@@ -69,10 +69,13 @@ button {
 }
 header {
   text-align: center;
-  background: linear-gradient(90deg, #d4eece, #55b3d0, #1e7eb7),
-              url('../images/header.jpg') no-repeat;
+  background: url('../images/header.jpg') no-repeat;
               background-blend-mode: multiply;
               background-size: cover;
+  /*background: linear-gradient(90deg, #d4eece, #55b3d0, #1e7eb7),
+              url('../images/header.jpg') no-repeat;
+              background-blend-mode: multiply;
+              background-size: cover;*/
 }
 header input {
   padding: 12px;

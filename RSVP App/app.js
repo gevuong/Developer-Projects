@@ -33,10 +33,12 @@ function createLi(invitee) {
 // In general, a `submit` event type is fired only on the <form> element, when user either clicks Submit or hits Enter.
 form.addEventListener("submit", (e) => {
   e.preventDefault(); // prevent brower's default behavior of sending into to URL and loading that URL when HTML form is submitted.
-  const invitee = input.value;
-  input.value = '';
-  const li = createLi(invitee);
-  ul.appendChild(li);
+  if (input.value.length > 0) {
+    const invitee = input.value;
+    input.value = '';
+    const li = createLi(invitee);
+    ul.appendChild(li);
+  }
 });
 
 // Instead of adding an event handler to each checkbox created, add a single delegated event handler to just one element, <ul>. Due to event bubbling, an event that occurs on one element (i.e. checkboxInput) bubbles up to its parent (i.e. <label>) or other ancestors (i.e. <ul>). Due to event delegation, the action of changing className is delegated down to its children, specifically a <li>.
@@ -56,26 +58,29 @@ ul.addEventListener("change", (e) => {
 // use a single delegated handler on the parent element <ul> to receive the button click event because user may add, edit, and remove lots of names to list.
 ul.addEventListener("click", (e) => {
   if (e.target.tagName === 'BUTTON') {
-    const button = e.target; // returns element that initiated the event
+    const button = e.target; // returns element that initiated the event, which is a button element
     const li = button.parentNode;
     const ul = li.parentNode;
     if (button.textContent === 'remove') {
       ul.removeChild(li);
     } else if (button.textContent === 'edit') {
+      // implement edit state to list item
       const span = li.firstElementChild;
       const editNameInput = document.createElement('input');
       editNameInput.type = 'text';
+      editNameInput.value = span.textContent;
       li.replaceChild(editNameInput, span);
-      // li.appendChild(editNameInput);
+        // alternative to li.replaceChild():
+        // li.insertBefore(editNameInput,span);
+        // li.removeChild(span);
+      button.textContent = 'save';
+    } else if (button.textContent === 'save') {
+      // implement saved state to list item
+      const editNameInput = li.firstElementChild;
+      const span = document.createElement('span');
+      span.textContent = editNameInput.value;
+      li.replaceChild(span, editNameInput);
+      button.textContent = 'edit';
     }
   }
 })
-
-// ul.addEventListener("click", (e) => {
-//   const editSaveButton = e.target;
-//   const li = editSaveButton.parentNode;
-//   if (editSaveButton.textContent === 'edit') {
-//     editSaveButton.textContent = 'save';
-
-//   }
-// })
