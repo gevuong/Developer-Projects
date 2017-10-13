@@ -1,5 +1,6 @@
 // In RSVP app, we won't be sending data to a remote server, and we won't be leaving current page.
 
+// Note: var is function scoping, meaning variables declared inside a function are visible from the outside. let and const are block scoping, meaning those variables are not visible outside of its block.
 const form = document.getElementById("registrar");
 const input = form.querySelector("[type=text]");
 const ul = document.getElementById("invitedList");
@@ -45,7 +46,7 @@ form.addEventListener("submit", (e) => {
 
 // "Change" event is fired when an <input>, <select>, or <textarea> value has changed.
 ul.addEventListener("change", (e) => {
-  const checkboxInput = e.target; // returns element that initiated the event, which is an input element
+  const checkboxInput = e.target; // references to element that received the event, which is an input element
   const checked = checkboxInput.checked; // returns a boolean
   const li = checkboxInput.parentNode.parentNode; // DOM traversal to <label> then to <li>
   if (checked) {
@@ -58,13 +59,13 @@ ul.addEventListener("change", (e) => {
 // use a single delegated handler on the parent element <ul> to receive the button click event because user may add, edit, and remove lots of names to list.
 ul.addEventListener("click", (e) => {
   if (e.target.tagName === 'BUTTON') {
-    const button = e.target; // returns element that initiated the event, which is a button element
+    const button = e.target; // references to element that received the event, which is a button element
     const li = button.parentNode;
     const ul = li.parentNode;
     if (button.textContent === 'remove') {
       ul.removeChild(li);
     } else if (button.textContent === 'edit') {
-      // implement edit state to list item
+      // move list item to an editing state
       const span = li.firstElementChild;
       const editNameInput = document.createElement('input');
       editNameInput.type = 'text';
@@ -75,7 +76,7 @@ ul.addEventListener("click", (e) => {
         // li.removeChild(span);
       button.textContent = 'save';
     } else if (button.textContent === 'save') {
-      // implement saved state to list item
+      // move list item to a saved state
       const editNameInput = li.firstElementChild;
       const span = document.createElement('span');
       span.textContent = editNameInput.value;
@@ -84,3 +85,7 @@ ul.addEventListener("click", (e) => {
     }
   }
 })
+
+// Function scoping: variables declared outside a function are visible from the inside.
+// Event object: is an object provided to an event handler that contains info about the event.
+// Inside event handler, 'target' property on event object contains reference to element that received event.
