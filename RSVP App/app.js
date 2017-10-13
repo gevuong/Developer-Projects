@@ -1,4 +1,4 @@
-// In this app, we won't be sending data to a remote server, and we won't be leaving current page.
+// In RSVP app, we won't be sending data to a remote server, and we won't be leaving current page.
 
 const form = document.getElementById("registrar");
 const input = form.querySelector("[type=text]");
@@ -7,7 +7,10 @@ const ul = document.getElementById("invitedList");
 // create list element
 function createLi(invitee) {
   const li = document.createElement('li');
-  li.textContent = invitee;
+
+  const span = document.createElement('span');
+  span.textContent = invitee; // replaced li.textContent with span to convert text element to HTML element
+  li.appendChild(span);
 
   const label = document.createElement('label');
   label.textContent = 'Confirmed';
@@ -16,6 +19,10 @@ function createLi(invitee) {
   const checkboxInput = document.createElement('input');
   checkboxInput.type = 'checkbox';  label.appendChild(checkboxInput);
 
+  const editButton = document.createElement('button');
+  editButton.textContent = 'edit'
+  li.appendChild(editButton);
+
   const removeButton = document.createElement('button');
   removeButton.textContent = "remove";
   li.appendChild(removeButton);
@@ -23,35 +30,52 @@ function createLi(invitee) {
   return li;
 }
 
-// `submit` event fires when user either clicks Submit or hits Enter on the form element, not `button` or `submit input`. Argument, 'e', can be any name.
+// In general, a `submit` event type is fired only on the <form> element, when user either clicks Submit or hits Enter.
 form.addEventListener("submit", (e) => {
-  e.preventDefault(); // prevents page reloading when HTML form is submitted, in which the browser sends info to URL specified by action attribute and loads that URL as well.
+  e.preventDefault(); // prevent brower's default behavior of sending into to URL and loading that URL when HTML form is submitted.
   const invitee = input.value;
   input.value = '';
   const li = createLi(invitee);
   ul.appendChild(li);
 });
 
-// Instead of adding an event handler to each checkbox created, add a single event delegated handler to just one element, <ul>. Due to event bubbling, an event that occurs on one element (i.e. checkboxInput) bubbles up to its parent (i.e. <label>) or other ancestors (i.e. <ul>). Due to event delegation, the action is delegated to its children.
+// Instead of adding an event handler to each checkbox created, add a single delegated event handler to just one element, <ul>. Due to event bubbling, an event that occurs on one element (i.e. checkboxInput) bubbles up to its parent (i.e. <label>) or other ancestors (i.e. <ul>). Due to event delegation, the action of changing className is delegated down to its children, specifically a <li>.
 
-// Also, "change" event is used instead of "click" to see if checkbox state has changed from unchecked to checked, and vice versa, not so much as to whether the box is clicked. "Change" event is fired when an <input>, <select>, or <textarea> value has changed.
+// "Change" event is fired when an <input>, <select>, or <textarea> value has changed.
 ul.addEventListener("change", (e) => {
-  const checkboxInput = e.target; // returns element that initiated the event, which is the checkbox input element
+  const checkboxInput = e.target; // returns element that initiated the event, which is an input element
   const checked = checkboxInput.checked; // returns a boolean
-  const listItem = checkboxInput.parentNode.parentNode; // DOM traversal in action
+  const li = checkboxInput.parentNode.parentNode; // DOM traversal to <label> then to <li>
   if (checked) {
-    listItem.className = "responded";
+    li.className = "responded";
   } else {
-    listItem.className = '';
+    li.className = '';
   }
 })
 
-// use a delegated handler on the parent element to receive the removeButton click event because user may add and remove lots of names to list.
+// use a single delegated handler on the parent element <ul> to receive the button click event because user may add, edit, and remove lots of names to list.
 ul.addEventListener("click", (e) => {
-  const removeButton = e.target; // returns element that initiated the event, which is the checkbox button element
-  if (e.target.textContent === 'remove') {
-    const li = removeButton.parentNode;
+  if (e.target.tagName === 'BUTTON') {
+    const button = e.target; // returns element that initiated the event
+    const li = button.parentNode;
     const ul = li.parentNode;
-    ul.removeChild(li);
+    if (button.textContent === 'remove') {
+      ul.removeChild(li);
+    } else if (button.textContent === 'edit') {
+      const span = li.firstElementChild;
+      const editNameInput = document.createElement('input');
+      editNameInput.type = 'text';
+      li.replaceChild(editNameInput, span);
+      // li.appendChild(editNameInput);
+    }
   }
 })
+
+// ul.addEventListener("click", (e) => {
+//   const editSaveButton = e.target;
+//   const li = editSaveButton.parentNode;
+//   if (editSaveButton.textContent === 'edit') {
+//     editSaveButton.textContent = 'save';
+
+//   }
+// })
