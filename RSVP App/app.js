@@ -38,7 +38,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   })
 
-  // create list element
+  // create list element, refactored
   function createLi(invitee) {
     function createElement(elementName, property, value) {
       const element = document.createElement(elementName);
@@ -90,13 +90,16 @@ document.addEventListener('DOMContentLoaded', () => {
   // use a single delegated handler on the parent element <ul>, to receive the button click event because user may add, edit, and remove lots of names to list.
   ul.addEventListener("click", (e) => {
     if (e.target.tagName === 'BUTTON') {
-      const button = e.target; // references to element that received the event, which is a button element
+      const button = e.target; // reference button element that received event
       const li = button.parentNode;
       const ul = li.parentNode;
-      if (button.textContent === 'remove') {
+
+      const removeLi = function() {
         ul.removeChild(li);
-      } else if (button.textContent === 'edit') {
-        // move list item to an editing state
+      }
+
+      const editName = function() {
+        // move list item to editing state
         const span = li.firstElementChild;
         const editNameInput = document.createElement('input');
         editNameInput.type = 'text';
@@ -106,20 +109,30 @@ document.addEventListener('DOMContentLoaded', () => {
           // li.insertBefore(editNameInput,span);
           // li.removeChild(span);
         button.textContent = 'save';
-      } else if (button.textContent === 'save') {
-        // move list item to a saved state
+      }
+
+      const saveName = function() {
+        // move list item to saved state
         const editNameInput = li.firstElementChild;
         const span = document.createElement('span');
         span.textContent = editNameInput.value;
         li.replaceChild(span, editNameInput);
         button.textContent = 'edit';
       }
+
+      const nameActions = {
+        remove: removeLi,
+        edit: editName,
+        save: saveName
+      }
+
+      nameActions[button.textContent]();
     }
   });
 });
 
 // Side notes:
-// Defensive programming: A form of defensive design to ensure continuing function of a piece of software under unforeseen circumstances. Used where high availability, safety or security is needed. (i.e. moving script tag around in index.html)
+// Defensive programming: A defensive design to ensure continuing function of a piece of software under unforeseen circumstances. Used where high availability, safety or security is needed. (i.e. moving script tag around in index.html)
 // JS functions are first-class citizens: functions can be passed into other functions, assigned to variables, and even be stored in arrays and objects.
 // Array.from() creates a new Array instance from an array-like object.
 // Function scoping: variables declared outside a function are visible from the inside.
