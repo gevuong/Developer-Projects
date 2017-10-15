@@ -40,43 +40,24 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // create list element
   function createLi(invitee) {
-    function createElement(element, property, value) {
-      const newElement = document.createElement(element);
-      newElement[property] = value;
-      return newElement;
+    function createElement(elementName, property, value) {
+      const element = document.createElement(elementName);
+      element[property] = value;
+      return element;
     }
 
-    function appendToLi(element) {
-      const li = createElement('li');
-      li.appendChild(createElement(element, property, value));
+    function appendToLi(elementName, property, value) {
+      const element = createElement(elementName, property, value);
+      li.appendChild(element);
+      return element;
     }
 
     const li = document.createElement('li');
-    const span = appendToLi('span', textContent, invitee);
-    const label = appendToLi('label', textContent, 'Confirmed');
-    const checkboxInput = appendToLi('checkboxInput', type, 'checkbox');
-    const editButton = appendToLi('editButton', textContent, 'edit');
-    const removeButton = appendToLi('removeButton', textContent, 'remove');
-
-    // const span = document.createElement('span');
-    // span.textContent = invitee; // replaced li.textContent with span to convert text element to HTML element
-    // li.appendChild(span);
-    //
-    // const label = document.createElement('p');
-    // label.textContent = 'Confirmed';
-    // li.appendChild(label);
-    //
-    // const checkboxInput = document.createElement('input');
-    // checkboxInput.type = 'checkbox';
-    // li.appendChild(checkboxInput);
-    //
-    // const editButton = document.createElement('button');
-    // editButton.textContent = 'edit'
-    // li.appendChild(editButton);
-    //
-    // const removeButton = document.createElement('button');
-    // removeButton.textContent = "remove";
-    // li.appendChild(removeButton);
+    const span = appendToLi('span', 'textContent', invitee);
+    appendToLi('p', 'textContent', 'Confirmed')
+      .appendChild(createElement('input', 'type', 'checkbox'));
+    const editButton = appendToLi('button', 'textContent', 'edit');
+    const removeButton = appendToLi('button', 'textContent', 'remove');
 
     return li;
   }
