@@ -38,6 +38,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   })
 
+  // const items = JSON.parse(localStorage.getItem('items')) || [];
   // create list element, refactored
   function createLi(invitee) {
     function createElement(elementName, property, value) {
@@ -59,8 +60,16 @@ document.addEventListener('DOMContentLoaded', () => {
     const editButton = appendToLi('button', 'textContent', 'edit');
     const removeButton = appendToLi('button', 'textContent', 'remove');
 
+    const texts = {
+      text: span.textContent
+    }
+
+    // items.push(texts);
+    // console.log(items);
+    // localStorage.setItem('items', JSON.stringify(items));
     return li;
   }
+
 
   // In general, a `submit` event type is fired only on the <form> element, when user either clicks Submit or hits Enter.
   form.addEventListener("submit", (e) => {
@@ -129,6 +138,8 @@ document.addEventListener('DOMContentLoaded', () => {
       nameActions[button.textContent]();
     }
   });
+
+  createLi(input.value)
 });
 
 // Side notes:
