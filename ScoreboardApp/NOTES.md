@@ -1,9 +1,19 @@
-### Notes
+### Trivia Notes
+* Remember, React keeps a copy of the previous Virtual DOM. A unique key is required to help React understand which object maps to which virtual DOM element. So if item in list is rearranged, added, or deleted, React can use key to reorder list as opposed to changing the content for each DOM Node (or item) based on position in list.
+
+* Cannot use JS for loop to iterate over items inside JSX expression. Need to use .map(), which creates a list of JSX elements from an array of JS values.
+
+* Any stateless functional component can be written as a Component class.
+
+* Break component into smaller components when component has too much markup, a component does too many things, or when component is reused.
+
+* State is data in app that can change. React is a library for writing UI, it is encouraged to use other libraries to help with AJAX, persistence, or managing state. To manage application state. a popular design pattern, Flux, consolidates state for easier management. Redux library implements the Flux pattern.
+
 * All React components, declared as a function or class, must act like pure functions with respect to their props. A "pure" function does not change its inputs, and always return same result for the same input.
 
 * A React component must return a single Virtual DOM element. This is why we wrap all other elements in a single <div> element.
 
-* JSX is an extension to JS that allows us to use XML syntax to build React.createElement calls. JSX provides syntactic sugar for React.createElement(comp, props, children) function. JSX is not the same as HTML in JS files.
+* JSX is an extension to JS that allows us to use XML syntax to build React.createElement calls. JSX is not required for using React, and is convenient when you don't want to setup a compiler in build environment. JSX provides syntactic sugar for React.createElement(comp, props, children) function. So anything you do with JSX can also be done in plain JS. JSX is not the same as HTML in JS files.
 
 * Babel is a JS compiler used to translate JSX files into standard JavaScript.
 
