@@ -970,21 +970,118 @@ var _reactDom2 = _interopRequireDefault(_reactDom);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 // function that returns React VirtualDOM elements.
-// first arg is virtualDOM element, second arg is realDOM element where we want to place our virtual DOM. This code says to render a virtual DOM with text Hello World into an element called "container" on the page.
-
 function App() {
   return _react2.default.createElement(
     'div',
-    null,
+    { className: 'scoreboard' },
     _react2.default.createElement(
-      'h1',
-      null,
-      'Hello from React'
+      'div',
+      { className: 'header' },
+      _react2.default.createElement(
+        'h1',
+        null,
+        'Scoreboard'
+      )
     ),
     _react2.default.createElement(
-      'p',
-      null,
-      'I was rendered from the App component!'
+      'div',
+      { className: 'players' },
+      _react2.default.createElement(
+        'div',
+        { className: 'player' },
+        _react2.default.createElement(
+          'div',
+          { className: 'player-name' },
+          'George V.'
+        ),
+        _react2.default.createElement(
+          'div',
+          { className: 'player-score' },
+          _react2.default.createElement(
+            'div',
+            { className: 'counter' },
+            _react2.default.createElement(
+              'button',
+              { className: 'counter-action decrement' },
+              ' - '
+            ),
+            _react2.default.createElement(
+              'div',
+              { className: 'counter-score' },
+              '50'
+            ),
+            _react2.default.createElement(
+              'button',
+              { className: 'counter-action increment' },
+              ' + '
+            )
+          )
+        )
+      ),
+      _react2.default.createElement(
+        'div',
+        { className: 'player' },
+        _react2.default.createElement(
+          'div',
+          { className: 'player-name' },
+          'George V.'
+        ),
+        _react2.default.createElement(
+          'div',
+          { className: 'player-score' },
+          _react2.default.createElement(
+            'div',
+            { className: 'counter' },
+            _react2.default.createElement(
+              'button',
+              { className: 'counter-action decrement' },
+              ' - '
+            ),
+            _react2.default.createElement(
+              'div',
+              { className: 'counter-score' },
+              '50'
+            ),
+            _react2.default.createElement(
+              'button',
+              { className: 'counter-action increment' },
+              ' + '
+            )
+          )
+        )
+      ),
+      _react2.default.createElement(
+        'div',
+        { className: 'player' },
+        _react2.default.createElement(
+          'div',
+          { className: 'player-name' },
+          'George V.'
+        ),
+        _react2.default.createElement(
+          'div',
+          { className: 'player-score' },
+          _react2.default.createElement(
+            'div',
+            { className: 'counter' },
+            _react2.default.createElement(
+              'button',
+              { className: 'counter-action decrement' },
+              ' - '
+            ),
+            _react2.default.createElement(
+              'div',
+              { className: 'counter-score' },
+              '50'
+            ),
+            _react2.default.createElement(
+              'button',
+              { className: 'counter-action increment' },
+              ' + '
+            )
+          )
+        )
+      )
     )
   );
 }
@@ -994,11 +1091,7 @@ document.addEventListener('DOMContentLoaded', function () {
   _reactDom2.default.render(_react2.default.createElement(App, null), document.getElementById('root'));
 });
 
-// Notes:
-// All React components, declared as a function or class, must act like pure functions with respect to their props. A "pure" function does not change their inputs, and always return same result for the same input.
-// A React component must return a single Virtual DOM element. This is why we wrap all other elements in a single <div> element.
-// JSX is an extension to JS that allows us to use XML syntax to build React.createElement calls. JSX is not HTML.
-// Babel is a JS compiler used to translate JSX files into standard JavaScript
+// first arg in ReactDOM.render() is virtualDOM element, second arg is real DOM element where we want to place our virtual DOM. Above code says to create an <App /> instance (or React element) and render within a DOM element called "root" on the page.
 
 /***/ }),
 /* 16 */
