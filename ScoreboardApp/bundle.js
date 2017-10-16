@@ -967,10 +967,13 @@ var _reactDom = __webpack_require__(18);
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
+var _propTypes = __webpack_require__(29);
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-// function that returns React VirtualDOM elements.
-function App() {
+function App(props) {
   return _react2.default.createElement(
     'div',
     { className: 'scoreboard' },
@@ -980,7 +983,7 @@ function App() {
       _react2.default.createElement(
         'h1',
         null,
-        'Scoreboard'
+        props.title
       )
     ),
     _react2.default.createElement(
@@ -1024,7 +1027,7 @@ function App() {
         _react2.default.createElement(
           'div',
           { className: 'player-name' },
-          'George V.'
+          'George Foreman'
         ),
         _react2.default.createElement(
           'div',
@@ -1056,7 +1059,7 @@ function App() {
         _react2.default.createElement(
           'div',
           { className: 'player-name' },
-          'George V.'
+          'George St. Pierre'
         ),
         _react2.default.createElement(
           'div',
@@ -1072,7 +1075,7 @@ function App() {
             _react2.default.createElement(
               'div',
               { className: 'counter-score' },
-              '50'
+              props.score
             ),
             _react2.default.createElement(
               'button',
@@ -1086,9 +1089,18 @@ function App() {
   );
 }
 
+App.propTypes = {
+  title: _propTypes2.default.string,
+  score: _propTypes2.default.number
+};
+
+App.defaultProps = {
+  title: "My Scoreboard using defaultProps"
+};
+
 // <App /> creates an instance of the App component in JSX
 document.addEventListener('DOMContentLoaded', function () {
-  _reactDom2.default.render(_react2.default.createElement(App, null), document.getElementById('root'));
+  _reactDom2.default.render(_react2.default.createElement(App, { score: 50 }), document.getElementById('root'));
 });
 
 // first arg in ReactDOM.render() is virtualDOM element, second arg is real DOM element where we want to place our virtual DOM. Above code says to create an <App /> instance (or React element) and render within a DOM element called "root" on the page.

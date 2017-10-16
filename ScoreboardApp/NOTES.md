@@ -1,5 +1,5 @@
 ### Notes
-* All React components, declared as a function or class, must act like pure functions with respect to their props. A "pure" function does not change their inputs, and always return same result for the same input.
+* All React components, declared as a function or class, must act like pure functions with respect to their props. A "pure" function does not change its inputs, and always return same result for the same input.
 
 * A React component must return a single Virtual DOM element. This is why we wrap all other elements in a single <div> element.
 
@@ -19,6 +19,8 @@
 * When React renders code to real DOM, it translates virtual DOM elements into real DOM elements on the page.
 
 * React is performant because it keeps virtual DOM representation from last time component was rendered. Then when it wants to re-render, compares the two virtual DOMs, previous and current, and figures out minimal changes needed to update the real DOM tree.
+
+* Wrap JSX expression in curly braces to change to plain old JS. It has to be an JS expression wrapped in curly braces. An expression is something that returns a value.
 
 ### Steps to setup React:
 1. npm init -y (the directory name needs to not have spaces)
