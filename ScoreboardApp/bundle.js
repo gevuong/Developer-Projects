@@ -973,134 +973,93 @@ var _propTypes2 = _interopRequireDefault(_propTypes);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function App(props) {
+function Header(props) {
   return _react2.default.createElement(
     'div',
-    { className: 'scoreboard' },
+    { className: 'header' },
     _react2.default.createElement(
-      'div',
-      { className: 'header' },
-      _react2.default.createElement(
-        'h1',
-        null,
-        props.title
-      )
-    ),
-    _react2.default.createElement(
-      'div',
-      { className: 'players' },
-      _react2.default.createElement(
-        'div',
-        { className: 'player' },
-        _react2.default.createElement(
-          'div',
-          { className: 'player-name' },
-          'George V.'
-        ),
-        _react2.default.createElement(
-          'div',
-          { className: 'player-score' },
-          _react2.default.createElement(
-            'div',
-            { className: 'counter' },
-            _react2.default.createElement(
-              'button',
-              { className: 'counter-action decrement' },
-              ' - '
-            ),
-            _react2.default.createElement(
-              'div',
-              { className: 'counter-score' },
-              '50'
-            ),
-            _react2.default.createElement(
-              'button',
-              { className: 'counter-action increment' },
-              ' + '
-            )
-          )
-        )
-      ),
-      _react2.default.createElement(
-        'div',
-        { className: 'player' },
-        _react2.default.createElement(
-          'div',
-          { className: 'player-name' },
-          'George Foreman'
-        ),
-        _react2.default.createElement(
-          'div',
-          { className: 'player-score' },
-          _react2.default.createElement(
-            'div',
-            { className: 'counter' },
-            _react2.default.createElement(
-              'button',
-              { className: 'counter-action decrement' },
-              ' - '
-            ),
-            _react2.default.createElement(
-              'div',
-              { className: 'counter-score' },
-              '50'
-            ),
-            _react2.default.createElement(
-              'button',
-              { className: 'counter-action increment' },
-              ' + '
-            )
-          )
-        )
-      ),
-      _react2.default.createElement(
-        'div',
-        { className: 'player' },
-        _react2.default.createElement(
-          'div',
-          { className: 'player-name' },
-          'George St. Pierre'
-        ),
-        _react2.default.createElement(
-          'div',
-          { className: 'player-score' },
-          _react2.default.createElement(
-            'div',
-            { className: 'counter' },
-            _react2.default.createElement(
-              'button',
-              { className: 'counter-action decrement' },
-              ' - '
-            ),
-            _react2.default.createElement(
-              'div',
-              { className: 'counter-score' },
-              props.score
-            ),
-            _react2.default.createElement(
-              'button',
-              { className: 'counter-action increment' },
-              ' + '
-            )
-          )
-        )
-      )
+      'h1',
+      null,
+      props.title
     )
   );
 }
 
-App.propTypes = {
-  title: _propTypes2.default.string,
-  score: _propTypes2.default.number
+Header.propTypes = {
+  title: _propTypes2.default.string.isRequired
 };
 
+function Player(props) {
+  return _react2.default.createElement(
+    'div',
+    { className: 'player' },
+    _react2.default.createElement(
+      'div',
+      { className: 'player-name' },
+      props.name
+    ),
+    _react2.default.createElement(
+      'div',
+      { className: 'player-score' },
+      _react2.default.createElement(Counter, { score: props.score })
+    )
+  );
+}
+
+Player.propTypes = {
+  name: _propTypes2.default.string.isRequired
+};
+
+function Counter(props) {
+  return _react2.default.createElement(
+    'div',
+    { className: 'counter' },
+    _react2.default.createElement(
+      'button',
+      { className: 'counter-action decrement' },
+      ' - '
+    ),
+    _react2.default.createElement(
+      'div',
+      { className: 'counter-score' },
+      ' ',
+      props.score,
+      ' '
+    ),
+    _react2.default.createElement(
+      'button',
+      { className: 'counter-action increment' },
+      ' + '
+    )
+  );
+}
+
+Counter.propTypes = {
+  score: _propTypes2.default.number.isRequired
+};
+
+function App(props) {
+  return _react2.default.createElement(
+    'div',
+    { className: 'scoreboard' },
+    _react2.default.createElement(Header, { title: props.title }),
+    _react2.default.createElement(
+      'div',
+      { className: 'players' },
+      _react2.default.createElement(Player, { name: 'George V.', score: 13 - 1 }),
+      _react2.default.createElement(Player, { name: 'George Foreman', score: 23 }),
+      _react2.default.createElement(Player, { name: 'George St.Pierre', score: 4 })
+    )
+  );
+}
+
 App.defaultProps = {
-  title: "My Scoreboard using defaultProps"
+  title: "My Scoreboard"
 };
 
 // <App /> creates an instance of the App component in JSX
 document.addEventListener('DOMContentLoaded', function () {
-  _reactDom2.default.render(_react2.default.createElement(App, { score: 50 }), document.getElementById('root'));
+  _reactDom2.default.render(_react2.default.createElement(App, null), document.getElementById('root'));
 });
 
 // first arg in ReactDOM.render() is virtualDOM element, second arg is real DOM element where we want to place our virtual DOM. Above code says to create an <App /> instance (or React element) and render within a DOM element called "root" on the page.
