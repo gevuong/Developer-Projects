@@ -18,6 +18,151 @@ var PLAYERS = [
 ]
 
 var playerId = 3;
+
+class Stopwatch extends React.Component {
+    constructor(){
+        super();
+        this.state = {
+            running: false,
+            elapsedTime: 0,
+            previousTime: 0,
+        }
+
+        this.onTick = this.onTick.bind(this);
+    };
+
+    componentDidMount() {
+      this.interval = setInterval(this.onTick, 100);
+    }
+
+    componentWillUnmount() {
+        clearInterval(this.interval);
+    }
+
+    onTick() {
+        if(this.state.running) {
+          const now = Date.now();
+          this.setState({
+              previousTime: now,
+              elapsedTime: this.state.elapsedTime + (now - this.state.previousTime),
+          });
+        }
+        console.log('onTick');
+    }
+
+    onStart() {
+        this.setState({
+            running: true,
+            previousTime: Date.now(),
+        });
+    }
+
+    onStop() {
+        this.setState({
+            running: false
+        });
+    }
+
+    onReset() {
+        this.setState({
+            elapsedTime: 0,
+            previousTime: Date.now(),
+        });
+    }
+
+
+
+    render() {
+        var seconds = Math.floor(this.state.elapsedTime / 1000);
+        return (
+            <div className="stopwatch">
+                <h2>Stopwatch</h2>
+                <div className="stopwatch-time">{seconds}</div>
+                { this.state.running ?
+                    <button onClick={this.onStop}>Stop</button>
+                    :
+                    <button  onClick={this.onStart}>Start</button>
+                }
+                <button onClick={this.onReset}>Reset</button>
+
+            </div>
+        );
+    }
+}
+// class Stopwatch extends Component {
+//   constructor() {
+//     super();
+//     this.state = {
+//       running: false,
+//       elapsedTime: 0,
+//       previousTime: 0,
+//     }
+//     this.onStart = this.onStart.bind(this);
+//     this.onStop = this.onStop.bind(this);
+//     this.onReset = this.onReset.bind(this);
+//     this.onTick = this.onTick.bind(this);
+//   }
+//
+//   // As soon as Stopwatch component is added to DOM on page, componentDidMount() will be called. Convenient for setting up timers, data fetching, etc.
+//   componentDidMount() {
+//     this.interval = setInterval(this.onTick, 100); // invisible event
+//   }
+//
+//   // invoked immediately before component is removed or unmounted. Convenient for invalidating timers, canceling network requests, or DOM elements created in componentDidMount. In case if stopwatch no longer needs to rendered, clearInterval will remove setInterval, which can keep Stopwatch component in memory, causing a memory leak.
+//   componentWillUnmount() {
+//     clearInterval(this.interval); // cleanup interval
+//   }
+//
+//   // how to get onTick to be called over and over again? Cannot put in render()
+//   onTick() {
+//     console.log("onTick");
+//     if (this.state.running) {
+//       let timeNow = Date.now(); // returns number of ms since Jan 1,1970 (UNIX epoch)
+//       this.setState({
+//         previousTime: timeNow,
+//         elapsedTime: this.state.elapsedTime + (timeNow - this.state.previousTime),
+//       });
+//     }
+//   }
+//
+//   onStart() {
+//     this.setState({
+//       running: true,
+//       previousTime: Date.now(),
+//     });
+//
+//   }
+//
+//   onStop() {
+//     this.setState({ running: false });
+//   }
+//
+//   onReset() {
+//     this.setState({
+//       running: false,
+//       elapsedTime: 0,
+//       previousTime: Date.now() // update previousTime so next tick will get exact same amount of ms between when we reset versus the previous tick.
+//     });
+//   }
+//
+//   render() {
+//     let seconds = Math.floor(this.state.elapsedTime / 1000)
+//     return(
+//       <div className="stopwatch">
+//         <h2>Stopwatch</h2>
+//         <div className="stopwatch-time">{ seconds }</div>
+//         {/* alternative can be { this.state.running ? "Start" : "Stop" } */}
+//         { this.state.running ?
+//           <button onClick={this.onStop}>Stop</button>
+//           :
+//           <button onClick={this.onStart}>Start</button>
+//         }
+//         <button onClick={this.onReset}>Reset</button>
+//       </div>
+//     )
+//   }
+// }
+
 // Controlled Component is when an input form element (i.e <input>, <textarea>, <select>), maintain their own state and update based on user input. The input form element's value is controlled by React. Every state mutation (i.e this.state.name) will have an associated handler fcn (i.e onNameChange()). React state is the "single source of truth" because for example, the displayed value in form element will always be "this.state.value".
 class AddPlayerForm extends Component {
   constructor(props) {
@@ -26,7 +171,7 @@ class AddPlayerForm extends Component {
     AddPlayerForm.propTypes = {
       onAdd: PropTypes.func.isRequired,
     }
-    this.state = {name: ""}; // The state called "name" is considered a local component state
+    this.state = { name: "" }; // The state called "name" is considered a local component state
 
     this.onSubmit = this.onSubmit.bind(this);
     this.onNameChange = this.onNameChange.bind(this);
@@ -34,14 +179,14 @@ class AddPlayerForm extends Component {
 
   // event.target represents <input> element generated in form. Since onNameChange() runs on every keystroke to update React state, the displayed value will update as user types.
   onNameChange(e) {
-    this.setState({name: e.target.value});
+    this.setState({ name: e.target.value });
   }
 
   onSubmit(e) {
     e.preventDefault();
     if (this.state.name.split(" ").join("").length > 0) {
       this.props.onAdd(this.state.name);
-      this.setState({name: ""});
+      this.setState({ name: "" });
     }
   }
 
@@ -49,8 +194,8 @@ class AddPlayerForm extends Component {
   render() {
     return (
       <div className="add-player-form">
-        <form onSubmit={this.onSubmit} >
-          <input type="text" value={this.state.name} onChange={this.onNameChange}></input>
+        <form onSubmit={ this.onSubmit } >
+          <input type="text" value={ this.state.elapsedTime } onChange={ this.onNameChange }></input>
           <input type="submit" value="Add Player" ></input>
         </form>
       </div>
@@ -92,6 +237,7 @@ function Header(props) {
     <div className="header">
       <Stats players={props.players}/>
       <h1>{props.title}</h1>
+      <Stopwatch />
       {/* This is how to comment in JSX */}
     </div>
   );

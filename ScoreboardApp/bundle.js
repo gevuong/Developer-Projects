@@ -1028,7 +1028,183 @@ var PLAYERS = [{
 }];
 
 var playerId = 3;
+
+var Stopwatch = function (_React$Component) {
+  _inherits(Stopwatch, _React$Component);
+
+  function Stopwatch() {
+    _classCallCheck(this, Stopwatch);
+
+    var _this = _possibleConstructorReturn(this, (Stopwatch.__proto__ || Object.getPrototypeOf(Stopwatch)).call(this));
+
+    _this.state = {
+      running: false,
+      elapsedTime: 0,
+      previousTime: 0
+    };
+
+    _this.onTick = _this.onTick.bind(_this);
+    return _this;
+  }
+
+  _createClass(Stopwatch, [{
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      this.interval = setInterval(this.onTick, 100);
+    }
+  }, {
+    key: 'componentWillUnmount',
+    value: function componentWillUnmount() {
+      clearInterval(this.interval);
+    }
+  }, {
+    key: 'onTick',
+    value: function onTick() {
+      if (this.state.running) {
+        var now = Date.now();
+        this.setState({
+          previousTime: now,
+          elapsedTime: this.state.elapsedTime + (now - this.state.previousTime)
+        });
+      }
+      console.log('onTick');
+    }
+  }, {
+    key: 'onStart',
+    value: function onStart() {
+      this.setState({
+        running: true,
+        previousTime: Date.now()
+      });
+    }
+  }, {
+    key: 'onStop',
+    value: function onStop() {
+      this.setState({
+        running: false
+      });
+    }
+  }, {
+    key: 'onReset',
+    value: function onReset() {
+      this.setState({
+        elapsedTime: 0,
+        previousTime: Date.now()
+      });
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      var seconds = Math.floor(this.state.elapsedTime / 1000);
+      return _react2.default.createElement(
+        'div',
+        { className: 'stopwatch' },
+        _react2.default.createElement(
+          'h2',
+          null,
+          'Stopwatch'
+        ),
+        _react2.default.createElement(
+          'div',
+          { className: 'stopwatch-time' },
+          seconds
+        ),
+        this.state.running ? _react2.default.createElement(
+          'button',
+          { onClick: this.onStop },
+          'Stop'
+        ) : _react2.default.createElement(
+          'button',
+          { onClick: this.onStart },
+          'Start'
+        ),
+        _react2.default.createElement(
+          'button',
+          { onClick: this.onReset },
+          'Reset'
+        )
+      );
+    }
+  }]);
+
+  return Stopwatch;
+}(_react2.default.Component);
+// class Stopwatch extends Component {
+//   constructor() {
+//     super();
+//     this.state = {
+//       running: false,
+//       elapsedTime: 0,
+//       previousTime: 0,
+//     }
+//     this.onStart = this.onStart.bind(this);
+//     this.onStop = this.onStop.bind(this);
+//     this.onReset = this.onReset.bind(this);
+//     this.onTick = this.onTick.bind(this);
+//   }
+//
+//   // As soon as Stopwatch component is added to DOM on page, componentDidMount() will be called. Convenient for setting up timers, data fetching, etc.
+//   componentDidMount() {
+//     this.interval = setInterval(this.onTick, 100); // invisible event
+//   }
+//
+//   // invoked immediately before component is removed or unmounted. Convenient for invalidating timers, canceling network requests, or DOM elements created in componentDidMount. In case if stopwatch no longer needs to rendered, clearInterval will remove setInterval, which can keep Stopwatch component in memory, causing a memory leak.
+//   componentWillUnmount() {
+//     clearInterval(this.interval); // cleanup interval
+//   }
+//
+//   // how to get onTick to be called over and over again? Cannot put in render()
+//   onTick() {
+//     console.log("onTick");
+//     if (this.state.running) {
+//       let timeNow = Date.now(); // returns number of ms since Jan 1,1970 (UNIX epoch)
+//       this.setState({
+//         previousTime: timeNow,
+//         elapsedTime: this.state.elapsedTime + (timeNow - this.state.previousTime),
+//       });
+//     }
+//   }
+//
+//   onStart() {
+//     this.setState({
+//       running: true,
+//       previousTime: Date.now(),
+//     });
+//
+//   }
+//
+//   onStop() {
+//     this.setState({ running: false });
+//   }
+//
+//   onReset() {
+//     this.setState({
+//       running: false,
+//       elapsedTime: 0,
+//       previousTime: Date.now() // update previousTime so next tick will get exact same amount of ms between when we reset versus the previous tick.
+//     });
+//   }
+//
+//   render() {
+//     let seconds = Math.floor(this.state.elapsedTime / 1000)
+//     return(
+//       <div className="stopwatch">
+//         <h2>Stopwatch</h2>
+//         <div className="stopwatch-time">{ seconds }</div>
+//         {/* alternative can be { this.state.running ? "Start" : "Stop" } */}
+//         { this.state.running ?
+//           <button onClick={this.onStop}>Stop</button>
+//           :
+//           <button onClick={this.onStart}>Start</button>
+//         }
+//         <button onClick={this.onReset}>Reset</button>
+//       </div>
+//     )
+//   }
+// }
+
 // Controlled Component is when an input form element (i.e <input>, <textarea>, <select>), maintain their own state and update based on user input. The input form element's value is controlled by React. Every state mutation (i.e this.state.name) will have an associated handler fcn (i.e onNameChange()). React state is the "single source of truth" because for example, the displayed value in form element will always be "this.state.value".
+
 
 var AddPlayerForm = function (_Component) {
   _inherits(AddPlayerForm, _Component);
@@ -1036,16 +1212,16 @@ var AddPlayerForm = function (_Component) {
   function AddPlayerForm(props) {
     _classCallCheck(this, AddPlayerForm);
 
-    var _this = _possibleConstructorReturn(this, (AddPlayerForm.__proto__ || Object.getPrototypeOf(AddPlayerForm)).call(this, props));
+    var _this2 = _possibleConstructorReturn(this, (AddPlayerForm.__proto__ || Object.getPrototypeOf(AddPlayerForm)).call(this, props));
 
     AddPlayerForm.propTypes = {
       onAdd: _propTypes2.default.func.isRequired
     };
-    _this.state = { name: "" }; // The state called "name" is considered a local component state
+    _this2.state = { name: "" }; // The state called "name" is considered a local component state
 
-    _this.onSubmit = _this.onSubmit.bind(_this);
-    _this.onNameChange = _this.onNameChange.bind(_this);
-    return _this;
+    _this2.onSubmit = _this2.onSubmit.bind(_this2);
+    _this2.onNameChange = _this2.onNameChange.bind(_this2);
+    return _this2;
   }
 
   // event.target represents <input> element generated in form. Since onNameChange() runs on every keystroke to update React state, the displayed value will update as user types.
@@ -1077,7 +1253,7 @@ var AddPlayerForm = function (_Component) {
         _react2.default.createElement(
           'form',
           { onSubmit: this.onSubmit },
-          _react2.default.createElement('input', { type: 'text', value: this.state.name, onChange: this.onNameChange }),
+          _react2.default.createElement('input', { type: 'text', value: this.state.elapsedTime, onChange: this.onNameChange }),
           _react2.default.createElement('input', { type: 'submit', value: 'Add Player' })
         )
       );
@@ -1146,7 +1322,8 @@ function Header(props) {
       'h1',
       null,
       props.title
-    )
+    ),
+    _react2.default.createElement(Stopwatch, null)
   );
 }
 
@@ -1225,7 +1402,7 @@ var App = function (_Component2) {
     _classCallCheck(this, App);
 
     // initialPlayers is an array of objects with the following shape, that needs to be passed in. title is optional.
-    var _this2 = _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this, props));
+    var _this3 = _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this, props));
 
     App.propTypes = {
       title: _propTypes2.default.string,
@@ -1235,10 +1412,10 @@ var App = function (_Component2) {
       })).isRequired
     };
 
-    _this2.state = { players: _this2.props.initialPlayers };
-    _this2.onPlayerAdd = _this2.onPlayerAdd.bind(_this2);
+    _this3.state = { players: _this3.props.initialPlayers };
+    _this3.onPlayerAdd = _this3.onPlayerAdd.bind(_this3);
     // this.onScoreChange = this.onScoreChange.bind(this);
-    return _this2;
+    return _this3;
   }
 
   _createClass(App, [{
@@ -1277,7 +1454,7 @@ var App = function (_Component2) {
   }, {
     key: 'render',
     value: function render() {
-      var _this3 = this;
+      var _this4 = this;
 
       return _react2.default.createElement(
         'div',
@@ -1289,10 +1466,10 @@ var App = function (_Component2) {
           this.state.players.map(function (player, idx) {
             return _react2.default.createElement(Player, {
               onRemove: function onRemove() {
-                return _this3.onRemovePlayer(idx);
+                return _this4.onRemovePlayer(idx);
               },
               onScoreChange: function onScoreChange(delta) {
-                return _this3.onScoreChange(idx, delta);
+                return _this4.onScoreChange(idx, delta);
               },
               name: player.name,
               score: player.score,
