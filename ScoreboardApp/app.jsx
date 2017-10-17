@@ -17,6 +17,8 @@ var PLAYERS = [
   },
 ]
 
+var playerId = 3;
+// Controlled Component is when an input form element (i.e <input>, <textarea>, <select>), maintain their own state and update based on user input. The input form element's value is controlled by React. Every state mutation (i.e this.state.name) will have an associated handler fcn (i.e onNameChange()). React state is the "single source of truth" because for example, the displayed value in form element will always be "this.state.value".
 class AddPlayerForm extends Component {
   constructor(props) {
     super(props);
@@ -24,21 +26,23 @@ class AddPlayerForm extends Component {
     AddPlayerForm.propTypes = {
       onAdd: PropTypes.func.isRequired,
     }
-    this.state = {name: ""};
+    this.state = {name: ""}; // The state called "name" is considered a local component state
 
     this.onSubmit = this.onSubmit.bind(this);
     this.onNameChange = this.onNameChange.bind(this);
   }
 
-  // event.target represents <input> element generated in form. When onNameChange gets called or everytime you type, state gets updated, which will cause a re-render. And since this.state.name is updated, text is kept in <input> field.
+  // event.target represents <input> element generated in form. Since onNameChange() runs on every keystroke to update React state, the displayed value will update as user types.
   onNameChange(e) {
     this.setState({name: e.target.value});
   }
 
   onSubmit(e) {
     e.preventDefault();
-    this.props.onAdd(this.state.name);
-    this.setState({name: ""});
+    if (this.state.name.split(" ").join("").length > 0) {
+      this.props.onAdd(this.state.name);
+      this.setState({name: ""});
+    }
   }
 
   // when form submits, page refreshes. Use preventDefault()
@@ -119,6 +123,7 @@ function Player(props) {
   return (
     <div className="player">
       <div className="player-name">
+        <a className="remove-player" onClick={props.onRemove}>&#10006;</a>
         {props.name}
       </div>
       <div className="player-score">
@@ -132,11 +137,14 @@ Player.propTypes = {
   name: PropTypes.string.isRequired,
   score: PropTypes.number.isRequired,
   onScoreChange: PropTypes.func.isRequired,
+  onRemove: PropTypes.func.isRequired,
 }
+
 
 class App extends Component {
   constructor(props) {
     super(props);
+
     // initialPlayers is an array of objects with the following shape, that needs to be passed in. title is optional.
     App.propTypes = {
       title: PropTypes.string,
@@ -146,16 +154,13 @@ class App extends Component {
       })).isRequired,
     };
 
-    this.state = {
-      players: this.props.initialPlayers,
-    }
-
+    this.state = {players: this.props.initialPlayers};
     this.onPlayerAdd = this.onPlayerAdd.bind(this);
     // this.onScoreChange = this.onScoreChange.bind(this);
   }
 
   onScoreChange(id, delta) {
-    console.log('onScoreChange', id, delta)
+    // console.log('onScoreChange', id, delta)
     if (this.state.players[id].score > 0 ) {
       this.state.players[id].score += delta;
       this.setState(this.state);
@@ -166,28 +171,35 @@ class App extends Component {
   }
 
   onPlayerAdd(name) {
-    console.log("player added: ", name);
-    this.state.players.push({
+    // console.log("player added: ", name);
+    this.state.players.push({ // .push() persists to array, opposed to .concat()
       name: name,
       score: 0,
     })
     this.setState(this.state);
-    // console.log(this.state.players);
+    playerId += 1; // used only if I want to assign unique ID to each added player
   }
 
-  // Within function of map iterator, "this" doesn't point to appropriate instance. Need to call .bind(this) on anonymous fcn to make "this" within fcn apply to same "this" outside of fcn. Use arrow fcn within .map() to avoid .bind(this).
+  onRemovePlayer(idx) {
+    // console.log("player removed:", this.state.players[idx].name)
+    this.state.players.splice(idx, 1);
+    this.setState(this.state);
+  }
+
+  // Within function of map iterator, "this" doesn't point to appropriate instance. Need to call .bind(this) on anonymous fcn to make "this" within fcn apply to same "this" outside of fcn. If passing an anonymous fcn as prop, use arrow fcn within .map() to avoid .bind(this). Using other anonymous fcn syntax does not autobind, so will lose its binding to "this".
   render() {
     return (
       <div className="scoreboard">
         <Header title={this.props.title} players={this.state.players} />
         <div className="players">
-          {this.state.players.map((player, id) => {
+          {this.state.players.map((player, idx) => {
             return (
               <Player
-                onScoreChange={delta => this.onScoreChange(id, delta)}
+                onRemove={() => this.onRemovePlayer(idx)}
+                onScoreChange={delta => this.onScoreChange(idx, delta)}
                 name={player.name}
                 score={player.score}
-                key={id} />
+                key={idx} />
             );
           })}
         </div>
@@ -200,7 +212,6 @@ class App extends Component {
 App.defaultProps = {
   title: "My Scoreboard",
 };
-
 // <App /> creates an instance of the App component in JSX
 document.addEventListener('DOMContentLoaded', () => {
   ReactDOM.render(<App initialPlayers={PLAYERS}/>, document.getElementById('root'));
