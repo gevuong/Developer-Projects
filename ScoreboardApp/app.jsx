@@ -4,164 +4,109 @@ import PropTypes from 'prop-types';
 
 var PLAYERS = [
   {
-    name: "George V.",
-    score: 4,
+    name: "Mohandas Gandhi",
+    score: 0,
   },
   {
-    name: "George Foreman",
-    score: 2,
+    name: "Pablo Picasso",
+    score: 0,
   },
   {
-    name: "George St. Pierre",
-    score: 1,
+    name: "Sigmund Freud",
+    score: 0,
   },
+  {
+    name: "Maria Montessori",
+    score: 0,
+  },
+  {
+    name: "Carl Jung",
+    score: 0,
+  },
+
 ]
 
-var playerId = 3;
+var playerId = 3; // incremented to assign unique ID for each added player
 
-class Stopwatch extends React.Component {
-    constructor(){
-        super();
-        this.state = {
-            running: false,
-            elapsedTime: 0,
-            previousTime: 0,
+class Stopwatch extends Component {
+  constructor() {
+    super();
+    this.state = {
+      running: false,
+      elapsedTime: 0,
+      previousTime: 0,
+    }
+    this.onStart = this.onStart.bind(this);
+    this.onStop = this.onStop.bind(this);
+    this.onReset = this.onReset.bind(this);
+    this.onTick = this.onTick.bind(this);
+  }
+
+  // As soon as Stopwatch component is added to DOM on page, componentDidMount() will be called. Convenient for setting up timers, data fetching, etc.
+  componentDidMount() {
+    this.interval = setInterval(this.onTick, 10); // invisible event
+  }
+
+  // invoked immediately before component is removed from DOM. Convenient for invalidating timers, canceling network requests, or DOM elements created in componentDidMount. In case if stopwatch no longer needs to rendered, clearInterval will remove setInterval, which can keep Stopwatch component in memory, causing a memory leak.
+  componentWillUnmount() {
+    clearInterval(this.interval); // cleanup interval
+  }
+
+  // how to get onTick to be called over and over again? Cannot put in render(), but can be placed in componentDidMount().
+  onTick() {
+    console.log("onTick");
+    if (this.state.running) {
+      let timeNow = Date.now(); // returns number of ms since Jan 1,1970 (UNIX epoch)
+      this.setState({
+        previousTime: timeNow,
+        elapsedTime: this.state.elapsedTime + (timeNow - this.state.previousTime),
+      });
+    }
+  }
+
+  onStart(e) {
+    this.setState({
+      running: true,
+      previousTime: Date.now(),
+    });
+  }
+
+  onStop(e) {
+    this.setState({ running: false });
+  }
+
+  onReset() {
+    this.setState({
+      running: false,
+      elapsedTime: 0,
+      previousTime: Date.now() // update previousTime so next tick will get exact same amount of ms between when we reset versus the previous tick.
+    });
+  }
+
+  render() {
+    // let milliseconds = Math.floor(this.state.elapsedTime / 10);
+    let seconds = Math.floor(this.state.elapsedTime / 1000);
+    let minutes = Math.floor(seconds / 60);
+    // let hours = Math.floor(minutes / 60);
+    return(
+      <div className="stopwatch">
+        <h2>Stopwatch</h2>
+        { minutes >= 1 ?
+          <div className="stopwatch-time">{ minutes }:{ seconds % 60 }</div>
+          :
+          <div className="stopwatch-time">{ seconds % 60 }</div>
         }
-
-        this.onTick = this.onTick.bind(this);
-    };
-
-    componentDidMount() {
-      this.interval = setInterval(this.onTick, 100);
-    }
-
-    componentWillUnmount() {
-        clearInterval(this.interval);
-    }
-
-    onTick() {
-        if(this.state.running) {
-          const now = Date.now();
-          this.setState({
-              previousTime: now,
-              elapsedTime: this.state.elapsedTime + (now - this.state.previousTime),
-          });
+        {/* alternative can be { this.state.running ? "Start" : "Stop" } */}
+        { this.state.running ?
+          <button type="submit" onClick={this.onStop}>Stop</button>
+          :
+          <button type="submit" onClick={this.onStart}>Start</button>
         }
-        console.log('onTick');
-    }
-
-    onStart() {
-        this.setState({
-            running: true,
-            previousTime: Date.now(),
-        });
-    }
-
-    onStop() {
-        this.setState({
-            running: false
-        });
-    }
-
-    onReset() {
-        this.setState({
-            elapsedTime: 0,
-            previousTime: Date.now(),
-        });
-    }
-
-
-
-    render() {
-        var seconds = Math.floor(this.state.elapsedTime / 1000);
-        return (
-            <div className="stopwatch">
-                <h2>Stopwatch</h2>
-                <div className="stopwatch-time">{seconds}</div>
-                { this.state.running ?
-                    <button onClick={this.onStop}>Stop</button>
-                    :
-                    <button  onClick={this.onStart}>Start</button>
-                }
-                <button onClick={this.onReset}>Reset</button>
-
-            </div>
-        );
-    }
+        <button onClick={this.onReset}>Reset</button>
+      </div>
+    )
+  }
 }
-// class Stopwatch extends Component {
-//   constructor() {
-//     super();
-//     this.state = {
-//       running: false,
-//       elapsedTime: 0,
-//       previousTime: 0,
-//     }
-//     this.onStart = this.onStart.bind(this);
-//     this.onStop = this.onStop.bind(this);
-//     this.onReset = this.onReset.bind(this);
-//     this.onTick = this.onTick.bind(this);
-//   }
-//
-//   // As soon as Stopwatch component is added to DOM on page, componentDidMount() will be called. Convenient for setting up timers, data fetching, etc.
-//   componentDidMount() {
-//     this.interval = setInterval(this.onTick, 100); // invisible event
-//   }
-//
-//   // invoked immediately before component is removed or unmounted. Convenient for invalidating timers, canceling network requests, or DOM elements created in componentDidMount. In case if stopwatch no longer needs to rendered, clearInterval will remove setInterval, which can keep Stopwatch component in memory, causing a memory leak.
-//   componentWillUnmount() {
-//     clearInterval(this.interval); // cleanup interval
-//   }
-//
-//   // how to get onTick to be called over and over again? Cannot put in render()
-//   onTick() {
-//     console.log("onTick");
-//     if (this.state.running) {
-//       let timeNow = Date.now(); // returns number of ms since Jan 1,1970 (UNIX epoch)
-//       this.setState({
-//         previousTime: timeNow,
-//         elapsedTime: this.state.elapsedTime + (timeNow - this.state.previousTime),
-//       });
-//     }
-//   }
-//
-//   onStart() {
-//     this.setState({
-//       running: true,
-//       previousTime: Date.now(),
-//     });
-//
-//   }
-//
-//   onStop() {
-//     this.setState({ running: false });
-//   }
-//
-//   onReset() {
-//     this.setState({
-//       running: false,
-//       elapsedTime: 0,
-//       previousTime: Date.now() // update previousTime so next tick will get exact same amount of ms between when we reset versus the previous tick.
-//     });
-//   }
-//
-//   render() {
-//     let seconds = Math.floor(this.state.elapsedTime / 1000)
-//     return(
-//       <div className="stopwatch">
-//         <h2>Stopwatch</h2>
-//         <div className="stopwatch-time">{ seconds }</div>
-//         {/* alternative can be { this.state.running ? "Start" : "Stop" } */}
-//         { this.state.running ?
-//           <button onClick={this.onStop}>Stop</button>
-//           :
-//           <button onClick={this.onStart}>Start</button>
-//         }
-//         <button onClick={this.onReset}>Reset</button>
-//       </div>
-//     )
-//   }
-// }
 
 // Controlled Component is when an input form element (i.e <input>, <textarea>, <select>), maintain their own state and update based on user input. The input form element's value is controlled by React. Every state mutation (i.e this.state.name) will have an associated handler fcn (i.e onNameChange()). React state is the "single source of truth" because for example, the displayed value in form element will always be "this.state.value".
 class AddPlayerForm extends Component {
@@ -203,7 +148,6 @@ class AddPlayerForm extends Component {
   }
 }
 
-
 function Stats(props) {
   const totalPlayers = props.players.length;
   const totalPoints = props.players.reduce(function(total, player) {
@@ -238,7 +182,6 @@ function Header(props) {
       <Stats players={props.players}/>
       <h1>{props.title}</h1>
       <Stopwatch />
-      {/* This is how to comment in JSX */}
     </div>
   );
 }
@@ -264,7 +207,7 @@ Counter.propTypes = {
   onChange: PropTypes.func.isRequired,
 };
 
-// relay another property, onScoreChange, that has a value of a callback fcn
+
 function Player(props) {
   return (
     <div className="player">
@@ -279,6 +222,7 @@ function Player(props) {
   );
 }
 
+// relay another property, onScoreChange, that has a value of a callback fcn
 Player.propTypes = {
   name: PropTypes.string.isRequired,
   score: PropTypes.number.isRequired,
@@ -290,7 +234,6 @@ Player.propTypes = {
 class App extends Component {
   constructor(props) {
     super(props);
-
     // initialPlayers is an array of objects with the following shape, that needs to be passed in. title is optional.
     App.propTypes = {
       title: PropTypes.string,
@@ -302,11 +245,10 @@ class App extends Component {
 
     this.state = {players: this.props.initialPlayers};
     this.onPlayerAdd = this.onPlayerAdd.bind(this);
-    // this.onScoreChange = this.onScoreChange.bind(this);
+    // this.onScoreChange = this.onScoreChange.bind(this); Don't need, but why?
   }
 
   onScoreChange(id, delta) {
-    // console.log('onScoreChange', id, delta)
     if (this.state.players[id].score > 0 ) {
       this.state.players[id].score += delta;
       this.setState(this.state);
@@ -358,16 +300,13 @@ class App extends Component {
 App.defaultProps = {
   title: "My Scoreboard",
 };
+
 // <App /> creates an instance of the App component in JSX
 document.addEventListener('DOMContentLoaded', () => {
   ReactDOM.render(<App initialPlayers={PLAYERS}/>, document.getElementById('root'));
 });
-
 // first arg in ReactDOM.render() is virtualDOM element, second arg is real DOM element where we want to place our virtual DOM. Above code says to create an <App /> instance (or React element) and render within a DOM element called "root" on the page.
 
-// In normal JS, passing a method to "this" would lose the methods association to the instance of the class it is in, because "this" is either null or window. By using .bind(this), it passes instance of function to the current instance "this" is bound to.
-
-// this.setState() notifies the class it's in that state has been updated, and render method will be called again, and create a DOM tree where this.state.score increments/decrements by 1.
 
 // Component class of Counter
 // class Counter extends Component {

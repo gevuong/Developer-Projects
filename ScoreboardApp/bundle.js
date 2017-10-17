@@ -1017,20 +1017,26 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 var PLAYERS = [{
-  name: "George V.",
-  score: 4
+  name: "Mohandas Gandhi",
+  score: 0
 }, {
-  name: "George Foreman",
-  score: 2
+  name: "Pablo Picasso",
+  score: 0
 }, {
-  name: "George St. Pierre",
-  score: 1
+  name: "Sigmund Freud",
+  score: 0
+}, {
+  name: "Maria Montessori",
+  score: 0
+}, {
+  name: "Carl Jung",
+  score: 0
 }];
 
-var playerId = 3;
+var playerId = 3; // incremented to assign unique ID for each added player
 
-var Stopwatch = function (_React$Component) {
-  _inherits(Stopwatch, _React$Component);
+var Stopwatch = function (_Component) {
+  _inherits(Stopwatch, _Component);
 
   function Stopwatch() {
     _classCallCheck(this, Stopwatch);
@@ -1042,36 +1048,47 @@ var Stopwatch = function (_React$Component) {
       elapsedTime: 0,
       previousTime: 0
     };
-
+    _this.onStart = _this.onStart.bind(_this);
+    _this.onStop = _this.onStop.bind(_this);
+    _this.onReset = _this.onReset.bind(_this);
     _this.onTick = _this.onTick.bind(_this);
     return _this;
   }
 
+  // As soon as Stopwatch component is added to DOM on page, componentDidMount() will be called. Convenient for setting up timers, data fetching, etc.
+
+
   _createClass(Stopwatch, [{
     key: 'componentDidMount',
     value: function componentDidMount() {
-      this.interval = setInterval(this.onTick, 100);
+      this.interval = setInterval(this.onTick, 10); // invisible event
     }
+
+    // invoked immediately before component is removed from DOM. Convenient for invalidating timers, canceling network requests, or DOM elements created in componentDidMount. In case if stopwatch no longer needs to rendered, clearInterval will remove setInterval, which can keep Stopwatch component in memory, causing a memory leak.
+
   }, {
     key: 'componentWillUnmount',
     value: function componentWillUnmount() {
-      clearInterval(this.interval);
+      clearInterval(this.interval); // cleanup interval
     }
+
+    // how to get onTick to be called over and over again? Cannot put in render(), but can be placed in componentDidMount().
+
   }, {
     key: 'onTick',
     value: function onTick() {
+      console.log("onTick");
       if (this.state.running) {
-        var now = Date.now();
+        var timeNow = Date.now(); // returns number of ms since Jan 1,1970 (UNIX epoch)
         this.setState({
-          previousTime: now,
-          elapsedTime: this.state.elapsedTime + (now - this.state.previousTime)
+          previousTime: timeNow,
+          elapsedTime: this.state.elapsedTime + (timeNow - this.state.previousTime)
         });
       }
-      console.log('onTick');
     }
   }, {
     key: 'onStart',
-    value: function onStart() {
+    value: function onStart(e) {
       this.setState({
         running: true,
         previousTime: Date.now()
@@ -1079,23 +1096,25 @@ var Stopwatch = function (_React$Component) {
     }
   }, {
     key: 'onStop',
-    value: function onStop() {
-      this.setState({
-        running: false
-      });
+    value: function onStop(e) {
+      this.setState({ running: false });
     }
   }, {
     key: 'onReset',
     value: function onReset() {
       this.setState({
+        running: false,
         elapsedTime: 0,
-        previousTime: Date.now()
+        previousTime: Date.now() // update previousTime so next tick will get exact same amount of ms between when we reset versus the previous tick.
       });
     }
   }, {
     key: 'render',
     value: function render() {
+      // let milliseconds = Math.floor(this.state.elapsedTime / 10);
       var seconds = Math.floor(this.state.elapsedTime / 1000);
+      var minutes = Math.floor(seconds / 60);
+      // let hours = Math.floor(minutes / 60);
       return _react2.default.createElement(
         'div',
         { className: 'stopwatch' },
@@ -1104,18 +1123,24 @@ var Stopwatch = function (_React$Component) {
           null,
           'Stopwatch'
         ),
-        _react2.default.createElement(
+        minutes >= 1 ? _react2.default.createElement(
           'div',
           { className: 'stopwatch-time' },
-          seconds
+          minutes,
+          ':',
+          seconds % 60
+        ) : _react2.default.createElement(
+          'div',
+          { className: 'stopwatch-time' },
+          seconds % 60
         ),
         this.state.running ? _react2.default.createElement(
           'button',
-          { onClick: this.onStop },
+          { type: 'submit', onClick: this.onStop },
           'Stop'
         ) : _react2.default.createElement(
           'button',
-          { onClick: this.onStart },
+          { type: 'submit', onClick: this.onStart },
           'Start'
         ),
         _react2.default.createElement(
@@ -1128,86 +1153,13 @@ var Stopwatch = function (_React$Component) {
   }]);
 
   return Stopwatch;
-}(_react2.default.Component);
-// class Stopwatch extends Component {
-//   constructor() {
-//     super();
-//     this.state = {
-//       running: false,
-//       elapsedTime: 0,
-//       previousTime: 0,
-//     }
-//     this.onStart = this.onStart.bind(this);
-//     this.onStop = this.onStop.bind(this);
-//     this.onReset = this.onReset.bind(this);
-//     this.onTick = this.onTick.bind(this);
-//   }
-//
-//   // As soon as Stopwatch component is added to DOM on page, componentDidMount() will be called. Convenient for setting up timers, data fetching, etc.
-//   componentDidMount() {
-//     this.interval = setInterval(this.onTick, 100); // invisible event
-//   }
-//
-//   // invoked immediately before component is removed or unmounted. Convenient for invalidating timers, canceling network requests, or DOM elements created in componentDidMount. In case if stopwatch no longer needs to rendered, clearInterval will remove setInterval, which can keep Stopwatch component in memory, causing a memory leak.
-//   componentWillUnmount() {
-//     clearInterval(this.interval); // cleanup interval
-//   }
-//
-//   // how to get onTick to be called over and over again? Cannot put in render()
-//   onTick() {
-//     console.log("onTick");
-//     if (this.state.running) {
-//       let timeNow = Date.now(); // returns number of ms since Jan 1,1970 (UNIX epoch)
-//       this.setState({
-//         previousTime: timeNow,
-//         elapsedTime: this.state.elapsedTime + (timeNow - this.state.previousTime),
-//       });
-//     }
-//   }
-//
-//   onStart() {
-//     this.setState({
-//       running: true,
-//       previousTime: Date.now(),
-//     });
-//
-//   }
-//
-//   onStop() {
-//     this.setState({ running: false });
-//   }
-//
-//   onReset() {
-//     this.setState({
-//       running: false,
-//       elapsedTime: 0,
-//       previousTime: Date.now() // update previousTime so next tick will get exact same amount of ms between when we reset versus the previous tick.
-//     });
-//   }
-//
-//   render() {
-//     let seconds = Math.floor(this.state.elapsedTime / 1000)
-//     return(
-//       <div className="stopwatch">
-//         <h2>Stopwatch</h2>
-//         <div className="stopwatch-time">{ seconds }</div>
-//         {/* alternative can be { this.state.running ? "Start" : "Stop" } */}
-//         { this.state.running ?
-//           <button onClick={this.onStop}>Stop</button>
-//           :
-//           <button onClick={this.onStart}>Start</button>
-//         }
-//         <button onClick={this.onReset}>Reset</button>
-//       </div>
-//     )
-//   }
-// }
+}(_react.Component);
 
 // Controlled Component is when an input form element (i.e <input>, <textarea>, <select>), maintain their own state and update based on user input. The input form element's value is controlled by React. Every state mutation (i.e this.state.name) will have an associated handler fcn (i.e onNameChange()). React state is the "single source of truth" because for example, the displayed value in form element will always be "this.state.value".
 
 
-var AddPlayerForm = function (_Component) {
-  _inherits(AddPlayerForm, _Component);
+var AddPlayerForm = function (_Component2) {
+  _inherits(AddPlayerForm, _Component2);
 
   function AddPlayerForm(props) {
     _classCallCheck(this, AddPlayerForm);
@@ -1365,7 +1317,6 @@ Counter.propTypes = {
   onChange: _propTypes2.default.func.isRequired
 };
 
-// relay another property, onScoreChange, that has a value of a callback fcn
 function Player(props) {
   return _react2.default.createElement(
     'div',
@@ -1388,6 +1339,7 @@ function Player(props) {
   );
 }
 
+// relay another property, onScoreChange, that has a value of a callback fcn
 Player.propTypes = {
   name: _propTypes2.default.string.isRequired,
   score: _propTypes2.default.number.isRequired,
@@ -1395,8 +1347,8 @@ Player.propTypes = {
   onRemove: _propTypes2.default.func.isRequired
 };
 
-var App = function (_Component2) {
-  _inherits(App, _Component2);
+var App = function (_Component3) {
+  _inherits(App, _Component3);
 
   function App(props) {
     _classCallCheck(this, App);
@@ -1414,14 +1366,13 @@ var App = function (_Component2) {
 
     _this3.state = { players: _this3.props.initialPlayers };
     _this3.onPlayerAdd = _this3.onPlayerAdd.bind(_this3);
-    // this.onScoreChange = this.onScoreChange.bind(this);
+    // this.onScoreChange = this.onScoreChange.bind(this); Don't need, but why?
     return _this3;
   }
 
   _createClass(App, [{
     key: 'onScoreChange',
     value: function onScoreChange(id, delta) {
-      // console.log('onScoreChange', id, delta)
       if (this.state.players[id].score > 0) {
         this.state.players[id].score += delta;
         this.setState(this.state);
@@ -1487,16 +1438,13 @@ var App = function (_Component2) {
 App.defaultProps = {
   title: "My Scoreboard"
 };
+
 // <App /> creates an instance of the App component in JSX
 document.addEventListener('DOMContentLoaded', function () {
   _reactDom2.default.render(_react2.default.createElement(App, { initialPlayers: PLAYERS }), document.getElementById('root'));
 });
-
 // first arg in ReactDOM.render() is virtualDOM element, second arg is real DOM element where we want to place our virtual DOM. Above code says to create an <App /> instance (or React element) and render within a DOM element called "root" on the page.
 
-// In normal JS, passing a method to "this" would lose the methods association to the instance of the class it is in, because "this" is either null or window. By using .bind(this), it passes instance of function to the current instance "this" is bound to.
-
-// this.setState() notifies the class it's in that state has been updated, and render method will be called again, and create a DOM tree where this.state.score increments/decrements by 1.
 
 // Component class of Counter
 // class Counter extends Component {
