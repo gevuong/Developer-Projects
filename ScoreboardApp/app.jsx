@@ -17,6 +17,44 @@ var PLAYERS = [
   },
 ]
 
+class AddPlayerForm extends Component {
+  constructor(props) {
+    super(props);
+
+    AddPlayerForm.propTypes = {
+      onAdd: PropTypes.func.isRequired,
+    }
+    this.state = {name: ""};
+
+    this.onSubmit = this.onSubmit.bind(this);
+    this.onNameChange = this.onNameChange.bind(this);
+  }
+
+  // event.target represents <input> element generated in form. When onNameChange gets called or everytime you type, state gets updated, which will cause a re-render. And since this.state.name is updated, text is kept in <input> field.
+  onNameChange(e) {
+    this.setState({name: e.target.value});
+  }
+
+  onSubmit(e) {
+    e.preventDefault();
+    this.props.onAdd(this.state.name);
+    this.setState({name: ""});
+  }
+
+  // when form submits, page refreshes. Use preventDefault()
+  render() {
+    return (
+      <div className="add-player-form">
+        <form onSubmit={this.onSubmit} >
+          <input type="text" value={this.state.name} onChange={this.onNameChange}></input>
+          <input type="submit" value="Add Player" ></input>
+        </form>
+      </div>
+    )
+  }
+}
+
+
 function Stats(props) {
   const totalPlayers = props.players.length;
   const totalPoints = props.players.reduce(function(total, player) {
@@ -112,6 +150,7 @@ class App extends Component {
       players: this.props.initialPlayers,
     }
 
+    this.onPlayerAdd = this.onPlayerAdd.bind(this);
     // this.onScoreChange = this.onScoreChange.bind(this);
   }
 
@@ -124,6 +163,16 @@ class App extends Component {
       if (delta > 0) this.state.players[id].score += delta;
       this.setState(this.state);
     }
+  }
+
+  onPlayerAdd(name) {
+    console.log("player added: ", name);
+    this.state.players.push({
+      name: name,
+      score: 0,
+    })
+    this.setState(this.state);
+    // console.log(this.state.players);
   }
 
   // Within function of map iterator, "this" doesn't point to appropriate instance. Need to call .bind(this) on anonymous fcn to make "this" within fcn apply to same "this" outside of fcn. Use arrow fcn within .map() to avoid .bind(this).
@@ -142,6 +191,7 @@ class App extends Component {
             );
           })}
         </div>
+        <AddPlayerForm onAdd={this.onPlayerAdd} />
       </div>
     );
   }
