@@ -21194,6 +21194,14 @@ var _react = __webpack_require__(4);
 
 var _react2 = _interopRequireDefault(_react);
 
+var _SearchForm = __webpack_require__(33);
+
+var _SearchForm2 = _interopRequireDefault(_SearchForm);
+
+var _GifList = __webpack_require__(34);
+
+var _GifList2 = _interopRequireDefault(_GifList);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -21208,23 +21216,33 @@ var App = function (_Component) {
   function App() {
     _classCallCheck(this, App);
 
-    return _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).apply(this, arguments));
+    return _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this)); // Figure out what the point of super() is
   }
 
   _createClass(App, [{
-    key: "render",
+    key: 'render',
     value: function render() {
       return _react2.default.createElement(
-        "div",
-        { className: "main-header" },
+        'div',
+        null,
         _react2.default.createElement(
-          "div",
-          { className: "inner" },
+          'div',
+          { className: 'main-header' },
           _react2.default.createElement(
-            "h1",
-            { className: "main-header" },
-            "GIFSEARCH"
+            'div',
+            { className: 'inner' },
+            _react2.default.createElement(
+              'h1',
+              { className: 'main-title' },
+              'Gifsearch'
+            ),
+            _react2.default.createElement(_SearchForm2.default, null)
           )
+        ),
+        _react2.default.createElement(
+          'div',
+          { className: 'main-content' },
+          _react2.default.createElement(_GifList2.default, null)
         )
       );
     }
@@ -21234,6 +21252,165 @@ var App = function (_Component) {
 }(_react.Component);
 
 exports.default = App;
+
+/***/ }),
+/* 33 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(4);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var SearchForm = function (_Component) {
+  _inherits(SearchForm, _Component);
+
+  function SearchForm() {
+    _classCallCheck(this, SearchForm);
+
+    var _this = _possibleConstructorReturn(this, (SearchForm.__proto__ || Object.getPrototypeOf(SearchForm)).call(this));
+
+    _this.state = { searchText: "" };
+    // this.onHandleSubmit = this.onHandleSubmit.bind(this); // don't need when submitting form??
+    _this.onSearchChange = _this.onSearchChange.bind(_this);
+    return _this;
+  }
+
+  _createClass(SearchForm, [{
+    key: "onSearchChange",
+    value: function onSearchChange(e) {
+      console.log(e.target.value);
+      // console.log(e.currentTarget.value); // same output?
+      this.setState({ searchText: e.target.value });
+    }
+  }, {
+    key: "onHandleSubmit",
+    value: function onHandleSubmit(e) {
+      e.preventDefault();
+      console.log("form submitted");
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      return _react2.default.createElement(
+        "form",
+        { className: "search-form", onSubmit: this.onHandleSubmit },
+        _react2.default.createElement("input", { type: "text", placeholder: "Search...", onChange: this.onSearchChange }),
+        _react2.default.createElement(
+          "button",
+          { type: "submit", className: "search-button" },
+          _react2.default.createElement(
+            "i",
+            { className: "material-icons icn-search" },
+            "search"
+          )
+        )
+      );
+    }
+  }]);
+
+  return SearchForm;
+}(_react.Component);
+
+exports.default = SearchForm;
+
+/***/ }),
+/* 34 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(4);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _Gif = __webpack_require__(35);
+
+var _Gif2 = _interopRequireDefault(_Gif);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var GifList = function (_Component) {
+  _inherits(GifList, _Component);
+
+  function GifList(props) {
+    _classCallCheck(this, GifList);
+
+    return _possibleConstructorReturn(this, (GifList.__proto__ || Object.getPrototypeOf(GifList)).call(this, props));
+  }
+
+  _createClass(GifList, [{
+    key: 'render',
+    value: function render() {
+      return _react2.default.createElement(
+        'div',
+        null,
+        _react2.default.createElement(_Gif2.default, null)
+      );
+    }
+  }]);
+
+  return GifList;
+}(_react.Component);
+
+exports.default = GifList;
+
+/***/ }),
+/* 35 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _react = __webpack_require__(4);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+// functional component, doesn't require "export default"
+var Gif = function Gif() {
+  return _react2.default.createElement(
+    'div',
+    null,
+    'INput Gif Here'
+  );
+};
+
+exports.default = Gif;
 
 /***/ })
 /******/ ]);

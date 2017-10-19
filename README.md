@@ -11,3 +11,6 @@
   * [x] Stopwatch with start, stop, and reset buttons
     * [ ] Add milliseconds, hours
   * [ ] Persist state with localStorage
+* [ ] [GIFSearch App](https://rawgit.com/gevuong/Frontend-Projects/master/GIFSearchApp/index.html) (React.js)
+  * [ ] Fetch data using Fetch API and Axios
+  * [ ] Integrate Searchbar feature
