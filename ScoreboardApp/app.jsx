@@ -23,7 +23,6 @@ var PLAYERS = [
     name: "Carl Jung",
     score: 0,
   },
-
 ]
 
 var playerId = 3; // incremented to assign unique ID for each added player
