@@ -1,30 +1,43 @@
 import React, { Component } from 'react';
 
 export default class SearchForm extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {searchText: ""};
-    // this.onHandleSubmit = this.onHandleSubmit.bind(this); // don't need when submitting form??
+    this.handleSubmit = this.handleSubmit.bind(this);
     this.onSearchChange = this.onSearchChange.bind(this);
   }
 
   onSearchChange(e) {
-    console.log(e.target.value);
-    // console.log(e.currentTarget.value); // same output?
+    // e.currentTarget.value same output?
     this.setState({ searchText: e.target.value });
   };
 
-  onHandleSubmit(e) {
+  handleSubmit(e) {
     e.preventDefault();
-    console.log("form submitted");
+    this.props.onSearch(this.state.searchText);
+    e.currentTarget.reset(); // reset() resets values of all elements in form
+
+    console.log("target: ", e.target);
+    console.log("currentTarget: ", e.currentTarget);
   }
 
   render() {
     return (
-      <form className="search-form" onSubmit={this.onHandleSubmit}>
-        <input type="text" placeholder="Search..." onChange={this.onSearchChange}></input>
-        <button type="submit" className="search-button"><i className="material-icons icn-search">search</i></button>
+      <form className="search-form" onSubmit={this.handleSubmit} >
+        <input type="text"
+               placeholder="Search..."
+               onChange={this.onSearchChange}>
+        </input>
+        <button type="submit" className="search-button">
+          <i className="material-icons icn-search">search</i>
+        </button>
       </form>
     )
   }
 }
+
+// Suppose you have access to event object but not DOM element. "currentTarget" returns DOM element that's associated with event handler you defined, or the element you actually bound the event to.
+// "target" is whatever you actually clicked on to trigger event.
+
+// Alternative to writing SearchForm component without constructor fcn or .bind() shown in SearchForm2.js

@@ -7,13 +7,9 @@ const GifList = props => {
     return (
       <Gif url={gif.images.fixed_height.url} key={gif.id} />
     )
-  // implicit return
-  // let gifs = props.gifs.map((gif, idx) =>
-  //   <Gif url={gif.images.fixed_height.url} key={idx} />
-  // )
+  // for implicit return: see code at bottom of page
   });
 
-  console.log(gifs);
   return (
     <ul className="gif-list">
       {gifs}
@@ -22,3 +18,7 @@ const GifList = props => {
 }
 
 export default GifList;
+
+// let gifs = props.gifs.map((gif, idx) =>
+//   <Gif url={gif.images.fixed_height.url} key={idx} />
+// )

@@ -21894,6 +21894,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+// import SearchForm2 from './src/components/SearchForm2';
+
 
 // used to support old browsers when using fetchAPI
 
@@ -21909,6 +21911,8 @@ var App = function (_Component) {
     _this.state = {
       gifs: []
     };
+
+    _this.performSearch = _this.performSearch.bind(_this);
     return _this;
   }
 
@@ -21926,12 +21930,26 @@ var App = function (_Component) {
       ).catch(function (error) {
         console.log("Error fetching and parsing data: ", error);
       });
+      // To use fetchAPI method instead: refer to code at bottom of page
+    }
+  }, {
+    key: 'performSearch',
+    value: function performSearch(query) {
+      var _this3 = this;
 
-      // To use FetchAPI method: refer to code at bottom of page
+      fetch('http://api.giphy.com/v1/gifs/search?q=' + query + '&api_key=dc6zaTOxFJmzC&limit=24').then(function (response) {
+        return response.json();
+      }).then(function (responseData) {
+        _this3.setState({ gifs: responseData.data });
+      }).catch(function (error) {
+        return console.log("Error fetching and parsing data: ", error);
+      });
     }
   }, {
     key: 'render',
     value: function render() {
+      var _this4 = this;
+
       console.log(this.state.gifs);
       return _react2.default.createElement(
         'div',
@@ -21947,7 +21965,9 @@ var App = function (_Component) {
               { className: 'main-title' },
               'Gifsearch'
             ),
-            _react2.default.createElement(_SearchForm2.default, null)
+            _react2.default.createElement(_SearchForm2.default, { onSearch: function onSearch(query) {
+                return _this4.performSearch(query);
+              } })
           )
         ),
         _react2.default.createElement(
@@ -22006,13 +22026,13 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var SearchForm = function (_Component) {
   _inherits(SearchForm, _Component);
 
-  function SearchForm() {
+  function SearchForm(props) {
     _classCallCheck(this, SearchForm);
 
-    var _this = _possibleConstructorReturn(this, (SearchForm.__proto__ || Object.getPrototypeOf(SearchForm)).call(this));
+    var _this = _possibleConstructorReturn(this, (SearchForm.__proto__ || Object.getPrototypeOf(SearchForm)).call(this, props));
 
     _this.state = { searchText: "" };
-    // this.onHandleSubmit = this.onHandleSubmit.bind(this); // don't need when submitting form??
+    _this.handleSubmit = _this.handleSubmit.bind(_this);
     _this.onSearchChange = _this.onSearchChange.bind(_this);
     return _this;
   }
@@ -22020,23 +22040,28 @@ var SearchForm = function (_Component) {
   _createClass(SearchForm, [{
     key: "onSearchChange",
     value: function onSearchChange(e) {
-      console.log(e.target.value);
-      // console.log(e.currentTarget.value); // same output?
+      // e.currentTarget.value same output?
       this.setState({ searchText: e.target.value });
     }
   }, {
-    key: "onHandleSubmit",
-    value: function onHandleSubmit(e) {
+    key: "handleSubmit",
+    value: function handleSubmit(e) {
       e.preventDefault();
-      console.log("form submitted");
+      this.props.onSearch(this.state.searchText);
+      e.currentTarget.reset(); // reset() resets values of all elements in form
+
+      console.log("target: ", e.target);
+      console.log("currentTarget: ", e.currentTarget);
     }
   }, {
     key: "render",
     value: function render() {
       return _react2.default.createElement(
         "form",
-        { className: "search-form", onSubmit: this.onHandleSubmit },
-        _react2.default.createElement("input", { type: "text", placeholder: "Search...", onChange: this.onSearchChange }),
+        { className: "search-form", onSubmit: this.handleSubmit },
+        _react2.default.createElement("input", { type: "text",
+          placeholder: "Search...",
+          onChange: this.onSearchChange }),
         _react2.default.createElement(
           "button",
           { type: "submit", className: "search-button" },
@@ -22052,6 +22077,12 @@ var SearchForm = function (_Component) {
 
   return SearchForm;
 }(_react.Component);
+
+// Suppose you have access to event object but not DOM element. "currentTarget" returns DOM element that's associated with event handler you defined, or the element you actually bound the event to.
+// "target" is whatever you actually clicked on to trigger event.
+
+// Alternative to writing SearchForm component without constructor fcn or .bind() shown in SearchForm2.js
+
 
 exports.default = SearchForm;
 
@@ -22080,13 +22111,9 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var GifList = function GifList(props) {
   var gifs = props.gifs.map(function (gif) {
     return _react2.default.createElement(_Gif2.default, { url: gif.images.fixed_height.url, key: gif.id });
-    // implicit return
-    // let gifs = props.gifs.map((gif, idx) =>
-    //   <Gif url={gif.images.fixed_height.url} key={idx} />
-    // )
+    // for implicit return: see code at bottom of page
   });
 
-  console.log(gifs);
   return _react2.default.createElement(
     'ul',
     { className: 'gif-list' },
@@ -22095,6 +22122,10 @@ var GifList = function GifList(props) {
 };
 
 exports.default = GifList;
+
+// let gifs = props.gifs.map((gif, idx) =>
+//   <Gif url={gif.images.fixed_height.url} key={idx} />
+// )
 
 /***/ }),
 /* 42 */
@@ -22123,7 +22154,8 @@ var Gif = function Gif(props) {
 };
 
 exports.default = Gif;
-// The alt attribute im <img> provides alternative information for an image if a user for some reason cannot view it (because of slow connection, an error in the src attribute, or if the user uses a screen reader).
+
+// The "alt" attribute im <img> provides alternative information for an image if a user for some reason cannot view it (because of slow connection, an error in the src attribute, or if the user uses a screen reader).
 
 /***/ }),
 /* 43 */

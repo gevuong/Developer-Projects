@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import SearchForm from './src/components/SearchForm';
+// import SearchForm2 from './src/components/SearchForm2';
 import GifList from './src/components/GifList';
 import axios from 'axios';
 import 'whatwg-fetch'; // used to support old browsers when using fetchAPI
@@ -10,6 +11,8 @@ export default class App extends Component {
     this.state = {
       gifs: [],
     };
+
+    this.performSearch = this.performSearch.bind(this);
   }
 
   // method runs immediately after component is added to DOM. Convenient for loading external data because at this point in the lifecycle, component has a DOM representation
@@ -21,8 +24,18 @@ export default class App extends Component {
       .catch(error => {
         console.log("Error fetching and parsing data: ", error);
       });
+    // To use fetchAPI method instead: refer to code at bottom of page
+  }
 
-    // To use FetchAPI method: refer to code at bottom of page
+  performSearch(query) {
+    fetch(`http://api.giphy.com/v1/gifs/search?q=${query}&api_key=dc6zaTOxFJmzC&limit=24`)
+    .then(response => response.json())
+    .then(responseData => {
+      this.setState({ gifs: responseData.data, });
+    })
+    .catch(error =>
+      console.log("Error fetching and parsing data: ", error)
+    )
   }
 
   render() {
@@ -32,7 +45,8 @@ export default class App extends Component {
         <div className="main-header">
           <div className="inner">
             <h1 className="main-title">Gifsearch</h1>
-            <SearchForm />
+            <SearchForm onSearch={query => this.performSearch(query)} />
+            {/* <SearchForm onSearch={this.onSearch} passes fcn as a prop to SearchForm as well />*/}
           </div>
         </div>
         <div className="main-content">
