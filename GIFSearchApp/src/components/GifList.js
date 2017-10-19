@@ -1,17 +1,24 @@
 import React, { Component } from 'react';
 import Gif from './Gif';
 
-export default class GifList extends Component {
-  constructor(props) {
-    super(props);
-
-  }
-
-  render() {
+// Presentational Component
+const GifList = props => {
+  let gifs = props.gifs.map(gif => {
     return (
-      <div>
-        <Gif />
-      </div>
-    );
-  }
+      <Gif url={gif.images.fixed_height.url} key={gif.id} />
+    )
+  // implicit return
+  // let gifs = props.gifs.map((gif, idx) =>
+  //   <Gif url={gif.images.fixed_height.url} key={idx} />
+  // )
+  });
+
+  console.log(gifs);
+  return (
+    <ul className="gif-list">
+      {gifs}
+    </ul>
+  );
 }
+
+export default GifList;

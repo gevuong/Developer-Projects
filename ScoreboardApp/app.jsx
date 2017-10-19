@@ -204,6 +204,8 @@ function Counter(props) {
 Counter.propTypes = {
   score: PropTypes.number.isRequired,
   onChange: PropTypes.func.isRequired,
+
+  // To see Counter as component class, see code at bottom of page.
 };
 
 

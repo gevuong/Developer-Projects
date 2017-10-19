@@ -4,7 +4,6 @@ import GifList from './src/components/GifList';
 import axios from 'axios';
 import 'whatwg-fetch'; // used to support old browsers when using fetchAPI
 
-
 export default class App extends Component {
   constructor() {
     super(); // Calling super() allows us to use "this" inside constructor within context of App class, rather than parent Component class extending from React.
@@ -37,13 +36,14 @@ export default class App extends Component {
           </div>
         </div>
         <div className="main-content">
-          <GifList />
+          <GifList gifs={this.state.gifs} /> {/* Presentational Component */}
         </div>
       </div>
     );
   }
 }
 
+// fetchAPI method:
 // fetchAPI returns a JS promise, and if promise is "fulfilled", which is when browser receives data from the server, .then() methods which store callbacks will get executed
 // fetch("http://api.giphy.com/v1/gifs/trending?api_key=dc6zaTOxFJmzC&limit=24")
 // .then(response => response.json())

@@ -1,12 +1,13 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-// functional component, doesn't require "export default"
-const Gif = () => {
+// Presentational component
+const Gif = props => {
   return (
-    <div>
-      INput Gif Here
-    </div>
+    <li className="gif-wrap" alt="gif">
+      <img src={props.url}></img>
+    </li>
   );
-}
+};
 
 export default Gif;
+// The alt attribute im <img> provides alternative information for an image if a user for some reason cannot view it (because of slow connection, an error in the src attribute, or if the user uses a screen reader).
