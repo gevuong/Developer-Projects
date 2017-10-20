@@ -10,6 +10,7 @@ export default class App extends Component {
     super(); // Calling super() allows us to use "this" inside constructor within context of App class, rather than parent Component class extending from React.
     this.state = {
       gifs: [],
+      loading: true,
     };
 
     this.performSearch = this.performSearch.bind(this);
@@ -17,6 +18,8 @@ export default class App extends Component {
 
   // method runs immediately after component is added to DOM. Convenient for loading external data because at this point in the lifecycle, component has a DOM representation
   componentDidMount() {
+    this.performSearch();
+    
     axios.get('http://api.giphy.com/v1/gifs/trending?api_key=dc6zaTOxFJmzC&limit=24')
       .then(response =>
         this.setState({ gifs: response.data.data, }) // response.data is response provided by server already in JSON format. Append .data to access GiphyAPI data array.
@@ -27,11 +30,14 @@ export default class App extends Component {
     // To use fetchAPI method instead: refer to code at bottom of page
   }
 
-  performSearch(query) {
+  performSearch(query = "corgis") {
     fetch(`http://api.giphy.com/v1/gifs/search?q=${query}&api_key=dc6zaTOxFJmzC&limit=24`)
     .then(response => response.json())
     .then(responseData => {
-      this.setState({ gifs: responseData.data, });
+      this.setState({
+        gifs: responseData.data,
+        loading: false, // because at this point, data has already been fetched
+      });
     })
     .catch(error =>
       console.log("Error fetching and parsing data: ", error)
@@ -39,7 +45,6 @@ export default class App extends Component {
   }
 
   render() {
-    console.log(this.state.gifs);
     return (
       <div>
         <div className="main-header">
@@ -50,7 +55,10 @@ export default class App extends Component {
           </div>
         </div>
         <div className="main-content">
-          <GifList gifs={this.state.gifs} /> {/* Presentational Component */}
+          {this.state.loading
+            ? <h3>Loading...</h3>
+            : <GifList gifs={this.state.gifs} />
+          }
         </div>
       </div>
     );

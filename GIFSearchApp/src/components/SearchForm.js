@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 export default class SearchForm extends Component {
   constructor(props) {
     super(props);
-    this.state = {searchText: ""};
+    this.state = { searchText: "" }; // local state thats needed for component to work, not really part of application state
     this.handleSubmit = this.handleSubmit.bind(this);
     this.onSearchChange = this.onSearchChange.bind(this);
   }
@@ -17,9 +17,7 @@ export default class SearchForm extends Component {
     e.preventDefault();
     this.props.onSearch(this.state.searchText);
     e.currentTarget.reset(); // reset() resets values of all elements in form
-
-    console.log("target: ", e.target);
-    console.log("currentTarget: ", e.currentTarget);
+    // target vs currentTarget see NOTES.md
   }
 
   render() {
@@ -27,7 +25,7 @@ export default class SearchForm extends Component {
       <form className="search-form" onSubmit={this.handleSubmit} >
         <input type="text"
                placeholder="Search..."
-               onChange={this.onSearchChange}>
+               onChange={ this.onSearchChange }>
         </input>
         <button type="submit" className="search-button">
           <i className="material-icons icn-search">search</i>

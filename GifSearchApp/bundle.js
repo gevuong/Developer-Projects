@@ -21909,7 +21909,8 @@ var App = function (_Component) {
     var _this = _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this));
 
     _this.state = {
-      gifs: []
+      gifs: [],
+      loading: true
     };
 
     _this.performSearch = _this.performSearch.bind(_this);
@@ -21924,6 +21925,8 @@ var App = function (_Component) {
     value: function componentDidMount() {
       var _this2 = this;
 
+      this.performSearch();
+
       _axios2.default.get('http://api.giphy.com/v1/gifs/trending?api_key=dc6zaTOxFJmzC&limit=24').then(function (response) {
         return _this2.setState({ gifs: response.data.data });
       } // response.data is response provided by server already in JSON format. Append .data to access GiphyAPI data array.
@@ -21934,13 +21937,18 @@ var App = function (_Component) {
     }
   }, {
     key: 'performSearch',
-    value: function performSearch(query) {
+    value: function performSearch() {
       var _this3 = this;
+
+      var query = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : "corgis";
 
       fetch('http://api.giphy.com/v1/gifs/search?q=' + query + '&api_key=dc6zaTOxFJmzC&limit=24').then(function (response) {
         return response.json();
       }).then(function (responseData) {
-        _this3.setState({ gifs: responseData.data });
+        _this3.setState({
+          gifs: responseData.data,
+          loading: false // because at this point, data has already been fetched
+        });
       }).catch(function (error) {
         return console.log("Error fetching and parsing data: ", error);
       });
@@ -21950,7 +21958,6 @@ var App = function (_Component) {
     value: function render() {
       var _this4 = this;
 
-      console.log(this.state.gifs);
       return _react2.default.createElement(
         'div',
         null,
@@ -21973,8 +21980,11 @@ var App = function (_Component) {
         _react2.default.createElement(
           'div',
           { className: 'main-content' },
-          _react2.default.createElement(_GifList2.default, { gifs: this.state.gifs }),
-          ' '
+          this.state.loading ? _react2.default.createElement(
+            'h3',
+            null,
+            'Loading...'
+          ) : _react2.default.createElement(_GifList2.default, { gifs: this.state.gifs })
         )
       );
     }
@@ -22031,7 +22041,7 @@ var SearchForm = function (_Component) {
 
     var _this = _possibleConstructorReturn(this, (SearchForm.__proto__ || Object.getPrototypeOf(SearchForm)).call(this, props));
 
-    _this.state = { searchText: "" };
+    _this.state = { searchText: "" }; // local state thats needed for component to work, not really part of application state
     _this.handleSubmit = _this.handleSubmit.bind(_this);
     _this.onSearchChange = _this.onSearchChange.bind(_this);
     return _this;
@@ -22049,9 +22059,7 @@ var SearchForm = function (_Component) {
       e.preventDefault();
       this.props.onSearch(this.state.searchText);
       e.currentTarget.reset(); // reset() resets values of all elements in form
-
-      console.log("target: ", e.target);
-      console.log("currentTarget: ", e.currentTarget);
+      // target vs currentTarget see NOTES.md
     }
   }, {
     key: "render",
@@ -22105,26 +22113,41 @@ var _Gif = __webpack_require__(42);
 
 var _Gif2 = _interopRequireDefault(_Gif);
 
+var _NoGifs = __webpack_require__(64);
+
+var _NoGifs2 = _interopRequireDefault(_NoGifs);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 // Presentational Component
 var GifList = function GifList(props) {
-  var gifs = props.gifs.map(function (gif) {
-    return _react2.default.createElement(_Gif2.default, { url: gif.images.fixed_height.url, key: gif.id });
-    // for implicit return: see code at bottom of page
-  });
+  var gifArray = props.gifs;
+  var gifs = void 0;
 
-  return _react2.default.createElement(
-    'ul',
-    { className: 'gif-list' },
-    gifs
-  );
+  if (gifArray.length > 0) {
+    gifs = props.gifs.map(function (gif) {
+      return _react2.default.createElement(_Gif2.default, { url: gif.images.fixed_height.url, key: gif.id });
+    });
+
+    return _react2.default.createElement(
+      'ul',
+      { className: 'gif-list' },
+      gifs
+    );
+  } else {
+    return _react2.default.createElement(
+      'ul',
+      { className: 'gif-list' },
+      _react2.default.createElement(_NoGifs2.default, null)
+    );
+  }
 };
 
 exports.default = GifList;
 
-// let gifs = props.gifs.map((gif, idx) =>
-//   <Gif url={gif.images.fixed_height.url} key={idx} />
+// implicit return:
+// let gifs = props.gifs.map(gif => (
+//   <Gif url={gif.images.fixed_height.url} key={gif.id} />
 // )
 
 /***/ }),
@@ -22144,17 +22167,25 @@ var _react2 = _interopRequireDefault(_react);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-// Presentational component
+// Presentational component w/ implicit return
 var Gif = function Gif(props) {
   return _react2.default.createElement(
     "li",
-    { className: "gif-wrap", alt: "gif" },
-    _react2.default.createElement("img", { src: props.url })
+    { className: "gif-wrap" },
+    _react2.default.createElement("img", { src: props.url, alt: "gif" })
   );
 };
 
 exports.default = Gif;
 
+// explicit return
+// const Gif = props => {
+//   return (
+//     <li className="gif-wrap" alt="gif">
+//       <img src={props.url}></img>
+//     </li>
+//   );
+// }
 // The "alt" attribute im <img> provides alternative information for an image if a user for some reason cannot view it (because of slow connection, an error in the src attribute, or if the user uses a screen reader).
 
 /***/ }),
@@ -23497,6 +23528,43 @@ module.exports = function spread(callback) {
   self.fetch.polyfill = true
 })(typeof self !== 'undefined' ? self : this);
 
+
+/***/ }),
+/* 63 */,
+/* 64 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _react = __webpack_require__(3);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var NoGifs = function NoGifs() {
+  return _react2.default.createElement(
+    "li",
+    { className: "no-gifs" },
+    _react2.default.createElement(
+      "i",
+      { className: "material-icons icon-gif" },
+      "sentiment_very_dissatisfied"
+    ),
+    _react2.default.createElement(
+      "h3",
+      null,
+      "Sorry no GIFS match your search."
+    )
+  );
+};
+
+exports.default = NoGifs;
 
 /***/ })
 /******/ ]);
