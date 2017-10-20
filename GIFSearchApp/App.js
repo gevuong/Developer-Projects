@@ -18,8 +18,8 @@ export default class App extends Component {
 
   // method runs immediately after component is added to DOM. Convenient for loading external data because at this point in the lifecycle, component has a DOM representation
   componentDidMount() {
-    this.performSearch();
-    
+    this.performSearch(); // initially renders default query of corgis
+
     axios.get('http://api.giphy.com/v1/gifs/trending?api_key=dc6zaTOxFJmzC&limit=24')
       .then(response =>
         this.setState({ gifs: response.data.data, }) // response.data is response provided by server already in JSON format. Append .data to access GiphyAPI data array.

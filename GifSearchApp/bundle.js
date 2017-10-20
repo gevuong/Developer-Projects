@@ -21925,7 +21925,7 @@ var App = function (_Component) {
     value: function componentDidMount() {
       var _this2 = this;
 
-      this.performSearch();
+      this.performSearch(); // initially renders default query of corgis
 
       _axios2.default.get('http://api.giphy.com/v1/gifs/trending?api_key=dc6zaTOxFJmzC&limit=24').then(function (response) {
         return _this2.setState({ gifs: response.data.data });
@@ -22089,7 +22089,7 @@ var SearchForm = function (_Component) {
 // Suppose you have access to event object but not DOM element. "currentTarget" returns DOM element that's associated with event handler you defined, or the element you actually bound the event to.
 // "target" is whatever you actually clicked on to trigger event.
 
-// Alternative to writing SearchForm component without constructor fcn or .bind() shown in SearchForm2.js
+// Alternative to writing SearchForm component without constructor fcn or .bind() shown in SearchForm2.js. Need babelrc.
 
 
 exports.default = SearchForm;

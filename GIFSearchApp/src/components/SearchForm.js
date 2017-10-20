@@ -38,4 +38,4 @@ export default class SearchForm extends Component {
 // Suppose you have access to event object but not DOM element. "currentTarget" returns DOM element that's associated with event handler you defined, or the element you actually bound the event to.
 // "target" is whatever you actually clicked on to trigger event.
 
-// Alternative to writing SearchForm component without constructor fcn or .bind() shown in SearchForm2.js
+// Alternative to writing SearchForm component without constructor fcn or .bind() shown in SearchForm2.js. Need babelrc.
