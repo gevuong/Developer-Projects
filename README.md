@@ -15,4 +15,5 @@
   * [x] Renders 24 currently trending GIFs using Giphy API's **Trending GIFs Endpoint**
   * [x] Search feature using Giphy API's **Search Endpoint**
   * [x] Loading indicator and "no GIFS match your search" indicator
-    * [ ] Add event handler to "GIFSEARCH" to render default page of gifs.
+    * [ ] Add event handler to "GIFSEARCH" to render default trending GIFs.
+  
