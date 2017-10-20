@@ -1,0 +1,4 @@
+// .babelrc will allow the jsx and es6 in your test files to be properly transpiled when we run our tests. This is mainly for Jest setup for React, but I added this file because I want to determine if I can access ES6+ feature property initializers, which provides the ability to declare functions within a component class without manually binding or using "this" when creating a state object. Look at SearchForm2.js in component dir for an example.  
+{
+  "presets": ["es2015", "react"]
+}
