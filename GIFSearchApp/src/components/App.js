@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import SearchForm from './src/components/SearchForm';
+import SearchForm from './SearchForm';
 // import SearchForm2 from './src/components/SearchForm2';
-import GifList from './src/components/GifList';
+import GifList from './GifList';
 import axios from 'axios';
 import 'whatwg-fetch'; // used to support old browsers when using fetchAPI
 
