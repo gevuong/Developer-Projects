@@ -43,7 +43,7 @@ class Stopwatch extends Component {
 
   // As soon as Stopwatch component is added to DOM on page, componentDidMount() will be called. Convenient for setting up timers, data fetching, etc.
   componentDidMount() {
-    this.interval = setInterval(this.onTick, 10); // invisible event
+    this.interval = setInterval(this.onTick, 100); // invisible event
   }
 
   // invoked immediately before component is removed from DOM. Convenient for invalidating timers, canceling network requests, or DOM elements created in componentDidMount. In case if stopwatch no longer needs to rendered, clearInterval will remove setInterval, which can keep Stopwatch component in memory, causing a memory leak.

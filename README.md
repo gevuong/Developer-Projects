@@ -16,4 +16,5 @@
   * [x] Search feature using Giphy API's **Search Endpoint**
   * [x] Loading indicator and "no GIFS match your search" indicator
   * [ ] Deploy app to github pages or heroku
-* [ ] [CourseDirectory App] (In progress) (React.js, React Router)
+* [ ] [CourseDirectory App] (In progress) (React.js, React Router v4)
+  * [ ] Single page application

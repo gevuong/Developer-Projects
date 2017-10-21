@@ -21,5 +21,6 @@ module.exports = {
   devtool: 'source-map',
   resolve: {
     extensions: [".js", ".jsx", "*"]
-  }
+  },
+  devServer: { historyApiFallback: true }, // to serve your index.html in place of 404 responses
 };
