@@ -261,7 +261,7 @@ process.umask = function() { return 0; };
 
 
 var bind = __webpack_require__(17);
-var isBuffer = __webpack_require__(42);
+var isBuffer = __webpack_require__(46);
 
 /*global toString:true*/
 
@@ -568,6 +568,21 @@ module.exports = {
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
+/* WEBPACK VAR INJECTION */(function(process) {
+
+if (process.env.NODE_ENV === 'production') {
+  module.exports = __webpack_require__(23);
+} else {
+  module.exports = __webpack_require__(24);
+}
+
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
+
+/***/ }),
+/* 3 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
 
 
 /**
@@ -606,7 +621,7 @@ emptyFunction.thatReturnsArgument = function (arg) {
 module.exports = emptyFunction;
 
 /***/ }),
-/* 3 */
+/* 4 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -666,7 +681,7 @@ module.exports = invariant;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
-/* 4 */
+/* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -763,21 +778,6 @@ module.exports = shouldUseNative() ? Object.assign : function (target, source) {
 
 
 /***/ }),
-/* 5 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/* WEBPACK VAR INJECTION */(function(process) {
-
-if (process.env.NODE_ENV === 'production') {
-  module.exports = __webpack_require__(23);
-} else {
-  module.exports = __webpack_require__(24);
-}
-
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
-
-/***/ }),
 /* 6 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -816,7 +816,7 @@ module.exports = emptyObject;
 
 
 
-var emptyFunction = __webpack_require__(2);
+var emptyFunction = __webpack_require__(3);
 
 /**
  * Similar to invariant but only logs a warning if the condition is not met.
@@ -885,7 +885,7 @@ module.exports = warning;
 
 
 if (process.env.NODE_ENV !== 'production') {
-  var invariant = __webpack_require__(3);
+  var invariant = __webpack_require__(4);
   var warning = __webpack_require__(7);
   var ReactPropTypesSecret = __webpack_require__(9);
   var loggedTypeFailures = {};
@@ -1003,7 +1003,7 @@ module.exports = ExecutionEnvironment;
 /* WEBPACK VAR INJECTION */(function(process) {
 
 var utils = __webpack_require__(1);
-var normalizeHeaderName = __webpack_require__(44);
+var normalizeHeaderName = __webpack_require__(48);
 
 var DEFAULT_CONTENT_TYPE = {
   'Content-Type': 'application/x-www-form-urlencoded'
@@ -1111,7 +1111,7 @@ module.exports = defaults;
  * @typechecks
  */
 
-var emptyFunction = __webpack_require__(2);
+var emptyFunction = __webpack_require__(3);
 
 /**
  * Upstream version of event listener. Does not take into account specific
@@ -1388,12 +1388,12 @@ module.exports = function bind(fn, thisArg) {
 /* WEBPACK VAR INJECTION */(function(process) {
 
 var utils = __webpack_require__(1);
-var settle = __webpack_require__(45);
-var buildURL = __webpack_require__(47);
-var parseHeaders = __webpack_require__(48);
-var isURLSameOrigin = __webpack_require__(49);
+var settle = __webpack_require__(49);
+var buildURL = __webpack_require__(51);
+var parseHeaders = __webpack_require__(52);
+var isURLSameOrigin = __webpack_require__(53);
 var createError = __webpack_require__(19);
-var btoa = (typeof window !== 'undefined' && window.btoa && window.btoa.bind(window)) || __webpack_require__(50);
+var btoa = (typeof window !== 'undefined' && window.btoa && window.btoa.bind(window)) || __webpack_require__(54);
 
 module.exports = function xhrAdapter(config) {
   return new Promise(function dispatchXhrRequest(resolve, reject) {
@@ -1490,7 +1490,7 @@ module.exports = function xhrAdapter(config) {
     // This is only done if running in a standard browser environment.
     // Specifically not if we're in a web worker, or react-native.
     if (utils.isStandardBrowserEnv()) {
-      var cookies = __webpack_require__(51);
+      var cookies = __webpack_require__(55);
 
       // Add xsrf header
       var xsrfValue = (config.withCredentials || isURLSameOrigin(config.url)) && config.xsrfCookieName ?
@@ -1575,7 +1575,7 @@ module.exports = function xhrAdapter(config) {
 "use strict";
 
 
-var enhanceError = __webpack_require__(46);
+var enhanceError = __webpack_require__(50);
 
 /**
  * Create an Error with the specified message, config, error code, request and response.
@@ -1638,7 +1638,7 @@ module.exports = Cancel;
 "use strict";
 
 
-var _react = __webpack_require__(5);
+var _react = __webpack_require__(2);
 
 var _react2 = _interopRequireDefault(_react);
 
@@ -1671,7 +1671,7 @@ document.addEventListener('DOMContentLoaded', function () {
  This source code is licensed under the MIT license found in the
  LICENSE file in the root directory of this source tree.
 */
-var f=__webpack_require__(4),p=__webpack_require__(6);__webpack_require__(3);var r=__webpack_require__(2);
+var f=__webpack_require__(5),p=__webpack_require__(6);__webpack_require__(4);var r=__webpack_require__(3);
 function t(a){for(var b=arguments.length-1,d="Minified React error #"+a+"; visit http://facebook.github.io/react/docs/error-decoder.html?invariant\x3d"+a,e=0;e<b;e++)d+="\x26args[]\x3d"+encodeURIComponent(arguments[e+1]);b=Error(d+" for the full message or use the non-minified dev environment for full errors and additional helpful warnings.");b.name="Invariant Violation";b.framesToPop=1;throw b;}
 var u={isMounted:function(){return!1},enqueueForceUpdate:function(){},enqueueReplaceState:function(){},enqueueSetState:function(){}};function v(a,b,d){this.props=a;this.context=b;this.refs=p;this.updater=d||u}v.prototype.isReactComponent={};v.prototype.setState=function(a,b){"object"!==typeof a&&"function"!==typeof a&&null!=a?t("85"):void 0;this.updater.enqueueSetState(this,a,b,"setState")};v.prototype.forceUpdate=function(a){this.updater.enqueueForceUpdate(this,a,"forceUpdate")};
 function w(a,b,d){this.props=a;this.context=b;this.refs=p;this.updater=d||u}function x(){}x.prototype=v.prototype;var y=w.prototype=new x;y.constructor=w;f(y,v.prototype);y.isPureReactComponent=!0;function z(a,b,d){this.props=a;this.context=b;this.refs=p;this.updater=d||u}var A=z.prototype=new x;A.constructor=z;f(A,v.prototype);A.unstable_isAsyncReactComponent=!0;A.render=function(){return this.props.children};
@@ -1708,11 +1708,11 @@ if (process.env.NODE_ENV !== "production") {
 
 'use strict';
 
-var objectAssign$1 = __webpack_require__(4);
+var objectAssign$1 = __webpack_require__(5);
 var require$$0 = __webpack_require__(7);
 var emptyObject = __webpack_require__(6);
-var invariant = __webpack_require__(3);
-var emptyFunction = __webpack_require__(2);
+var invariant = __webpack_require__(4);
+var emptyFunction = __webpack_require__(3);
 var checkPropTypes = __webpack_require__(8);
 
 /**
@@ -3454,7 +3454,7 @@ if (process.env.NODE_ENV === 'production') {
  LICENSE file in the root directory of this source tree.
  Modernizr 3.0.0pre (Custom Build) | MIT
 */
-var aa=__webpack_require__(5);__webpack_require__(3);var l=__webpack_require__(10),n=__webpack_require__(4),ba=__webpack_require__(12),ca=__webpack_require__(2),da=__webpack_require__(6),ea=__webpack_require__(13),fa=__webpack_require__(14),ha=__webpack_require__(15),ia=__webpack_require__(16);
+var aa=__webpack_require__(2);__webpack_require__(4);var l=__webpack_require__(10),n=__webpack_require__(5),ba=__webpack_require__(12),ca=__webpack_require__(3),da=__webpack_require__(6),ea=__webpack_require__(13),fa=__webpack_require__(14),ha=__webpack_require__(15),ia=__webpack_require__(16);
 function w(a){for(var b=arguments.length-1,c="Minified React error #"+a+"; visit http://facebook.github.io/react/docs/error-decoder.html?invariant\x3d"+a,d=0;d<b;d++)c+="\x26args[]\x3d"+encodeURIComponent(arguments[d+1]);b=Error(c+" for the full message or use the non-minified dev environment for full errors and additional helpful warnings.");b.name="Invariant Violation";b.framesToPop=1;throw b;}aa?void 0:w("227");
 function ja(a){switch(a){case "svg":return"http://www.w3.org/2000/svg";case "math":return"http://www.w3.org/1998/Math/MathML";default:return"http://www.w3.org/1999/xhtml"}}
 var ka={Namespaces:{html:"http://www.w3.org/1999/xhtml",mathml:"http://www.w3.org/1998/Math/MathML",svg:"http://www.w3.org/2000/svg"},getIntrinsicNamespace:ja,getChildNamespace:function(a,b){return null==a||"http://www.w3.org/1999/xhtml"===a?ja(b):"http://www.w3.org/2000/svg"===a&&"foreignObject"===b?"http://www.w3.org/1999/xhtml":a}},la=null,oa={};
@@ -3779,14 +3779,14 @@ if (process.env.NODE_ENV !== "production") {
 
 'use strict';
 
-var react = __webpack_require__(5);
-var invariant = __webpack_require__(3);
+var react = __webpack_require__(2);
+var invariant = __webpack_require__(4);
 var ExecutionEnvironment = __webpack_require__(10);
-var _assign = __webpack_require__(4);
+var _assign = __webpack_require__(5);
 var EventListener = __webpack_require__(12);
 var require$$0 = __webpack_require__(7);
 var hyphenateStyleName = __webpack_require__(30);
-var emptyFunction = __webpack_require__(2);
+var emptyFunction = __webpack_require__(3);
 var camelizeStyleName = __webpack_require__(32);
 var performanceNow = __webpack_require__(34);
 var propTypes = __webpack_require__(36);
@@ -21255,10 +21255,10 @@ if (process.env.NODE_ENV !== 'production') {
 
 
 
-var emptyFunction = __webpack_require__(2);
-var invariant = __webpack_require__(3);
+var emptyFunction = __webpack_require__(3);
+var invariant = __webpack_require__(4);
 var warning = __webpack_require__(7);
-var assign = __webpack_require__(4);
+var assign = __webpack_require__(5);
 
 var ReactPropTypesSecret = __webpack_require__(9);
 var checkPropTypes = __webpack_require__(8);
@@ -21805,8 +21805,8 @@ module.exports = function(isValidElement, throwOnDirectAccess) {
 
 
 
-var emptyFunction = __webpack_require__(2);
-var invariant = __webpack_require__(3);
+var emptyFunction = __webpack_require__(3);
+var invariant = __webpack_require__(4);
 var ReactPropTypesSecret = __webpack_require__(9);
 
 module.exports = function() {
@@ -21869,23 +21869,23 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _react = __webpack_require__(5);
+var _react = __webpack_require__(2);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _SearchForm = __webpack_require__(60);
+var _SearchForm = __webpack_require__(40);
 
 var _SearchForm2 = _interopRequireDefault(_SearchForm);
 
-var _GifList = __webpack_require__(61);
+var _GifList = __webpack_require__(41);
 
 var _GifList2 = _interopRequireDefault(_GifList);
 
-var _axios = __webpack_require__(40);
+var _axios = __webpack_require__(44);
 
 var _axios2 = _interopRequireDefault(_axios);
 
-__webpack_require__(59);
+__webpack_require__(63);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -21927,7 +21927,7 @@ var App = function (_Component) {
 
       this.performSearch(); // initially renders default query of corgis
 
-      _axios2.default.get('http://api.giphy.com/v1/gifs/trending?api_key=dc6zaTOxFJmzC&limit=24').then(function (response) {
+      _axios2.default.get('https://api.giphy.com/v1/gifs/trending?api_key=dc6zaTOxFJmzC&limit=24').then(function (response) {
         return _this2.setState({ gifs: response.data.data });
       } // response.data is response provided by server already in JSON format. Append .data to access GiphyAPI data array.
       ).catch(function (error) {
@@ -21942,7 +21942,7 @@ var App = function (_Component) {
 
       var query = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : "corgis";
 
-      fetch('http://api.giphy.com/v1/gifs/search?q=' + query + '&api_key=dc6zaTOxFJmzC&limit=24').then(function (response) {
+      fetch('https://api.giphy.com/v1/gifs/search?q=' + query + '&api_key=dc6zaTOxFJmzC&limit=24').then(function (response) {
         return response.json();
       }).then(function (responseData) {
         _this3.setState({
@@ -22012,7 +22012,87 @@ exports.default = App;
 /* 40 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(41);
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(2);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var SearchForm = function (_Component) {
+  _inherits(SearchForm, _Component);
+
+  function SearchForm(props) {
+    _classCallCheck(this, SearchForm);
+
+    var _this = _possibleConstructorReturn(this, (SearchForm.__proto__ || Object.getPrototypeOf(SearchForm)).call(this, props));
+
+    _this.state = { searchText: "" }; // local state thats needed for component to work, not really part of application state
+    _this.handleSubmit = _this.handleSubmit.bind(_this);
+    _this.onSearchChange = _this.onSearchChange.bind(_this);
+    return _this;
+  }
+
+  _createClass(SearchForm, [{
+    key: "onSearchChange",
+    value: function onSearchChange(e) {
+      // e.currentTarget.value same output?
+      this.setState({ searchText: e.target.value });
+    }
+  }, {
+    key: "handleSubmit",
+    value: function handleSubmit(e) {
+      e.preventDefault();
+      this.props.onSearch(this.state.searchText);
+      e.currentTarget.reset(); // reset() resets values of all elements in form
+      // target vs currentTarget see NOTES.md
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      return _react2.default.createElement(
+        "form",
+        { className: "search-form", onSubmit: this.handleSubmit },
+        _react2.default.createElement("input", { type: "text",
+          placeholder: "Search...",
+          onChange: this.onSearchChange }),
+        _react2.default.createElement(
+          "button",
+          { type: "submit", className: "search-button" },
+          _react2.default.createElement(
+            "i",
+            { className: "material-icons icn-search" },
+            "search"
+          )
+        )
+      );
+    }
+  }]);
+
+  return SearchForm;
+}(_react.Component);
+
+// Suppose you have access to event object but not DOM element. "currentTarget" returns DOM element that's associated with event handler you defined, or the element you actually bound the event to.
+// "target" is whatever you actually clicked on to trigger event.
+
+// Alternative to writing SearchForm component without constructor fcn or .bind() shown in SearchForm2.js. Need babelrc.
+
+
+exports.default = SearchForm;
 
 /***/ }),
 /* 41 */
@@ -22021,9 +22101,145 @@ module.exports = __webpack_require__(41);
 "use strict";
 
 
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _react = __webpack_require__(2);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _Gif = __webpack_require__(42);
+
+var _Gif2 = _interopRequireDefault(_Gif);
+
+var _NoGifs = __webpack_require__(43);
+
+var _NoGifs2 = _interopRequireDefault(_NoGifs);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+// Presentational Component
+var GifList = function GifList(props) {
+  var gifArray = props.gifs;
+  var gifs = void 0;
+
+  if (gifArray.length > 0) {
+    gifs = props.gifs.map(function (gif) {
+      return _react2.default.createElement(_Gif2.default, { url: gif.images.fixed_height.url, key: gif.id });
+    });
+
+    return _react2.default.createElement(
+      'ul',
+      { className: 'gif-list' },
+      gifs
+    );
+  } else {
+    return _react2.default.createElement(
+      'ul',
+      { className: 'gif-list' },
+      _react2.default.createElement(_NoGifs2.default, null)
+    );
+  }
+};
+
+exports.default = GifList;
+
+// implicit return:
+// let gifs = props.gifs.map(gif => (
+//   <Gif url={gif.images.fixed_height.url} key={gif.id} />
+// )
+
+/***/ }),
+/* 42 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _react = __webpack_require__(2);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+// Presentational component w/ implicit return
+var Gif = function Gif(props) {
+  return _react2.default.createElement(
+    "li",
+    { className: "gif-wrap" },
+    _react2.default.createElement("img", { src: props.url, alt: "gif" })
+  );
+};
+
+exports.default = Gif;
+
+// explicit return
+// const Gif = props => {
+//   return (
+//     <li className="gif-wrap" alt="gif">
+//       <img src={props.url}></img>
+//     </li>
+//   );
+// }
+// The "alt" attribute im <img> provides alternative information for an image if a user for some reason cannot view it (because of slow connection, an error in the src attribute, or if the user uses a screen reader).
+
+/***/ }),
+/* 43 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _react = __webpack_require__(2);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var NoGifs = function NoGifs() {
+  return _react2.default.createElement(
+    "li",
+    { className: "no-gifs" },
+    _react2.default.createElement(
+      "i",
+      { className: "material-icons icon-gif" },
+      "sentiment_very_dissatisfied"
+    ),
+    _react2.default.createElement(
+      "h3",
+      null,
+      "Sorry no GIFS match your search."
+    )
+  );
+};
+
+exports.default = NoGifs;
+
+/***/ }),
+/* 44 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__(45);
+
+/***/ }),
+/* 45 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
 var utils = __webpack_require__(1);
 var bind = __webpack_require__(17);
-var Axios = __webpack_require__(43);
+var Axios = __webpack_require__(47);
 var defaults = __webpack_require__(11);
 
 /**
@@ -22058,14 +22274,14 @@ axios.create = function create(instanceConfig) {
 
 // Expose Cancel & CancelToken
 axios.Cancel = __webpack_require__(21);
-axios.CancelToken = __webpack_require__(57);
+axios.CancelToken = __webpack_require__(61);
 axios.isCancel = __webpack_require__(20);
 
 // Expose all/spread
 axios.all = function all(promises) {
   return Promise.all(promises);
 };
-axios.spread = __webpack_require__(58);
+axios.spread = __webpack_require__(62);
 
 module.exports = axios;
 
@@ -22074,7 +22290,7 @@ module.exports.default = axios;
 
 
 /***/ }),
-/* 42 */
+/* 46 */
 /***/ (function(module, exports) {
 
 /*!
@@ -22101,7 +22317,7 @@ function isSlowBuffer (obj) {
 
 
 /***/ }),
-/* 43 */
+/* 47 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -22109,10 +22325,10 @@ function isSlowBuffer (obj) {
 
 var defaults = __webpack_require__(11);
 var utils = __webpack_require__(1);
-var InterceptorManager = __webpack_require__(52);
-var dispatchRequest = __webpack_require__(53);
-var isAbsoluteURL = __webpack_require__(55);
-var combineURLs = __webpack_require__(56);
+var InterceptorManager = __webpack_require__(56);
+var dispatchRequest = __webpack_require__(57);
+var isAbsoluteURL = __webpack_require__(59);
+var combineURLs = __webpack_require__(60);
 
 /**
  * Create a new instance of Axios
@@ -22194,7 +22410,7 @@ module.exports = Axios;
 
 
 /***/ }),
-/* 44 */
+/* 48 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -22213,7 +22429,7 @@ module.exports = function normalizeHeaderName(headers, normalizedName) {
 
 
 /***/ }),
-/* 45 */
+/* 49 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -22246,7 +22462,7 @@ module.exports = function settle(resolve, reject, response) {
 
 
 /***/ }),
-/* 46 */
+/* 50 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -22274,7 +22490,7 @@ module.exports = function enhanceError(error, config, code, request, response) {
 
 
 /***/ }),
-/* 47 */
+/* 51 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -22349,7 +22565,7 @@ module.exports = function buildURL(url, params, paramsSerializer) {
 
 
 /***/ }),
-/* 48 */
+/* 52 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -22393,7 +22609,7 @@ module.exports = function parseHeaders(headers) {
 
 
 /***/ }),
-/* 49 */
+/* 53 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -22468,7 +22684,7 @@ module.exports = (
 
 
 /***/ }),
-/* 50 */
+/* 54 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -22511,7 +22727,7 @@ module.exports = btoa;
 
 
 /***/ }),
-/* 51 */
+/* 55 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -22571,7 +22787,7 @@ module.exports = (
 
 
 /***/ }),
-/* 52 */
+/* 56 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -22630,14 +22846,14 @@ module.exports = InterceptorManager;
 
 
 /***/ }),
-/* 53 */
+/* 57 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
 var utils = __webpack_require__(1);
-var transformData = __webpack_require__(54);
+var transformData = __webpack_require__(58);
 var isCancel = __webpack_require__(20);
 var defaults = __webpack_require__(11);
 
@@ -22716,7 +22932,7 @@ module.exports = function dispatchRequest(config) {
 
 
 /***/ }),
-/* 54 */
+/* 58 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -22743,7 +22959,7 @@ module.exports = function transformData(data, headers, fns) {
 
 
 /***/ }),
-/* 55 */
+/* 59 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -22764,7 +22980,7 @@ module.exports = function isAbsoluteURL(url) {
 
 
 /***/ }),
-/* 56 */
+/* 60 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -22785,7 +23001,7 @@ module.exports = function combineURLs(baseURL, relativeURL) {
 
 
 /***/ }),
-/* 57 */
+/* 61 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -22849,7 +23065,7 @@ module.exports = CancelToken;
 
 
 /***/ }),
-/* 58 */
+/* 62 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -22883,7 +23099,7 @@ module.exports = function spread(callback) {
 
 
 /***/ }),
-/* 59 */
+/* 63 */
 /***/ (function(module, exports) {
 
 (function(self) {
@@ -23348,222 +23564,6 @@ module.exports = function spread(callback) {
   self.fetch.polyfill = true
 })(typeof self !== 'undefined' ? self : this);
 
-
-/***/ }),
-/* 60 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _react = __webpack_require__(5);
-
-var _react2 = _interopRequireDefault(_react);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var SearchForm = function (_Component) {
-  _inherits(SearchForm, _Component);
-
-  function SearchForm(props) {
-    _classCallCheck(this, SearchForm);
-
-    var _this = _possibleConstructorReturn(this, (SearchForm.__proto__ || Object.getPrototypeOf(SearchForm)).call(this, props));
-
-    _this.state = { searchText: "" }; // local state thats needed for component to work, not really part of application state
-    _this.handleSubmit = _this.handleSubmit.bind(_this);
-    _this.onSearchChange = _this.onSearchChange.bind(_this);
-    return _this;
-  }
-
-  _createClass(SearchForm, [{
-    key: "onSearchChange",
-    value: function onSearchChange(e) {
-      // e.currentTarget.value same output?
-      this.setState({ searchText: e.target.value });
-    }
-  }, {
-    key: "handleSubmit",
-    value: function handleSubmit(e) {
-      e.preventDefault();
-      this.props.onSearch(this.state.searchText);
-      e.currentTarget.reset(); // reset() resets values of all elements in form
-      // target vs currentTarget see NOTES.md
-    }
-  }, {
-    key: "render",
-    value: function render() {
-      return _react2.default.createElement(
-        "form",
-        { className: "search-form", onSubmit: this.handleSubmit },
-        _react2.default.createElement("input", { type: "text",
-          placeholder: "Search...",
-          onChange: this.onSearchChange }),
-        _react2.default.createElement(
-          "button",
-          { type: "submit", className: "search-button" },
-          _react2.default.createElement(
-            "i",
-            { className: "material-icons icn-search" },
-            "search"
-          )
-        )
-      );
-    }
-  }]);
-
-  return SearchForm;
-}(_react.Component);
-
-// Suppose you have access to event object but not DOM element. "currentTarget" returns DOM element that's associated with event handler you defined, or the element you actually bound the event to.
-// "target" is whatever you actually clicked on to trigger event.
-
-// Alternative to writing SearchForm component without constructor fcn or .bind() shown in SearchForm2.js. Need babelrc.
-
-
-exports.default = SearchForm;
-
-/***/ }),
-/* 61 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _react = __webpack_require__(5);
-
-var _react2 = _interopRequireDefault(_react);
-
-var _Gif = __webpack_require__(62);
-
-var _Gif2 = _interopRequireDefault(_Gif);
-
-var _NoGifs = __webpack_require__(63);
-
-var _NoGifs2 = _interopRequireDefault(_NoGifs);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-// Presentational Component
-var GifList = function GifList(props) {
-  var gifArray = props.gifs;
-  var gifs = void 0;
-
-  if (gifArray.length > 0) {
-    gifs = props.gifs.map(function (gif) {
-      return _react2.default.createElement(_Gif2.default, { url: gif.images.fixed_height.url, key: gif.id });
-    });
-
-    return _react2.default.createElement(
-      'ul',
-      { className: 'gif-list' },
-      gifs
-    );
-  } else {
-    return _react2.default.createElement(
-      'ul',
-      { className: 'gif-list' },
-      _react2.default.createElement(_NoGifs2.default, null)
-    );
-  }
-};
-
-exports.default = GifList;
-
-// implicit return:
-// let gifs = props.gifs.map(gif => (
-//   <Gif url={gif.images.fixed_height.url} key={gif.id} />
-// )
-
-/***/ }),
-/* 62 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _react = __webpack_require__(5);
-
-var _react2 = _interopRequireDefault(_react);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-// Presentational component w/ implicit return
-var Gif = function Gif(props) {
-  return _react2.default.createElement(
-    "li",
-    { className: "gif-wrap" },
-    _react2.default.createElement("img", { src: props.url, alt: "gif" })
-  );
-};
-
-exports.default = Gif;
-
-// explicit return
-// const Gif = props => {
-//   return (
-//     <li className="gif-wrap" alt="gif">
-//       <img src={props.url}></img>
-//     </li>
-//   );
-// }
-// The "alt" attribute im <img> provides alternative information for an image if a user for some reason cannot view it (because of slow connection, an error in the src attribute, or if the user uses a screen reader).
-
-/***/ }),
-/* 63 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _react = __webpack_require__(5);
-
-var _react2 = _interopRequireDefault(_react);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var NoGifs = function NoGifs() {
-  return _react2.default.createElement(
-    "li",
-    { className: "no-gifs" },
-    _react2.default.createElement(
-      "i",
-      { className: "material-icons icon-gif" },
-      "sentiment_very_dissatisfied"
-    ),
-    _react2.default.createElement(
-      "h3",
-      null,
-      "Sorry no GIFS match your search."
-    )
-  );
-};
-
-exports.default = NoGifs;
 
 /***/ })
 /******/ ]);

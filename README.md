@@ -11,10 +11,10 @@
   * [x] Stopwatch with start, stop, and reset buttons
     * [ ] Add milliseconds, hours
   * [ ] Persist state with localStorage
-* [x] [GIFSearch App](https://rawgit.com/gevuong/Frontend-Projects/master/GIFSearchApp/index.html) (React.js)
+* [x] [GIFSearch App](https://gevuong.github.io/app-deployment/) (React.js)
   * [x] Renders 24 currently trending GIFs using Giphy API's **Trending GIFs Endpoint**
   * [x] Search feature using Giphy API's **Search Endpoint**
   * [x] Loading indicator and "no GIFS match your search" indicator
-  * [ ] Deploy app to github pages or heroku
+  * [x] Deploy app to Github pages
 * [ ] [CourseDirectory App] (In progress) (React.js, React Router v4)
   * [ ] Single page application
