@@ -1,8 +1,9 @@
 import React from 'react';
 
-const About = () => (
-  <div>
-    <h3>About</h3>
+// stateless, pure component
+const About = props => (
+  <div className="main-content">
+    <h2>{ props.title }</h2>
   </div>
 )
 

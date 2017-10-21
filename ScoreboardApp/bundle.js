@@ -1061,7 +1061,7 @@ var Stopwatch = function (_Component) {
   _createClass(Stopwatch, [{
     key: 'componentDidMount',
     value: function componentDidMount() {
-      this.interval = setInterval(this.onTick, 10); // invisible event
+      this.interval = setInterval(this.onTick, 100); // invisible event
     }
 
     // invoked immediately before component is removed from DOM. Convenient for invalidating timers, canceling network requests, or DOM elements created in componentDidMount. In case if stopwatch no longer needs to rendered, clearInterval will remove setInterval, which can keep Stopwatch component in memory, causing a memory leak.
@@ -1315,6 +1315,8 @@ Header.propTypes = {
 Counter.propTypes = {
   score: _propTypes2.default.number.isRequired,
   onChange: _propTypes2.default.func.isRequired
+
+  // To see Counter as component class, see code at bottom of page.
 };
 
 function Player(props) {

@@ -15,6 +15,6 @@
   * [x] Renders 24 currently trending GIFs using Giphy API's **Trending GIFs Endpoint**
   * [x] Search feature using Giphy API's **Search Endpoint**
   * [x] Loading indicator and "no GIFS match your search" indicator
-  * [x] Deploy app to Github pages
-* [ ] [CourseDirectory App] (In progress) (React.js, React Router v4)
+  * [ ] Infinite scroll feature
+* [ ] [CourseDirectory App] (In progress) (React.js)
   * [ ] Single page application
