@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter, Route, Link, NavLink } from 'react-router-dom';
 import HTMLCourses from './courses/HTML';
-import CSSCourses from './courses/CSS';
+import css from './courses/CSS';
 import JavaScriptCourses from './courses/JavaScript';
 
 const Courses = () => (
@@ -17,7 +17,7 @@ const Courses = () => (
 
     {/* Write routes here */}
     <Route path="/courses/html" component={ HTMLCourses } />
-    <Route path="/courses/css" component={ CSSCourses } />
+    <Route path="/courses/css" component={ css } />
     <Route path="/courses/javascript" component={ JavaScriptCourses } />
   </div>
 )
