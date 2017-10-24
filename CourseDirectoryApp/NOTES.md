@@ -1,5 +1,5 @@
 ### Trivia Notes
-
+* Setting up routes allows you to navigate parts of website by manually inputting URL. Setting up links allows you to click on a link to navigate website.
 * JS frameworks, like Angular and Ember, come with built-in routing features. React is not a framework, but a library concerned with rendering UI. React is a declarative and modular style of building UIs.
 * This app will be a **single page apps (or SPA)**, displayed only on a single web page. The HTML, CSS, and JS are only loaded once on the browser, and content **changes dynamically** as user interacts with app, provides a smoother browsing experience. App never reloads unless user manually refreshes.
 * Routing is responsible for matching URL with the set of components being rendered, and loading and unloading content. The router finds components that correspond with, for example, the sign-up URL and loads them on screen.

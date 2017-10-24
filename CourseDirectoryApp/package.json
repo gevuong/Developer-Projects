@@ -2,7 +2,7 @@
   "name": "CourseDirectoryApp",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "webpack.config.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "webpack": "webpack",
@@ -11,6 +11,7 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
+
   "dependencies": {
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",

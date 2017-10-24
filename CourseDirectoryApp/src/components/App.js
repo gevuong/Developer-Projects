@@ -13,11 +13,12 @@ const App = () => (
     <div className="container">
       <Header />
       <h2>Course Directory</h2>
+
       <Route exact path="/" component={ Home } />
-      {/*inline rendering allows props passing to component, which allows rendering of dynamic content */}
-      <Route exact path="/about" render={ () => <About title="About Me" /> } />
-      <Route exact path="/teachers" component={ Teachers } />
-      <Route exact path="/courses" component={ Courses } />
+      {/*inline "render" allows props to pass to component, which allows rendering of dynamic content */}
+      <Route path="/about" render={ () => <About title="About Me" /> } />
+      <Route path="/teachers" component={ Teachers } />
+      <Route path="/courses" component={ Courses } />
     </div>
   </BrowserRouter>
 )
@@ -33,7 +34,7 @@ export default App;
 
 // Usually it is preferable to use a <BrowserRouter>, but if your website will be hosted on a server that only serves static files, then <HashRouter> is a good solution.
 
-
+// Declarative approach means that React lets you write code that describes the end result. For instance, the route component matches a URL's path and loads a component, without you having to define how it should happen.
 
 // With React Router, any route written in App container will render a child component when its path matches URL.
 
