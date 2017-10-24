@@ -1,18 +1,18 @@
 import React from 'react';
 import { JSCourses } from '../../data/courses';
-
+import Course from './course';
 
 const JavaScript = () => (
-
   <div>
     <p> { console.log(JSCourses) }</p>
     <ul>
       { JSCourses.map(course => (
-        <li key={ course.id }>
-          <p>{ course.title }</p>
-          <p>{ course.description }</p>
-          <img src={ course.img_src }></img>
-        </li>
+        <Course
+          key={ course.id }
+          title={ course.title }
+          desc={ course.description }
+          img={ course.img_src }
+        />
         )
       )};
     </ul>
