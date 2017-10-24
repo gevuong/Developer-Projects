@@ -1,8 +1,8 @@
 import React from 'react';
 import { BrowserRouter, Route, Link, NavLink } from 'react-router-dom';
-import HTMLCourses from './courses/HTML';
-import css from './courses/CSS';
-import JavaScriptCourses from './courses/JavaScript';
+import HTML from './courses/HTML';
+import CSS from './courses/CSS';
+import JavaScript from './courses/JavaScript';
 
 const Courses = () => (
   <div className="main-content courses">
@@ -16,9 +16,9 @@ const Courses = () => (
     </div>
 
     {/* Write routes here */}
-    <Route path="/courses/html" component={ HTMLCourses } />
-    <Route path="/courses/css" component={ css } />
-    <Route path="/courses/javascript" component={ JavaScriptCourses } />
+    <Route path="/courses/html" component={ HTML } />
+    <Route path="/courses/css" component={ CSS } />
+    <Route path="/courses/javascript" component={ JavaScript } />
   </div>
 )
 

@@ -1,9 +1,19 @@
 import React from 'react';
+import { HTMLCourses } from '../../data/courses';
 
-const HTMLCourses = () => (
+const HTML = () => (
   <div>
-    HTML courses
+    <ul>
+    { HTMLCourses.map(course => (
+      <li key={ course.id }>
+        <p>{ course.title }</p>
+        <p>{ course.description }</p>
+        <img src={ course.img_src }></img>
+      </li>
+      )
+    )};
+    </ul>
   </div>
 )
 
-export default HTMLCourses;
+export default HTML;

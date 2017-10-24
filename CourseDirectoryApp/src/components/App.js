@@ -12,7 +12,6 @@ const App = () => (
   <BrowserRouter>
     <div className="container">
       <Header />
-      <h2>Course Directory</h2>
 
       <Route exact path="/" component={ Home } />
       {/*inline "render" allows props to pass to component, which allows rendering of dynamic content */}
