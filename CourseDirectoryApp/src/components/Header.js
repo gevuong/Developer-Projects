@@ -3,6 +3,7 @@ import { Link, NavLink } from 'react-router-dom';
 
 const Header = () => (
   <header>
+    <span className="icn-logo"><i className="material-icons">Code</i></span>
     <ul className="main-nav">
       <li>
         <NavLink exact to="/" activeStyle={{ background: "tomato" }}>

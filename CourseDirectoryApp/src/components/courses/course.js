@@ -1,10 +1,10 @@
 import React from 'react';
 
 const Course = props => (
-  <li>
-    <p>{ props.title }</p>
-    <p>{ props.desc }</p>
-    <img src={ props.img }></img>
+  <li className="course-media-group">
+    <img className="course-img" src={ props.img } alt="course" />
+      <h3>{ props.title }</h3>
+      <p>{ props.desc }</p>
   </li>
 )
 
