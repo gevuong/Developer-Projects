@@ -1,8 +1,7 @@
 import React from 'react';
 import { BrowserRouter, Route, Link, NavLink, Redirect } from 'react-router-dom';
-import HTML from './courses/HTML';
-import CSS from './courses/CSS';
-import JavaScript from './courses/JavaScript';
+import { HTMLCourses, CSSCourses, JSCourses } from '../data/courses';
+import CourseContainer from './courses/CourseContainer';
 
 const Courses = ({ match }) => (
   <div className="main-content courses">
@@ -16,11 +15,19 @@ const Courses = ({ match }) => (
     </div>
 
     {/* Write routes here */}
-    // <Redirect to="/courses/html"></Redirect> does not work because clicking on /courses does not render /courses/html content.
-    <Route exact path={`${match.path}`} render={ () => <Redirect to={`${match.url}/html`} /> } />
-    <Route path={`${match.path}/html`} component={ HTML } />
-    <Route path={`${match.path}/css`} component={ CSS } />
-    <Route path={`${match.path}/javascript`} component={ JavaScript } />
+    {/*} Simply adding <Redirect to="/courses/html"></Redirect> does not work because clicking on /courses does not render /courses/html content.*/}
+    <Route exact path={`${match.path}`}
+      render={ () => <Redirect to={`${match.url}/html`} /> }
+    />
+    <Route path={`${match.path}/html`}
+      render={ () => <CourseContainer course={ HTMLCourses } /> }
+    />
+    <Route path={`${match.path}/css`}
+      render={ () => <CourseContainer course={ CSSCourses } /> }
+    />
+    <Route path={`${match.path}/javascript`}
+      render={ () => <CourseContainer course={ JSCourses } /> }
+    />
   </div>
 )
 

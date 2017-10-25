@@ -8,6 +8,7 @@ import Courses from './Courses';
 import coursesData from '../data/courses';
 import teachersData from '../data/teachers';
 import NotFound from './NotFound';
+import Featured from './Featured';
 
 const App = () => (
   <BrowserRouter>
@@ -18,7 +19,8 @@ const App = () => (
         <Route exact path="/" component={ Home } />
         {/*inline "render" allows props to pass to component, which allows rendering of dynamic content */}
         <Route path="/about" render={ () => <About title="About Me" /> } />
-        <Route path="/teachers" component={ Teachers } />
+        <Route exact path="/teachers" component={ Teachers } />
+        <Route path="/teachers/:topic/:fname-:lname" component={ Featured } />
         <Route path="/foo" component={ Courses } />
         <Route component={ NotFound } />
       </Switch>
