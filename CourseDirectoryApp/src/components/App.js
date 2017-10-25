@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Route } from 'react-router-dom';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Home from './Home';
 import About from './About';
 import Header from './Header';
@@ -7,17 +7,21 @@ import Teachers from './Teachers';
 import Courses from './Courses';
 import coursesData from '../data/courses';
 import teachersData from '../data/teachers';
+import NotFound from './NotFound';
 
 const App = () => (
   <BrowserRouter>
     <div className="container">
       <Header />
-
-      <Route exact path="/" component={ Home } />
-      {/*inline "render" allows props to pass to component, which allows rendering of dynamic content */}
-      <Route path="/about" render={ () => <About title="About Me" /> } />
-      <Route path="/teachers" component={ Teachers } />
-      <Route path="/courses" component={ Courses } />
+      {/* Switch only renders the first route that matches URL */}
+      <Switch>
+        <Route exact path="/" component={ Home } />
+        {/*inline "render" allows props to pass to component, which allows rendering of dynamic content */}
+        <Route path="/about" render={ () => <About title="About Me" /> } />
+        <Route path="/teachers" component={ Teachers } />
+        <Route path="/foo" component={ Courses } />
+        <Route component={ NotFound } />
+      </Switch>
     </div>
   </BrowserRouter>
 )

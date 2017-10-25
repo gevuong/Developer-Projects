@@ -1,10 +1,10 @@
 import React from 'react';
-import TeacherList from '../data/teachers';
+import TeacherLists from '../data/teachers';
 
 const Teachers = () => (
   <div className="main-content">
     <ul className="group">
-    { TeacherList.map(teacher => (
+    { TeacherLists.map(teacher => (
       <li className="teacher" key={ teacher.id }>
         <p>{ teacher.name }</p>
         <p>{ teacher.bio }</p>
