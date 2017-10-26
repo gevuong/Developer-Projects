@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Route, Link, NavLink, Redirect } from 'react-router-dom';
+import { BrowserRouter, Route, NavLink, Redirect } from 'react-router-dom';
 import { HTMLCourses, CSSCourses, JSCourses } from '../data/courses';
 import CourseContainer from './courses/CourseContainer';
 
@@ -29,6 +29,6 @@ const Courses = ({ match }) => (
       render={ () => <CourseContainer course={ JSCourses } /> }
     />
   </div>
-)
+);
 
 export default Courses;

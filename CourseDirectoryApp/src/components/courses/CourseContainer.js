@@ -12,7 +12,7 @@ const CourseContainer = props => (
           img={ course.img_src }
         />
       )
-    )};
+    )}
     </ul>
   </div>
 )

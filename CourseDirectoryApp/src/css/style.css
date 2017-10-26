@@ -94,6 +94,7 @@ header {
   margin-bottom: 1em;
 }
 
+
 /* IMAGES -------- */
 
 .course-img {
@@ -160,6 +161,9 @@ header {
 .icn-error {
   font-size: 3.2em;
   margin-bottom: .25em;
+}
+#not-found-icon {
+  font-size: 4.2em;
 }
 
 /* =================================

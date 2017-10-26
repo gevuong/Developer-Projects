@@ -2,8 +2,9 @@
 <html>
   <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
     <title>Front End Course Directory</title>
-    <!-- <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico"> -->
     <link type="text/css" href="/src/css/style.css" rel="stylesheet">
     <!-- The "rel" attribute specifies the relationship between the current document and the linked document/resource -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -13,3 +14,11 @@
     <script src="/bundle.js"></script>
   </body>
 </html>
+
+<!-- Lesson learned through debugging index.html today:
+When implementing routes, index.html can be loaded from any path created in the Route components. Therefore, the browser needs a root relative path for any external resources used because the browser does not know where to locate these external resources relative to the current path it is trying to load.
+
+For instance, earlier, a GET request was being made to /courses/bundle.js. bundle.js could not be found because it did not have a forward slash in front to signify a URL path. Similarly with src/css/style.css, if that makes sense.
+
+Words from Seth Kroger: Because the index.html file can be loaded from either / or /courses or any other path in Routes you can use relative paths for links from there. The browser will consider the path to be relative to the path in the address bar. It has no idea what the actual file structure on the server is. You should use root-relative paths for both in this case, /src/css/style.css and /bundle.js
+-->

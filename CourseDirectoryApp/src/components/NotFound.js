@@ -1,8 +1,9 @@
 import React from 'react';
 
 const NotFound = () => (
-  <div>
-    <h3>Page Not Found</h3>
+  <div className="main-content not-found">
+    <i id="not-found-icon" className="material-icons icn-error" >error_outline</i>
+    <h2>Page Not Found</h2>
   </div>
 )
 
