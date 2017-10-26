@@ -1,0 +1,12 @@
+// This file tells babel how we want our code transpiled. Babel is just another JSON file.
+
+// If you want to be precise about which features babel transpiles, you can specify them with what babel calls plugins. For example, there's a plugin for arrow functions and another one for ES 2015 constants.
+
+// "Presets" bundle multiple "plugins" together. The ES2015 preset includes all finalized ES2015 features. That means you can simply specify this one preset instead of listing out each individual plugin in your configuration file.
+
+{
+  "presets": [
+    "es2015", "react"
+  ],
+  "plugins": []
+}
