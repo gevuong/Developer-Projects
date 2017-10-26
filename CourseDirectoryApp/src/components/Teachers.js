@@ -4,7 +4,7 @@ import TeacherLists from '../data/teachers';
 const Teachers = () => (
   <div className="main-content">
     <h2>Teachers</h2>
-    
+
     <ul className="group">
     { TeacherLists.map(teacher => (
       <li className="teacher" key={ teacher.id }>
@@ -22,7 +22,7 @@ export default Teachers;
 
 // The "alt" attribute provides alternative information for an image if a user for some reason cannot view it (because of slow connection, an error in the src attribute, or if the user uses a screen reader).
 
-// alternative method
+// alternative method to writing Teacher Component
 // const Teachers = () => {
 //   let teachers = TeacherList.map((teacher) => {
 //     return (

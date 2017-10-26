@@ -15,7 +15,7 @@ class Home extends Component {
     let teacherLastName = this.lname.value;
     let teacherTopic = this.topic.value;
     let path = `/teachers/${teacherTopic}/${teacherFirstName}-${teacherLastName}`;
-    this.props.history.push(path); // push the path variable onto history stack, and will redirect the user to the URL stored in path.
+    this.props.history.push(path); // push "path" variable onto history stack, and will redirect the user to the URL stored in path.
   }
 
   render() {

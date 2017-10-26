@@ -25933,7 +25933,7 @@ var Home = function (_Component) {
       var teacherLastName = this.lname.value;
       var teacherTopic = this.topic.value;
       var path = '/teachers/' + teacherTopic + '/' + teacherFirstName + '-' + teacherLastName;
-      this.props.history.push(path); // push the path variable onto history stack, and will redirect the user to the URL stored in path.
+      this.props.history.push(path); // push "path" variable onto history stack, and will redirect the user to the URL stored in path.
     }
   }, {
     key: 'render',
@@ -26025,7 +26025,7 @@ var _react2 = _interopRequireDefault(_react);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-// stateless, pure component
+// state-less, pure component
 var About = function About(props) {
   return _react2.default.createElement(
     "div",
@@ -26122,8 +26122,6 @@ var Header = function Header() {
 
 exports.default = Header;
 
-// The <NavLink> component is a special version of <Link> that can change the appearance of a link when it's active. Meaning you are able to style the link. By default NavLink components have a className called "active". Can set to custom className using "activeClassName" prop. Also, can write active style using "activeStyle" prop.
-
 /***/ }),
 /* 84 */
 /***/ (function(module, exports, __webpack_require__) {
@@ -26183,7 +26181,7 @@ exports.default = Teachers;
 
 // The "alt" attribute provides alternative information for an image if a user for some reason cannot view it (because of slow connection, an error in the src attribute, or if the user uses a screen reader).
 
-// alternative method
+// alternative method to writing Teacher Component
 // const Teachers = () => {
 //   let teachers = TeacherList.map((teacher) => {
 //     return (

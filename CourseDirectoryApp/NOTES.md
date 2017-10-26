@@ -14,7 +14,6 @@ to keep the UI in sync with the URL. That way users can navigate the app using t
 
 * React Router uses JSX syntax to declare routes. React Router is a set of components, and the declarative syntax of JSX makes it easier to visualize how routes are structured.
 
-
 * React router passes rendered components information about the current path and URL the route is matching. The component also gets passed a history object that listens for changes to the current URL, keeps tracks of browser history and the number of entries in the history stack. And by history stack I mean previously visited URLs.
 
 * For instance, every time a user navigates to a new path that URL is stored the history stack. History is what lets users navigate your app using the browser's back and forward buttons, even refresh the app while keeping everything in sync. So the history object can also be used to programmatically change the current URL.
@@ -36,3 +35,5 @@ to keep the UI in sync with the URL. That way users can navigate the app using t
 * This will render both routes because both paths contain "/", so router considers both routes to match URL. You'll need to add "exact path" to instruct Router to render component only if path matches URL exactly.
 // <Route path="/" component={ Home } />
 // <Route path="/about" component={ About } />
+
+* The <NavLink> component is a special version of <Link> that can change the appearance of a link when it's active. Meaning you are able to style the link. By default NavLink components have a className called "active". Can set to custom className using "activeClassName" prop. Also, can write active style using "activeStyle" prop.

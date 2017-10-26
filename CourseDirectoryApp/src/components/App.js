@@ -14,10 +14,10 @@ const App = () => (
   <BrowserRouter>
     <div className="container">
       <Header />
-      {/* Switch only renders the first route that matches URL */}
+      {/* <Switch> only renders the first route that matches URL */}
       <Switch>
         <Route exact path="/" component={ Home } />
-        {/*inline "render" allows props to pass to component, which allows rendering of dynamic content */}
+        {/*inline "render" allows rendering of dynamic content by passing props to component */}
         <Route path="/about" render={ () => <About title="About" /> } />
         <Route exact path="/teachers" component={ Teachers } />
         <Route path="/teachers/:topic/:fname-:lname" component={ Featured } />
