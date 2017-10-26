@@ -139,7 +139,7 @@ class AddPlayerForm extends Component {
     return (
       <div className="add-player-form">
         <form onSubmit={ this.onSubmit } >
-          <input type="text" value={ this.state.elapsedTime } onChange={ this.onNameChange }></input>
+          <input type="text" value={ this.state.name } onChange={ this.onNameChange }></input>
           <input type="submit" value="Add Player" ></input>
         </form>
       </div>

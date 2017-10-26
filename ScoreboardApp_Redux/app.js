@@ -1,29 +1,12 @@
 // Libs
 import React from 'react';
 import ReactDOM from 'react-dom';
+
+// Components
 import Scoreboard from './components/Scoreboard';;
 
 // css
 import './css/style.css'; // no longer need <link> in index.html because webpack handles it due to style-loader and css-loader
-
-// var PLAYERS = [
-//   {
-//     name: "Mohandas Gandhi",
-//     score: 23,
-//   },
-//   {
-//     name: "Pablo Picasso",
-//     score: 15,
-//   },
-//   {
-//     name: "Sigmund Freud",
-//     score: 56,
-//   },
-//   {
-//     name: "Maria Montessori",
-//     score: 89,
-//   },
-// ]
 
 // <App /> creates an instance of the App component in JSX
 document.addEventListener('DOMContentLoaded', () => {

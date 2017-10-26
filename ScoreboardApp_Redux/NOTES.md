@@ -19,6 +19,6 @@ Immutability: Refers to an object that cannot be changed once it has been create
 
 * The --inline option fully reloads your app in the browser, so any time I save changes in my app, I lose all component states. So, as you can see, everything in the app goes back to the initial state. This can be a hassle during development and when editing components. To maintain component states, use webpack plugin **React Hot Loader**.
 
-* **It's important to know that your entry file cannot be hot reloaded. So if I change anything in app.js, it causes a full page reload, and components still lose state. But we can trigger a hot module replacement by breaking the components out into individual modules.**
+* It's important to know that **your entry file cannot be hot reloaded. So if you change anything in app.js, it causes a full page reload, and components still lose state.** But we can trigger a hot module replacement by breaking the components out into individual modules.
 
 * Difference between transpiling and compiling is the level of abstraction when converting code from one language to another. For example, compiling is converting a language like Java to bytecode, which converts one language to another at a lower abstraction level. Transpiling is converting a language like SASS to CSS, they are both high level languages that serve the purpose of styling HTML, and at the same abstraction level.

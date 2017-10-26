@@ -107,9 +107,7 @@ class AddPlayerForm extends Component {
     e.preventDefault();
     if (this.state.name.split(" ").join("").length > 0) {
       this.props.onAdd(this.state.name);
-      this.state.name = "";
       this.setState({ name: "" });
-      console.log("state: ", this.state.name);
     }
   }
 
@@ -118,7 +116,7 @@ class AddPlayerForm extends Component {
     return (
       <div className="add-player-form">
         <form onSubmit={ this.onSubmit } >
-          <input type="text" placeholder="input name" value={ this.state.elapsedTime } onChange={ this.onNameChange }></input>
+          <input type="text" placeholder="input name" value={ this.state.name } onChange={ this.onNameChange }></input>
           <input type="submit" value="Add Player" ></input>
         </form>
       </div>
@@ -226,19 +224,19 @@ class Scoreboard extends Component {
       players: [
         {
           name: "Mohandas Gandhi",
-          score: 23,
+          score: 0,
         },
         {
           name: "Pablo Picasso",
-          score: 15,
+          score: 0,
         },
         {
           name: "Sigmund Freud",
-          score: 56,
+          score: 0,
         },
         {
           name: "Maria Montessori",
-          score: 89,
+          score: 0,
         },
       ]
     }
@@ -263,7 +261,6 @@ class Scoreboard extends Component {
       name: name,
       score: 0,
     })
-    this.state.name = "";
     this.setState(this.state);
     playerId += 1; // used only if I want to assign unique ID to each added player
   }
