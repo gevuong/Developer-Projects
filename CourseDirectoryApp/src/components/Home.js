@@ -33,9 +33,9 @@ class Home extends Component {
         <form onSubmit={this.handleSubmit}>
           <h3>Input Teacher and Topic below to search</h3>
           <div>
-            <input type="text" placeholder="first name" ref={ input => this.fname = input } />
-            <input type="text" placeholder="last name" ref={ input => this.lname = input } />
-            <input type="text" placeholder="topic" ref={ input => this.topic = input } />
+            <input type="text" placeholder="First Name" ref={ input => this.fname = input } />
+            <input type="text" placeholder="Last Name" ref={ input => this.lname = input } />
+            <input type="text" placeholder="Subject" ref={ input => this.topic = input } />
             <button type="submit">GO!</button>
           </div>
         </form>

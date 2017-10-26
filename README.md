@@ -18,7 +18,7 @@
   * [x] Search feature using Giphy API's **Search Endpoint**
   * [x] Loading indicator and "no GIFS match your search" indicator
   * [ ] Infinite scroll
-* [x] [CourseDirectory App]( https://gevuong.github.io/app-deployment-2/) (React.js, React Router 4)
+* [x] [CourseDirectory App](https://rawgit.com/gevuong/Frontend-Projects/master/CourseDirectoryApp/index.html) (React.js, React Router 4)
   * [x] Single page application
   * [x] Navigate routes programmatically via form submission
   * [x] Displays 404 Error Route
