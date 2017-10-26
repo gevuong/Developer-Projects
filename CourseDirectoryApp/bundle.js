@@ -25981,13 +25981,13 @@ var Home = function (_Component) {
           _react2.default.createElement(
             'div',
             null,
-            _react2.default.createElement('input', { type: 'text', placeholder: 'first name', ref: function ref(input) {
+            _react2.default.createElement('input', { type: 'text', placeholder: 'First Name', ref: function ref(input) {
                 return _this2.fname = input;
               } }),
-            _react2.default.createElement('input', { type: 'text', placeholder: 'last name', ref: function ref(input) {
+            _react2.default.createElement('input', { type: 'text', placeholder: 'Last Name', ref: function ref(input) {
                 return _this2.lname = input;
               } }),
-            _react2.default.createElement('input', { type: 'text', placeholder: 'topic', ref: function ref(input) {
+            _react2.default.createElement('input', { type: 'text', placeholder: 'Subject', ref: function ref(input) {
                 return _this2.topic = input;
               } }),
             _react2.default.createElement(
@@ -26413,6 +26413,11 @@ var NotFound = function NotFound() {
       "h2",
       null,
       "404 Error: Page Not Found"
+    ),
+    _react2.default.createElement(
+      "h3",
+      null,
+      "Click on Tab Headers to return Home"
     )
   );
 };
