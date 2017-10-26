@@ -14,7 +14,6 @@ const Courses = ({ match }) => (
         </ul>
     </div>
 
-    {/* Write routes here */}
     {/*} Simply adding <Redirect to="/courses/html"></Redirect> does not work because clicking on /courses does not render /courses/html content.*/}
     <Route exact path={`${match.path}`}
       render={ () => <Redirect to={`${match.url}/html`} /> }

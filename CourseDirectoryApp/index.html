@@ -3,21 +3,20 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
     <title>Front End Course Directory</title>
     <link type="text/css" href="src/css/style.css" rel="stylesheet">
-    <!-- Used when running local server: <link type="text/css" href="/src/css/style.css" rel="stylesheet"> -->
+    <!-- Used when running local server <link type="text/css" href="/src/css/style.css" rel="stylesheet"> -->
     <!-- The "rel" attribute specifies the relationship between the current document and the linked document/resource -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   </head>
   <body>
     <div id="root">Loading...</div>
     <script src="bundle.js"></script>
-    <!-- Used when running local server: <script src="/bundle.js"></script> -->
+    <!-- Used when running local server <script src="/bundle.js"></script> -->
   </body>
 </html>
 
-<!-- Lesson learned through debugging index.html today:
+<!-- To prevent crash when refreshing page in nested route:
 When implementing routes, index.html can be loaded from any path created in the Route components. Therefore, the browser needs a root relative path for any external resources used because the browser does not know where to locate these external resources relative to the current path it is trying to load.
 
 For instance, earlier, a GET request was being made to /courses/bundle.js. bundle.js could not be found because it did not have a forward slash in front to signify a URL path. Similarly with src/css/style.css, if that makes sense.
