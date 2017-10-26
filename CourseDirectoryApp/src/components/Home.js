@@ -31,7 +31,7 @@ class Home extends Component {
         <hr />
 
         <form onSubmit={this.handleSubmit}>
-          <h3>Input Teacher and Topic below to search</h3>
+          <h3>Teacher Search</h3>
           <div>
             <input type="text" placeholder="First Name" ref={ input => this.fname = input } />
             <input type="text" placeholder="Last Name" ref={ input => this.lname = input } />
