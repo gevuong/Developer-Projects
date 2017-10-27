@@ -3,13 +3,13 @@ import PropTypes from 'prop-types';
 
 // Control Component is when an input form element (i.e <input>, <textarea>, <select>), maintain their own state and update based on user input. The input form element's value is controlled by React. Every state mutation (i.e this.state.name) will have an associated handler fcn (i.e onNameChange()). React state is the "single source of truth" because for example, the displayed value in form element will always be "this.state.value".
 
-// Logical component, manages its own state, and may use lifecycle events. It is not possible to use var, let, or const with export default 
+// Logical component, manages its own state, and may use lifecycle events. It is not possible to use var, let, or const with export default
 export default class AddPlayerForm extends Component {
   constructor(props) {
     super(props);
 
     AddPlayerForm.propTypes = {
-      onAdd: PropTypes.func.isRequired,
+      addPlayer: PropTypes.func.isRequired,
     }
     this.state = { name: '' }; // The state called "name" is considered a local component state
 
@@ -26,7 +26,7 @@ export default class AddPlayerForm extends Component {
   onSubmit(e) {
     e.preventDefault();
     if (this.state.name.split(' ').join('').length > 0) {
-      this.props.onAdd(this.state.name);
+      this.props.addPlayer(this.state.name);
       this.setState({ name: '' });
     }
   }
@@ -42,5 +42,3 @@ export default class AddPlayerForm extends Component {
     )
   }
 }
-
-// export default AddPlayerForm;

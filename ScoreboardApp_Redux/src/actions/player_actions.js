@@ -26,5 +26,3 @@ export const updatePlayerScore = (index, score) => {
     score
   }
 }
-
-// export const addPlyaer =

@@ -1,13 +1,13 @@
-var path = require("path");
+var path = require('path');
 // var webpack = require('webpack');
 
 module.exports = {
   context: __dirname,
-  entry: "./index.js",
+  entry: './index.js',
     // "webpack-dev-server/client?http://localhost:8080",
     // "webpack/hot/only-dev-server",
   output: {
-    filename: "bundle.js"
+    filename: 'bundle.js'
   },
   // plugins: [
   //   new webpack.HotModuleReplacementPlugin()
@@ -20,11 +20,11 @@ module.exports = {
         loader: 'babel-loader',
         query: {
           presets: ['es2015', 'react'],
-          "env": {
-            "development": {
-              "presets": ['react-hmre']
-            }
-          },
+          // "env": {
+          //   "development": {
+          //     "presets": ['react-hmre']
+          //   }
+          // },
           plugins: ['react-hot-loader/babel']
         }
       },
@@ -37,7 +37,7 @@ module.exports = {
   },
   devtool: 'source-map',
   resolve: {
-    extensions: [".js", ".jsx", "*"]
+    extensions: ['.js', '.jsx', '*']
   },
   // devServer: { hot: true }
 };

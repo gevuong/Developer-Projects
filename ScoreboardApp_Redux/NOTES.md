@@ -5,6 +5,12 @@
 
 **Immutability is one of the key principles of Redux, which is achieved by implementing reducers as pure functions that do not mutate state**.
 
+* Redux store holds the entire application state. It's a composition of all the reducers defined that becomes one single state container for app.
+
+* When connecting to Redux, you must provide a method to mappingStateToProps, and a container. A container uses the connect helper method in order to tie into the Redux pipeline.
+
+* When creating bound action creators using the bindActionCreators method, we have to supply an action creator and dispatch method. A bound action creator works exactly like a normal action creator, but in addition to generating an action, the action generated is also dispatched to the Redux store immediately.
+
 ### Submitting an action to Redux
 * An action creator generates an action. The action is dispatched to Redux store. The store holds your app state and it's where a reducer handles the action. The reducer passes action to a component and returns a new state.
 * With Redux, you are not required to separate your React components into their own files.
@@ -19,7 +25,7 @@ Immutability: Refers to an object that cannot be changed once it has been create
 
 * Reducer: A Redux construct that is responsible for maintaining a specific portion of the Redux store. In JavaScript, a reducer is implemented as a pure function that takes two arguments, the current state and the action being taken, and produces the next state. In order for Redux to work properly, Reducers must not mutate the current state. In other words, the state for a reducer must be treated as immutable.
 * Action Type: An action type in Redux represents an explicit action type that will occur within the application. It is expressed in JavaScript as a string constant.
-* Actions: Explicit events that occur in our application represented by a type and any relevant metadata associated with the action. In other words, an event that Redux uses to determine how app state will be affected. 
+* Actions: Explicit events that occur in our application represented by a type and any relevant metadata associated with the action. In other words, an event that Redux uses to determine how app state will be affected.
 * Action Creators: In Redux, a construct for generating an action.
 
 * Redux store: A single source of truth for app state.

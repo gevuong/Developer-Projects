@@ -12,7 +12,7 @@
   * [x] Stopwatch with start, stop, and reset buttons
     * [ ] Add milliseconds, hours
   * [ ] Persist state with localStorage
-  * Challenge encountered: Designing data flow that is easy to understand and maintain, such as communicating events via DOM traversal.
+  * Challenge encountered: Designing data flow that is easy to understand and maintain, such as communicating events from grandchild to parent component via virtualDOM traversal.
 * [x] [GIFSearch App](https://gevuong.github.io/app-deployment/) (React.js, fetchAPI, Axios)
   * [x] Renders 24 currently trending GIFs using Giphy API's **Trending GIFs Endpoint**
   * [x] Search feature using Giphy API's **Search Endpoint**

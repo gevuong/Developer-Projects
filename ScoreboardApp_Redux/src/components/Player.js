@@ -10,11 +10,14 @@ const Player = props => {
   return (
     <div className="player">
       <div className="player-name">
-        <a className="remove-player" onClick={props.onRemove}>&#10006;</a>
+        <a className="remove-player" onClick={ () => props.removePlayer(props.index) }>&#10006;</a>
         {props.name}
       </div>
       <div className="player-score">
-        <Counter score={props.score} onChange={props.onScoreChange} />
+        <Counter
+          index={props.index}
+          score={props.score}
+          updatePlayerScore={props.updatePlayerScore} />
       </div>
     </div>
   );
@@ -23,9 +26,10 @@ const Player = props => {
 // relay another property, onScoreChange, that has a value of a callback fcn
 Player.propTypes = {
   name: PropTypes.string.isRequired,
+  index: PropTypes.number.isRequired,
   score: PropTypes.number.isRequired,
-  onScoreChange: PropTypes.func.isRequired,
-  onRemove: PropTypes.func.isRequired,
+  updatePlayerScore: PropTypes.func.isRequired,
+  removePlayer: PropTypes.func.isRequired,
 }
 
 export default Player;

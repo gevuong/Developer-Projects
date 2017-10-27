@@ -1,7 +1,7 @@
 // import { ADD_PLAYER, REMOVE_PLAYER, UPDATE_PLAYER } from '../actions/player_actions';
 import * as PlayerActionTypes from '../actions/player_actions';
 
-const initialState = [
+const initialPlayers = [
   {
     name: 'Mohandas Ghandi',
     score: 15,
@@ -21,7 +21,9 @@ const initialState = [
 ];
 
 // reducer should be written as a pure function, and not mutate or alter current state! In other words, the state for reducer must be immutable. Immutability is not enforced by Redux, so it's up to developer to make sure reducer is implemented as pure functions. A reducer takes two args, current state and action taken, and produces the next state.
-const playerReducer = (state = initialState, action) => {
+const playerReducer = (state = initialPlayers, action) => {
+  Object.freeze(state);
+
   switch(action.type){
     case PlayerActionTypes.ADD_PLAYER:
     // spread operator will generate new object/array without mutating or altering original source, which is key because object should be immutable or unalterable.
@@ -40,9 +42,10 @@ const playerReducer = (state = initialState, action) => {
 
     case PlayerActionTypes.UPDATE_PLAYER_SCORE:
       return state.map((player, index) => {
+        console.log(player);
         if (index === action.index) {
           return {
-            ...player,
+            name: player.name,
             score: player.score + action.score
           };
         };
