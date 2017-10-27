@@ -3,7 +3,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 // Components
-import Scoreboard from './components/Scoreboard';;
+import Scoreboard from './src/containers/Scoreboard';;
 
 // css
 import './css/style.css'; // no longer need <link> in index.html because webpack handles it due to style-loader and css-loader

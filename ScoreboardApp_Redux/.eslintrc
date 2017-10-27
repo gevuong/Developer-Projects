@@ -1,10 +1,6 @@
 # ESLint: A tool that analyzes JavaScript for syntactical, logical, and conventional issues based on an .eslintrc file. It defines what rules should be used to evaluate the code. This process of analyzing JavaScript is known as linting.
 
 {
-  "ecmaFeatures": {
-    "jsx": true,
-    "modules": true
-  },
   "env": {
     "browser": true,
     "node": true

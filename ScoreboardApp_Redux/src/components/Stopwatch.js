@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 
-// Logical, presentational component, manages its own state and may use lifecycle events.
-class Stopwatch extends Component {
+// Logical, presentational component, will often render a view, but manages its own state and may use lifecycle events.
+export default class Stopwatch extends Component {
   constructor() {
     super();
-    this.state = {
+    this.state = { // local state
       running: false,
       elapsedTime: 0,
       previousTime: 0,
@@ -25,9 +25,9 @@ class Stopwatch extends Component {
     clearInterval(this.interval); // cleanup interval
   }
 
-  // how to get onTick to be called over and over again? Cannot put in render(), but can be placed in componentDidMount().
+  // To get onTick to be called over and over again, cannot put in render(), but can be placed in componentDidMount().
   onTick() {
-    console.log("onTick");
+    console.log('onTick');
     if (this.state.running) {
       let timeNow = Date.now(); // returns number of ms since Jan 1,1970 (UNIX epoch)
       this.setState({
@@ -81,4 +81,4 @@ class Stopwatch extends Component {
   }
 }
 
-export default Stopwatch;
+// export default Stopwatch;

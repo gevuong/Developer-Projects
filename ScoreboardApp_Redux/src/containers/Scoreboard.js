@@ -3,14 +3,14 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 // Components
-import Header from './Header';
-import Player from './Player';
-import AddPlayerForm from './AddPlayerForm';
+import Header from '../components/Header';
+import Player from '../components/Player';
+import AddPlayerForm from '../components/AddPlayerForm';
 
 var playerId = 3; // incremented to assign unique ID for each added player
 
 // Container component, propagates data down to presentational components. Interacts with and receives data from single object storing entire state of app.
-class Scoreboard extends Component {
+export default class Scoreboard extends Component {
   constructor(props) {
     super(props);
     // initialPlayers is an array of objects with the following shape, that needs to be passed in. title is optional.
@@ -24,24 +24,23 @@ class Scoreboard extends Component {
     this.state = {
       players: [
         {
-          name: "Mohandas Gandhi",
-          score: 0,
+          name: 'Mohandas Ghandi',
+          score: 15,
         },
         {
-          name: "Pablo Picasso",
-          score: 0,
+          name: 'Pablo Picasso',
+          score: 23,
         },
         {
-          name: "Sigmund Freud",
-          score: 0,
+          name: 'Sigmund Freud',
+          score: 56,
         },
         {
-          name: "Maria Montessori",
-          score: 0,
+          name: 'Maria Montessori',
+          score: 37,
         },
       ]
     }
-    // this.state = {players: this.props.initialPlayers};
     this.onPlayerAdd = this.onPlayerAdd.bind(this);
     // this.onScoreChange = this.onScoreChange.bind(this); Don't need, but why?
   }
@@ -96,7 +95,7 @@ class Scoreboard extends Component {
 }
 
 Scoreboard.defaultProps = {
-  title: "My Scoreboard",
+  title: 'My Scoreboard',
 };
 
-export default Scoreboard;
+// export default Scoreboard;

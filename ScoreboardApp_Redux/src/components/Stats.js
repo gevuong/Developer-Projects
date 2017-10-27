@@ -2,7 +2,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-// Pure, stateless, presentational component, does not manage its own state, or use lifecycle events.
+// Pure, stateless function, presentational component, does not manage its own state, or use lifecycle events.
 const Stats = props => {
   const totalPlayers = props.players.length;
   const totalPoints = props.players.reduce(function(total, player) {
