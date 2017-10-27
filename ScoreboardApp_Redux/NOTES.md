@@ -1,9 +1,29 @@
+### Trivia Notes
+* React-Redux library provides a number of helper methods that make it easier to connect Redux to your React app.
+
 ### Redux terms:
-* Redux: A JavaScript framework for managing and maintaining application state usually used in conjunction with other frameworks to build applications.
+* Redux: A JavaScript framework for managing and maintaining application state usually used in conjunction with other frameworks to build applications. Can make your app robust, scalable, and maintainable. It offers data governance, data tracking, and data is universally accessible to all parts of your application.
 * Store: Refers to the application state container for the entire application
 * Action: Refers to an explicit event that occurs within a Redux application that will impact application state
 * Container: A React component that subscribes to specific Reducer updates and propagates data to other React components known as presentational components
 Immutability: Refers to an object that cannot be changed once it has been created.
+
+### More terms:
+* Container Component: A container component is concerned with how things work. It interacts with and receives data from the object storing the entire state of your application. It's a container component's responsibility to propagate data down to the presentational components. So instead of containing markup of its own, a container simply provides the data and behavior to presentational components and renders them.
+* Presentational Component: A type of component that's concerned with how things look. A presentational component behaves exactly like any other React component in that it just renders HTML and doesn't care if we use Redux at all. As long as it receives prop data as it expects, it will render the same.
+* There are two types of presentational components, logical and pure.
+
+* Logical Component: React components that manages own state and may or may not make use of React lifecycle events
+* Pure Component: Presentation component is stateless, implemented as pure functions that do not manage their own state, and do not use React life cycle events. They rely solely on props.
+* Component Hierarchy: A composition of React components represented as a tree that depicts the component structure.
+
+### When to use Redux
+* For simple React apps that only use minimal React components, Redux can be overkill. Make sure your app will benefit from using Redux.
+* **Provides a single source of truth for your app. Making it easier to keep your application state in sync, and distribute state data in a predictable and deterministic way.**
+* When you use Redux with React, both align themselves almost perfectly. Redux handles all your data management while React only manages the presentation and the use of your app.
+* Redux is considered to be an opinionated framework, meaning that Redux expects you to implement features a specific way. Otherwise, your app will not work as you would expect. This is good for a couple of reasons.
+* First, developers familiar with Redux will understand structure of other apps using Redux.
+* Second, consistent design patterns make debugging and testing your application much easier because application responsibilities are distinct and isolated.
 
 
 ### Webpack and Babel
