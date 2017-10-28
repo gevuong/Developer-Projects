@@ -42,12 +42,11 @@ const playerReducer = (state = initialPlayers, action) => {
 
     case PlayerActionTypes.UPDATE_PLAYER_SCORE:
       return state.map((player, index) => {
-        console.log(player);
         if (index === action.index) {
           return {
             name: player.name,
             score: player.score + action.score
-          };
+          }
         };
         return player;
       });

@@ -8,9 +8,21 @@ import PropTypes from 'prop-types';
 const Counter = props => {
   return (
     <div className="counter">
-      <button className="counter-action decrement" onClick={ () => props.updatePlayerScore(props.index, -1) } > - </button>
+      <button className="counter-action decrement"
+        onClick={ props.score > 0 ?
+          () => props.updatePlayerScore(props.index, -1)
+          :
+          () => props.updatePlayerScore(props.index, 0) 
+        }
+      > - </button>
       <div className="counter-score"> {props.score} </div>
-      <button className="counter-action increment" onClick={ () => props.updatePlayerScore(props.index, 1) } > + </button>
+      <button className="counter-action increment"
+        onClick={ props.score >= 0 ?
+          () => props.updatePlayerScore(props.index, 1)
+          :
+          () => props.updatePlayerScore(props.index, 0)
+          }
+      > + </button>
     </div>
   );
 }

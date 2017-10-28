@@ -13,7 +13,7 @@ export default class AddPlayerForm extends Component {
     }
     this.state = { name: '' }; // The state called "name" is considered a local component state
 
-    this.onSubmit = this.onSubmit.bind(this);
+    this.addPlayer = this.addPlayer.bind(this);
     this.onNameChange = this.onNameChange.bind(this);
   }
 
@@ -23,7 +23,7 @@ export default class AddPlayerForm extends Component {
   }
 
   // when form submits, page refreshes. Use preventDefault()
-  onSubmit(e) {
+  addPlayer(e) {
     e.preventDefault();
     if (this.state.name.split(' ').join('').length > 0) {
       this.props.addPlayer(this.state.name);
@@ -34,7 +34,7 @@ export default class AddPlayerForm extends Component {
   render() {
     return (
       <div className="add-player-form">
-        <form onSubmit={ this.onSubmit } >
+        <form onSubmit={ this.addPlayer } >
           <input type="text" placeholder="input name" value={ this.state.name } onChange={ this.onNameChange }></input>
           <input type="submit" value="Add Player" ></input>
         </form>
