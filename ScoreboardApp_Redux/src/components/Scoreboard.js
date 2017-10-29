@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 import Header from '../components/Header';
 import Player from '../components/Player';
 import AddPlayerForm from '../components/AddPlayerForm';
+import PlayerDetail from './PlayerDetail';
 
 var playerId = 3; // incremented to assign unique ID for each added player
 
@@ -16,15 +17,22 @@ class Scoreboard extends Component {
 
     Scoreboard.propTypes = {
       players: PropTypes.array.isRequired,
+      selectedPlayerIndex: PropTypes.number.isRequired,
       addPlayer: PropTypes.func.isRequired,
       removePlayer: PropTypes.func.isRequired,
       updatePlayerScore: PropTypes.func.isRequired,
+      selectPlayer: PropTypes.func.isRequired,
     }
   };
 
   // Within function of map iterator, "this" doesn't point to appropriate instance. Need to call .bind(this) on anonymous fcn to make "this" within fcn apply to same "this" outside of fcn. If passing an anonymous fcn as prop, use arrow fcn within .map() to avoid .bind(this). Using other anonymous fcn syntax does not autobind, so will lose its binding to "this".
   render() {
-    const { players, addPlayer, removePlayer, updatePlayerScore } = this.props;
+    const { players, addPlayer, removePlayer, updatePlayerScore, selectPlayer, selectedPlayerIndex } = this.props;
+
+    let selectedPlayer; // initially set to undefined
+    if (selectedPlayerIndex !== -1) {
+      selectedPlayer = players[selectedPlayerIndex];
+    }
 
     let playerComponent = players.map((player, index) => {
       return (
@@ -32,6 +40,7 @@ class Scoreboard extends Component {
           index={index}
           removePlayer={removePlayer}
           updatePlayerScore={updatePlayerScore}
+          selectPlayer={selectPlayer}
           name={player.name}
           score={player.score}
           key={index}
@@ -45,7 +54,13 @@ class Scoreboard extends Component {
         <div className="players">
           { playerComponent }
         </div>
-        <AddPlayerForm addPlayer={addPlayer} />
+        <AddPlayerForm addPlayer={ addPlayer } />
+        <div className="playerDetail">
+          <PlayerDetail
+            players={players}
+            selectedPlayer={selectedPlayer}
+          />
+        </div>
       </div>
     );
   }

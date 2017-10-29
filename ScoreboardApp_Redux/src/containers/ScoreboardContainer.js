@@ -1,14 +1,15 @@
 // Libs
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { addPlayer, removePlayer, updatePlayerScore } from '../actions/player_actions';
+import { addPlayer, removePlayer, updatePlayerScore, selectPlayer } from '../actions/player_actions';
 
 // Components
 import Scoreboard from '../components/Scoreboard';
 
 const mapStateToProps = state => (
   {
-    players: state,
+    players: state.players,
+    selectedPlayerIndex: state.selectedPlayerIndex,
   }
 );
 
@@ -17,6 +18,7 @@ const mapDispatchToProps = dispatch => (
   addPlayer: bindActionCreators(addPlayer, dispatch),
   removePlayer: bindActionCreators(removePlayer, dispatch),
   updatePlayerScore: bindActionCreators(updatePlayerScore, dispatch),
+  selectPlayer: bindActionCreators(selectPlayer, dispatch),
   }
 );
 

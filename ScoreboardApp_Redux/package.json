@@ -33,7 +33,7 @@
     "prestart": "npm run lint",
     "lint": "eslint ./src/**/*.{js, jsx} --fix",
     "build": "webpack",
-    "start": "webpack-dev-server --progress --inline"
+    "start": "webpack-dev-server --progress --inline --hot"
   },
   "keywords": [],
   "author": "",

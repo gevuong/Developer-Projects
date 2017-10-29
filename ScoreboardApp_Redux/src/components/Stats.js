@@ -28,6 +28,8 @@ Stats.propTypes = {
   players: PropTypes.arrayOf(PropTypes.shape({
     name: PropTypes.string.isRequired,
     score: PropTypes.number.isRequired,
+    created: PropTypes.string,
+    updated: PropTypes.string,
   })).isRequired,
 }
 
