@@ -57,18 +57,16 @@ export default class Stopwatch extends Component {
   }
 
   render() {
-    // let milliseconds = Math.floor(this.state.elapsedTime / 10);
-    let seconds = Math.floor(this.state.elapsedTime / 1000);
-    let minutes = Math.floor(seconds / 60);
-    // let hours = Math.floor(minutes / 60);
+    let nowSeconds = Math.floor(this.state.elapsedTime / 1000);
+    let seconds;
+    nowSeconds % 60 < 10 ? seconds = '0' + (nowSeconds % 60) : seconds = nowSeconds % 60;
+    let minutes = Math.floor(nowSeconds / 60);
+    Math.floor(nowSeconds / 60) < 10 ? minutes = '0' + minutes : minutes;
+
     return(
       <div className="stopwatch">
         <h2>Stopwatch</h2>
-        { minutes >= 1 ?
-          <div className="stopwatch-time">{ minutes }:{ seconds % 60 }</div>
-          :
-          <div className="stopwatch-time">{ seconds % 60 }</div>
-        }
+        <div className="stopwatch-time">{ minutes }:{ seconds }</div>
         {/* alternative can be { this.state.running ? "Start" : "Stop" } */}
         { this.state.running ?
           <button type="submit" onClick={this.onStop}>Stop</button>

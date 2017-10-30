@@ -6,20 +6,20 @@ const initialPlayers = {
     {
       name: 'Pablo Picasso',
       score: 23,
-      created: 'Tuesday, Oct 25, 1881',
-      updated: 'Sunday, Apr 08, 1973',
+      created: 'Tuesday, Oct 25, 1881, 12:53 PM',
+      updated: 'Sunday, Apr 08, 1973, 2:53 AM',
     },
     {
       name: 'Sigmund Freud',
       score: 56,
-      created: 'Tuesday, May 06, 1856',
-      updated: 'Saturday, Sep 23, 1939',
+      created: 'Tuesday, May 06, 1856, 7:53 AM',
+      updated: 'Saturday, Sep 23, 1939, 8:53 PM',
     },
     {
       name: 'Maria Montessori',
       score: 37,
-      created: 'Wednesday, Aug 31, 1870',
-      updated: 'Tuesday, May 06, 1952',
+      created: 'Wednesday, Aug 31, 1870, 9:53 AM',
+      updated: 'Tuesday, May 06, 1952, 3:53 PM',
     }
   ],
   selectedPlayerIndex: -1
@@ -29,9 +29,20 @@ const playerReducer = (state = initialPlayers, action) => {
   Object.freeze(state);
 
   let now = new Date();
+  let nowHours = now.getHours();
+  let nowMinutes = now.getMinutes();
+
   let weekdays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
   let months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-  let currentDateTime = `${weekdays[now.getDay()]}, ${months[now.getMonth()]} ${now.getDate()}, ${now.getFullYear()}, ${now.getHours()}:${now.getMinutes()}:${now.getSeconds()}`;
+
+  let hours;
+  nowHours === 0 || nowHours === 12 ? hours = 12 : hours = nowHours % 12;
+  let ampm;
+  nowHours >= 12 ? ampm = 'PM' : ampm = 'AM';
+  let minutes;
+  nowMinutes < 10 ? minutes = '0' + nowMinutes : minutes = nowMinutes;
+
+  let currentDateTime = `${weekdays[now.getDay()]}, ${months[now.getMonth()]} ${now.getDate()}, ${now.getFullYear()}, ${hours}:${minutes} ${ampm}`;
 
   switch(action.type){
 
@@ -56,8 +67,8 @@ const playerReducer = (state = initialPlayers, action) => {
     // REMOVE_PLAYER case takes all existing items in state and changes just the players array of objects.
     case PlayerActions.REMOVE_PLAYER: {
       const removePlayerList = [
-        ...state.slice(0, action.index),
-        ...state.slice(action.index + 1)
+        ...state.players.slice(0, action.index),
+        ...state.players.slice(action.index + 1)
       ];
       return Object.assign({}, state, { players: removePlayerList })
       // ES6 syntax using spread operator:
@@ -74,6 +85,7 @@ const playerReducer = (state = initialPlayers, action) => {
           return {
             name: player.name,
             score: player.score + action.score,
+            created: player.created,
             updated: currentDateTime,
           }
         };
