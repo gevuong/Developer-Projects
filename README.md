@@ -5,7 +5,7 @@
   * [x] Filter guests who have responded
   * [ ] Persist state with localStorage
   * Learning points: DOM traversal, DOM manipulation, event handling
-* [x] [Scoreboard App](https://rawgit.com/gevuong/Frontend-Projects/master/ScoreboardApp_Redux/index.html) (React.js with Redux)
+* [x] [Scoreboard App](https://cdn.rawgit.com/gevuong/Frontend-Projects/master/ScoreboardApp_Redux/index.html) (React.js with Redux)
   * [x] Increment/decrement score per player
   * [x] Add and remove player
   * [x] Stats on total player count and score

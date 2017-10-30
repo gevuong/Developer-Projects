@@ -5,21 +5,21 @@ const initialPlayers = {
   players: [
     {
       name: 'Pablo Picasso',
-      score: 23,
+      score: 91,
       created: 'Tuesday, Oct 25, 1881, 12:53 PM',
-      updated: 'Sunday, Apr 08, 1973, 2:53 AM',
+      updated: 'Sunday, Apr 08, 1973, 1:09 AM',
     },
     {
-      name: 'Sigmund Freud',
-      score: 56,
-      created: 'Tuesday, May 06, 1856, 7:53 AM',
-      updated: 'Saturday, Sep 23, 1939, 8:53 PM',
+      name: 'Georgia O\' Keefe',
+      score: 98,
+      created: 'Tuesday, Nov 15, 1887, 7:01 AM',
+      updated: 'Thursday, Mar 06, 1986, 3:12 PM',
     },
     {
-      name: 'Maria Montessori',
-      score: 37,
-      created: 'Wednesday, Aug 31, 1870, 9:53 AM',
-      updated: 'Tuesday, May 06, 1952, 3:53 PM',
+      name: 'Claude Monet',
+      score: 86,
+      created: 'Saturday, Nov 14, 1840, 9:16 AM',
+      updated: 'Sunday, Dec 05, 1926, 6:28 PM',
     }
   ],
   selectedPlayerIndex: -1
