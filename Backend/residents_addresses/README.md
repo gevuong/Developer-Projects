@@ -44,7 +44,7 @@ bundle install
 - rails g migration <SpecifyActionToWhichTable> (CamelCase)
 - rails db:seed
 - rails db:rollback
-- rails g model <singular noun>
+- rails g model <singular noun> <singular noun> <singular noun> to generate multiple models inline
 ```
 
 * How to run the test suite
