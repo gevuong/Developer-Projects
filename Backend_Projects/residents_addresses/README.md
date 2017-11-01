@@ -1,13 +1,15 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Create a simple Rails project to model the relationships between people and houses. By the end of this project, each Person will live in a house and each House will have an address. You will be able to call House.residents and get a list of the people that live in that House. You will also be able to call Person.house and get the House that that Person lives in.
 
 Things you may want to cover:
 * Ruby version
-- gem install rails -v '5.1.2'
+```
+gem install rails -v '5.1.2'
+```
 
 * System dependencies
+```
 gem 'annotate'
 
 - These two give you a great error handling page. But make sure to never use them in production!
@@ -15,28 +17,33 @@ gem 'better_errors'
 gem 'binding_of_caller'
 
 gem 'byebug'
-
-- pry > irb
 gem 'pry-rails'
+```
 
 * Configuration
-- Open postgresql
-- rails new demo_project --database=postgresql
-- bundle install
+```
+Open postgresql
+rails new demo_project --database=postgresql
+bundle install
+```
 
 * Database creation
+```
 - rails db:create
 - rails db:schema:load
   There is no need (and it is error prone) to initialize a new database by replaying the entire migration history. It is much simpler and faster to just load into the database a description of the current schema (rails db:schema:load).
 - rails db:migrate
 
 - Instead of rake db:somecommand, you can now do rails db:somecommand. Note that using rake still works, but using rails standardizes Rails commands in the terminal.
+```
 
 * Database initialization
+```
 - rails g migration <SpecifyActionToWhichTable> (CamelCase)
 - rails db:seed
 - rails db:rollback
 - rails g model <singular noun>
+```
 
 * How to run the test suite
 ```
@@ -58,9 +65,11 @@ Person.all[0].house # returns the house that the person lives in
 - rails dbconsole: If you want to access a SQL console, you may conveniently run
 
 * Services (job queues, cache servers, search engines, etc.)
+```
 - reload! Another trick: you're used to using load to re-load source code from the console. In the Rails console, run the reload! command; this will re-load all the model classes.
 - To destroy two tables, films and distributors: DROP TABLE films, distributors;
 - be annotate
+```
 
 * Deployment instructions
 
