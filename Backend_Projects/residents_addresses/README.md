@@ -2,6 +2,8 @@
 
 Create a simple Rails project to model the relationships between people and houses. By the end of this project, each Person will live in a house and each House will have an address. You will be able to call House.residents and get a list of the people that live in that House. You will also be able to call Person.house and get the House that that Person lives in.
 
+**ApplicationRecord will act as an intermediary class that we use to extend our model classes with ActiveRecord::Base.**
+
 Things you may want to cover:
 * Ruby version
 ```
@@ -51,18 +53,16 @@ house = House.new(address: '308 Negra Arroyo Lane')
 person = Person.new(name: 'Walter White', house_id: house.id)
 house.save!
 person.save!
+use #create! to create a new record and immediately save it to the db:
+House.create!(address: '123 Fake St')
 ```
 - Associations tell ActiveRecord that there is a connection between two models (or tables). **The belongs_to and has_many methods exist in a module named ActiveRecord::Associations::ClassMethods. ActiveRecord::Base extends this module, so the association methods are available as class methods.** These class methods define instance methods: in this case, House#people and Person#house. Class methods like this are called **macros**.
 
-- we can use #create! to create a new record and immediately save it to the db:
-House.create!(address: '123 Fake St')
 ```
-House.all
-House.save!
 House.all[0].residents # returns a list of people that live in that house
-Person.all[0].house # returns the house that the person lives in
+Person.all[0].house # returns the house that the person lives in.
+rails dbconsole: If you want to access a SQL console, you may conveniently run
 ```
-- rails dbconsole: If you want to access a SQL console, you may conveniently run
 
 * Services (job queues, cache servers, search engines, etc.)
 ```
@@ -74,6 +74,7 @@ Person.all[0].house # returns the house that the person lives in
 * Deployment instructions
 
 * ...
+
 ## Trivia Notes
 * The ActiveRecord ORM translates rows from your SQL tables into Ruby objects on fetch, and translates your Ruby objects back to rows on save. The ORM also empowers your Ruby classes with convenient methods to perform common SQL operations.
 
