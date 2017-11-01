@@ -24,7 +24,7 @@ gem 'pry-rails'
 
 * Configuration
 ```
-Open postgresql
+Run postgresql
 rails new demo_project --database=postgresql
 bundle install
 ```
@@ -62,6 +62,12 @@ House.create!(address: '123 Fake St')
 House.all[0].residents # returns a list of people that live in that house
 Person.all[0].house # returns the house that the person lives in.
 rails dbconsole: If you want to access a SQL console, you may conveniently run
+\d is a special Postgres command to list the tables
+\q to quit
+
+rails dbconsole gives you name of your DB for that particular repo. I.e. this DB is called residents_addresses_development.
+
+This allows you to open psql terminal, type \q, navigate to residents_addresses dir, and run psql residents_addresses_development to enter DB of repo, allowing you to run SQL queries to retrieve data from table.
 ```
 
 * Services (job queues, cache servers, search engines, etc.)
