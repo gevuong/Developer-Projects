@@ -4,7 +4,7 @@ Create a simple Rails project to model the relationships between people and hous
 
 **ApplicationRecord will act as an intermediary class that we use to extend our model classes with ActiveRecord::Base.**
 
-Things you may want to cover:
+Useful Rails commands:
 * Ruby version
 ```
 gem install rails -v '5.1.2'
@@ -53,6 +53,8 @@ house = House.new(address: '308 Negra Arroyo Lane')
 person = Person.new(name: 'Walter White', house_id: house.id)
 house.save!
 person.save!
+House.first
+Person.first
 use #create! to create a new record and immediately save it to the db:
 House.create!(address: '123 Fake St')
 ```
@@ -75,6 +77,7 @@ This allows you to open psql terminal, type \q, navigate to residents_addresses 
 - reload! Another trick: you're used to using load to re-load source code from the console. In the Rails console, run the reload! command; this will re-load all the model classes.
 - To destroy two tables, films and distributors: DROP TABLE films, distributors;
 - be annotate
+- be annotate --routes
 ```
 
 * Deployment instructions
