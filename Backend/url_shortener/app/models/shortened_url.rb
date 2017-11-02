@@ -14,13 +14,22 @@ class ShortenedUrl < ApplicationRecord
   validates :long_url, :short_url, :submitter_id, presence: true
   validates :short_url, uniqueness: true
 
-  # Remember, belongs_to is a class method where the first argument is
-  # the name of the association instance method, and the second argument is an options
-  # hash.
+  # Remember, belongs_to is a class method where the first argument is the name of the association instance method, and the second argument is an options hash.
   belongs_to :submitter,
   primary_key: :id,
   foreign_key: :submitter_id,
   class_name: :User
+
+  has_many :visits,
+  primary_key: :id,
+  foreign_key: :short_url_id,
+  class_name: :Visit
+
+  has_many :visitors,
+  Proc.new { distinct }, # add magic "scope block" to remove duplicate visitors
+  through: :visits,
+  source: :visitor
+
 
   def self.random_code
     random_code = SecureRandom.urlsafe_base64
@@ -39,4 +48,19 @@ class ShortenedUrl < ApplicationRecord
       short_url: ShortenedUrl.random_code
     )
   end
+
+  # counts number of clicks on ShortenedUrl
+  def num_clicks
+    ShortenedUrl.select(:visits)
+  end
+
+  # determine number of distinct users who clicked a link
+  def num_uniques
+    ShortenedUrl.select(:visitors)
+  end
+
+  def num_recent_uniques
+    num_uniques.where(10.minutes.ago)
+  end
+
 end

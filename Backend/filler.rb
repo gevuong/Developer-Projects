@@ -1,1 +1,1 @@
-# rb file used to ensure access to dir in github
+# this file is used to ensure access to directories in Backend in github
