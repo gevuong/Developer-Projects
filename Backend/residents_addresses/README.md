@@ -62,7 +62,7 @@ Person.first
 use #create! to create a new record and immediately save it to the db:
 House.create!(address: '123 Fake St')
 
-* Person.create will fail quietly and return rollback. Person.create! fails loudly by raising an error. 
+* Person.create will fail quietly and return rollback. Person.create! fails loudly by raising an error.
 ```
 
 - Associations tell ActiveRecord that there is a connection between two models (or tables). **The belongs_to and has_many methods exist in a module named ActiveRecord::Associations::ClassMethods. ActiveRecord::Base extends this module, so the association methods are available as class methods.** These class methods define instance methods: in this case, House#people and Person#house. Class methods like this are called **macros**.
@@ -92,7 +92,7 @@ This allows you to open psql terminal, type \q, navigate to residents_addresses 
 * ...
 
 ## Trivia Notes
-* The ActiveRecord ORM translates rows from your SQL tables into Ruby objects on fetch, and translates your Ruby objects back to rows on save. The ORM also empowers your Ruby classes with convenient methods to perform common SQL operations.
+* An object relational mapping is the system that translates between SQL records and Ruby (or Java, or Lisp...) objects. The ActiveRecord ORM (Object Relational Mapping) translates rows from your SQL tables into Ruby objects on fetch, and translates your Ruby objects back to rows on save. The ORM also empowers your Ruby classes with convenient methods to perform common SQL operations.
 
 * For each table, we define a Ruby model class; an instance of the model will represent an individual row in the table. For instance, a physicians table will have a corresponding Physician model class; when we fetch rows from the physicians table, we will get back Physician objects. **All model classes extend ApplicationRecord, which in turn extends ActiveRecord::Base.** Methods in ActiveRecord::Base will allow us to fetch and save Ruby objects from/to the table.
 
