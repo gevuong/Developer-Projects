@@ -3,24 +3,21 @@
 # Table name: users
 #
 #  id         :integer          not null, primary key
-#  name       :string           not null
+#  email      :string           not null
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
 
 class User < ApplicationRecord
-  validates :name, presence: true, uniqueness: true
+  validates :email, presence: true, uniqueness: true
 
   # Remember, "has_many" is a class method where the first argument is
   # the name of the association instance method, and the second argument is an options
   # hash.
-  has_many :enrollments,
+  has_many :submitted_urls,
   primary_key: :id,
-  foreign_key: :student_id,
-  class_name: :Enrollment
+  foreign_key: :submitter_id,
+  class_name: :ShortenedUrl
 
-  has_many :enrolled_courses,
-  through: :enrollments,
-  source: :course   #course instance method needs to be lowercase
 
 end
