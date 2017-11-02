@@ -35,9 +35,10 @@ class Course < ApplicationRecord
   primary_key: :id,
   foreign_key: :prereq_id,    # foreign_key so use "belongs_to"
   class_name: :Course,
-  optional: true # without this line, returns "Validation failed: Prerequisite must exist". Apparently, Rails cannot validate an instance method where the value of class_name is the class the #prerequisite instance method is defined in. Instead, Rails assumes there is a class Prerequisite that needs to be associated with #prerequisite.
+  optional: true # without this line, returns "Validation failed: Prerequisite must exist". Rails 5 auto validates belongs_to #prerequisite association.
+  # If instance of Course has a prereq_id that does not match any course.id (due to class_name: :Course), error will appear. So even if prereq_id is defined as some integer, error will still appear because there is no course.id the prereq_id can associate with.
 
-  # Tested hypothesis with #instructor below by changing class_name: :Course. Returned "Validation failed: Instructor must exist".
+  # Tested hypothesis with #instructor below by creating an instance of Course and assigning instructor_id to a non-existent user.id (due to classname: :User). Returned "Validation failed: Instructor must exist".
 
   belongs_to :instructor,
   primary_key: :id,

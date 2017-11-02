@@ -53,11 +53,18 @@ house = House.new(address: '308 Negra Arroyo Lane')
 person = Person.new(name: 'Walter White', house_id: house.id)
 house.save!
 person.save!
+
+* The difference between the two #save! and #save is that #save! will raise an error if you fail to save the object, whereas #save will quietly return false (it returns true on success).
+
 House.first
 Person.first
+
 use #create! to create a new record and immediately save it to the db:
 House.create!(address: '123 Fake St')
+
+* Person.create will fail quietly and return rollback. Person.create! fails loudly by raising an error. 
 ```
+
 - Associations tell ActiveRecord that there is a connection between two models (or tables). **The belongs_to and has_many methods exist in a module named ActiveRecord::Associations::ClassMethods. ActiveRecord::Base extends this module, so the association methods are available as class methods.** These class methods define instance methods: in this case, House#people and Person#house. Class methods like this are called **macros**.
 
 ```
@@ -104,7 +111,5 @@ jonas.home_city = 'La Jolla'
 ```
 
 * ActiveRecord needs primary_key and foreign_key attributes to generate proper SQL query.
-
-* The difference between the two #save! and #save is that #save! will warn you if you fail to save the object, whereas #save will quietly return false (it returns true on success).
 
 * Big difference between rails console and pry/irb is that the console will take care of loading your Rails application so you won't have to require your model classes manually. It will also open up a connection to the DB for you. This is handy, because you can immediately start playing with your app, rather than first requiring and loading a bunch of supporting classes.
