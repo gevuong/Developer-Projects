@@ -49,18 +49,27 @@ class ShortenedUrl < ApplicationRecord
     )
   end
 
-  # counts number of clicks on ShortenedUrl
+  # counts number of clicks on ShortenedUrl.
+  # invoked on a ShortenedUrl object, thus executing association #visits instance method to obtain collection of visitor_ids
   def num_clicks
-    ShortenedUrl.select(:visits)
+    visits.count
   end
 
   # determine number of distinct users who clicked a link
   def num_uniques
-    ShortenedUrl.select(:visitors)
+    visits
+      .select(:visitor_id)
+      .distinct
+      .count
   end
 
+  # collect unique clicks in a recent time period
   def num_recent_uniques
-    num_uniques.where(10.minutes.ago)
+    visits
+      .select(:visitor_id)
+      .where('created_at > ?', 60.minutes.ago)
+      .distinct
+      .count
   end
 
 end
