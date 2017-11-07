@@ -12,9 +12,7 @@
 class Enrollment < ApplicationRecord
   validates :student_id, :course_id, presence: true
 
-  # Remember, "belongs_to" is a class method where the first argument is
-  # the name of the association instance method, and the second argument is an options
-  # hash.
+  # Remember, "belongs_to" is a class method where the first arg is name of association instance method, and second arg is an options hash.
   belongs_to :student,
   primary_key: :id,
   foreign_key: :student_id,

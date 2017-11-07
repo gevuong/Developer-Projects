@@ -15,9 +15,7 @@ class Course < ApplicationRecord
   validates :instructor_id, presence: true
   # validates :prereq_id, presence: true # prevents rails db:seed from successfully executing and storing data in DB because seeded data is missing prereq_id. Get "Validation failed: Prereq can't be blank".
 
-  # Remember, "has_many" is a class method where the first argument is
-  # the name of the association instance method, and the second argument is an options
-  # hash.
+  # Remember, "has_many" is a class method where first arg is name of association instance method, and second arg is an options hash.
   has_many :enrollments,
   primary_key: :id,
   foreign_key: :course_id,

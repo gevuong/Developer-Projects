@@ -12,9 +12,7 @@
 class Person < ApplicationRecord
   validates :name, :house_id, presence: true
 
-  # Remember, belongs_to is a class method where the first argument is
-  # the name of the association instance mthod, and the second argument is an options
-  # hash.
+  # Remember, belongs_to is a class method where first arg is name of association instance mthod, and second arg is an options hash.
   belongs_to :house,
   primary_key: :id,
   foreign_key: :house_id,

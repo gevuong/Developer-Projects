@@ -11,9 +11,7 @@
 class User < ApplicationRecord
   validates :name, presence: true, uniqueness: true
 
-  # Remember, "has_many" is a class method where the first argument is
-  # the name of the association instance method, and the second argument is an options
-  # hash.
+  # Remember, "has_many" is a class method where first arg is name of association instance method, and second arg is an options hash.
   has_many :enrollments,
   primary_key: :id,
   foreign_key: :student_id,
