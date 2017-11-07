@@ -1,0 +1,71 @@
+#!/usr/bin/env ruby
+
+class CLI
+  def create_short_url
+    puts "Type in your long url: "
+    long_url = gets.chomp
+    shortened_url = ShortenedUrl.create_short_url!(@current_user, long_url)
+
+    puts " Your short url is: #{shortened_url.short_url}"
+    puts "Goodbye!"
+  end
+
+  def visit_shortened_url
+    puts "Type in short url: "
+    short_url = gets.chomp
+
+    shortened_url = ShortenedUrl.find_by_short_url(short_url)
+    # ShortenedUrl.find_by(short_url: short_url) same as line above
+
+    raise 'Shortened url doesn\'t exist' if shortened_url.nil?
+
+    Visit.record_visit!(@current_user, shortened_url)
+
+    puts "Launching #{shortened.url.long_url} ..."
+    puts "Goodbye!"
+    Launchy.open(shortened_url.long_url)
+  end
+
+  def login_user!
+    puts "What is your email address? "
+    email = gets.chomp
+    @current_user = User.find_by(email: email)
+    # @current_user = User.find_by_email(email) same as line above
+
+    while @current_user.nil?
+      # raise 'That user doesn\'t exist'
+      puts "User doesn't exist. Create new user? (y/n)"
+      new_user = gets.chomp
+      if new_user == "y"
+        puts "Creating new user, #{email} ..."
+        @current_user = User.create_user!(email)
+      elsif new_user == 'n'
+        puts "Okay, goodbye!"
+        return
+      end
+    end
+
+    @current_user
+  end
+
+  def run
+    login_user!
+    return if @current_user.nil?
+
+    puts "What do you want to do? "
+    puts "Press 0: Create shortened url"
+    puts "Press 1: Visit shortened url"
+
+    option = gets.chomp.to_i
+
+    case option
+    when 0
+      create_short_url
+    when 1
+      visit_shortened_url
+    end
+  end
+
+end
+
+CLI.new.run

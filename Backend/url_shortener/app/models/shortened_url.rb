@@ -33,7 +33,7 @@ class ShortenedUrl < ApplicationRecord
 
   def self.random_code
     random_code = SecureRandom.urlsafe_base64
-    # ActiveRecord method that returns true if a record exists in the table that matches specified condition
+    # ActiveRecord exist? method returns true if record exists in the table that matches specified condition
     while ShortenedUrl.exists?(short_url: random_code)
       random_code = SecureRandom.urlsafe_base64
     end
@@ -55,7 +55,7 @@ class ShortenedUrl < ApplicationRecord
     visits.count
   end
 
-  # determine number of distinct users who clicked a link
+  # determine number of distinct users who clicked link
   def num_uniques
     visits
       .select(:visitor_id)
@@ -63,7 +63,7 @@ class ShortenedUrl < ApplicationRecord
       .count
   end
 
-  # collect unique clicks in a recent time period
+  # collect unique clicks within recent time period
   def num_recent_uniques
     visits
       .select(:visitor_id)

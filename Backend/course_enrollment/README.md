@@ -58,8 +58,8 @@ To get an array of human readable messages.
 class Person < ApplicationRecord
   validates :name, presence: true
 end
-# Person.create actually attempts to store record in DB then return .valid?
-# Person.new does not attempt to store record in DB, and returns true or false.
+# Person.create(...).valid? actually attempts to store record in DB, then return result of .valid?
+# Person.new(...).valid? does not attempt to store record in DB, and returns true or false.
 
 Person.new(name: "John Doe").valid? # => true
 Person.new(name: nil).valid? # => false

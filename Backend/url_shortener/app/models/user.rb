@@ -27,4 +27,7 @@ class User < ApplicationRecord
   through: :visits,
   source: :visited_short_url
 
+  def self.create_user!(email)
+    User.create!(email: email)
+  end
 end
