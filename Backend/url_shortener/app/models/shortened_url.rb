@@ -14,6 +14,7 @@ class ShortenedUrl < ApplicationRecord
   validates :long_url, :short_url, :submitter_id, presence: true
   validates :short_url, uniqueness: true
   validate :no_spamming
+  # "validate" declaration is used for custom validation, whereas "validates" is used for generic validation like presence, uniqueness, etc.
 
   # Remember, belongs_to is a class method where the first argument is the name of the association instance method, and the second argument is an options hash.
   belongs_to :submitter,
@@ -84,14 +85,17 @@ class ShortenedUrl < ApplicationRecord
       .count
   end
 
+  private
+
+  # Custom validation methods
   # prevent users from submitting more than 5 URLs in less than a minute
   def no_spamming
-    last_minute = ShortenedUrl
+    submit_count = ShortenedUrl
       .where('created_at >= ?', 1.minute.ago)
       .where(submitter_id: submitter_id)
       .length
 
-    errors[:maximum] << 'of five short urls per minute' if last_minute >= 5
+    errors[:maximum] << 'of five short URLs per minute' if submit_count >= 5
     # submit_count = submitter
     #   .select(:submitter_id)
     #   .where('created_at > ?', 1.minute.ago)
