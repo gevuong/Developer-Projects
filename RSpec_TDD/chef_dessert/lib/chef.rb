@@ -1,5 +1,3 @@
-# require_relative 'dessert'
-
 class Chef
   attr_reader :name
 

@@ -1,8 +1,8 @@
-# required dependencies
+# required dependencies: Note that RSpec will by default include the lib/ folder in the require path so that we can use require and not require_relative.
 require 'rspec'
 require 'dessert'
 
-# Note that RSpec will by default include the lib/ folder in the require path so that we can use require and not require_relative.
+# unit test is to test classes in isolation. Mocks let us write unit tests that isolate the functionality of a single class from other outside classes. Unit tests are very specific and are meant to isolate logical problems within a class. This lets us live up to the philosophy of unit tests: in each spec, test one thing only.
 
 describe Dessert do # `describe` method creates an object that is a subclass of ExampleGroup. Within the block passed to `describe` you can declare Examples using the `it` method, which returns an instance of Example.
 
@@ -20,7 +20,7 @@ describe Dessert do # `describe` method creates an object that is a subclass of 
     end
 
     it 'sets name of chef' do
-      expect(brownie.chef.name).to eq('Jacques Pepin')
+      expect(chef.name).to eq('Jacques Pepin')
     end
 
     it 'starts ingredients as empty array' do
@@ -28,7 +28,7 @@ describe Dessert do # `describe` method creates an object that is a subclass of 
     end
 
     it 'raises ArgumentError when given a non-integer quantity' do
-      expect { Dessert.new("cake", "5") }.to raise_error(ArgumentError)
+      expect { Dessert.new("cake", "5", chef) }.to raise_error(ArgumentError)
     end
   end
 
@@ -70,8 +70,8 @@ describe Dessert do # `describe` method creates an object that is a subclass of 
 
   describe '#serve_by' do
     it 'contains the titleized version of the chef\'s name' do
-      allow(chef).to receive(:titleize).and_return('Chef Jacques Pepin') # needed when  creating a test double w/out one-liner.
-      expect(brownie.serve_by).to eq("Chef Jacques Pepin, has made 10 brownies!")
+      allow(chef).to receive(:titleize).and_return('Chef Jacques Pepin') # create stub method for mock double, passing in :titleize method to stub. The parameter of `and_return` method takes the return value that the stubbed method returns. 
+      expect(brownie.serve_by).to eq("Chef Jacques Pepin has made 10 brownies!")
     end
   end
 
@@ -79,6 +79,7 @@ describe Dessert do # `describe` method creates an object that is a subclass of 
     it 'calls bake on chef, with dessert passed in' do
       expect(chef).to receive(:bake).with(brownie)
       brownie.make_more
+      # use Method Expectations to make sure tested object is supposed to call proper methods on other objects. Expectations need to be set up in advance before calling `make_more` method. Here, we want to make sure that when we call `make_more` on `brownie` object, it tells chef to bake more dessert by specifying that bake is passed a dessert.
     end
   end
 end

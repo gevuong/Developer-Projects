@@ -1,7 +1,7 @@
-require 'active_support/inflector' # allows the use of .pluralize/singularize/.titleize
+require 'active_support/inflector' # allows the use of .pluralize/.singularize/.titleize
 
 class Dessert
-  attr_reader :type, :quantity, :ingredients, :chef
+  attr_reader :type, :quantity, :ingredients, :heat
 
   def initialize(type, quantity, chef)
     raise ArgumentError unless quantity.is_a?(Integer)
@@ -10,6 +10,7 @@ class Dessert
     @quantity = quantity
     @chef = chef
     @ingredients = []
+    @heat = 60
   end
 
   def add_ingredient(ingredient)
@@ -20,13 +21,17 @@ class Dessert
     @ingredients.shuffle!
   end
 
+  def heat!
+    @heat = 400
+  end
+
   def eat(amount)
     raise 'There is not enough left!' if @quantity - amount < 0
     @quantity -= amount
   end
 
   def serve_by
-    "#{@chef.titleize}, has made #{@quantity} #{@type.pluralize}!"
+    "#{@chef.titleize} has made #{@quantity} #{@type.pluralize}!"
   end
 
   def make_more
