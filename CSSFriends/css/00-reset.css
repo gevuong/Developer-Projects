@@ -1,0 +1,43 @@
+/* PHASE 0: Reset */
+
+/* Browsers (aka User Agents) have an internal default stylesheet, and differ slightly per browser. Reset properties the User Agent Stylesheet declares. Put reset styles at top or stylesheet. */
+html, body, header, nav, h1, a,
+ul, li, strong, main, button, i,
+section, img, div, h2, p, form,
+fieldset, label, input, textarea,
+span, article, footer, time, small {
+  margin: 0;
+  border: 0;
+  padding: 0;
+  outline: 0;
+  box-sizing: inherit; /* default way to calculate an element's box model size is called content-box: width/height + padding + border. If you set width/height, it is 'exclusive' of padding and border. In other words, you need to add them to the width/height to get the total size an element takes up on the page. The 'box-sizing' property lets us change the default way of calculating an element's size. Rather than using the default 'content-box' value, as described above, we can set it to 'border-box' to have the width and height be inclusive of the padding and border. */
+  font: inherit;
+  text-decoration: inherit;
+  text-align: inherit;
+  color: inherit;
+  background: transparent;
+}
+
+ul {
+  list-style-type: none; /* removes bullets from list items */
+}
+
+img {
+  display: block; /* makes all images block elements */
+  width: 100%; /* expands to a full 100% width of parent container */
+  height: auto; /* grows proportionally */
+}
+
+input[type="password"],
+input[type="email"],
+input[type="text"],
+input[type="submit"],
+textarea,
+button {
+  -webkit-appearance: none; /* appearance property is used to apply platform specific styling (based on user's OS's theme) to an element */
+}
+
+button,
+input[type="submit"] {
+  cursor: pointer;
+}
