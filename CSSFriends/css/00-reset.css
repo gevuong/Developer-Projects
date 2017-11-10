@@ -1,5 +1,9 @@
 /* PHASE 0: Reset */
 
+/* selector {
+    property: value
+ } */
+
 /* Browsers (aka User Agents) have an internal default stylesheet, and differ slightly per browser. Reset properties the User Agent Stylesheet declares. Put reset styles at top or stylesheet. */
 html, body, header, nav, h1, a,
 ul, li, strong, main, button, i,
@@ -19,7 +23,8 @@ span, article, footer, time, small {
 }
 
 ul {
-  list-style-type: none; /* removes bullets from list items */
+/* The list-style CSS property is a shorthand for setting the individual values that define how a list is displayed: list-style-type, list-style-image, and list-style-position. */
+  list-style: none; /* removes bullets from list items */
 }
 
 img {
@@ -34,7 +39,9 @@ input[type="text"],
 input[type="submit"],
 textarea,
 button {
-  -webkit-appearance: none; /* appearance property is used to apply platform specific styling (based on user's OS's theme) to an element */
+  /* get rid of native styling */
+  -moz-appearance: none; /* The -moz-appearance CSS property is used in Gecko (Firefox) to display an element using platform-native styling based on the operating system's theme. */
+  -webkit-appearance: none; /* The -webkit-appearance property is used by WebKit-based (e.g., Safari) and Blink-based (e.g., Chrome, Opera) browsers to achieve the same thing  */
 }
 
 button,
