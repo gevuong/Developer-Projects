@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,700"  />
     <link rel="stylesheet" href="css/00-reset.css" type="text/css" />
     <link rel="stylesheet" href="css/01-header.css" type="text/css" />
+    <link rel="stylesheet" href="css/02-notifications.css" type="text/css" />
   </head>
   <body>
 
@@ -17,7 +18,16 @@
 
         <ul class="header-list">
           <!-- "#" signs are dummy links to prevent a page reload -->
-          <li><a href="#">Notifications</a></li>
+          <li>
+            <!-- <strong> gives text strong importance, typically displayed in bold -->
+            <a href="#">Notifications <strong class="badge">3</strong></a>
+
+            <ul class="header-notifications">
+              <li><a href="#">Tom left you a message</a></li>
+              <li><a href="#">Diana is now following you</a></li>
+              <li><a href="#">Dave likes your video</a></li>
+            </ul>
+          </li>
           <li><a href="#">Profile</a></li>
           <li><a href="#">Settings</a></li>
         </ul>

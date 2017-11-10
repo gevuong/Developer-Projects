@@ -1,0 +1,48 @@
+/* Phase 2: Notifications */
+
+.header {
+  /* z-index does not work on static (which is default), non-positioned elements. This does not change anything visually as-is, but will ensure header dropdown will stay on top when adding more pages */
+  position: relative;
+  z-index: 1;
+}
+
+.badge {
+  /*display: inline;*/
+  background: #000;
+  border-radius: 50%;
+  padding: 1px 6px;
+  font-size: 14px;
+  margin-left: 1px;
+}
+
+li:hover .badge { /* selects all elements with class="badge" that are inside <li> */
+  background: #f00; /* red */
+}
+
+/*.header-list > li {
+  position: relative; /* creates a coordinate system to control 
+} */
+
+.header-notifications {
+  position: absolute;
+  display: none;
+  border: 1px solid #ccc;
+  font-size: 13px;
+  background: #fff;
+  /*padding: 10px 20px;*/
+  /*white-space: normal;*/
+}
+
+.header-notifications > li {
+  color: #000;
+  border-top: 1px solid #ccc;
+}
+
+.header-notifications > li:hover {
+  background: #eee;
+}
+
+li:hover .header-notifications {
+  display: block;
+  color: #000;
+}

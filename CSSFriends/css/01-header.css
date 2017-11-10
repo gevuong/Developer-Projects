@@ -12,7 +12,7 @@ body {
 }
 
 .header {
-  background-color: #f00; /* red */
+  background: #f00; /* red */
   color: #fff;
   border-bottom: 1px solid #ccc;
 }
