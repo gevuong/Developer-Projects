@@ -1,3 +1,18 @@
+# == Schema Information
+#
+# Table name: prices
+#
+#  id         :integer          not null, primary key
+#  company_id :integer
+#  open       :float
+#  high       :float
+#  low        :float
+#  close      :float
+#  price_date :date
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
+
 require 'rails_helper'
 
 RSpec.describe Price, type: :model do
