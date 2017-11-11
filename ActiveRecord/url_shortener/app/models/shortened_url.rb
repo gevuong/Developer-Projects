@@ -13,8 +13,7 @@
 class ShortenedUrl < ApplicationRecord
   validates :long_url, :short_url, :submitter_id, presence: true
   validates :short_url, uniqueness: true
-  validate :no_spamming
-  # "validate" declaration is used for custom validation, whereas "validates" is used for generic validation like presence, uniqueness, etc.
+  validate :no_spamming # "validate" declaration is used for custom validation, whereas "validates" is used for generic validation like presence, uniqueness, etc.
 
   # Remember, belongs_to is a class method where the first argument is the name of the association instance method, and the second argument is an options hash.
   belongs_to :submitter,

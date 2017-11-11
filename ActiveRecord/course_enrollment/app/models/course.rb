@@ -26,12 +26,10 @@ class Course < ApplicationRecord
   source: :student
   #student instance method specified in class Enrollment, must be lowercase
 
-  # Remember, "belongs_to" is a class method where the first argument is
-  # the name of the association instance method, and the second argument is an options
-  # hash.
+  # Remember, "belongs_to" is a class method where first argument is name of association instance method, and second argument is an options hash.
   belongs_to :prerequisite,
   primary_key: :id,
-  foreign_key: :prereq_id,    # foreign_key so use "belongs_to"
+  foreign_key: :prereq_id, # foreign_key so use "belongs_to"
   class_name: :Course,
   optional: true # without this line, returns "Validation failed: Prerequisite must exist". Rails 5 auto validates belongs_to #prerequisite association.
   # If instance of Course has a prereq_id that does not match any course.id (due to class_name: :Course), error will appear. So even if prereq_id is defined as some integer, error will still appear because there is no course.id the prereq_id can associate with.
