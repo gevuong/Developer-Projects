@@ -1,4 +1,4 @@
-# Frontend Projects
+## Frontend Projects
 
 * [x] [Scoreboard App](https://goo.gl/GjZeVb) (React.js with Redux)
   * [x] Increment/decrement score per player
