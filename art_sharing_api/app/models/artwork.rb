@@ -28,9 +28,18 @@ class Artwork < ApplicationRecord
   foreign_key: :artwork_id,
   class_name: :ArtworkShare,
   dependent: :destroy
-  
+
   # returns set of users with whom artwork is shared with.
   has_many :shared_viewers,
   through: :artwork_shares,
   source: :viewer
+
+  # class method that returns all of the artworks made by the user OR
+# shared with the user (1-query method)
+  def self.artworks_for_user_id(user_id)
+    Artwork
+      .left_outer_joins(:artwork_shares)
+      .where('(artworks.artist_id = :user_id) OR (artwork_shares.viewer_id = :user_id)', user_id: user_id)
+      .distinct
+  end
 end

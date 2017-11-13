@@ -17,6 +17,13 @@ Rails.application.routes.draw do
   # delete 'users/:id', to: 'users#destroy', as: 'user'
 
   # Each route is an API endpoint, which encapsulates a single controller action your app can take. Creating a resource in this case creates a new user object/instance that can be create/read/update/destroy (CRUD actions).
+  #RESTful design patterns
   resources :users, only: [:index, :create, :show, :update, :destroy]
-  resources :artworks, only: [:index, :create, :show, :update, :destroy]
+
+  # provides a route to get all artworks for a given user
+  resources :users do
+    resources :artworks, only: :index
+  end
+  resources :artworks, only: [:create, :show, :update, :destroy]
+  resources :artwork_shares, only: [:index, :create, :destroy]
 end

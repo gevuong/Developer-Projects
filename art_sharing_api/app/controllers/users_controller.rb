@@ -47,6 +47,8 @@ class UsersController < ApplicationController
 
   private
   # Using a private method to encapsulate the permissible parameters (strong parameters) is a good pattern since you'll be able to reuse the same permit list between create and update. These user attributes are keys in nested user hash.
+
+  # use strong params by writing helper method that whitelists User attributes
   def user_params
     params.require(:user).permit(:username, :email)
   end
