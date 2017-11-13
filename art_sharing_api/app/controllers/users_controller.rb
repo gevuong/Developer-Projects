@@ -3,7 +3,7 @@ class UsersController < ApplicationController
 
   def index
     # if there is no explicit render or redirect, controller renders template with same name as the controller action - in this case, index.html.erb
-    # render json: params # query string params
+    # render json: params <-- renders query string params
 
     users = User.all
     render json: users
@@ -11,10 +11,45 @@ class UsersController < ApplicationController
 
   def create
     # if we don't explicitly render or redirect, Rails is going to render template with the same name: create.html.erb
-    render json: params # POST request body params
+    # render json: params <-- renders POST request body params
+
+    user = User.new(user_params) # expects all user params to be nested under the key :user in params hash.
+    if user.save!
+      render json: user
+    else
+      render user.errors.full_messages, status: 404
+    end
   end
 
   def show
-    render json: params # route params
+    # render json: params # renders route params
+
+    # user = User.find_by(id: params[:id]) same as line below
+    render json: User.find(params[:id])
   end
+
+  def update
+    user = User.find(params[:id])
+    if user.update!(user_params)
+      render json: user
+    else
+      render user.errors.full_messages, status: 422
+    end
+  end
+
+  def destroy
+    user = User.find(params[:id])
+    if user.destroy!
+      render json: user
+    else
+      render user.errors.full_messages, status: 404
+    end 
+  end
+
+  private
+  # Using a private method to encapsulate the permissible parameters (STRONG parameters) is a good pattern since you'll be able to reuse the same permit list between create and update.
+  def user_params
+    params.require(:user).permit(:name, :email)
+  end
+
 end

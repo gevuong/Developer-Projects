@@ -19,3 +19,11 @@ be rails routes
 * Browsers aren't the only program that can make HTTP requests. When a non-browser client makes an API request, the requestor probably prefers a raw representation of the data rather than an HTML document that includes a lot of extraneous formatting information and is difficult to parse. JSON is typically a better format for non-browser clients.
 
 * The key to building a Rails API is to get your controllers to convert model objects into JSON, and then return the JSON. This requires support at two layers: the model layer (convert a model to JSON) and the controller layer (return the JSON to the user).
+
+How data comes into our controllers from the outside world.
+
+* #params is a method provided by ActionController::Base that returns a hash of all the parameters available. The parameters are complied by the router and are sourced from three places:
+
+Route parameters (e.g. the :id from /users/:id)
+Query string (the part of the URL after the ?: ?key=value)
+POST/PATCH request data (the body of the HTTP request).
