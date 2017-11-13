@@ -5,8 +5,7 @@ class UsersController < ApplicationController
     # if there is no explicit render or redirect, controller renders template with same name as the controller action - in this case, index.html.erb
     # render json: params <-- renders query string params
 
-    users = User.all
-    render json: users
+    render json: User.all
   end
 
   def create
@@ -17,7 +16,7 @@ class UsersController < ApplicationController
     if user.save!
       render json: user
     else
-      render user.errors.full_messages, status: 404
+      render user.errors.full_messages, status: 422
     end
   end
 
@@ -30,7 +29,7 @@ class UsersController < ApplicationController
 
   def update
     user = User.find(params[:id])
-    if user.update!(user_params)
+    if user.update!(user_params) # performs mass-assignment update and save
       render json: user
     else
       render user.errors.full_messages, status: 422
@@ -40,14 +39,14 @@ class UsersController < ApplicationController
   def destroy
     user = User.find(params[:id])
     if user.destroy!
-      render json: user
+      render json: user # best practice is to render the destroyed object after destroying it in DB.
     else
       render user.errors.full_messages, status: 404
     end
   end
 
   private
-  # Using a private method to encapsulate the permissible parameters (STRONG parameters) is a good pattern since you'll be able to reuse the same permit list between create and update.
+  # Using a private method to encapsulate the permissible parameters (strong parameters) is a good pattern since you'll be able to reuse the same permit list between create and update. These user attributes are keys in nested user hash.
   def user_params
     params.require(:user).permit(:username, :email)
   end

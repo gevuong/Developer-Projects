@@ -11,11 +11,10 @@
 
 class ArtworkShare < ApplicationRecord
   validates :artwork_id, :viewer_id, presence: true
-  validates :artwork_id, uniqueness: { scope: :viewer_id, message: 'artwork cannot be shared with viewer more than once'}
+  validates :artwork_id, uniqueness: { scope: :viewer_id, message: 'cannot be shared with viewer more than once'}
 
   # N.B. Remember, Rails 5 automatically validates the presence of
-  # belongs_to associations, so we can leave the validation of artist
-  # out here.
+  # belongs_to associations, so we can leave validation of artist out.
 
   # belongs_to :artwork <-- shorthand for the following:
   belongs_to :artwork,
@@ -28,6 +27,5 @@ class ArtworkShare < ApplicationRecord
   primary_key: :id,
   foreign_key: :viewer_id,
   class_name: :User
-
 
 end

@@ -18,5 +18,5 @@ Rails.application.routes.draw do
 
   # Each route is an API endpoint, which encapsulates a single controller action your app can take. Creating a resource in this case creates a new user object/instance that can be create/read/update/destroy (CRUD actions).
   resources :users, only: [:index, :create, :show, :update, :destroy]
-
+  resources :artworks, only: [:index, :create, :show, :update, :destroy]
 end
