@@ -43,13 +43,13 @@ class UsersController < ApplicationController
       render json: user
     else
       render user.errors.full_messages, status: 404
-    end 
+    end
   end
 
   private
   # Using a private method to encapsulate the permissible parameters (STRONG parameters) is a good pattern since you'll be able to reuse the same permit list between create and update.
   def user_params
-    params.require(:user).permit(:name, :email)
+    params.require(:user).permit(:username, :email)
   end
 
 end

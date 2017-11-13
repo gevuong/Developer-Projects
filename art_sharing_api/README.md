@@ -3,9 +3,15 @@
 open postgres
 rails new project_name --database=postgresql
 bundle install
+rails g migration createArtworkShare
 rails db:create
 be rails routes
 
+**When a client makes an HTTP request, the webserver receives it and hands it off to Rails. The Rails router looks up the controller action to call. As mentioned, it creates an instance of the controller to handle the response. The router then calls the appropriate method on the controller instance.**
+
+The controller instance then takes over the request processing. It runs the given method. As part of its work in the method, it should render a response or issue a redirect.
+
+After issuing the response, the request is over and the connection between client-and-server is closed. The controller instance is discarded.
 * A resource is anything in your application that you will be CRUDing.
 
 * A RESTful resource can either be a collection of objects or a single instance. These collections/instance have access to CRUD actions dictated by HTTP methods.
@@ -22,8 +28,9 @@ be rails routes
 
 How data comes into our controllers from the outside world.
 
-* #params is a method provided by ActionController::Base that returns a hash of all the parameters available. The parameters are complied by the router and are sourced from three places:
+**#params is a method provided by ActionController::Base that returns a hash of all the parameters available. The parameters are complied by the router and are sourced from three places:
 
 Route parameters (e.g. the :id from /users/:id)
 Query string (the part of the URL after the ?: ?key=value)
 POST/PATCH request data (the body of the HTTP request).
+**

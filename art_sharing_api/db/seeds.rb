@@ -7,7 +7,15 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 User.destroy_all
+Artwork.destroy_all
+ArtworkShare.destroy_all
 
-User.create!(name: "George", email: 'george@gmail.com')
-User.create!(name: "Steve", email: 'steve@gmail.com')
-User.create!(name: "Elaine", email: 'elaine@gmail.com')
+u1 = User.create!(username: "George", email: 'george@gmail.com')
+u2 = User.create!(username: "Galileo", email: 'galileo@gmail.com')
+u3 = User.create!(username: "Copernicus", email: 'copernicus@gmail.com')
+
+artwork1 = Artwork.create!(title: 'nighthawks', image_url: 'google.com', artist_id: u1.id)
+artwork2 = Artwork.create!(title: 'mona lisa', image_url: 'google1.com', artist_id: u2.id)
+
+ArtworkShare.create!(artwork_id: artwork1.id, viewer_id: u2.id)
+ArtworkShare.create!(artwork_id: artwork2.id, viewer_id: u3.id)
