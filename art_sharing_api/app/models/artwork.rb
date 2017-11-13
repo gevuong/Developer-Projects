@@ -34,6 +34,12 @@ class Artwork < ApplicationRecord
   through: :artwork_shares,
   source: :viewer
 
+  has_many :comments,
+  primary_key: :id,
+  foreign_key: :artwork_id,
+  class_name: :Comment,
+  dependent: :destroy
+
   # class method that returns all of the artworks made by the user OR
 # shared with the user (1-query method)
   def self.artworks_for_user_id(user_id)

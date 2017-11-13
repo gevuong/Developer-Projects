@@ -3,7 +3,7 @@ class ArtworksController < ApplicationController
   def index
     render json: Artwork.artworks_for_user_id(params[:user_id]) # 1-query way
 
-    # 3-query method I initially came up with
+  # 3-query method I initially came up with
     # artworks = Artwork.where(artist_id: params[:user_id])
     # current_user = User.find(params[:user_id])
     # artworks_shared = current_user.shared_artworks
