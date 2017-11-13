@@ -4,8 +4,14 @@ class UsersController < ApplicationController
   def index
     # if there is no explicit render or redirect, controller renders template with same name as the controller action - in this case, index.html.erb
     # render json: params <-- renders query string params
-
-    render json: User.all
+    if params[:query]
+      # finds any value that starts with "#{params[query]}
+      # For more info: https://www.w3schools.com/sql/sql_like.asp
+      users = User.where('username LIKE ?', "#{params[:query]}%")
+    else
+      users = User.all
+    end
+    render json: users
   end
 
   def create

@@ -1,12 +1,12 @@
 class ArtworksController < ApplicationController
-  #index should return the artworked owned by user and shared with user
+  #index should return the artwork owned by user and shared with user
   def index
+    # params[:user_id] comes from route parameters (:user_id wildcard)
     render json: Artwork.artworks_for_user_id(params[:user_id]) # 1-query way
 
   # 3-query method I initially came up with
     # artworks = Artwork.where(artist_id: params[:user_id])
-    # current_user = User.find(params[:user_id])
-    # artworks_shared = current_user.shared_artworks
+    # artworks_shared = User.find(params[:user_id]).shared_artworks
     # render json: (artworks + artworks_shared).uniq
   end
 
