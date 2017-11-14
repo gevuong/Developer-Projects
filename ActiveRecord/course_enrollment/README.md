@@ -1,9 +1,21 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+We are going to write active record associations to connect some models. In this project there are three models:
+`User`, `Course`, and `Enrollment`. It is your duty to connect them using active record associations.
 
-Things you may want to cover:
+Be sure and check out the `db/schema.rb` to see what you are dealing with.
+
+
+## Learning Goals
+
+* Understand what an ActiveRecord association represents
+* Know when to use `has_many` vs. `belongs_to`
+* Be able to write `has_many` and `belongs_to` associations
+* Know what variables to use as `primary_key`, `foreign_key`, and `class_name`
+* Know how to use ActiveRecord associations to return associated objects
+
+
+### Things you may want to cover:
 
 * The errors method is only useful after validations have been run, because it only inspects the errors collection and does not trigger validations itself. You should always first run valid? or save or some such before trying to access errors
 
