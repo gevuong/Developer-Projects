@@ -17,7 +17,6 @@ class Artwork < ApplicationRecord
 
   # N.B. Remember, Rails 5 automatically validates the presence of
   # belongs_to associations, so we can leave validation of artist out.
-
   belongs_to :artist,
   primary_key: :id,
   foreign_key: :artist_id,
@@ -40,8 +39,10 @@ class Artwork < ApplicationRecord
   class_name: :Comment,
   dependent: :destroy
 
-  # class method that returns all of the artworks made by the user OR
-# shared with the user (1-query method)
+  # return users who liked the artwork using polymorphic association. An instance of Artwork model can retrieve a collection of likes
+  has_many :likes, as: :likeable
+
+  # class method that returns all of the artworks made by the user OR shared with the user (1-query method)
   def self.artworks_for_user_id(user_id)
     Artwork
       .left_outer_joins(:artwork_shares)

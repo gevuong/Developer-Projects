@@ -5,9 +5,13 @@ class ArtworksController < ApplicationController
     render json: Artwork.artworks_for_user_id(params[:user_id]) # 1-query way
 
   # 3-query method I initially came up with
-    # artworks = Artwork.where(artist_id: params[:user_id])
-    # artworks_shared = User.find(params[:user_id]).shared_artworks
-    # render json: (artworks + artworks_shared).uniq
+    # if params.has_key?(:user_id)
+    #   artworks = Artwork.where(artist_id: params[:user_id])
+    #   artworks_shared = User.find(params[:user_id]).shared_artworks
+    #   render json: (artworks + artworks_shared).uniq
+    # else
+    #   render json: "unprocessable entity"
+    # end
   end
 
   def show

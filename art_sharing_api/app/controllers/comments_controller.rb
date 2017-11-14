@@ -1,5 +1,4 @@
 class CommentsController < ApplicationController
-
   #index, to test in postman, need to pass in query string params to work
   def index
     if comment_params[:user_id]

@@ -9,6 +9,8 @@
 User.destroy_all
 Artwork.destroy_all
 ArtworkShare.destroy_all
+Comment.destroy_all
+Like.destroy_all
 
 u1 = User.create!(username: "George", email: 'george@gmail.com')
 u2 = User.create!(username: "Galileo", email: 'galileo@gmail.com')
@@ -19,3 +21,11 @@ artwork2 = Artwork.create!(title: 'mona lisa', image_url: 'google1.com', artist_
 
 ArtworkShare.create!(artwork_id: artwork1.id, viewer_id: u2.id)
 ArtworkShare.create!(artwork_id: artwork2.id, viewer_id: u3.id)
+
+comment1 = Comment.create!(body: 'great!', user_id: u1.id, artwork_id: artwork1.id)
+comment2 = Comment.create!(body: 'another great one', user_id: u2.id, artwork_id: artwork2.id)
+
+Like.create!(user_id: u1.id, likeable_id: comment1.id, likeable_type: 'Comment')
+Like.create!(user_id: u2.id, likeable_id: artwork2.id, likeable_type: 'Artwork')
+Like.create!(user_id: u1.id, likeable_id: artwork2.id, likeable_type: 'Artwork')
+Like.create!(user_id: u3.id, likeable_id: comment1.id, likeable_type: 'Comment')
