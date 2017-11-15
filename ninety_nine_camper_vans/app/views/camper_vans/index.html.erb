@@ -1,0 +1,8 @@
+<h1>Our wide selection of campervans!</h1>
+
+<ul>
+  <% @campervans.each do |campervan| %>
+    <li><%= { campervan } %></li>
+    <%= button_to "show", campervan_url(@campervan), method: get %>
+  <% end %>
+</ul>
