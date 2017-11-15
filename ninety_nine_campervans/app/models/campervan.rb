@@ -23,6 +23,6 @@ class Campervan < ApplicationRecord
 
   def year_not_in_future
     current_year = DateTime.now.strftime("%Y").to_i
-    error[:year] << "cannot be in the future" if year > current_year
+    errors[:year] << "cannot be in the future" if year > current_year
   end
 end

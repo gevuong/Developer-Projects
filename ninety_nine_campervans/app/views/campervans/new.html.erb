@@ -1,42 +1,58 @@
 <h2>Create Campervan</h2>
 
+<!-- when form submits, all info inputted in form gets packaged and makes a POST request to campervans_url which is campervans#create. -->
+<!-- action: url to which we want to send data -->
+<!-- method: http method we want to use -->
 <form action="<%= campervans_url %>" method="post">
-  <label for="Name">Name</label>
-    <input type="text" />
+  <!-- for attribute tells which input we want to tie label to -->
+  <label for="name">Name</label>
+    <input id="name" type="text" name="campervan[name]" />
     <br />
 
-  <label for="Year">Year</label>
-    <input type="text" />
+  <label for="year">Year</label>
+    <input id="year" type="text" name="campervan[year]" />
     <br />
 
-  <label for="Make">Make</label>
-    <input type="text" />
+  <label for="make">Make</label>
+    <select id="make" name="campervan[make]">
+      <option disabled selected>-select a make-</option>
+      <option value="Toyota">Toyota</option>
+      <option value="Honda">Honda</option>
+      <option value="Volkswagon">Volkswagon</option>
+      <option value="Ford">Ford</option>
+      <option value="GMC">GMC</option>
+      <option value="Mitsubishi">Mitsubishi</option>
+      <option value="Plymouth">Plymouth</option>
+      <option value="Mercedes">Mercedes</option>
+      <option value="BMW">BMW</option>
+      <option value="Other">Other</option>
+    </select>
     <br />
 
-  <label for="Model">Model</label>
-    <input type="text" />
+  <label for="model">Model</label>
+    <input id="model" type="text" name="campervan[model]" />
     <br />
 
-  <label for="Color">Color</label>
-  <select>
-    <option disabled selected>-select a color -</option>
-    <option value="black">black</option>
-    <option value="white">white</option>
-    <option value="red">red</option>
-    <option value="blue">blue</option>
-    <option value="green">green</option>
-    <option value="yellow">yellow</option>
-    <option value="other">other</option>
-  </select>
+  <label for="color">Color</label>
+    <select id="color" name="campervan[color]">
+      <option disabled selected>-select a color -</option>
+      <option value="black">black</option>
+      <option value="white">white</option>
+      <option value="red">red</option>
+      <option value="blue">blue</option>
+      <option value="green">green</option>
+      <option value="yellow">yellow</option>
+      <option value="other">other</option>
+    </select>
     <br />
 
-  <label for="Mileage">Mileage</label>
-    <input type="text" />
+  <label for="mileage">Mileage</label>
+    <input id="mileage" type="text" name="campervan[mileage]" />
     <br />
 
-  <label for="Description">Description</label>
-    <textarea name="description"></textarea>
+  <label for="description">Description</label>
+    <textarea name="campervan[description]"></textarea>
     <br />
-
+    <!-- value attribute appears on the button -->
   <input type="submit" value="create campervan"/>
 </form>
