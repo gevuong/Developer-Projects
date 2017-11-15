@@ -1,10 +1,12 @@
 <h2>Create Campervan</h2>
 
+<!-- Do not put "_form" to render partial, campervan becomes a local variable,  -->
+<%= render "form", campervan: @campervan, action: :new %>
+
 <!-- when form submits, all info inputted in form gets packaged and makes a POST request to campervans_url which is campervans#create. -->
 <!-- action: url to which we want to send data -->
 <!-- method: http method we want to use -->
-<form action="<%= campervans_url %>" method="post">
-  <!-- for attribute tells which input we want to tie label to -->
+<!-- <form action="<%= campervans_url %>" method="post">
   <label for="name">Name</label>
     <input id="name" type="text" name="campervan[name]" />
     <br />
@@ -53,6 +55,5 @@
   <label for="description">Description</label>
     <textarea name="campervan[description]"></textarea>
     <br />
-    <!-- value attribute appears on the button -->
   <input type="submit" value="create campervan"/>
-</form>
+</form> -->

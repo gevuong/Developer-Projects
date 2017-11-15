@@ -1,0 +1,75 @@
+<!-- Now we have access to action and campervan local variables  -->
+
+<% if action == :edit %>
+  <% action_url = campervan_url(campervan) %>
+<% elsif action == :new %>
+  <% action_url = campervans_url %>
+<% end %>
+
+<!-- when form submits, all info gets packaged and a POST request is made to campervans_url (which is campervans#create). -->
+<!-- action: url to which we want to send data -->
+<!-- method: http method we want to use -->
+<form action="<%= action_url %>" method="post">
+
+  <!-- Because forms can only do get or post requests, a workaround is to create a hidden input tag with the value "patch" to edit form -->
+  <% if action == :edit %>
+    <input type="hidden" name="_method" value="patch">
+  <% end %>
+
+  <!-- for attribute tells which <input> to tie <label> to -->
+  <label for="name">Name</label>
+
+    <!-- campervan.name will either return actual name if it exists, or 'nil' due to Campervan.new in campervanr#new. So we don't need ternary -->
+    <input id="name" type="text" name="campervan[name]" value="<%= campervan.name %>" />
+    <br />
+
+  <label for="year">Year</label>
+    <input id="year" type="text" name="campervan[year]" value="<%= campervan.year %>" />
+    <br />
+
+  <label for="make">Make</label>
+    <select id="make" name="campervan[make]">
+      <!-- if campervan.make returns 'nil' due to Campervan.new in campervan#new, return "selected" -->
+      <option disabled <%= campervan.make ? "" : "selected" %>>-select a make-</option>
+      <option value="Toyota" <%= campervan.make == "Toyota" ? "selected" : "" %>>Toyota</option>
+      <option value="Honda" <%= campervan.make == "Honda" ? "selected" : "" %>>Honda</option>
+      <option value="Volkswagon" <%= campervan.make == "Volkswagon" ? "selected" : "" %>>Volkswagon</option>
+      <option value="Ford" <%= campervan.make == "Ford" ? "selected" : "" %>>Ford</option>
+      <option value="GMC" <%= campervan.make == "GMC" ? "selected" : "" %>>GMC</option>
+      <option value="Mitsubishi" <%= campervan.make == "Mitsubishi" ? "selected" : "" %>>Mitsubishi</option>
+      <option value="Plymouth" <%= campervan.make == "Plymouth" ? "selected" : "" %>>Plymouth</option>
+      <option value="Mercedes" <%= campervan.make == "Mercedes" ? "selected" : "" %>>Mercedes</option>
+      <option value="BMW" <%= campervan.make == "BMW" ? "selected" : "" %>>BMW</option>
+      <option value="Other" <%= campervan.make == "Other" ? "selected" : "" %>>Other</option>
+    </select>
+    <br />
+
+  <label for="model">Model</label>
+    <input id="model" type="text" name="campervan[model]" value="<%= campervan.model %>" />
+    <br />
+
+  <label for="color">Color</label>
+    <select id="color" name="campervan[color]">
+      <option disabled <%= campervan.color ? "" : "selected" %>>-select a color-</option>
+      <option value="black" <%= campervan.color == "black" ? "selected" : "" %>>black</option>
+      <option value="white" <%= campervan.color == "white" ? "selected" : "" %>>white</option>
+      <option value="red" <%= campervan.color == "red" ? "selected" : "" %>>red</option>
+      <option value="blue" <%= campervan.color == "blue" ? "selected" : "" %>>blue</option>
+      <option value="green" <%= campervan.color == "green" ? "selected" : "" %>>green</option>
+      <option value="yellow" <%= campervan.color == "yellow" ? "selected" : "" %>>yellow</option>
+      <option value="other" <%= campervan.color == "other" ? "selected" : "" %>>other</option>
+    </select>
+    <br />
+
+  <label for="mileage">Mileage</label>
+    <input id="mileage" type="text" name="campervan[mileage]" value="<%= campervan.mileage %>" />
+    <br />
+
+  <label for="description">Description</label>
+    <textarea name="campervan[description]">
+      <%=campervan.description%>
+    </textarea>
+    <br />
+    <!-- value attribute appears on the button -->
+    <input type="submit" value="<%= action == :edit ? "update campervan" : "add campervan"%>" />
+</form>

@@ -5,7 +5,7 @@ class CampervansController < ApplicationController
   end
 
   def show
-    @campervan = Campervan.find(params[:id])
+    @campervan = Campervan.find_by_id(params[:id])
 
     if @campervan
       render :show
@@ -21,12 +21,25 @@ class CampervansController < ApplicationController
 
   def create
     @campervan = Campervan.new(campervan_params) # create new instance then try to save (two-step process to make sure a new instance can first be created)
-  
+
     if @campervan.save # returns true or false instead of raising exception
-      redirect_to campervan_url(@campervan.id) # show user show page
+      redirect_to campervan_url(@campervan) # show user show page
     else
-      fail
-      render :new # show user new book form again. Not redirect_to because we don't have a create template.
+      render :new # render new.html.erb template again. Not redirect_to because we don't have a create template.
+    end
+  end
+
+  def edit
+    @campervan = Campervan.find_by_id(params[:id]) # .find_by() returns nil, .find raises an exception
+    render :edit
+  end
+
+  def update
+    @campervan = Campervan.find_by_id(params[:id])
+    if @campervan.update_attributes(campervan_params)
+      redirect_to campervan_url(@campervan) # redirects to show changes
+    else
+      render :edit # render edit.html.erb template again
     end
   end
 

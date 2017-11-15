@@ -24,7 +24,7 @@
   * Learning points: DOM traversal, DOM manipulation, event handling
 
 ## Backend Projects
-* [ ] [URL Shortener] (In progress - Ruby on Rails)
+* [ ] [URL Shortener] (Ruby on Rails)
   * [x] Create new users and shortened url using CLI
   * [x] Launches shortened url via Launchy gem
   * [x] Records number of url visits, unique visits, and unique visits within a recent time period
