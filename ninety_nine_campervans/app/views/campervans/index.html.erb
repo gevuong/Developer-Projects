@@ -1,0 +1,10 @@
+<h2>Campervans available</h2>
+
+<ul>
+  <% @campervans.each do |campervan| %>
+    <li><%= link_to "#{campervan.name}", campervan_url(campervan) %>
+      <!-- above code is equivalent to the following: -->
+      <!-- <a href="<%#= campervan_url %>"><%#= campervan.year campervan.make campervan.model %></a> -->
+    </li>
+  <% end %>
+</ul>
