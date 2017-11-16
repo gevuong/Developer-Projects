@@ -15,8 +15,13 @@
 
 class Campervan < ApplicationRecord
   validates :name, :year, :make, :model, :color, :mileage, :description, presence: true
-  validates :make, inclusion: { in: %w(Toyota Honda Volkswagon Chevrolet Ford GMC Geo Mitsubishi Plymouth Mercedes BMW Other) }
-  validates :color, inclusion: { in: %w(black white gray red blue green yellow orange purple brown rainbow other ) }
+
+  CAMPERVAN_COLORS = %w(black white gray red blue green yellow orange brown rainbow other)
+
+  CAMPERVAN_MAKES = %w(Toyota Honda Volkswagon Chevrolet Ford GMC Plymouth Mercedes BMW Other)
+
+  validates :make, inclusion: CAMPERVAN_MAKES
+  validates :color, inclusion: CAMPERVAN_COLORS
 
   # custom validation method
   validate :year_not_in_future

@@ -1,14 +1,27 @@
 <h2>Campervans available</h2>
 
+<!-- Do not need specify _campervan when rendering partial template. Assign local variable, campervans, to @campervans -->
+
 <ul>
-  <% @campervans.each do |campervan| %>
-    <li><%= link_to "#{campervan.name}", campervan_url(campervan) %>
-      <!-- above code is equivalent to the following: -->
-      <!-- <a href="<%#= campervan_url %>"><%#= campervan.year campervan.make campervan.model %></a> -->
-    </li>
-  <% end %>
+  <%= render @campervans %>
 </ul>
 
-<%= link_to "Add a campervan", new_campervan_url %>
+<!--
+  ... is equivalent to:
+  <ul>
+    <% @campervans.each do |campervan| %>
+    <%#= render campervan %>
+    <% end %>
+  </ul>
+-->
+
+<!--
+  ... and is equivalent to:
+  <ul>
+    <%#= render 'campervan', campervan: campervan %>
+  </ul>
+-->
+
+<%= link_to "Add Campervan!", new_campervan_url %>
 <!-- equivalent to above code
 <a href="<%= new_campervan_url %>">Add a campervan</a> -->

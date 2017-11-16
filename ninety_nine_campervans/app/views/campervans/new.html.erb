@@ -1,8 +1,11 @@
 <h2>Create Campervan</h2>
 
-<!-- Do not put "_form" to render partial, campervan becomes a local variable,  -->
+<!-- Do not put "_form" to render partial, campervan becomes a local variable, We do not want to use instance variables in our partials because it promotes coupling between our partial and the controllers that render it. By passing in the instance variable as a local variable, we keep our code DRY and prevent bugs should we ever decide to refactor. -->
+
 <%= render "form", campervan: @campervan, action: :new %>
 
+
+<%= link_to "Return to Index", campervans_url %>
 <!-- when form submits, all info inputted in form gets packaged and makes a POST request to campervans_url which is campervans#create. -->
 <!-- action: url to which we want to send data -->
 <!-- method: http method we want to use -->

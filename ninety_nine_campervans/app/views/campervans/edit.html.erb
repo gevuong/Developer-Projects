@@ -1,6 +1,7 @@
 <h2>Edit Campervan</h2>
 
-<!-- when specifying partial template to render, do not use underscore. Pass in two local variables, campervan and action. Assign campervan to instance variable we have access to: @campervan, and action to :edit to change form type in partial template -->
+<!-- when specifying partial template to render, do not use underscore. Pass in two local variables, campervan and action. We do not want to use instance variables in our partials because it promotes coupling between our partial and the controllers that render it. By passing in the instance variable as a local variable, we keep our code DRY and prevent bugs should we ever decide to refactor.-->
+
 <%= render 'form', campervan: @campervan, action: :edit %>
 
 <!-- when form submits, all info gets packaged and a POST request is made to campervans_url (which is campervans#create). -->

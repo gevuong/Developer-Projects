@@ -1,0 +1,8 @@
+<!-- We have access to local variable, campervans due to local variable assignment to @campervans in index.html.erb -->
+
+<li>
+  <%= link_to "#{campervan.name}", campervan_url(campervan) %>
+</li>
+
+<!-- above code is equivalent to: -->
+<!-- <a href="<%#= campervan_url %>"><%#= campervan.year campervan.make campervan.model %></a> -->

@@ -1,4 +1,4 @@
-<h2><%= @campervan.name %> Show page</h2>
+<h2>Campervan name: <%= @campervan.name %></h2>
 
 <table>
   <tr>
@@ -34,7 +34,7 @@
 <br />
 <%= link_to "Edit #{@campervan.name}", edit_campervan_url(@campervan) %>
 <!--
-When it suffices to send parameters in the query string, recall from the routing chapter that you can do this like so: xyz_url(key: :value).
+When required to send parameters in query string, you can do this like so: xyz_url(key: :value).
 Same as above code, the older more verbose way: -->
 <!-- <%= link_to "Edit #{@campervan.name}", controller: "campervans", action: "edit", id: @campervan %> -->
 <!-- for more info: http://api.rubyonrails.org/classes/ActionView/Helpers/UrlHelper.html#method-i-link_to -->

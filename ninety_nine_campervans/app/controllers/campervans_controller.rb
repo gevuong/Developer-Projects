@@ -15,7 +15,7 @@ class CampervansController < ApplicationController
   end
 
   def new
-    @campervan = Campervan.new # creates object with nil values
+    @campervan = Campervan.new # creates object with nil values. Instance is used to prefill keys with blank (nil) values in new.html.erb.
     render :new
   end
 
