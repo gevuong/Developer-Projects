@@ -6,7 +6,6 @@ class CampervansController < ApplicationController
 
   def show
     @campervan = Campervan.find_by_id(params[:id])
-
     if @campervan
       render :show
     else
