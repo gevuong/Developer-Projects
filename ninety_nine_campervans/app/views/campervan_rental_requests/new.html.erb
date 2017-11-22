@@ -14,7 +14,10 @@
   <label for="end_date">End Date</label>
     <input type="date" name="date" value="End Date">
 
-
-  <button type="button" name="button">APPROVE</button>
-  <button type="button" name="button">DENY</button>
+  <% if @campervan_rental_request.status == "PENDING" %>
+    <button type="button" name="button">APPROVE</button>
+    <button type="button" name="button">DENY</button>
+  <% else %>
+    <input type="submit" name="" value="">
+  <% end %>
 </form>
