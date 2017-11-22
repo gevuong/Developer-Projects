@@ -15,6 +15,7 @@ class CampervanRentalRequest < ApplicationRecord
   validates :campervan_id, :start_date, :end_date, presence: true
   validates :status, inclusion: %w(APPROVED DENIED PENDING)
   validate :does_not_overlap_approved_request
+  validate :start_must_come_before_end
 
   # Remember, 'belongs_to' association is a class method, where first arg is association instance method, and second arg is options hash. Also, Rails 5 auto validates association methods.
   belongs_to :campervan,
@@ -27,7 +28,6 @@ class CampervanRentalRequest < ApplicationRecord
   def assign_pending_status
     self.status ||= "PENDING"
   end
-
 
   # A single campervan cannot be rented out to two people at once! Write a custom validation fo this. Get all requests that overlap with the ones we are trying to validate. Should return an ActiveRecord Relation object so we can chain more methods to it later.
   def overlapping_requests
@@ -42,7 +42,6 @@ class CampervanRentalRequest < ApplicationRecord
   def overlapping_approved_requests
     overlapping_requests.where(status: "APPROVED")
   end
-
 
   def does_not_overlap_approved_request
     # A denied request doesn't need to be checked. A pending request
