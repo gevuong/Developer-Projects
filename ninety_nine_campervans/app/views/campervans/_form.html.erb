@@ -7,9 +7,12 @@
 <% end %>
 
 <!--
-if action was not passed as a local variable, you can do the following:
+if action was not passed as a local variable, you can do the following if campervan.#persisted?(had been previously saved to DB) return PATCH:
+
 <% action_url = campervan.persisted? ? campervan_url(campervan) : campervans_url %>
 <% method = campervan.persisted? ? :patch : :post %>
+
+* PUT HTTP Verb is used if we want to replace an existing object entirely. We will mostly use PATCH HTTP verb to change a few attributes of an existing object. Both HTTP verbs direct to the controller#update action.
 -->
 
 <!-- when form submits, all info gets packaged and a POST request is made to campervans_url (which is campervans#create). -->

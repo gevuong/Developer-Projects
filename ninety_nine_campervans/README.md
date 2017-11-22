@@ -34,4 +34,4 @@
 * ActiveRecord's `.save!` raises an exception, however, `.save` returns either true or false if instance can be saved to DB or not.
 * ActiveRecord's `.update_attributes` will try to change the attributes and save it, and return true or false, similar to `.save`.
 
-* PUTS HTTP Verb is used if we want to replace an existing object entirely. We will mostly use PATCH HTTP verb to change a few attributes of an existing object. Both HTTP verbs direct to the controller#upate action.
+* PUT HTTP Verb is used if we want to replace an existing object entirely. We will mostly use PATCH HTTP verb to change a few attributes of an existing object. Both HTTP verbs direct to the controller#update action.

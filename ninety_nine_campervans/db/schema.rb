@@ -10,10 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171115014718) do
+ActiveRecord::Schema.define(version: 20171116010606) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "campervan_rental_requests", force: :cascade do |t|
+    t.date "start_date", null: false
+    t.date "end_date", null: false
+    t.integer "campervan_id", null: false
+    t.string "status", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["campervan_id"], name: "index_campervan_rental_requests_on_campervan_id"
+  end
 
   create_table "campervans", force: :cascade do |t|
     t.integer "year", null: false
