@@ -15,10 +15,10 @@
 #
 
 class Campervan < ApplicationRecord
-  validates :year, :make, :model, :color, :mileage, :description, presence: true
+  validates :name, :year, :make, :model, :color, :mileage, :description, presence: true
 
-  # has_many :campervan_rental_requests,
-  # dependent: :destroy # ensures when campervan is deleted, all of its requests are also deleted
+  has_many :campervan_rental_requests,
+  dependent: :destroy # ensures when campervan is deleted, all of its requests are also deleted
 
   CAMPERVAN_COLORS = %w(black white gray red blue green yellow orange brown rainbow other)
 
