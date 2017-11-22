@@ -1,23 +1,17 @@
 <h1>Create CampervanRentalRequests</h1>
 
-<form action="index.html" method="post">
+<form action="<%= campervan_rental_requests_url %>" method="post">
   <select name="">
     <option disabled selected value="">--SELECT CAMPERVAN--</option>
-    <option value="">Thundercat</option>
-    <!-- <%# @campervans.each do |campervan| %>
-      <option value="<%#= campervan.name %>"><%#= campervan.name %></option>
-    <%# end %> -->
+    <% Campervan.all.each do |campervan| %>
+      <option value="<%= campervan.id %>"><%= campervan.id %></option>
+    <% end %>
   </select>
   <label for="start_date">Start Date</label>
-  <input type="date" name="date" value="Start Date">
+  <input type="date" name="campervan_rental_request[start_date]" value="Start Date">
 
   <label for="end_date">End Date</label>
-    <input type="date" name="date" value="End Date">
+    <input type="date" name="campervan_rental_request[end_date]" value="End Date">
 
-  <% if @campervan_rental_request.status == "PENDING" %>
-    <button type="button" name="button">APPROVE</button>
-    <button type="button" name="button">DENY</button>
-  <% else %>
-    <input type="submit" name="" value="">
-  <% end %>
+    <input type="submit" name="" value="Submit">
 </form>
