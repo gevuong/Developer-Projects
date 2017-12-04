@@ -52,8 +52,10 @@ document.addEventListener("DOMContentLoaded", function() {
 
   function collide(board, player) {
     const [m, o] = [player.matrix, player.pos];
-    for (var row = 0; row < m.length; ++row) {
-      for (var col = 0; col < m[row].length; ++col) {
+    for (let row = 0; row < m.length; ++row) {
+      for (let col = 0; col < m[row].length; ++col) {
+        // console.log("row", row);
+        // console.log("col", col);
         if (m[row][col] !== 0 &&
           (board[row + o.y] && board[row + o.y][col + o.x]) !== 0) {
             console.log("true");
@@ -119,9 +121,35 @@ document.addEventListener("DOMContentLoaded", function() {
     } else if (e.keyCode === 40) { // arrowDown
       playerDrop();
       console.log(player.pos.y);
+    } else if (e.keyCode === 81) {
+      playerRotate(-1);
+    } else if (e.keyCode === 87) {
+      playerRotate(1);
     }
   });
 
+
+  function playerRotate(dir) {
+    rotate(player.matrix, dir);
+  }
+
+  // to rotate matrix, transpose matrix, and reverse each row
+  function rotate(matrix, dir) {
+    for (let row = 0; row < matrix.length; ++row) {
+      for (let col = 0; col < row; ++col) { // NB: col < row, not matrix[row].length
+        console.log("row", row);
+        [matrix[row][col], matrix[col][row]]
+        =
+        [matrix[col][row], matrix[row][col]];
+      }
+    }
+
+    if (dir > 0) {
+      matrix.forEach(row => row.reverse());
+    } else {
+      matrix.reverse();
+    }
+  }
 
   function draw() {
     // redraws ctx every time frame is updated to remove previously rendered piece
