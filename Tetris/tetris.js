@@ -9,8 +9,6 @@ document.addEventListener("DOMContentLoaded", function() {
   ctx.scale(20, 20);
 
   // CONSTANTS
-
-
   const player = {
     pos: {x: 5 , y: 0},
     matrix: createPiece("T"),
@@ -147,8 +145,13 @@ document.addEventListener("DOMContentLoaded", function() {
   function resetPiece() {
     const pieces = "TSLIZJO";
     player.matrix = createPiece(pieces[Math.floor(pieces.length * Math.random())]);
-    player.pos.y = 0;
+    player.pos.y = 0; // when piece reaches bottom of board, piece starts from the top
     player.pos.x = Math.floor(board[0].length / 2) - Math.floor(player.matrix[0].length / 2);
+
+    if (collide(board, player)) {
+      board.forEach(row => row.fill(0)); // removes everything from board by replacing each row with zeros.
+      // drawMatrix(board, {x: 0, y: 0});
+    }
   }
 
   function playerDrop() {
@@ -157,7 +160,6 @@ document.addEventListener("DOMContentLoaded", function() {
       player.pos.y--;
       merge(board, player);
       resetPiece();
-      player.pos.y = 0; // when piece reaches bottom of board, piece starts from the top
     }
     dropCounter = 0; // don't want drop to happen immediately after arrowDown
   }
