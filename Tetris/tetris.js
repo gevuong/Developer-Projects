@@ -54,6 +54,7 @@ document.addEventListener("DOMContentLoaded", function() {
     const [m, o] = [player.matrix, player.pos];
     for (let row = 0; row < m.length; ++row) {
       for (let col = 0; col < m[row].length; ++col) {
+        // debugger
         // console.log("row", row);
         // console.log("col", col);
         if (m[row][col] !== 0 &&
@@ -128,9 +129,21 @@ document.addEventListener("DOMContentLoaded", function() {
     }
   });
 
-
+  // create logic to prevent rotation against left or right side of wall
   function playerRotate(dir) {
+    const pos = player.pos.x;
+    let offset = 1; // initialize offset, to add to player.pos.x
     rotate(player.matrix, dir);
+    // cannot only check collision once, need to continuously check
+    while (collide(board, player)) {
+      player.pos.x += offset;
+      offset = -(offset + (offset > 0 ? 1: -1)) // algorithm to move piece however many spaces to left or right until there is no collision.
+      if (offset > player.matrix[0].length) { // to exit loop in case offset is greater than lenght of current piece, Rotate back current piece in neg dir.
+        rotate(player.matrix, -dir);
+        player.pos.x = pos; // reset offset
+        return
+      }
+    }
   }
 
   // to rotate matrix, transpose matrix, and reverse each row
