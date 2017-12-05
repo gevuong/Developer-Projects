@@ -1,6 +1,8 @@
 // add event listener to wait for document to be loaded before looking for canvas element.
 document.addEventListener("DOMContentLoaded", function() {
   const canvasEl = document.getElementById("tetris");
+
+
   // set height and width attributes of canvasEl
   canvasEl.width = 240;
   canvasEl.height = 400;
@@ -10,8 +12,9 @@ document.addEventListener("DOMContentLoaded", function() {
 
   // CONSTANTS
   const player = {
-    pos: {x: 5 , y: 0},
-    matrix: createPiece("T"),
+    pos: {x: 0 , y: 0},
+    matrix: null,
+    score: 0,
   };
   window.player = player; // test if piece moves by altering pos.x and pos.y
 
@@ -29,49 +32,53 @@ document.addEventListener("DOMContentLoaded", function() {
       ]
     } else if (type === "S") {
       return [
-        [0, 1, 1],
-        [1, 1, 0],
+        [0, 2, 2],
+        [2, 2, 0],
         [0, 0, 0]
       ]
     } else if (type === "L") {
       return [
-        [0, 1, 0],
-        [0, 1, 0],
-        [0, 1, 1]
+        [0, 3, 0],
+        [0, 3, 0],
+        [0, 3, 3]
       ]
     } else if (type === "I") {
       return [
-        [0, 1, 0, 0],
-        [0, 1, 0, 0], // easier to anticipate rotation if in 4x4
-        [0, 1, 0, 0],
-        [0, 1, 0, 0]
+        [0, 4, 0, 0],
+        [0, 4, 0, 0], // easier to anticipate rotation if in 4x4
+        [0, 4, 0, 0],
+        [0, 4, 0, 0]
       ]
     } else if (type === "Z") {
       return [
-        [1, 1, 0],
-        [0, 1, 1],
+        [5, 5, 0],
+        [0, 5, 5],
         [0, 0, 0]
       ]
     } else if (type === "J") {
       return [
-        [0, 1, 0],
-        [0, 1, 0],
-        [1, 1, 0]
+        [0, 6, 0],
+        [0, 6, 0],
+        [6, 6, 0]
       ]
     } else if (type === "O") {
       return [
-        [1, 1],
-        [1, 1]
+        [7, 7],
+        [7, 7]
       ]
     }
   }
 
+  const COLORS = [
+    null, 'red', 'blue', 'green', 'yellow', 'orange', 'purple', "violet"
+  ]
   // draw T-shaped piece by filling in color for each element in matrix
   function drawMatrix(matrix, offset) { // offset used to move and redraw block
     matrix.forEach((row, y) => {
       row.forEach((val, x) => {
         if (val !== 0) { // draw red square of width 1, height 1
-          ctx.fillStyle = 'red';
+          // console.log(COLORS[val]);
+          ctx.fillStyle = COLORS[val];
           ctx.fillRect(x + offset.x, y + offset.y, 1, 1);
         }
       });
@@ -89,7 +96,22 @@ document.addEventListener("DOMContentLoaded", function() {
     // matrix = new Array(height).fill(0).map(row => (new Array(width).fill(0)))
   }
 
+  function removeLine() {
+    let rowCount = 1;
+    outer: for (let y = board.length - 1; y > 0; y--) {
+      for (let col = 0; col < board[y].length; ++col) {
+        if (board[y][col] === 0) {
+          continue outer;
+        }
+      }
+      const row = board.splice(y, 1)[0].fill(0); // removes and selects row and fills each element with 0.
+      board.unshift(row); // add row of zeros to top of board
+      ++y;
 
+      player.score += rowCount * 10;
+      rowCount *= 2;
+    }
+  }
   function collide(board, player) {
     const [m, o] = [player.matrix, player.pos];
     for (let row = 0; row < m.length; ++row) {
@@ -151,8 +173,11 @@ document.addEventListener("DOMContentLoaded", function() {
     if (collide(board, player)) {
       board.forEach(row => row.fill(0)); // removes everything from board by replacing each row with zeros.
       // drawMatrix(board, {x: 0, y: 0});
+      player.score = 0;
+      updateScore();
     }
   }
+
 
   function playerDrop() {
     player.pos.y++;
@@ -160,9 +185,12 @@ document.addEventListener("DOMContentLoaded", function() {
       player.pos.y--;
       merge(board, player);
       resetPiece();
+      removeLine();
+      updateScore();
     }
     dropCounter = 0; // don't want drop to happen immediately after arrowDown
   }
+
 
   document.addEventListener("keydown", function(e) {
     if (e.keyCode === 39) { // arrowRight
@@ -242,5 +270,11 @@ document.addEventListener("DOMContentLoaded", function() {
     requestAnimationFrame(update); // takes a callback as an arg to be invoked before repaint. callback itself calls requestAnimationFrame() to animate another frame before repaint. call method when ready to update animation onscreen
   }
 
+  function updateScore() {
+    document.getElementById("score").innerText = player.score;
+  }
+
+  resetPiece();
+  updateScore();
   update();
 })
