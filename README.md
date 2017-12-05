@@ -1,5 +1,11 @@
-## Frontend Projects
-
+## Frontend
+* [x] [Tetris](https://goo.gl/uQ3zDN) (vanilla JS) (https://rawgit.com/gevuong/Developer-Projects/master/Tetris/index.html)
+  * [x] Collision detection (technical challenge)
+  * [x] Rotate Tetrominoes (technical challenge)
+  * [x] Simple scoreboard
+  * [ ] Implement two player and multi-player capability
+  * [ ] Persist high score
+  * [ ] Add levels and music/effects
 * [x] [Scoreboard App](https://goo.gl/GjZeVb) (React.js with Redux)
   * [x] Increment/decrement score per player
   * [x] Add and remove player
@@ -21,9 +27,9 @@
   * [x] Create, edit, and remove guest from RSVP list
   * [x] Filter guests who have responded
   * [ ] Persist state with localStorage
-  * Learning points: DOM traversal, DOM manipulation, event handling
+  * Learning goals: DOM traversal, DOM manipulation, event handling
 
-## Backend Projects
+## Backend
 * [ ] [URL Shortener] (Ruby on Rails)
   * [x] Create new users and shortened url using CLI
   * [x] Launches shortened url via Launchy gem

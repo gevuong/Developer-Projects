@@ -19,7 +19,6 @@ document.addEventListener("DOMContentLoaded", function() {
   window.player = player; // test if piece moves by altering pos.x and pos.y
 
   const board = createMatrix(12, 20) // 12 units wide, 20 units high
-  console.log(board); console.table(board);
   window.board = board;
 
   // create block types
@@ -121,12 +120,10 @@ document.addEventListener("DOMContentLoaded", function() {
         // console.log("col", col);
         if (m[row][col] !== 0 &&
           (board[row + o.y] && board[row + o.y][col + o.x]) !== 0) {
-            console.log("true");
           return true;
         }
       }
     }
-    console.log("false");
     return false;
   }
 
@@ -230,7 +227,6 @@ document.addEventListener("DOMContentLoaded", function() {
   function rotate(matrix, dir) {
     for (let row = 0; row < matrix.length; ++row) {
       for (let col = 0; col < row; ++col) { // NB: col < row, not matrix[row].length
-        console.log("row", row);
         [matrix[row][col], matrix[col][row]]
         =
         [matrix[col][row], matrix[row][col]];
