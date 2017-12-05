@@ -9,15 +9,11 @@ document.addEventListener("DOMContentLoaded", function() {
   ctx.scale(20, 20);
 
   // CONSTANTS
-  const matrix = [
-    [0, 0, 0],
-    [1, 1, 1],
-    [0, 1, 0]
-  ];
+
 
   const player = {
     pos: {x: 5 , y: 0},
-    matrix: matrix,
+    matrix: createPiece("T"),
   };
   window.player = player; // test if piece moves by altering pos.x and pos.y
 
@@ -25,6 +21,52 @@ document.addEventListener("DOMContentLoaded", function() {
   console.log(board); console.table(board);
   window.board = board;
 
+  // create block types
+  function createPiece(type) {
+    if (type === "T") {
+      return [
+        [0, 0, 0],
+        [1, 1, 1],
+        [0, 1, 0]
+      ]
+    } else if (type === "S") {
+      return [
+        [0, 1, 1],
+        [1, 1, 0],
+        [0, 0, 0]
+      ]
+    } else if (type === "L") {
+      return [
+        [0, 1, 0],
+        [0, 1, 0],
+        [0, 1, 1]
+      ]
+    } else if (type === "I") {
+      return [
+        [0, 1, 0, 0],
+        [0, 1, 0, 0], // easier to anticipate rotation if in 4x4
+        [0, 1, 0, 0],
+        [0, 1, 0, 0]
+      ]
+    } else if (type === "Z") {
+      return [
+        [1, 1, 0],
+        [0, 1, 1],
+        [0, 0, 0]
+      ]
+    } else if (type === "J") {
+      return [
+        [0, 1, 0],
+        [0, 1, 0],
+        [1, 1, 0]
+      ]
+    } else if (type === "O") {
+      return [
+        [1, 1],
+        [1, 1]
+      ]
+    }
+  }
 
   // draw T-shaped piece by filling in color for each element in matrix
   function drawMatrix(matrix, offset) { // offset used to move and redraw block
@@ -102,11 +144,19 @@ document.addEventListener("DOMContentLoaded", function() {
     }
   }
 
+  function resetPiece() {
+    const pieces = "TSLIZJO";
+    player.matrix = createPiece(pieces[Math.floor(pieces.length * Math.random())]);
+    player.pos.y = 0;
+    player.pos.x = Math.floor(board[0].length / 2) - Math.floor(player.matrix[0].length / 2);
+  }
+
   function playerDrop() {
     player.pos.y++;
     if (collide(board, player)) {
       player.pos.y--;
       merge(board, player);
+      resetPiece();
       player.pos.y = 0; // when piece reaches bottom of board, piece starts from the top
     }
     dropCounter = 0; // don't want drop to happen immediately after arrowDown
