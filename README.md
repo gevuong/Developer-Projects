@@ -1,5 +1,5 @@
 ## Frontend
-* [x] [Tetris](https://goo.gl/uQ3zDN) (vanilla JS) (https://rawgit.com/gevuong/Developer-Projects/master/Tetris/index.html)
+* [x] [Tetris](https://goo.gl/uQ3zDN) (vanilla JS)
   * [x] Collision detection (technical challenge)
   * [x] Rotate Tetrominoes (technical challenge)
   * [x] Simple scoreboard
