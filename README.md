@@ -3,7 +3,8 @@
   * [x] Collision detection (technical challenge)
   * [x] Rotate Tetrominoes (technical challenge)
   * [x] Simple scoreboard
-  * [ ] Implement two player and multi-player capability
+  * [ ] Implement two player capability
+  * [ ] Implement multi-player capability (websockets)
   * [ ] Persist high score
   * [ ] Add levels and music/effects
 * [x] [Scoreboard App](https://goo.gl/GjZeVb) (React.js with Redux)
