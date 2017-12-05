@@ -1,7 +1,0 @@
-Repo: CtCI-6th-Edition, Stars: 2500
-Repo: JavaScript30, Stars: 5583
-Repo: awesome-interview-questions, Stars: 16195
-Repo: slink, Stars: 5
-Repo: hackathon-starter, Stars: 21011
-Repo: art-portfolio-app, Stars: 3
-Repo: post-acceptance-prepwork, Stars: 1
