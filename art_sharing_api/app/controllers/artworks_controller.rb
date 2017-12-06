@@ -20,7 +20,7 @@ class ArtworksController < ApplicationController
 
   def create
     artwork = Artwork.new(artwork_params)
-    if artwork.save!
+    if artwork.save
       render json: artwork, status: :created # status: 201 created
     else
       render json: artwork.errors.full_messages, status: 422
@@ -30,7 +30,7 @@ class ArtworksController < ApplicationController
   def update
     artwork = Artwork.find(params[:id])
 
-    if artwork.update!(artwork_params)
+    if artwork.update(artwork_params)
       render json: artwork
     else
       render json: artwork.errors.full_messages, status: 422
@@ -39,7 +39,7 @@ class ArtworksController < ApplicationController
 
   def destroy
     artwork = Artwork.find(params[:id])
-    artwork.destroy!
+    artwork.destroy
     render json: artwork
   end
 

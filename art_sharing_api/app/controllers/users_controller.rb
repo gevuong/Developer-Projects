@@ -19,7 +19,7 @@ class UsersController < ApplicationController
     # render json: params <-- renders POST request body params
 
     user = User.new(user_params) # expects all user params to be nested under the key :user in params hash.
-    if user.save!
+    if user.save
       render json: user
     else
       render user.errors.full_messages, status: 422
@@ -35,7 +35,7 @@ class UsersController < ApplicationController
 
   def update
     user = User.find(params[:id])
-    if user.update!(user_params) # performs mass-assignment update and save
+    if user.update(user_params) # performs mass-assignment update and save
       render json: user
     else
       render user.errors.full_messages, status: 422
@@ -44,7 +44,7 @@ class UsersController < ApplicationController
 
   def destroy
     user = User.find(params[:id])
-    if user.destroy!
+    if user.destroy
       render json: user # best practice is to render the destroyed object after destroying it in DB.
     else
       render user.errors.full_messages, status: 404
