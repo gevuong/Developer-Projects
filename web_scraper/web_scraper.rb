@@ -19,7 +19,7 @@ parse_page.css('.content').css('.rows').css('.hdrlnk').map do |post|
   pets_array.push(post_name)
 end
 
-# push array into csv file. You need to specify a mode in the second arg. For more info on what the second arg means: https://stackoverflow.com/questions/17866291/what-is-the-second-parameter-argument-to-csv-open-in-ruby
+# push array into csv file. I believe you need to specify a mode in the second arg. "w" Write-only, truncates existing file to zero length or creates a new file for writing. For more info on what mode to input in second arg: https://stackoverflow.com/questions/17866291/what-is-the-second-parameter-argument-to-csv-open-in-ruby
 CSV.open('pets.csv', 'w') do |csv|
   csv << pets_array
 end
