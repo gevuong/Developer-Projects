@@ -1,4 +1,4 @@
-// add event listener to wait for document to be loaded before looking for canvas element.
+// add event listener to wait for document to be loaded before loading canvas el.
 document.addEventListener("DOMContentLoaded", function() {
   const canvasEl = document.getElementById("tetris");
 
