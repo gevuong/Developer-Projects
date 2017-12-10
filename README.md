@@ -1,8 +1,11 @@
 ## Frontend
+* [ ] [Super Mario Bros](https://goo.gl/BnoLin) (vanilla JS)
+  * [x] Create sprite of game screen (sky and ground tiles) background
+  * [ ]
 * [x] [Tetris](https://goo.gl/uQ3zDN) (vanilla JS)
   * [x] Collision detection (technical challenge)
   * [x] Rotate Tetrominoes (technical challenge)
-  * [x] Simple scoreboard
+  * [x] Basic scoreboard
   * [ ] Implement two player capability
   * [ ] Implement multi-player capability (websockets)
   * [ ] Persist high score

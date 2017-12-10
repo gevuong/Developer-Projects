@@ -1,4 +1,12 @@
 ## NOTES
+
+### To setup github pages to run frontend web app requiring multiple js, json, and png files.
+1. Create webpack.config.js and set proper entry file. Remove preset "react" if you're not using React.
+2. npm install --save babel-loader babel-core babel-preset-es2015 webpack webpack-dev-server
+3. run the following: webpack-dev-server --inline to create bundle.js. “inline” option adds “Live reloading” for the entire page. “hot” option enables “Hot Module Reloading” that tries to reload just the component that’s changed (instead of the entire page). If we pass both options, then, when the source changes, the webpack-dev-server will try to HMR first. If that doesn’t work, then it will reload the entire page. https://medium.com/@rajaraodv/webpack-the-confusing-parts-58712f8fcad9
+4. Set index.html script tag src="bundle.js", make sure index.html is in root dir. main.js does not need to be in root dir.
+5. Commit and push to Github. Set up github pages.
+
 ### Issue#0 encountered: Import js files into main.js using vanillaJS
 - The old versions of JavaScript had no import, include, or require, so many different approaches to this problem have been developed. But recent versions of JavaScript have standards like ES6 modules to import modules, although this is not supported yet by most browsers.
 

@@ -4,12 +4,16 @@
   "description": "",
   "main": "./public/js/main.js",
   "scripts": {
-    "start": "serve ./public", 
+    "start": "webpack-dev-server --inline --hot",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "serve": "^6.4.1"
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "serve": "^6.4.1",
+    "webpack": "^3.10.0",
+    "webpack-dev-server": "^2.9.7"
   }
 }

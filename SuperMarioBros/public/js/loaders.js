@@ -10,6 +10,7 @@ export function loadImage(url) {
 }
 
 export function loadLevel(name) {
-  return fetch(`/levels/${name}.json`)
-    .then(res => res.json());
+  return fetch(`./public/levels/${name}.json`)
+    .then(res => res.json())
+    .catch(error => console.log(error))
 }
