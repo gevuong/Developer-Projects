@@ -1,4 +1,4 @@
-class SpriteSheet {
+export default class SpriteSheet {
   constructor(image, width, height) {
     this.image = image;
     this.width = width;
@@ -23,6 +23,10 @@ class SpriteSheet {
   // we want to draw buffer to context
   draw(name, context, x, y) {
     const buffer = this.tiles.get(name); // Map.prototype.get(key) returns key of specified element from Map object. We want to retrieve buffer from tiles.set() in Map object.
-    ctx.drawImage(buffer, x, y); // drawImage() method is polymorphic, meaning behavior changes depending on number of args and type of args. In this case, (buffer, x, y) draws buffer img onto canvas. For more info: https://www.w3schools.com/tags/canvas_drawimage.asp
+    context.drawImage(buffer, x, y); // drawImage() method is polymorphic, meaning behavior changes depending on number of args and type of args. In this case, (buffer, x, y) draws buffer img onto canvas. For more info: https://www.w3schools.com/tags/canvas_drawimage.asp
+  }
+
+  drawTile(name, context, x, y) {
+    this.draw(name, context, x * this.width, y * this.height);
   }
 }
