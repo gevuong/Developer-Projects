@@ -1,0 +1,89 @@
+@import 'https://fonts.googleapis.com/css?family=Lato:400,700';
+
+body {
+  font-family: 'Lato', sans-serif;
+  padding-left: 43px;
+  padding-top: 16px;
+  /*line-height: 1.5;*/
+}
+
+h1 {
+  margin-bottom: 0;
+}
+
+p {
+  font-size: 1.08em;
+}
+
+p.description {
+  margin-top: 1em;
+  color: 'black';
+}
+#headingParagraph {
+  color: #637a91;
+  padding-bottom: 20px;
+}
+
+#listParagraph {
+  padding-top: 35px;
+  padding-bottom: 0px;
+  margin: auto;
+}
+
+input {
+  text-align: center;
+}
+
+input, button {
+  font-size: 0.8em;
+  border: solid 1px;
+  border-radius: 0.3em;
+  border-color: rgba(0, 0, 0, 0.1);
+  padding: 0.65em 0em;
+  width: 200px;
+}
+
+button {
+  color: white;
+}
+
+#toggleListButton {
+  margin-top: 5em;
+  background: #0CB7F7;
+}
+
+#myButton {
+  background: #52bab3;
+}
+
+#resetHeading, #inputBackgroundColor {
+  margin-top: 6px;
+  margin-left: 16.05em;
+  background-color: darkgray;
+}
+
+#buttonBackground {
+  margin-top: 6px;
+  background: #508abc;
+}
+
+button.description {
+  background: #FF9700;
+}
+
+#addItemButton {
+  background: #8771E8;
+}
+
+.removeItemDiv {
+  margin-top: 6px;
+  margin-left: 12.8em;
+}
+
+#removeItemButton {
+  background: #FF0079;
+}
+
+#linkDiv {
+  margin-top: 2em;
+}

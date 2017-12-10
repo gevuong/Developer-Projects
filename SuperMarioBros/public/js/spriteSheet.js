@@ -3,7 +3,7 @@ export default class SpriteSheet {
     this.image = image;
     this.width = width;
     this.height = height;
-    this.tiles = new Map(); // save buffer in Map instance
+    this.tiles = new Map(); // save tile buffer to Map instance
   }
 
   define(name, x, y) {

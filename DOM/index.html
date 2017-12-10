@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>JavaScript and the DOM</title>
+    <link rel="stylesheet" href="./style.css">
+  </head>
+  <body>
+    <h1 id="myHeading">JavaScript and the DOM</h1>
+    <p title='label' id='headingParagraph'>Making a web page interactive</p>
+
+    <div>
+      <input type="text" id='myTextInput' placeholder='Input a color'>
+      <button id="myButton">Change Headline Color</button>
+    </div>
+
+    <div class='resetHeadline'>
+      <button id="resetHeading">Reset Headline Color</button>
+    </div>
+
+    <div>
+      <input type="text" id='myBackgroundInput' placeholder='Input background color'>
+      <button id="buttonBackground">Change Background Color</button>
+    </div>
+
+    <button type="button" id='toggleListButton'>Hide List</button>
+    <div class="listDiv">
+      <p class='description'> Things that are purple are colored purple:</p>
+      <input type="text" class='description' placeholder='Input list description'>
+      <button class='description'>Change List Description</button>
+
+      <ul class='myList'>
+        <li>grapes</li>
+        <li class='not-purple'>oranges</li>
+        <li>lavender</li>
+        <li>plums</li>
+        <li class='not-purple'>mangos</li>
+        <li class='not-purple'>pumpkins</li>
+        <li>amethyst</li>
+      </ul>
+
+      <input type="text" id="addItemInput" placeholder='Input item'>
+      <button type="button" id=addItemButton>Add Item</button>
+      <div class='removeItemDiv'>
+        <button type="button" id=removeItemButton>Remove Last Item</button>
+      </div>
+    </div>
+
+
+    <div id="linkDiv">
+      <a id="link" href="https://teamtreehouse.com">Teamtreehouse</a>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>
