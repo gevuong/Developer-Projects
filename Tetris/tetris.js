@@ -1,7 +1,6 @@
 // add event listener to wait for document to be loaded before loading canvas el.
-document.addEventListener("DOMContentLoaded", function() {
+// document.addEventListener("DOMContentLoaded", function() {
   const canvasEl = document.getElementById("tetris");
-
 
   // set height and width attributes of canvasEl
   canvasEl.width = 240;
@@ -11,11 +10,7 @@ document.addEventListener("DOMContentLoaded", function() {
   ctx.scale(20, 20);
 
   // CONSTANTS
-  const player = {
-    pos: {x: 0 , y: 0},
-    matrix: null,
-    score: 0,
-  };
+  const player = new Player;
   window.player = player; // test if piece moves by altering pos.x and pos.y
 
   const board = createMatrix(12, 20) // 12 units wide, 20 units high
@@ -154,91 +149,19 @@ document.addEventListener("DOMContentLoaded", function() {
   }
   window.merge = merge;
 
-  function moveDirection(dir) {
-    player.pos.x += dir;
-    if (collide(board, player)) {
-      player.pos.x -= dir;
-    }
-  }
-
-  function resetPiece() {
-    const pieces = "TSLIZJO";
-    player.matrix = createPiece(pieces[Math.floor(pieces.length * Math.random())]);
-    player.pos.y = 0; // when piece reaches bottom of board, piece starts from the top
-    player.pos.x = Math.floor(board[0].length / 2) - Math.floor(player.matrix[0].length / 2);
-
-    if (collide(board, player)) {
-      board.forEach(row => row.fill(0)); // removes everything from board by replacing each row with zeros.
-      // drawMatrix(board, {x: 0, y: 0});
-      player.score = 0;
-      updateScore();
-    }
-  }
-
-
-  function playerDrop() {
-    player.pos.y++;
-    if (collide(board, player)) {
-      player.pos.y--;
-      merge(board, player);
-      resetPiece();
-      removeLine();
-      updateScore();
-    }
-    dropCounter = 0; // don't want drop to happen immediately after arrowDown
-  }
-
-
   document.addEventListener("keydown", function(e) {
     if (e.keyCode === 39) { // arrowRight
-      moveDirection(1);
-      console.log(player.pos.x);
+      player.move(1);
     } else if (e.keyCode === 37) { // arrowLeft
-      moveDirection(-1);
-      console.log(player.pos.x);
+      player.move(-1);
     } else if (e.keyCode === 40) { // arrowDown
-      playerDrop();
-      console.log(player.pos.y);
+      player.drop();
     } else if (e.keyCode === 81) {
-      playerRotate(-1);
+      player.rotate(-1);
     } else if (e.keyCode === 87) {
-      playerRotate(1);
+      player.rotate(1);
     }
   });
-
-  // create logic to prevent rotation against left or right side of wall
-  function playerRotate(dir) {
-    const pos = player.pos.x;
-    let offset = 1; // initialize offset, to add to player.pos.x
-    rotate(player.matrix, dir);
-    // cannot only check collision once, need to continuously check
-    while (collide(board, player)) {
-      player.pos.x += offset;
-      offset = -(offset + (offset > 0 ? 1: -1)) // algorithm to move piece however many spaces to left or right until there is no collision.
-      if (offset > player.matrix[0].length) { // to exit loop in case offset is greater than lenght of current piece, Rotate back current piece in neg dir.
-        rotate(player.matrix, -dir);
-        player.pos.x = pos; // reset offset
-        return
-      }
-    }
-  }
-
-  // to rotate matrix, transpose matrix, and reverse each row
-  function rotate(matrix, dir) {
-    for (let row = 0; row < matrix.length; ++row) {
-      for (let col = 0; col < row; ++col) { // NB: col < row, not matrix[row].length
-        [matrix[row][col], matrix[col][row]]
-        =
-        [matrix[col][row], matrix[row][col]];
-      }
-    }
-
-    if (dir > 0) {
-      matrix.forEach(row => row.reverse());
-    } else {
-      matrix.reverse();
-    }
-  }
 
   function draw() {
     // redraws ctx every time frame is updated to remove previously rendered piece
@@ -249,18 +172,12 @@ document.addEventListener("DOMContentLoaded", function() {
     drawMatrix(board, {x: 0, y: 0});
   }
 
-
-  let dropCounter = 0;
-  let dropInterval = 1000;
   let prevTime = 0;
 
   function update(time = 0) {
-    dropCounter += time - prevTime;
+    const deltaTime = time - prevTime;
     prevTime = time;
-
-    if (dropCounter >= dropInterval) {
-      playerDrop();
-    }
+    player.update(deltaTime)
 
     draw();
     requestAnimationFrame(update); // takes a callback as an arg to be invoked before repaint. callback itself calls requestAnimationFrame() to animate another frame before repaint. call method when ready to update animation onscreen
@@ -270,7 +187,7 @@ document.addEventListener("DOMContentLoaded", function() {
     document.getElementById("score").innerText = player.score;
   }
 
-  resetPiece();
+  player.reset();
   updateScore();
   update();
-})
+// })
