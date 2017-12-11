@@ -1,7 +1,10 @@
 // add event listener to wait for document to be loaded before loading canvas el.
 // document.addEventListener("DOMContentLoaded", function() {
 const tetrisManager = new TetrisManager(document);
-tetrisManager.createPlayer();
+const localTetris = tetrisManager.createPlayer();
+
+const connectionManager = new ConnectionManager();
+connectionManager.connect('ws://localhost:9000');
 
   const keyListener = e => {
     [
@@ -9,7 +12,7 @@ tetrisManager.createPlayer();
       [72, 75, 89, 73, 74], // player2 keys [h, k, y, i, j]
     ]
     .forEach((key, idx) => {
-      const player = tetrisManager.instances[idx].player;
+      const player = localTetris.player;
       if (e.type === 'keydown') {
         if (e.keyCode === key[0]) { // arrowRight
           player.move(-1);
