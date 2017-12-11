@@ -1,7 +1,7 @@
 class Session {
   constructor(id) {
     this.id = id;
-    this.clients = new Set; // stores all clients
+    this.clients = new Set; // stores all clients in a Set object to easily add and delete client, rather than storing clients in an array.
   }
 
   join(client) {
