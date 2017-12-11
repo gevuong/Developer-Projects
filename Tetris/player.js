@@ -1,12 +1,15 @@
 
 class Player {
-  constructor() {
+  constructor(tetris) {
+    this.tetris = tetris;
+    this.board = tetris.board;
+
     this.pos = {x: 0 , y: 0};
     this.matrix = null;
     this.score = 0;
 
     this.dropCounter = 0;
-    this.dropInterval = 1000;
+    this.dropInterval = 800;
 
     this.reset();
   }
@@ -14,7 +17,7 @@ class Player {
   // player class method. "this" refers to player
   move(dir) {
     this.pos.x += dir;
-    if (board.collide(this)) {
+    if (this.board.collide(this)) {
       this.pos.x -= dir;
     }
   }
@@ -25,7 +28,7 @@ class Player {
     let offset = 1; // initialize offset, to add to player.pos.x
     this._rotateMatrix(this.matrix, dir);
     // cannot only check collision once, need to continuously check
-    while (board.collide(this)) {
+    while (this.board.collide(this)) {
       this.pos.x += offset;
       offset = -(offset + (offset > 0 ? 1: -1)) // algorithm to move piece however many spaces to left or right until there is no collision.
       if (offset > this.matrix[0].length) { // to exit loop in case offset is greater than lenght of current piece, Rotate back current piece in neg dir.
@@ -55,12 +58,12 @@ class Player {
 
   drop() {
     this.pos.y++;
-    if (board.collide(this)) {
+    if (this.board.collide(this)) {
       this.pos.y--;
-      board.merge(this);
+      this.board.merge(this);
       this.reset();
-      board.removeLine();
-      updateScore();
+      this.board.removeLine();
+      // updateScore();
     }
     this.dropCounter = 0; // don't want drop to happen immediately after arrowDown
   }
@@ -76,13 +79,13 @@ class Player {
     const pieces = "TSLIZJO";
     this.matrix = createPiece(pieces[Math.floor(pieces.length * Math.random())]);
     this.pos.y = 0; // when piece reaches bottom of board, piece starts from the top
-    this.pos.x = Math.floor(board.matrix[0].length / 2) - Math.floor(this.matrix[0].length / 2);
+    this.pos.x = Math.floor(this.board.matrix[0].length / 2) - Math.floor(this.matrix[0].length / 2);
 
-    if (board.collide(this)) {
-      board.clear();
+    if (this.board.collide(this)) {
+      this.board.clear();
       // drawMatrix(board, {x: 0, y: 0});
       this.score = 0;
-      updateScore();
+      // updateScore();
     }
   }
 }

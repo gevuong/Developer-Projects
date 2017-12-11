@@ -1,10 +1,17 @@
 // add event listener to wait for document to be loaded before loading canvas el.
 // document.addEventListener("DOMContentLoaded", function() {
+
+  const tetri = [];
+
+  const playerElements = document.querySelectorAll(".player");
+  [...playerElements].forEach(playerElement => {
+    const canvas = playerElement.querySelector("canvas"); // select Canvas element inside player element
+    const tetris = new Tetris(canvas);
+    tetri.push(tetris);
+    console.log(playerElement);
+  })
+
   // CONSTANTS
-  const canvasEl = document.getElementById("tetris");
-  const board = new Board(12, 20); // 12 units wide, 20 units high
-  const player = new Player;
-  const tetris = new Tetris(canvasEl);
 
   // create block types
   function createPiece(type) {
@@ -53,24 +60,31 @@
     }
   }
 
-  document.addEventListener("keydown", function(e) {
-    if (e.keyCode === 39) { // arrowRight
-      player.move(1);
-    } else if (e.keyCode === 37) { // arrowLeft
-      player.move(-1);
-    } else if (e.keyCode === 40) { // arrowDown
-      player.drop();
-    } else if (e.keyCode === 81) {
-      player.rotate(-1);
-    } else if (e.keyCode === 87) {
-      player.rotate(1);
-    }
+  document.addEventListener("keydown", e => {
+    [
+      [65, 68, 81, 69, 83], // player1 keys [a, d, q, e, w]
+      [72, 75, 89, 73, 74], // player2 keys [h, k, y, i, j]
+    ]
+    .forEach((key, idx) => {
+      const player = tetri[idx].player;
+      if (e.keyCode === key[0]) { // arrowRight
+        player.move(-1);
+      } else if (e.keyCode === key[1]) { // arrowLeft
+        player.move(1);
+      } else if (e.keyCode === key[2]) {
+        player.rotate(-1);
+      } else if (e.keyCode === key[3]) {
+        player.rotate(1);
+      } else if (e.keyCode === key[4]) { // arrowDown
+        player.drop();
+      }
+    })
   });
 
+  // function updateScore() {
+  //   document.getElementById("score").innerText = tetris.player.score;
+  // }
 
-  function updateScore() {
-    document.getElementById("score").innerText = player.score;
-  }
 
-  updateScore();
+  // updateScore();
 // })
