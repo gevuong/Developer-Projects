@@ -55,18 +55,20 @@ class Board {
 
   removeLine() {
     let rowCount = 1;
-    outer: for (let y = this.matrix.length - 1; y > 0; y--) {
-      for (let col = 0; col < this.matrix[y].length; ++col) {
-        if (this.matrix[y][col] === 0) {
+    let score = 0;
+    outer: for (let row = this.matrix.length - 1; row > 0; row--) {
+      for (let col = 0; col < this.matrix[row].length; ++col) {
+        if (this.matrix[row][col] === 0) {
           continue outer;
         }
       }
-      const row = this.matrix.splice(y, 1)[0].fill(0); // removes and selects row and fills each element with 0.
-      this.matrix.unshift(row); // add row of zeros to top of board
-      ++y;
+      const rows = this.matrix.splice(row, 1)[0].fill(0); // removes and selects row and fills each element with 0.
+      this.matrix.unshift(rows); // add row of zeros to top of board
+      ++row;
 
-      player.score += rowCount * 10;
+      score += rowCount * 10;
       rowCount *= 2;
     }
+    return score;
   }
 }

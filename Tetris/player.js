@@ -1,6 +1,8 @@
 
 class Player {
   constructor(tetris) {
+    this.DROP_SLOW = 800;
+    this.DROP_FAST = 100;
     this.tetris = tetris;
     this.board = tetris.board;
 
@@ -9,9 +11,56 @@ class Player {
     this.score = 0;
 
     this.dropCounter = 0;
-    this.dropInterval = 800;
+    this.dropInterval = this.DROP_SLOW;
 
     this.reset();
+  }
+
+  // create block types
+  createPiece(type) {
+    if (type === "T") {
+      return [
+        [0, 0, 0],
+        [1, 1, 1],
+        [0, 1, 0]
+      ]
+    } else if (type === "S") {
+      return [
+        [0, 2, 2],
+        [2, 2, 0],
+        [0, 0, 0]
+      ]
+    } else if (type === "L") {
+      return [
+        [0, 3, 0],
+        [0, 3, 0],
+        [0, 3, 3]
+      ]
+    } else if (type === "I") {
+      return [
+        [0, 4, 0, 0],
+        [0, 4, 0, 0], // easier to anticipate rotation if in 4x4
+        [0, 4, 0, 0],
+        [0, 4, 0, 0]
+      ]
+    } else if (type === "Z") {
+      return [
+        [5, 5, 0],
+        [0, 5, 5],
+        [0, 0, 0]
+      ]
+    } else if (type === "J") {
+      return [
+        [0, 6, 0],
+        [0, 6, 0],
+        [6, 6, 0]
+      ]
+    } else if (type === "O") {
+      return [
+        [7, 7],
+        [7, 7]
+      ]
+    }
   }
 
   // player class method. "this" refers to player
@@ -59,11 +108,12 @@ class Player {
   drop() {
     this.pos.y++;
     if (this.board.collide(this)) {
+      // debugger
       this.pos.y--;
       this.board.merge(this);
       this.reset();
-      this.board.removeLine();
-      // updateScore();
+      this.score += this.board.removeLine();
+      this.tetris.updateScore(this.score);
     }
     this.dropCounter = 0; // don't want drop to happen immediately after arrowDown
   }
@@ -77,7 +127,7 @@ class Player {
 
   reset() {
     const pieces = "TSLIZJO";
-    this.matrix = createPiece(pieces[Math.floor(pieces.length * Math.random())]);
+    this.matrix = this.createPiece(pieces[Math.floor(pieces.length * Math.random())]);
     this.pos.y = 0; // when piece reaches bottom of board, piece starts from the top
     this.pos.x = Math.floor(this.board.matrix[0].length / 2) - Math.floor(this.matrix[0].length / 2);
 
@@ -85,7 +135,7 @@ class Player {
       this.board.clear();
       // drawMatrix(board, {x: 0, y: 0});
       this.score = 0;
-      // updateScore();
+      this.tetris.updateScore(this.score);
     }
   }
 }

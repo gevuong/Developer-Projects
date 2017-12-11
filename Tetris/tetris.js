@@ -1,7 +1,8 @@
 class Tetris {
-  constructor(canvas) {
-    this.canvas = canvas;
-    this.ctx =  canvas.getContext('2d'); // set 2d rendering context for the drawing surface of <canvas< element.
+  constructor(element) {
+    this.element = element;
+    this.canvas = element.querySelector("canvas");
+    this.ctx =  this.canvas.getContext('2d'); // set 2d rendering context for the drawing surface of <canvas< element.
     this.ctx.scale(20, 20);
 
     this.board = new Board(12, 20); // 12 units wide, 20 units high
@@ -15,13 +16,13 @@ class Tetris {
     const update = (time = 0) => {
       const deltaTime = time - prevTime;
       prevTime = time;
-      this.player.update(deltaTime)
+      this.player.update(deltaTime);
 
       this.draw();
       requestAnimationFrame(update); // takes a callback as an arg to be invoked before repaint. callback itself calls requestAnimationFrame() to animate another frame before repaint. call method when ready to update animation onscreen
     }
-
     update();
+    this.updateScore(0); // initialize score counter
   }
 
 
@@ -47,4 +48,7 @@ class Tetris {
     });
   }
 
+  updateScore(score) {
+    this.element.querySelector('.score').innerText = score;
+  }
 }
