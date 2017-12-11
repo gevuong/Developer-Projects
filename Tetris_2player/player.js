@@ -1,7 +1,7 @@
 
 class Player {
   constructor(tetris) {
-    this.DROP_SLOW = 800;
+    this.DROP_SLOW = 700;
     this.DROP_FAST = 100;
     this.tetris = tetris;
     this.board = tetris.board;

@@ -2,14 +2,13 @@
 * [ ] [Super Mario Bros](https://goo.gl/BnoLin) (vanilla JS)
   * [x] Create sprite of game screen (sky and ground tiles) background
   * [ ]
-* [x] [Tetris](https://goo.gl/uQ3zDN) (vanilla JS)
+* [x] [Tetris, 2-player](https://goo.gl/uQ3zDN) (vanilla JS)
   * [x] Collision detection (technical challenge)
   * [x] Rotate Tetrominoes (technical challenge)
   * [x] Basic scoreboard
-  * [ ] Implement two player capability
+  * [x] Implement two player capability
   * [ ] Implement multi-player capability (websockets)
   * [ ] Persist high score
-  * [ ] Add levels and music/effects
 * [x] [Scoreboard App](https://goo.gl/GjZeVb) (React.js with Redux)
   * [x] Increment/decrement score per player
   * [x] Add and remove player
