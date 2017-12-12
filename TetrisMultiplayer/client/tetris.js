@@ -12,10 +12,6 @@ class Tetris {
       this.updateScore(score);
     });
 
-    this.player.events.listen('pos', pos => {
-      console.log('player pos changed', pos);
-    })
-    
     this.colors = [
       null, 'red', 'blue', 'green', 'yellow', 'orange', 'purple', "violet"
     ];

@@ -53,6 +53,7 @@ server.on('connection', conn => {
   console.log('connected to port 9000');
   const client = createClient(conn); // id arg is optional
 
+  // message is received from client side
   conn.on("message", msg => {
     console.log("Message received (server-side): ", msg);
     const data = JSON.parse(msg);
@@ -72,7 +73,7 @@ server.on('connection', conn => {
       broadcastSession(session);
     }
 
-    console.log('sessions: ', sessions);
+    // console.log('sessions: ', sessions);
   });
 
   conn.on('close', () => {

@@ -1,4 +1,3 @@
-
 class Player {
   constructor(tetris) {
     this.DROP_SLOW = 700;
@@ -6,7 +5,7 @@ class Player {
     this.tetris = tetris;
     this.board = tetris.board;
 
-    this.events = new Events();
+    this.events = new Events;
 
     this.pos = {x: 0 , y: 0};
     this.matrix = null;
@@ -87,9 +86,10 @@ class Player {
       if (offset > this.matrix[0].length) { // to exit loop in case offset is greater than lenght of current piece, Rotate back current piece in neg dir.
         this._rotateMatrix(this.matrix, -dir);
         this.pos.x = pos; // reset offset
-        return
+        return;
       }
     }
+    this.events.emit('matrix', this.matrix);
   }
 
   // to rotate matrix, transpose matrix, and reverse each row
@@ -142,5 +142,8 @@ class Player {
       this.score = 0;
       this.events.emit('score', this.score);
     }
+
+    this.events.emit('pos', this.pos);
+    this.events.emit('matrix', this.matrix);
   }
 }

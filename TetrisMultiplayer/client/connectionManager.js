@@ -4,15 +4,16 @@ class ConnectionManager {
     this.peers = new Map; // keep a list of all peers
 
     this.tetrisManager = tetrisManager;
+    this.localTetris = [...tetrisManager.instances][0]; // this is how to access local player, ean instance Set object.
   }
 
   connect(address) {
     this.conn = new WebSocket(address);
-    // addEventListener gets called once connection is established:
+    // addEventListener gets called once connection is established
     this.conn.addEventListener('open', () => {
       console.log("connection established (client)");
       this.initSession(); // init session when connection is established
-
+      this.watchEvents(); // once connection is established, watchEventss
     });
 
     this.conn.addEventListener('message', e => {
@@ -34,6 +35,30 @@ class ConnectionManager {
         type: 'create-session',
       });
     }
+  }
+
+  // sets up event listeners in the player and board class
+  watchEvents() {
+    const local = this.localTetris;
+    const player = local.player;
+
+    ['pos', 'matrix', 'score'].forEach(prop => {
+      player.events.listen(prop, value => {
+        this.send({
+          type: 'state-update',
+          fragment: 'player',
+          player: [prop, value],
+        });
+      });
+    });
+
+    // player.events.listen('pos', pos => {
+    //   console.log('player pos changed', pos);
+    // })
+    //
+    // player.events.listen('matrix', matrix => {
+    //   console.log('player matrix changed', matrix);
+    // })
   }
 
   updateManager(peers) {
@@ -63,6 +88,7 @@ class ConnectionManager {
     }
   }
 
+  // send data to server 
   send(data) {
     const msg = JSON.stringify(data);
     console.log(`Sending message (from client): ${msg}`);
