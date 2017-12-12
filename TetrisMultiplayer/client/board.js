@@ -1,4 +1,3 @@
-
 class Board {
   constructor(width, height) {
     const matrix = [];
@@ -7,10 +6,13 @@ class Board {
     } // alternative:
       // matrix = new Array(height).fill(0).map(row => (new Array(width).fill(0)))
     this.matrix = matrix;
+
+    this.events = new Events;
   }
 
   clear() {
     this.matrix.forEach(row => row.fill(0)); // removes everything from board by replacing each row with zeros.
+    this.events.emit('matrix', this.matrix);
   }
 
   collide(player) {
@@ -51,6 +53,7 @@ class Board {
         }
       });
     });
+    this.events.emit('matrix', this.matrix);
   }
 
   removeLine() {
@@ -69,6 +72,7 @@ class Board {
       score += rowCount * 10;
       rowCount *= 2;
     }
+    this.events.emit('matrix', this.matrix);
     return score;
   }
 }

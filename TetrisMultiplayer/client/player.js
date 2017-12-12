@@ -1,10 +1,11 @@
-
 class Player {
   constructor(tetris) {
     this.DROP_SLOW = 700;
     this.DROP_FAST = 100;
     this.tetris = tetris;
     this.board = tetris.board;
+
+    this.events = new Events;
 
     this.pos = {x: 0 , y: 0};
     this.matrix = null;
@@ -68,7 +69,9 @@ class Player {
     this.pos.x += dir;
     if (this.board.collide(this)) {
       this.pos.x -= dir;
+      return;
     }
+    this.events.emit('pos', this.pos);
   }
 
   // create logic to prevent rotation against left or right side of wall
@@ -83,9 +86,10 @@ class Player {
       if (offset > this.matrix[0].length) { // to exit loop in case offset is greater than lenght of current piece, Rotate back current piece in neg dir.
         this._rotateMatrix(this.matrix, -dir);
         this.pos.x = pos; // reset offset
-        return
+        return;
       }
     }
+    this.events.emit('matrix', this.matrix);
   }
 
   // to rotate matrix, transpose matrix, and reverse each row
@@ -107,15 +111,17 @@ class Player {
 
   drop() {
     this.pos.y++;
+    this.dropCounter = 0; // don't want drop to happen immediately after arrowDown
     if (this.board.collide(this)) {
       // debugger
       this.pos.y--;
       this.board.merge(this);
       this.reset();
       this.score += this.board.removeLine();
-      this.tetris.updateScore(this.score);
+      this.events.emit('score', this.score);
+      return;
     }
-    this.dropCounter = 0; // don't want drop to happen immediately after arrowDown
+    this.events.emit('pos', this.pos);
   }
 
   update(deltaTime) {
@@ -133,9 +139,11 @@ class Player {
 
     if (this.board.collide(this)) {
       this.board.clear();
-      // drawMatrix(board, {x: 0, y: 0});
       this.score = 0;
-      this.tetris.updateScore(this.score);
+      this.events.emit('score', this.score);
     }
+
+    this.events.emit('pos', this.pos);
+    this.events.emit('matrix', this.matrix);
   }
 }

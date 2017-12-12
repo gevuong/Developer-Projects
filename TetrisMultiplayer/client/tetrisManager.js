@@ -11,7 +11,7 @@ class TetrisManager {
       .children[0];
 
     const tetris = new Tetris(element);
-    this.instances.add(tetris);
+    this.instances.add(tetris); // to access instances of Set object on window: [...tetrisManager.instances][0]
 
     this.document.body.appendChild(tetris.element);
 
@@ -21,5 +21,11 @@ class TetrisManager {
   removePlayer(tetris) {
     this.instances.delete(tetris);
     this.document.body.removeChild(tetris.element);
+  }
+
+  sortPlayers(tetri) {
+    tetri.forEach(tetris => {
+      this.document.body.appendChild(tetris.element); // appendChild never creates copies of nodes. So if we put every tetris last in order, it will be sorted
+    });
   }
 }
