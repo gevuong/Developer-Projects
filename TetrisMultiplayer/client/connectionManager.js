@@ -100,7 +100,7 @@ class ConnectionManager {
       return this.peers.get(client.id) || this.localTetris;
     });
     // console.log("sorted: ", sorted);
-    // this.tetrisManager.sortPlayers(sorted);
+    this.tetrisManager.sortPlayers(sorted);
   }
 
   updatePeer(id, fragment, [prop, value]) {
