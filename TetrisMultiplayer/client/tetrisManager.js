@@ -22,4 +22,10 @@ class TetrisManager {
     this.instances.delete(tetris);
     this.document.body.removeChild(tetris.element);
   }
+
+  sortPlayers(tetri) {
+    tetri.forEach(tetris => {
+      this.document.body.appendChild(tetris.element); // appendChild never creates copies of nodes. So if we put every tetris last in order, it will be sorted
+    });
+  }
 }

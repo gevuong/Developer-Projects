@@ -3,6 +3,8 @@ Steps to run application:
 - Run node server/main.js to start server.
 - Copy full path to index.html, and paste onto browser to open application
 
+### Implementation steps
+...
 
 10. When local player is playing, the moment another player is added. Nothing is happening. The added players need to get a message from the server to "join-session". We want to know if the added players are playing. To do this, create event library to listen and emit events when player is playing, such as updating player score, updating player position changes.
 
@@ -19,4 +21,6 @@ To test on browser, access a instances Set object using the following command: `
 13. Whenever player refreshes page, the game state does not get saved. In other words, the tiles are missing.
 We need to keep a record of the game state on the server that we send during broadcast. Create and call serialize() to return an object, a simple representation of the gameThe initial state does not get saved.
 
-14. Make sure when invoking broadcastSession(), an updated copy of the player state is saved to the server. The initial state of opposing player is saved on refresh. 
+14. Make sure when invoking broadcastSession(), an updated copy of the player state is saved to the server. The initial state of opposing player is saved on refresh.
+
+15. Add sorting in connectionManager to get all the tetris instances in the correct order according to the peers Map object. Next, send updated sorted array to tetrisManager to sort it for us. appendChild to document.body for every instance of tetris created. This allows proper order of player creation in the browser.
