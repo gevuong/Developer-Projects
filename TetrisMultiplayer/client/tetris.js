@@ -8,20 +8,27 @@ class Tetris {
     this.board = new Board(12, 20); // 12 units wide, 20 units high
     this.player = new Player(this); // to let Player class know player instance is created in Tetris class
 
+    this.player.events.listen('score', score => {
+      this.updateScore(score);
+    });
+
+    this.player.events.listen('pos', pos => {
+      console.log('player pos changed', pos);
+    })
+    
     this.colors = [
       null, 'red', 'blue', 'green', 'yellow', 'orange', 'purple', "violet"
     ];
 
     let prevTime = 0;
-    const update = (time = 0) => {
+    this._update = (time = 0) => {
       const deltaTime = time - prevTime;
       prevTime = time;
       this.player.update(deltaTime);
 
       this.draw();
-      requestAnimationFrame(update); // takes a callback as an arg to be invoked before repaint. callback itself calls requestAnimationFrame() to animate another frame before repaint. call method when ready to update animation onscreen
+      requestAnimationFrame(this._update); // takes a callback as an arg to be invoked before repaint. callback itself calls requestAnimationFrame() to animate another frame before repaint. call method when ready to update animation onscreen
     }
-    update();
     this.updateScore(0); // initialize score counter
   }
 
@@ -46,6 +53,10 @@ class Tetris {
         }
       });
     });
+  }
+
+  run() {
+    this._update();
   }
 
   updateScore(score) {

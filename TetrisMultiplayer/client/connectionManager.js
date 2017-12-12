@@ -38,20 +38,20 @@ class ConnectionManager {
 
   updateManager(peers) {
     const me = peers.you;
-    const clients = peers.clients.filter(id => me !== id); // filters me out of peers who are broadcasting session
+    const clients = peers.clients.filter(id => me !== id); // filters me out of peers while broadcasting session
     clients.forEach(id => {
       if (!this.peers.has(id)) { // if peers Map object does not have id, create a tetris player
         const tetris = this.tetrisManager.createPlayer();
-        this.peers.set(id, tetris); // store player in peers Map obj
+        this.peers.set(id, tetris); // store player in peers Map obj, which stores all active players/session IDs
       }
     });
 
     [...this.peers.entries()].forEach(([id, tetris]) => {
-      if (clients.indexOf(id) === -1) { // if clients array does not contain id
+      if (clients.indexOf(id) === -1) { // if clients array does not contain id, removePlayer and delete id from peers Map obj.
         this.tetrisManager.removePlayer(tetris);
         this.peers.delete(id);
       }
-    }
+    })
   }
 
   receive(msg) {

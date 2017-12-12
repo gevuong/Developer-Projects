@@ -6,6 +6,8 @@ class Player {
     this.tetris = tetris;
     this.board = tetris.board;
 
+    this.events = new Events();
+
     this.pos = {x: 0 , y: 0};
     this.matrix = null;
     this.score = 0;
@@ -68,7 +70,9 @@ class Player {
     this.pos.x += dir;
     if (this.board.collide(this)) {
       this.pos.x -= dir;
+      return;
     }
+    this.events.emit('pos', this.pos);
   }
 
   // create logic to prevent rotation against left or right side of wall
@@ -107,15 +111,17 @@ class Player {
 
   drop() {
     this.pos.y++;
+    this.dropCounter = 0; // don't want drop to happen immediately after arrowDown
     if (this.board.collide(this)) {
       // debugger
       this.pos.y--;
       this.board.merge(this);
       this.reset();
       this.score += this.board.removeLine();
-      this.tetris.updateScore(this.score);
+      this.events.emit('score', this.score);
+      return;
     }
-    this.dropCounter = 0; // don't want drop to happen immediately after arrowDown
+    this.events.emit('pos', this.pos);
   }
 
   update(deltaTime) {
@@ -133,9 +139,8 @@ class Player {
 
     if (this.board.collide(this)) {
       this.board.clear();
-      // drawMatrix(board, {x: 0, y: 0});
       this.score = 0;
-      this.tetris.updateScore(this.score);
+      this.events.emit('score', this.score);
     }
   }
 }

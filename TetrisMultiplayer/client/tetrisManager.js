@@ -11,7 +11,7 @@ class TetrisManager {
       .children[0];
 
     const tetris = new Tetris(element);
-    this.instances.add(tetris);
+    this.instances.add(tetris); // to access instances of Set object on window: [...tetrisManager.instances][0]
 
     this.document.body.appendChild(tetris.element);
 
