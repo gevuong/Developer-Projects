@@ -18,3 +18,5 @@ To test on browser, access a instances Set object using the following command: `
 
 13. Whenever player refreshes page, the game state does not get saved. In other words, the tiles are missing.
 We need to keep a record of the game state on the server that we send during broadcast. Create and call serialize() to return an object, a simple representation of the gameThe initial state does not get saved.
+
+14. Make sure when invoking broadcastSession(), an updated copy of the player state is saved to the server. The initial state of opposing player is saved on refresh. 

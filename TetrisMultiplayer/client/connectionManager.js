@@ -79,7 +79,7 @@ class ConnectionManager {
 
   updateManager(peers) {
     const me = peers.you;
-    const clients = peers.clients.filter(client.id => me !== client.id); // filters me out of peers while broadcasting session
+    const clients = peers.clients.filter(client => me !== client.id); // filters my ID out of peers while broadcasting session
     clients.forEach(client => {
       if (!this.peers.has(client.id)) { // if peers Map object does not have id, create a tetris player
         const tetris = this.tetrisManager.createPlayer();
@@ -89,7 +89,7 @@ class ConnectionManager {
     });
 
     [...this.peers.entries()].forEach(([id, tetris]) => {
-      if (!clients.some(client => client.id === id)) { // if loop over all clients, and can't find anyone with same id, then removePlayer and delete id from peers Map obj. 
+      if (!clients.some(client => client.id === id)) { // if loop over all clients, and can't find anyone with same id, then removePlayer and delete id from peers Map obj.
         this.tetrisManager.removePlayer(tetris);
         this.peers.delete(id);
       }
