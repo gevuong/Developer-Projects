@@ -55,6 +55,28 @@ class Tetris {
     this._update();
   }
 
+  // keep a record of the game state on the server that we send on broadcast. Call serialize() to return an object, a simple representation of the game
+  serialize() {
+    return {
+      board: {
+        matrix: this.board.matrix,
+      },
+      player: {
+        matrix: this.player.matrix,
+        pos: this.player.pos,
+        score: this.player.score,
+      },
+    }
+  }
+
+  // use serialize and unserialize() in connectionManager
+  unserialize(state) {
+    this.board = Object.assign(state.board);
+    this.player = Object.assign(state.player);
+    this.updateScore(this.player.score);
+    this.draw();
+  }
+
   updateScore(score) {
     this.element.querySelector('.score').innerText = score;
   }

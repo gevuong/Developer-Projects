@@ -42,7 +42,12 @@ function broadcastSession(session) {
       type: "session-broadcast",
       peers: {
         you: client.id,
-        clients: clients.map(client => client.id),
+        clients: clients.map(client => {
+          return {
+            id: client.id,
+            state: client.state,
+          }
+        }),
       },
     });
   })
@@ -61,6 +66,7 @@ server.on('connection', conn => {
     if (data.type === 'create-session') {
       const id = createId();
       const session = createSession(); // create new session instance
+      client.state = data.state; // set initial state on client
       session.join(client);
       client.send({
         type: 'session-created',
@@ -69,8 +75,13 @@ server.on('connection', conn => {
     } else if (data.type === 'join-session') {
       const session = getSession(data.id) || createSession(data.id);
       session.join(client);
+      client.state = data.state;
 
-      broadcastSession(session);
+      broadcastSession(session); // whenever we call broadcastSession(), we always have an updated copy of player state 
+    } else if (data.type === 'state-update') {
+      const [prop, value] = data.state;
+      client.state[data.fragment][prop] = value; // for each state output, we keep value on server as well
+      client.broadcast(data); // send message to all peers
     }
 
     // console.log('sessions: ', sessions);

@@ -24,15 +24,19 @@ class ConnectionManager {
 
   // check to see if session already exists, if not create new session
   initSession() {
-    const sessionId = window.location.hash.split("#")[1]; // get everything after hash
+    const sessionId = window.location.hash.split("#")[1];
+    const state = this.localTetris.serialize();
+    // get everything after hash
     if (sessionId) {
       this.send({
         type: 'join-session',
         id: sessionId,
+        state,
       })
     } else {
       this.send({ // send request from client-side to create a room/session in server
         type: 'create-session',
+        state,
       });
     }
   }
@@ -47,7 +51,19 @@ class ConnectionManager {
         this.send({
           type: 'state-update',
           fragment: 'player',
-          player: [prop, value],
+          state: [prop, value],
+        });
+      });
+    });
+
+    const board = local.board;
+
+    ['matrix'].forEach(prop => {
+      board.events.listen(prop, value => {
+        this.send({
+          type: 'state-update',
+          fragment: 'board',
+          state: [prop, value],
         });
       });
     });
@@ -63,20 +79,36 @@ class ConnectionManager {
 
   updateManager(peers) {
     const me = peers.you;
-    const clients = peers.clients.filter(id => me !== id); // filters me out of peers while broadcasting session
-    clients.forEach(id => {
-      if (!this.peers.has(id)) { // if peers Map object does not have id, create a tetris player
+    const clients = peers.clients.filter(client.id => me !== client.id); // filters me out of peers while broadcasting session
+    clients.forEach(client => {
+      if (!this.peers.has(client.id)) { // if peers Map object does not have id, create a tetris player
         const tetris = this.tetrisManager.createPlayer();
-        this.peers.set(id, tetris); // store player in peers Map obj, which stores all active players/session IDs
+        tetris.unserialize(client.state); // unserialize state for new player
+        this.peers.set(client.id, tetris); // store player in peers Map obj, which stores all active players/session IDs
       }
     });
 
     [...this.peers.entries()].forEach(([id, tetris]) => {
-      if (clients.indexOf(id) === -1) { // if clients array does not contain id, removePlayer and delete id from peers Map obj.
+      if (!clients.some(client => client.id === id)) { // if loop over all clients, and can't find anyone with same id, then removePlayer and delete id from peers Map obj. 
         this.tetrisManager.removePlayer(tetris);
         this.peers.delete(id);
       }
     })
+  }
+
+  updatePeer(id, fragment, [prop, value]) {
+    if (!this.peers.has(id)) { // if peers does not have id
+      console.error('Client does not exist', id);
+      return;
+    }
+    const tetris = this.peers.get(id);
+    tetris[fragment][prop] = value; // fragment is either board or player
+
+    if (prop === 'score') {
+      tetris.updateScore(value);
+    } else {
+      tetris.draw();
+    }
   }
 
   receive(msg) {
@@ -85,10 +117,12 @@ class ConnectionManager {
       window.location.hash = data.id;
     } else if (data.type === 'session-broadcast') {
       this.updateManager(data.peers);
+    } else if (data.type === 'state-update') {
+      this.updatePeer(data.clientId, data.fragment, data.state);
     }
   }
 
-  // send data to server 
+  // send data to server
   send(data) {
     const msg = JSON.stringify(data);
     console.log(`Sending message (from client): ${msg}`);
