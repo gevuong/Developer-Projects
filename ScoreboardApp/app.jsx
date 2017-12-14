@@ -244,7 +244,9 @@ class App extends Component {
       })).isRequired,
     };
 
-    this.state = {players: this.props.initialPlayers};
+    this.state = {
+      players: this.props.initialPlayers,
+    };
     this.onPlayerAdd = this.onPlayerAdd.bind(this);
     // this.onScoreChange = this.onScoreChange.bind(this); Don't need, but why?
   }

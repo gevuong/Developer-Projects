@@ -1,10 +1,15 @@
-Steps to run application:
+## Using Websockets on Heroku w/ Node.js
+- steps to create realtime Node.js applications on heroku. These instructions allow sharing of server's current time with client via persistent socket connection, using Node's express web server.
+https://devcenter.heroku.com/articles/node-websockets
 
-- Run node server/main.js to start server.
+
+Steps to run application locally after cloning:
+- npm install
+- Run npm start
 - Copy full path to index.html, and paste onto browser to open application
 
 ### Implementation steps
-...
+...did not record steps prior...
 
 10. When local player is playing, the moment another player is added. Nothing is happening. The added players need to get a message from the server to "join-session". We want to know if the added players are playing. To do this, create event library to listen and emit events when player is playing, such as updating player score, updating player position changes.
 

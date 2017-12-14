@@ -1,0 +1,19 @@
+{
+  "name": "tetris_multiplayer",
+  "version": "1.0.0",
+  "description": "Steps to run application:",
+  "main": "client/main.js",
+  "dependencies": {
+    "bufferutil": "3.0.3",
+    "express": "4.16.2",
+    "utf-8-validate": "4.0.0",
+    "ws": "3.3.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server/main.js"
+  },
+  "author": "",
+  "license": "ISC"
+}

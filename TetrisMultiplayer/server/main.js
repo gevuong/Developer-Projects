@@ -1,9 +1,25 @@
+const express = require('express');
 const WebSocketServer = require('ws').Server;
+const path = require('path');
+
 const Session = require('./session');
 const Client = require('./client');
 
-const server = new WebSocketServer({ port: 9000 });
+// const server = new WebSocketServer({ port: 9000 });
+const PORT = process.env.PORT || 9000;
+const INDEX = path.join(__dirname, 'index.html');
+
+// create an HTTP server to do two things: serve our client-side assets and provide a hook for the WebSocket server to monitor for upgrade requests.
+const server = express()
+  .use((req, res) => res.sendFile(INDEX) )
+  .listen(PORT, () => console.log(`Listening on ${ PORT }`
+  ));
+
+// create websocket server. WebSocket server takes a HTTP server as an arg so that it can listen for 'upgrade' events
+const wss = new WebSocketServer({ server });
+
 const sessions = new Map; // store session in Map object
+
 
 function createId(length = 6, chars = 'abcdefghijklmnopqrstuvwxyz0123456789') {
   let id = "";
@@ -30,7 +46,6 @@ function createSession(id = createId()) {
   return session;
 }
 
-
 function getSession(id) {
   return sessions.get(id);
 }
@@ -53,8 +68,8 @@ function broadcastSession(session) {
   })
 }
 
-
-server.on('connection', conn => {
+// handle connection by logging connections and disconnections.
+wss.on('connection', conn => {
   console.log('connected to port 9000');
   const client = createClient(conn); // id arg is optional
 
@@ -77,7 +92,7 @@ server.on('connection', conn => {
       session.join(client);
       client.state = data.state;
 
-      broadcastSession(session); // whenever we call broadcastSession(), we always have an updated copy of player state 
+      broadcastSession(session); // whenever we call broadcastSession(), we always have an updated copy of player state
     } else if (data.type === 'state-update') {
       const [prop, value] = data.state;
       client.state[data.fragment][prop] = value; // for each state output, we keep value on server as well
