@@ -23,28 +23,28 @@
   * [x] Stopwatch with start, stop, and reset buttons
   * Challenge encountered: Designing data flow that is easy to understand and maintain, such as communicating events from grandchild to parent component via virtualDOM traversal.
 
-![Scoreboard gif](imgs/scoreboard.gif)
+![Scoreboard gif](images/scoreboard.gif)
 
 * [x] [CourseDirectory App](https://goo.gl/RqTLNk) (React.js, React Router 4)
   * [x] Single page application
   * [x] Navigate routes programmatically via form submission
   * [x] Displays 404 Error route
 
-![CourseDirectory gif](imgs/course directory.gif)
+![CourseDirectory gif](images/course_directory.gif)
 
 * [x] [GIFSearch App](https://goo.gl/8e7Bqn) (React.js, fetchAPI, Axios)
   * [x] Renders 24 currently trending GIFs using Giphy API's **Trending GIFs Endpoint**
   * [x] Search feature using Giphy API's **Search Endpoint**
   * [x] Loading indicator and "no GIFS match your search" indicator
-  * [ ] Infinite scroll
 
-![Gifphy Search gif](/imgs/giphysearch.gif)
+![Gif Search gif](images/giphysearch.gif)
 
 * [x] [RSVP App](https://goo.gl/tWjW7c) (vanilla JS)
   * [x] Create, edit, and remove guest from RSVP list
   * [x] Filter guests who have responded
   * Learning goals: DOM traversal, DOM manipulation, event handling
-![rsvp gif](imgs/rsvp.gif)
+
+![rsvp gif](images/rsvp.gif)
 
 
 ## Backend
