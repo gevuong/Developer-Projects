@@ -5,7 +5,7 @@
 
 
 * [x] [Tetris, 2-player](https://goo.gl/voR27T) (vanilla JS)
-  * [x] left-player keys: asdqe, right-player keys: hjkyi
+  * [x] left-player keys: ASDW, right-player keys: Up, Down, Left, Right
   * [x] Collision detection (technical challenge)
   * [x] Rotate Tetrominoes (technical challenge)
   * [x] Remove row when entire row is filled

@@ -22,6 +22,12 @@ We'll have a simple CLI tool, though we can use the `launchy` gem to pop open th
 * Understand the purpose of adding an index to columns in our database
 
 
+## To run application on CLI
+* Run CLI script using `rails runner bin/cli` when you are in url_shortener directory. This will run the Rails environment, allowing you to access classes without requiring them explicitly. rails runner will also connect to the DB to query tables.
+* `launchy` gem is added to Gemfile and is used to open a URL in browser, record a visit.
+* Write a simple command-line script interface in bin/cli, and omit the .rb extension. Instead, write #!/usr/bin/env ruby on the first line of the file to tell the command-line interpreter that this is a ruby file. This is known as a `Shebang`.
+
+
 ### Trivia Notes
 * ActiveRecords #validates class method validates state of object/list of column names before they go into DB. If these validations produce any errors, Rails does not save the object. You can also run these validations on your own. valid? triggers your validations and returns true if no errors were found in the object, and false otherwise.
 
