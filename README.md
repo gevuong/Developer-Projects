@@ -3,11 +3,13 @@
   * [x] Create sprite of game screen (sky and ground tiles) background
   * [ ]
 
+![Super Mario Bros](images/super_mario_bros.png)
+
 
 * [x] [Tetris, 2-player](https://goo.gl/voR27T) (vanilla JS)
   * [x] left-player keys: ASDW, right-player keys: Up, Down, Left, Right
-  * [x] Collision detection (technical challenge)
-  * [x] Rotate Tetrominoes (technical challenge)
+  * [x] Collision detection
+  * [x] Rotate Tetrominoes
   * [x] Remove row when entire row is filled
   * [x] Basic scoreboard
   * [x] Implement two player capability
