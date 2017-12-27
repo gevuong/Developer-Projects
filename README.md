@@ -48,8 +48,10 @@
 
 
 ## Backend
-* [ ] [URL Shortener] (Ruby on Rails)
-  * [x] Create new users and shortened url using CLI
+* [x] [URL Shortener] (Ruby on Rails)
+  * [x] Create new user and shortened url in CLI using rails runner and Shebang
   * [x] Launches shortened url via Launchy gem
   * [x] Records number of url visits, unique visits, and unique visits within a recent time period
   * [ ] Establish functionality on browser (currently works in terminal)
+
+![url shortener gif](images/url_shortener.gif)

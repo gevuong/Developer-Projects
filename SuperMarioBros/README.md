@@ -1,5 +1,9 @@
 ## NOTES
 
+### Steps to implement Super Marios Bros background
+
+
+
 ### To setup github pages to run frontend web app requiring multiple js, json, and png files.
 1. Create webpack.config.js and set proper entry file. Remove preset "react" if you're not using React.
 2. npm install --save babel-loader babel-core babel-preset-es2015 webpack webpack-dev-server

@@ -44,10 +44,10 @@ class ShortenedUrl < ApplicationRecord
 
 
   def self.random_code
-    random_code = SecureRandom.urlsafe_base64
+    random_code = SecureRandom.urlsafe_base64(8)
     # ActiveRecord exist? method returns true if record exists in the table that matches specified condition
     while ShortenedUrl.exists?(short_url: random_code)
-      random_code = SecureRandom.urlsafe_base64
+      random_code = SecureRandom.urlsafe_base64(8)
     end
 
     return random_code
