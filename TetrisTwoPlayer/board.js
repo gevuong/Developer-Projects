@@ -66,7 +66,7 @@ class Board {
       this.matrix.unshift(rows); // add row of zeros to top of board
       ++row;
 
-      score += rowCount * 10;
+      score += rowCount * 100;
       rowCount *= 2;
     }
     return score;

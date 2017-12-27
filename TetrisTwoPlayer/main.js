@@ -12,9 +12,8 @@
   // CONSTANTS
   const keyListener = (e) => {
     [
-      [65, 68, 87, 83], // player1 keys [a, d, q, e, s]
-      // [72, 75, 89, 73, 74], // player2 keys [h, k, y, i, j]
-      [37, 39, 38, 40], // player2 keys [h, k, y, i, j]
+      [65, 68, 87, 83], // player1 keys [a, d, w, s]
+      [37, 39, 38, 40], // player2 keys [left, right, up, down]
     ]
     .forEach((key, idx) => {
       const player = tetri[idx].player;
@@ -27,15 +26,13 @@
         } else if (e.keyCode === key[2]) {
           player.rotate(-1);
         }
-        // else if (e.keyCode === key[3]) {
-        //   player.rotate(1);
-        // }
       }
 
       // allows both drop keys to work when pressed simultaneously
       if (e.keyCode === key[3]) { // arrowDown
         if (e.type === 'keydown') {
           if (player.dropInterval !== player.DROP_FAST) {
+            player.score += 1;
             player.drop();
             player.dropInterval = player.DROP_FAST;
           }

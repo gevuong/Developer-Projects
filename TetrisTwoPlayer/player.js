@@ -107,6 +107,7 @@ class Player {
 
   drop() {
     this.pos.y++;
+    this.tetris.updateScore(this.score);
     if (this.board.collide(this)) {
       // debugger
       this.pos.y--;

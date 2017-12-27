@@ -31,6 +31,7 @@ class Tetris {
     this.ctx.fillStyle = "#000";
     this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
     // fillRect(x, y, width, height), x: x-comp of coord for rectangle's starting point, y: y-comp of coord for rectangle's starting point
+
     this.drawMatrix(this.player.matrix, this.player.pos);
     this.drawMatrix(this.board.matrix, {x: 0, y: 0});
   }
@@ -49,6 +50,6 @@ class Tetris {
   }
 
   updateScore(score) {
-    this.element.querySelector('.score').innerText = score;
+    this.element.querySelector('.score').innerText = `Score: ${score}`;
   }
 }
