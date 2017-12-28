@@ -24,7 +24,7 @@ We'll have a simple CLI tool, though we can use the `launchy` gem to pop open th
 
 ## To run application on CLI
 * Run CLI script using `rails runner bin/cli` when you are in url_shortener directory. This will run the Rails environment, allowing you to access classes without requiring them explicitly. rails runner will also connect to the DB to query tables.
-* `launchy` gem is added to Gemfile and is used to open a URL in browser, record a visit.
+* `launchy` gem is added to Gemfile and is used to open a URL in browser, which records a visit.
 * Write a simple command-line script interface in bin/cli, and omit the .rb extension. Instead, write #!/usr/bin/env ruby on the first line of the file to tell the command-line interpreter that this is a ruby file. This is known as a `Shebang`.
 
 

@@ -5,7 +5,6 @@
 
 ![Super Mario Bros](images/super_mario_bros.png)
 
-
 * [x] [Tetris, 2-player](https://goo.gl/voR27T) (vanilla JS)
   * [x] left-player keys: ASDW, right-player keys: Up, Down, Left, Right
   * [x] Collision detection
@@ -15,6 +14,7 @@
   * [x] Implement two player capability
   * [x] Implement multi-player capability using websockets (need to deploy)
   * [ ] Persist high score
+
 
 
 * [x] [Scoreboard App](https://goo.gl/GjZeVb) (React.js with Redux)
@@ -54,6 +54,5 @@
   * [x] Create new user and shortened url in CLI using rails runner and Shebang
   * [x] Launches shortened url via Launchy gem
   * [x] Records number of url visits, unique visits, and unique visits within a recent time period
-  * [ ] Establish functionality on browser (currently works in terminal)
 
 ![url shortener gif](images/url_shortener.gif)

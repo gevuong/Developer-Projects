@@ -49,7 +49,7 @@ class Tetris {
     });
   }
 
-  updateScore(score) {
-    this.element.querySelector('.score').innerText = `Score: ${score}`;
+  updateScore(score, rowCount) {
+    this.element.querySelector('.score').innerText = `Score: ${score} Line: ${rowCount}`;
   }
 }

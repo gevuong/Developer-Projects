@@ -3,31 +3,20 @@
   <head>
     <meta charset="utf-8">
     <title>Tetris</title>
-    <style>
-      body {
-        display: flex;
-        justify-content: space-around;
-        background: darkgray;
-        color: #fff;
-        font-family: sans-serif;
-        font-size: 1.5em;
-        text-align: center;
-      }
-      canvas {
-        border: solid 0.2em #fff;
-        height: 90vh;
-      }
-    </style>
+    <link type="text/css" href="css/style.css" rel="stylesheet" />
   </head>
+
   <body>
     <div class="player">
       <div class="score"></div>
       <canvas class="tetris" width="240" height="400"></canvas>
     </div>
+
     <div class="player">
       <div class="score"></div>
       <canvas class="tetris" width="240" height="400"></canvas>
     </div>
+
     <script src="tetris.js"></script>
     <script src="board.js"></script>
     <script src="player.js"></script>
