@@ -1,4 +1,4 @@
-### Trivia Notes
+### Trivia Notes w/ Jim Hoskins
 * Remember, React keeps a copy of the previous Virtual DOM. A unique key is required to help React understand which object maps to which virtual DOM element. So if item in list is rearranged, added, or deleted, React can use key to reorder list as opposed to changing the content for each DOM Node (or item) based on position in list.
 
 * In normal JS, passing a method to "this" would lose the methods association to the instance of the class it is in, because "this" is either null or window. By using .bind(this), it passes instance of function to the current instance "this" is bound to.
