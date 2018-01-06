@@ -10,6 +10,7 @@ class Player {
     this.pos = {x: 0 , y: 0};
     this.matrix = null;
     this.score = 0;
+    this.rowCount = 0;
 
     this.dropCounter = 0;
     this.dropInterval = this.DROP_SLOW;
@@ -112,12 +113,16 @@ class Player {
   drop() {
     this.pos.y++;
     this.dropCounter = 0; // don't want drop to happen immediately after arrowDown
+    this.tetris.updateScore(this.score, this.rowCount)
     if (this.board.collide(this)) {
       // debugger
       this.pos.y--;
       this.board.merge(this);
       this.reset();
-      this.score += this.board.removeLine();
+      let playerData = this.board.removeLine();
+      this.score += playerData[0];
+      this.rowCount += playerData[1];
+      this.tetris.updateScore(this.score, this.rowCount);
       this.events.emit('score', this.score);
       return;
     }
@@ -140,6 +145,7 @@ class Player {
     if (this.board.collide(this)) {
       this.board.clear();
       this.score = 0;
+      this.tetris.updateScore(this.score, this.rowCount);
       this.events.emit('score', this.score);
     }
 

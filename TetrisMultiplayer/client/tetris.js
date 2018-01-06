@@ -77,7 +77,7 @@ class Tetris {
     this.draw();
   }
 
-  updateScore(score) {
-    this.element.querySelector('.score').innerText = score;
+  updateScore(score, rowCount) {
+    this.element.querySelector('.score').innerText = `Score: ${score} Line: ${rowCount}`;
   }
 }
