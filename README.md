@@ -1,7 +1,7 @@
 ## Frontend
 * [ ] [Super Mario Bros](https://goo.gl/BnoLin) (vanilla JS)
   * [x] Create sprite of game screen (sky and ground tiles) background
-  * [ ]
+  * [ ] ...
 
 ![Super Mario Bros](images/super_mario_bros.png)
 

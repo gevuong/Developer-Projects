@@ -3,10 +3,12 @@ Works locally, but has not been deployed.
 
 ![Tetris Multiplayer](images/tetris.gif)
 
-However, two player Tetris has been deployed and you can play here:
+### However, two player Tetris can be played here:
+
 [Tetris, 2-player](https://goo.gl/voR27T)
-LEFT PLAYER keys: A, S, D, W
-RIGHT PLAYER keys: Up, Down, Left, Right
+
+- LEFT PLAYER keys: A, S, D, W
+- RIGHT PLAYER keys: Up, Down, Left, Right
 
 
 ## Using Websockets on Heroku w/ Node.js
