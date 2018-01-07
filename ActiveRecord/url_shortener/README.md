@@ -1,7 +1,7 @@
 ## URL Shortener: Part SQL
 At the moment, application only works on terminal, as shown in gif.
 
-![url shortener gif](images/url_shortener.gif)
+![url shortener gif](../../images/url_shortener.gif)
 
 In this project, we'll build a tool that will take an arbitrarily-long URL and will shorten it for the user. Subsequent users can then give the short URL back to our tool and be redirected to the original URL. We'll also track clickthroughs, since these can be really helpful for business analytics.
 

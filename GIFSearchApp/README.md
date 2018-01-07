@@ -1,4 +1,13 @@
-### This app shows how to fetch external data with React and how to display data in app.
+## GIFSearch App
+
+* [x] [GIFSearch App](https://goo.gl/8e7Bqn) (React.js, fetchAPI, Axios)
+  * [x] Renders 24 currently trending GIFs using Giphy API's **Trending GIFs Endpoint**
+  * [x] Search feature using Giphy API's **Search Endpoint**
+  * [x] Loading indicator and "no GIFS match your search" indicator
+
+![Gif Search gif](../images/giphysearch.gif)
+
+### This app shows how to fetch external data with React (using FetchAPI and Axios) and how to display data in app.
 
 * React is just a view library, and it's only concern is rendering components using state and properties passed to them. React doesn't have a built in way to fetch data from a server. React doesn't know there is a server.
 * There are JS methods used to fetch data to React app. Both of the following methods use promise to handle results we get back from the server:

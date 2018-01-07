@@ -1,3 +1,15 @@
+## Scoreboard App
+
+* [x] [Scoreboard App](https://goo.gl/GjZeVb) (React.js with Redux)
+  * [x] Increment/decrement score per player
+  * [x] Add and remove player
+  * [x] Stats on total player count and score
+  * [x] Player details showing Score, Created At, Updated At
+  * [x] Stopwatch with start, stop, and reset buttons
+  * Challenge encountered: Designing data flow that is easy to understand and maintain, such as communicating events from grandchild to parent component via virtualDOM traversal.
+
+![Scoreboard gif](../images/scoreboard.gif)
+
 ### Trivia Notes
 * React-Redux library provides a number of helper methods that make it easier to connect Redux to your React app.
 * A good pattern to follow when building components is to start with components that have no dependency on other components and work backwards from there.

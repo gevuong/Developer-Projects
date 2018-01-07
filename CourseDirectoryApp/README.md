@@ -1,3 +1,12 @@
+## Course Directory App
+
+* [x] [CourseDirectory App](https://goo.gl/RqTLNk) (React.js, React Router 4)
+  * [x] Single page application
+  * [x] Navigate routes programmatically via form submission
+  * [x] Displays 404 Error route
+
+![CourseDirectory gif](../images/course_directory.gif)
+
 ### Trivia Notes
 * Setting up routes allows you to navigate parts of website by manually inputting URL. Setting up links allows you to click on a link to navigate website.
 * JS frameworks, like Angular and Ember, come with built-in routing features. React is not a framework, but a library concerned with rendering UI. React is a declarative and modular style of building UIs.
