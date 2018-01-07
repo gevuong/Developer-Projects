@@ -1,3 +1,14 @@
+## Tetris Multiplayer
+Works locally, but has not been deployed.
+
+![Tetris Multiplayer](images/tetris.gif)
+
+However, two player Tetris has been deployed and you can play here:
+[Tetris, 2-player](https://goo.gl/voR27T)
+LEFT PLAYER keys: A, S, D, W
+RIGHT PLAYER keys: Up, Down, Left, Right
+
+
 ## Using Websockets on Heroku w/ Node.js
 - steps to create realtime Node.js applications on heroku. These instructions allow sharing of server's current time with client via persistent socket connection, using Node's express web server.
 https://devcenter.heroku.com/articles/node-websockets
@@ -7,6 +18,7 @@ Steps to run application locally after cloning:
 - npm install
 - Run npm start
 - Copy full path to index.html, and paste onto browser to open application
+
 
 ### Implementation steps
 ...did not record steps prior...

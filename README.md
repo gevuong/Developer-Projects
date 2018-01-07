@@ -6,16 +6,15 @@
 ![Super Mario Bros](images/super_mario_bros.png)
 
 * [x] [Tetris, 2-player](https://goo.gl/voR27T) (vanilla JS)
-  * [x] left-player keys: ASDW, right-player keys: Up, Down, Left, Right
+  * [x] LEFT PLAYER keys: ASDW, RIGHT PLAYER keys: Up, Down, Left, Right
   * [x] Collision detection
   * [x] Rotate Tetrominoes
   * [x] Remove row when entire row is filled
   * [x] Basic scoreboard
   * [x] Implement two player capability
-  * [x] Implement multi-player capability using websockets (need to deploy)
-  * [ ] Persist high score
+  * [x] Implement multi-player capability using WebSocket (have not deployed, works locally)
 
-
+![Tetris Multiplayer](images/tetris.gif)
 
 * [x] [Scoreboard App](https://goo.gl/GjZeVb) (React.js with Redux)
   * [x] Increment/decrement score per player
