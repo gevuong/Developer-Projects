@@ -1,4 +1,3 @@
-
 class Player {
   constructor(tetris) {
     this.DROP_SLOW = 700;
@@ -109,7 +108,8 @@ class Player {
 
   drop() {
     this.pos.y++;
-    this.tetris.updateScore(this.score, this.rowCount);
+    this.tetris.updateScore(this.score);
+    this.tetris.updateRowCount(this.rowCount);
     if (this.board.collide(this)) {
       // debugger
       this.pos.y--;
@@ -118,7 +118,8 @@ class Player {
       let playerData = this.board.removeLine(); // [score, rowCount]
       this.score += playerData[0];
       this.rowCount += playerData[1];
-      this.tetris.updateScore(this.score, this.rowCount);
+      this.tetris.updateScore(this.score);
+      this.tetris.updateRowCount(this.rowCount);
     }
     this.dropCounter = 0; // don't want drop to happen immediately after arrowDown
   }
@@ -141,7 +142,9 @@ class Player {
       console.log("reset");
       // drawMatrix(board, {x: 0, y: 0});
       this.score = 0;
-      this.tetris.updateScore(this.score, this.rowCount);
+      this.rowCount = 0;
+      this.tetris.updateScore(this.score);
+      this.tetris.updateRowCount(this.rowCount);
     }
   }
 }

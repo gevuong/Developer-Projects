@@ -12,3 +12,7 @@ canvas {
   border: solid 0.2em #fff;
   height: 90vh;
 }
+
+.score, .row-count {
+  font-size: 0.75em;
+}

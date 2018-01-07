@@ -23,6 +23,7 @@ class Tetris {
     }
     update();
     this.updateScore(0); // initialize score counter
+    this.updateRowCount(0); // initialize score counter
   }
 
 
@@ -49,7 +50,10 @@ class Tetris {
     });
   }
 
-  updateScore(score, rowCount) {
-    this.element.querySelector('.score').innerText = `Score: ${score} Line: ${rowCount}`;
+  updateScore(score) {
+    this.element.querySelector('.score').innerText = `Score: ${score}`;
+  }
+  updateRowCount(rowCount) {
+    this.element.querySelector('.row-count').innerText = `Line: ${rowCount}`;
   }
 }

@@ -113,7 +113,8 @@ class Player {
   drop() {
     this.pos.y++;
     this.dropCounter = 0; // don't want drop to happen immediately after arrowDown
-    this.tetris.updateScore(this.score, this.rowCount)
+    this.tetris.updateScore(this.score);
+    this.tetris.updateRowCount(this.rowCount);
     if (this.board.collide(this)) {
       // debugger
       this.pos.y--;
@@ -122,8 +123,10 @@ class Player {
       let playerData = this.board.removeLine();
       this.score += playerData[0];
       this.rowCount += playerData[1];
-      this.tetris.updateScore(this.score, this.rowCount);
+      this.tetris.updateScore(this.score);
+      this.tetris.updateRowCount(this.rowCount);
       this.events.emit('score', this.score);
+      this.events.emit('rowCount', this.rowCount);
       return;
     }
     this.events.emit('pos', this.pos);
@@ -145,8 +148,12 @@ class Player {
     if (this.board.collide(this)) {
       this.board.clear();
       this.score = 0;
-      this.tetris.updateScore(this.score, this.rowCount);
+      this.rowCount = 0;
+      console.log(this.rowCount);
+      this.tetris.updateScore(this.score);
+      this.tetris.updateRowCount(this.rowCount);
       this.events.emit('score', this.score);
+      this.events.emit('rowCount', this.rowCount);
     }
 
     this.events.emit('pos', this.pos);

@@ -54,7 +54,6 @@ class Board {
   }
 
   removeLine() {
-    let arr = [];
     let rowCount = 1;
     let score = 0;
     // console.log(this.matrix);
@@ -71,7 +70,6 @@ class Board {
       score += rowCount * 100;
       rowCount *= 2; // doubles score if rowCount is greater than 1
     }
-    console.log([score, Math.floor(rowCount / 2)]);
     return [score, Math.floor(rowCount / 2)];
     // return score;
   }

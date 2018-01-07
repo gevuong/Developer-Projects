@@ -2,7 +2,7 @@ class Tetris {
   constructor(element) {
     this.element = element;
     this.canvas = element.querySelector("canvas");
-    this.ctx =  this.canvas.getContext('2d'); // set 2d rendering context for the drawing surface of <canvas< element.
+    this.ctx = this.canvas.getContext('2d'); // set 2d rendering context for the drawing surface of <canvas< element.
     this.ctx.scale(20, 20);
 
     this.board = new Board(12, 20); // 12 units wide, 20 units high
@@ -10,6 +10,9 @@ class Tetris {
 
     this.player.events.listen('score', score => {
       this.updateScore(score);
+    });
+    this.player.events.listen('rowCount', rowCount => {
+      this.updateRowCount(rowCount);
     });
 
     this.colors = [
@@ -26,6 +29,7 @@ class Tetris {
       requestAnimationFrame(this._update); // takes a callback as an arg to be invoked before repaint. callback itself calls requestAnimationFrame() to animate another frame before repaint. call method when ready to update animation onscreen
     }
     this.updateScore(0); // initialize score counter
+    this.updateRowCount(0); // initialize score counter
   }
 
 
@@ -65,6 +69,7 @@ class Tetris {
         matrix: this.player.matrix,
         pos: this.player.pos,
         score: this.player.score,
+        rowCount: this.player.rowCount,
       },
     }
   }
@@ -74,10 +79,15 @@ class Tetris {
     this.board = Object.assign(state.board);
     this.player = Object.assign(state.player);
     this.updateScore(this.player.score);
+    this.updateRowCount(this.player.rowCount);
     this.draw();
   }
 
-  updateScore(score, rowCount) {
-    this.element.querySelector('.score').innerText = `Score: ${score} Line: ${rowCount}`;
+  updateScore(score) {
+    this.element.querySelector('.score').innerText = `Score: ${score}`;
+  }
+
+  updateRowCount(rowCount) {
+    this.element.querySelector('.row-count').innerText = `Line: ${rowCount}`;
   }
 }
