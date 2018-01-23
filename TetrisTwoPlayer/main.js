@@ -7,7 +7,7 @@
   [...playerElements].forEach(playerElement => {
     const tetris = new Tetris(playerElement);
     tetri.push(tetris);
-  })
+  });
 
   // CONSTANTS
   const keyListener = e => {
@@ -45,8 +45,8 @@
           player.dropInterval = player.DROP_SLOW;
         }
       }
-    })
-  }
+    });
+  };
 
   document.addEventListener("keydown", keyListener);
   document.addEventListener("keyup", keyListener);
