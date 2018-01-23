@@ -24,43 +24,43 @@ class Player {
         [0, 0, 0],
         [1, 1, 1],
         [0, 1, 0]
-      ]
+      ];
     } else if (type === "S") {
       return [
         [0, 2, 2],
         [2, 2, 0],
         [0, 0, 0]
-      ]
+      ];
     } else if (type === "L") {
       return [
         [0, 3, 0],
         [0, 3, 0],
         [0, 3, 3]
-      ]
+      ];
     } else if (type === "I") {
       return [
         [0, 4, 0, 0],
         [0, 4, 0, 0], // easier to anticipate rotation if in 4x4
         [0, 4, 0, 0],
         [0, 4, 0, 0]
-      ]
+      ];
     } else if (type === "Z") {
       return [
         [5, 5, 0],
         [0, 5, 5],
         [0, 0, 0]
-      ]
+      ];
     } else if (type === "J") {
       return [
         [0, 6, 0],
         [0, 6, 0],
         [6, 6, 0]
-      ]
+      ];
     } else if (type === "O") {
       return [
         [7, 7],
         [7, 7]
-      ]
+      ];
     }
   }
 
@@ -80,11 +80,11 @@ class Player {
     // cannot only check collision once, need to continuously check
     while (this.board.collide(this)) {
       this.pos.x += offset;
-      offset = -(offset + (offset > 0 ? 1: -1)) // algorithm to move piece however many spaces to left or right until there is no collision.
+      offset = -(offset + (offset > 0 ? 1: -1)); // algorithm to move piece however many spaces to left or right until there is no collision.
       if (offset > this.matrix[0].length) { // to exit loop in case offset is greater than lenght of current piece, Rotate back current piece in neg dir.
         this._rotateMatrix(this.matrix, -dir);
         this.pos.x = pos; // reset offset
-        return
+        return;
       }
     }
   }
