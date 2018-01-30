@@ -18,7 +18,7 @@ class ArtworkSharesController < ApplicationController
     if artwork_share.destroy
       render json: artwork_share
     else
-      render json: artwork.share.errors.full_messages, status: 422
+      render json: artwork_share.errors.full_messages, status: 422
     end
   end
 

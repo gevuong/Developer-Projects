@@ -1,6 +1,6 @@
 var board = [
-  [0, 0, 0, 1, 1, 0, 0, 0],
-  [0, 0, 0, 1, 1, 0, 0, 0],
+  [0, 0, 1, 1, 0, 0, 0, 0],
+  [0, 0, 1, 1, 0, 0, 0, 0],
   [0, 0, 0, 0, 0, 0, 0, 0],
   [0, 0, 0, 0, 0, 0, 0, 0],
   [0, 0, 0, 0, 0, 0, 0, 0],
@@ -147,6 +147,65 @@ function freeze() {
   }
 }
 
+createPiece(type) {
+  if (type == T) {
+
+  }
+  if (type === I) {
+    board[0] = [0, 0, 0, 0, 1, 0, 0, 0];
+    board[1] = [0, 0, 0, 0, 1, 0, 0, 0];
+    board[2] = [0, 0, 0, 0, 1, 0, 0, 0];
+    board[3] = [0, 0, 0, 0, 1, 0, 0, 0];
+  }
+}
+
+// create block types
+createPiece(type) {
+  if (type === "T") {
+    return [
+      [0, 0, 0],
+      [1, 1, 1],
+      [0, 1, 0]
+    ];
+  } else if (type === "S") {
+    return [
+      [0, 2, 2],
+      [2, 2, 0],
+      [0, 0, 0]
+    ];
+  } else if (type === "L") {
+    return [
+      [0, 3, 0],
+      [0, 3, 0],
+      [0, 3, 3]
+    ];
+  } else if (type === "I") {
+    return [
+      [0, 4, 0, 0],
+      [0, 4, 0, 0], // easier to anticipate rotation if in 4x4
+      [0, 4, 0, 0],
+      [0, 4, 0, 0]
+    ];
+  } else if (type === "Z") {
+    return [
+      [5, 5, 0],
+      [0, 5, 5],
+      [0, 0, 0]
+    ];
+  } else if (type === "J") {
+    return [
+      [0, 6, 0],
+      [0, 6, 0],
+      [6, 6, 0]
+    ];
+  } else if (type === "O") {
+    return [
+      [7, 7],
+      [7, 7]
+    ];
+  }
+}
+
 
 function checkLines() {
   for (let row = 0; row < board.length; row++) {
@@ -164,7 +223,7 @@ function checkLines() {
   }
 }
 
-document.onkeydown = function(e) {
+document.addEventListener("keydown", (e) => {
   console.log(e.keyCode);
   if (e.keyCode === 37) {
     movePieceLeft();
@@ -174,7 +233,7 @@ document.onkeydown = function(e) {
     movePieceDown();
   }
   drawBoard();
-};
+});
 
 
 function gameLoop() {
