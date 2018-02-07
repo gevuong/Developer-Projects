@@ -14,7 +14,7 @@ class Product < ApplicationRecord
   # N.B. Remember, Rails 5 automatically validates the presence of belongs_to or has_many associations
   validates :name, :price, :quantity, presence: true
   validates :name, uniqueness: true
-  # validate check_product_quantity
+  validates :quantity, numericality: { greater_than: 0 }
 
   has_many :ordered_products,
   dependent: :destroy
@@ -23,8 +23,4 @@ class Product < ApplicationRecord
   through: :ordered_products,
   source: :order
 
-  def check_product_quantity
-    return if :quantity > 0
-    errors[:quantity] >> "must be greater than 0"
-  end
 end

@@ -15,6 +15,6 @@ end
 # json.set! :author do
 #   json.set! :name, 'David'
 # end
-
 # => {"author": { "name": "David" }}
+
 # For more info on jbuilder syntax: https://github.com/rails/jbuilder

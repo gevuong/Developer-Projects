@@ -13,10 +13,17 @@
 class OrderedProduct < ApplicationRecord
   # N.B. Remember, Rails 5 automatically validates the presence of belongs_to or has_many associations
   validates :order_id, :product_id, :number_purchased, presence: true
-  # validate start_must_come_before_end if start_date && end_date
+  validates :number_purchased, numericality: { greater_than: 0 }
 
+  # validate start_must_come_before_end if start_date && end_date
   belongs_to :order
   belongs_to :product
+
+
+  # def sold_out?
+  #   return "product is sold out"
+  #
+  # end
 
   # cannot have overlapping start/end dates
   def start_must_come_before_end(start_date, end_date)
@@ -26,16 +33,14 @@ class OrderedProduct < ApplicationRecord
     errors[:end_date] << "must come after start date"
   end
 
+# An API endpoint that accepts a date range and a day, week, or month and returns a breakdown of products sold by quantity per day/week/month.
   def self.fetch_ordered_products(start_date, end_date, type)
     if type == "day"
-
       # Step 1: parse date
       date_start = Date.parse(start_date)
       date_end = Date.parse(end_date)
 
       # Step 2: retrieve ordered_products within parsed date_range
-      # remaining_ordered_products = OrderedProduct.where('ordered_products.created_at BETWEEN ? AND ?', date_start, date_end)
-
       date_range = (date_start..date_end).to_a
 
       dates = Hash.new
@@ -43,7 +48,6 @@ class OrderedProduct < ApplicationRecord
         dates[date] = OrderedProduct.where("date(created_at) = ?", date)
       end
 
-      p dates
 
       # remaining_ordered_products = OrderedProduct.where(created_at: (date_start..date_end)).group("date(created_at)")
       #
@@ -78,16 +82,3 @@ class OrderedProduct < ApplicationRecord
     end
   end
 end
-
-# hash = {
-#     date: {
-#       2018-2-4 => {
-#         "name" => "hash_brown",
-#         "number_purchased" => 5
-#              },
-#       110 => {
-#         "name" => "frozen_peas",
-#         "number_purchased" => 3
-#       }
-#     }
-#   }

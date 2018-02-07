@@ -9,24 +9,24 @@ class Api::OrdersController < ApplicationController
   end
 
   def index
-    # params[:user_id] comes from wildcard in route parameters
     if params[:user_id]
       @customers_orders = Order.includes(:products).orders_for_user_id(params[:user_id])
-      # render json: customers_orders
       render :index
 
-      CSV.open(customer_orders.csv)
+      # figure out how to export nested json to CSV...
+      CSV.open("customer_orders.csv", "w") do |csv|
+        csv << ["id", "user_id", "status", "created_at", "updated_at"]
+        @customers_orders.each do |customer_order|
+          csv << customer_order.attributes.values
+        end
+      end
+
     else
       orders = Order.all
       render json: orders
 
-      # respond_to do |format|
-      #   format.html
-      #   format.csv { render text: orders.to_csv }
-      # end
-
       CSV.open("all_orders.csv", "w") do |csv|
-        csv << ["order_id", "status", "created_at", "updated_at", "ordered_product_id", "name", "number_purchased"]
+        csv << ["id", "user_id", "status", "created_at", "updated_at"]
         orders.each do |order|
           csv << order.attributes.values
         end
