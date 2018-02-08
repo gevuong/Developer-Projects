@@ -24,27 +24,12 @@ class Api::OrderedProductsController < ApplicationController
     # :start_date :end_date comes from query string in format: '2018-1-29'
 
     if params[:start_date] && params[:end_date] && params[:type]
-      @dates = OrderedProduct.fetch_ordered_products(params[:start_date], params[:end_date], params[:type])
+      @dates_hash = OrderedProduct.fetch_ordered_products(params[:start_date], params[:end_date], params[:type])
+
+      @type = params[:type]
       render :index
 
-    # elsif params[:start_date] && params[:end_date]
-    #   p params
-    #   date_start = Date.parse(params[:start_date])
-    #   date_end = Date.parse(params[:end_date])
-    #
-    #   # Step 2: retrieve ordered_products within parsed date_range
-    #   # remaining_ordered_products = OrderedProduct.where('ordered_products.created_at BETWEEN ? AND ?', date_start, date_end)
-    #
-    #   date_range = (date_start..date_end).to_a
-    #
-    #   @dates = Hash.new
-    #   date_range.each do |date|
-    #     @dates[date] = OrderedProduct.where("date(created_at) = ?", date)
-    #   end
-    #
-    #   render :index
     else
-      # ordered_product pertaining to customer if customer wildcard is given, if not then show all ordered_product
       ordered_products = OrderedProduct.all
       render json: ordered_products
 

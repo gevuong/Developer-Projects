@@ -14,6 +14,8 @@ class Api::OrdersController < ApplicationController
       render :index
 
       # figure out how to export nested json to CSV...
+      column_headers = ["id", "user_id", "status", "created_at", "updated_at"]
+      
       CSV.open("customer_orders.csv", "w") do |csv|
         csv << ["id", "user_id", "status", "created_at", "updated_at"]
         @customers_orders.each do |customer_order|
@@ -25,8 +27,9 @@ class Api::OrdersController < ApplicationController
       orders = Order.all
       render json: orders
 
+      column_headers = ["id", "user_id", "status", "created_at", "updated_at"]
       CSV.open("all_orders.csv", "w") do |csv|
-        csv << ["id", "user_id", "status", "created_at", "updated_at"]
+        csv << column_headers
         orders.each do |order|
           csv << order.attributes.values
         end

@@ -28,9 +28,19 @@ class OrderedProduct < ApplicationRecord
   # cannot have overlapping start/end dates
   def start_must_come_before_end(start_date, end_date)
     return if start_date < end_date
-    errors[:start_date] << "cannot be in the future" unless :start_date < DateTime.now
+    errors[:start_date] << "cannot be in the future" unless :start_date <= DateTime.now
+    errors[:end_date] << "cannot be in the future" unless :end_date <= DateTime.now
+
+    errors[:start_date] << "is not a valid date" if start_date.valid_date?
+    errors[:end_date] << "is not a valid date" if end_date.valid_date?
+
     errors[:start_date] << "must come before end date"
     errors[:end_date] << "must come after start date"
+  end
+
+
+  def day_week_month?(type)
+    type
   end
 
 # An API endpoint that accepts a date range and a day, week, or month and returns a breakdown of products sold by quantity per day/week/month.
@@ -41,44 +51,34 @@ class OrderedProduct < ApplicationRecord
       date_end = Date.parse(end_date)
 
       # Step 2: retrieve ordered_products within parsed date_range
+      # remaining_ordered_products = OrderedProduct.where('ordered_products.created_at BETWEEN ? AND ?', date_start, date_end)
       date_range = (date_start..date_end).to_a
 
       dates = Hash.new
       date_range.each do |date|
-        dates[date] = OrderedProduct.where("date(created_at) = ?", date)
+        dates[date] = OrderedProduct.includes(:product).where("date(created_at) = ?", date)
       end
+      dates
+
+    elsif type == "month" # need to keep track of year as well.
+      date_start = Date.parse(start_date).beginning_of_month
+      date_end = Date.parse(end_date).end_of_month
 
 
-      # remaining_ordered_products = OrderedProduct.where(created_at: (date_start..date_end)).group("date(created_at)")
-      #
-      #
-      # # Step 3: parse date_range by month, week, and day
-      #
-      # date_range = (date_start..date_end).to_a
-      #
-      # date_hash = Hash.new
-      # date_range.each do |date|
-      #   date_hash[date] = OrderedProduct.where("date(created_at) = ?", date)
-      # end
-      #
-      # p date_hash
-      #
-      # # Step 4: Show quantity sold by month
-      # month_range = (date_start.mon..date_end.mon).to_a
-      # ods = OrderedProduct.where('created_at = ?', date_start.to_datetime)
-      # ods.each do |od|
-      #   puts od["created_at"]
-      # end
+      # OrderedProduct.where("extract(month from created_at) = ? AND extract(year from created_at) = ?", 12, 2017)
 
-      # Step 5: Iterate through remaining ordered_products and store product_id as key, and number_purchased as hash
-      # product_count = Hash.new(0)
-      # remaining_ordered_products.each do |ordered_product|
-      #   quantity_sold = ordered_product.number_purchased
-      #   product_id = ordered_product.product_id
-      #   product_count[product_id] += quantity_sold
-      # end
+
+      OrderedProduct.where(:created_at => (date_start..date_end)).order(:created_at).group_by { |m| m.created_at.month.to_s + "-" + m.created_at.year.to_s }
+
+
+      # try this: How to deal with different years with same month
+      # OrderedProduct.group("year(created_at)").group("month(created_at)")
+      # OrderedProduct.where(:created_at => (date_start..date_end)).group("date(created_at)")
+      # OrderedProduct.pluck("date(created_at)").group("date(created_at)")
       #
-      # p product_count
+      # example_range = (Time.zone.today..2.months.from_now)
+      # example_range.group_by { |date| date.month.to_s + "-" + date.year.to_s }
+
     end
   end
 end

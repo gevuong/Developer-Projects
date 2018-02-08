@@ -4,14 +4,6 @@ class ApplicationController < ActionController::Base
 
   helper_method :merge_arrays
 
-  def ordered_products
-
-  end
-
-  def products
-
-  end
-
   def merge_arrays(arr1, arr2)
 
   end
