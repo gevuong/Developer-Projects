@@ -51,14 +51,23 @@ class OrderedProduct < ApplicationRecord
       date_end = Date.parse(end_date)
 
       # Step 2: retrieve ordered_products within parsed date_range
-      # remaining_ordered_products = OrderedProduct.where('ordered_products.created_at BETWEEN ? AND ?', date_start, date_end)
+      # remaining_ordered_products =  OrderedProduct.where('ordered_products.created_at BETWEEN ? AND ?', date_start, date_end)
       date_range = (date_start..date_end).to_a
 
+      # try making one query to grab all ordered_products within date range, then iterate through date range and see if it equals then store ordered_product within date.
+      # iterate through dates in the views? So I don't have to make a query for each date.
       dates = Hash.new
       date_range.each do |date|
-        dates[date] = OrderedProduct.includes(:product).where("date(created_at) = ?", date)
+        dates[date] = OrderedProduct.includes(:product)
+          .where("date(created_at) = ?", date)
       end
       dates
+
+    elsif type == "week"
+      date_start = Date.parse(start_date)
+      date_end = Date.parse(end_date)
+      
+
 
     elsif type == "month" # need to keep track of year as well.
       date_start = Date.parse(start_date).beginning_of_month
@@ -68,7 +77,10 @@ class OrderedProduct < ApplicationRecord
       # OrderedProduct.where("extract(month from created_at) = ? AND extract(year from created_at) = ?", 12, 2017)
 
 
-      OrderedProduct.where(:created_at => (date_start..date_end)).order(:created_at).group_by { |m| m.created_at.month.to_s + "-" + m.created_at.year.to_s }
+      OrderedProduct.includes(:product)
+        .where(:created_at => (date_start..date_end))
+        .order(:created_at)
+        .group_by { |m| m.created_at.month.to_s + "-" + m.created_at.year.to_s }
 
 
       # try this: How to deal with different years with same month
