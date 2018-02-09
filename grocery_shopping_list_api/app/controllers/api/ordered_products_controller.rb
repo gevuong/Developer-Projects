@@ -24,9 +24,9 @@ class Api::OrderedProductsController < ApplicationController
     # :start_date :end_date comes from query string in format: '2018-1-29'
 
     if params[:start_date] && params[:end_date] && params[:type]
+      @type = params[:type]
       @dates_hash = OrderedProduct.fetch_ordered_products(params[:start_date], params[:end_date], params[:type])
 
-      @type = params[:type]
       render :index
 
     else

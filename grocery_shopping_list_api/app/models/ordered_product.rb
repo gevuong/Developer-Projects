@@ -54,7 +54,7 @@ class OrderedProduct < ApplicationRecord
       # remaining_ordered_products =  OrderedProduct.where('ordered_products.created_at BETWEEN ? AND ?', date_start, date_end)
       date_range = (date_start..date_end).to_a
 
-      # try making one query to grab all ordered_products within date range, then iterate through date range and see if it equals then store ordered_product within date.
+     # NB try making one query to grab all ordered_products within date range, then iterate through date range and see if it equals then store ordered_product within date.
       # iterate through dates in the views? So I don't have to make a query for each date.
       dates = Hash.new
       date_range.each do |date|
@@ -66,8 +66,13 @@ class OrderedProduct < ApplicationRecord
     elsif type == "week"
       date_start = Date.parse(start_date)
       date_end = Date.parse(end_date)
-      
 
+      # date_trunc truncates date down to a certain precision
+      # OrderedProduct.group("date_trunc('week', created_at)").count
+      OrderedProduct.includes(:product)
+        .where(:created_at => (date_start..date_end))
+        .order(:created_at)
+        .group_by { |date| date.created_at.to_date.cweek.to_s + "-" + date.created_at.year.to_s }
 
     elsif type == "month" # need to keep track of year as well.
       date_start = Date.parse(start_date).beginning_of_month
@@ -80,7 +85,7 @@ class OrderedProduct < ApplicationRecord
       OrderedProduct.includes(:product)
         .where(:created_at => (date_start..date_end))
         .order(:created_at)
-        .group_by { |m| m.created_at.month.to_s + "-" + m.created_at.year.to_s }
+        .group_by { |date| date.created_at.month.to_s + "-" + date.created_at.year.to_s }
 
 
       # try this: How to deal with different years with same month
@@ -94,3 +99,14 @@ class OrderedProduct < ApplicationRecord
     end
   end
 end
+
+
+=begin
+# Useful Resources:
+1. Grouping ActiveRecord objects by day or week using date_trunc  https://alexpeattie.com/blog/grouping-activerecord-by-day-or-week-with-datetrunc
+
+2. Unlike Ruby, single/double quotes are not interchangeable. Literal strings must be single quoted in Postgres. https://www.postgresql.org/docs/9.4/static/sql-syntax-lexical.html#SQL-SYNTAX-STRINGS
+
+3. Grouping by week/month/etc & ActiveRecord
+https://stackoverflow.com/questions/902974/grouping-by-week-month-etc-activerecord
+=end

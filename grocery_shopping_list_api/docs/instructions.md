@@ -1,4 +1,10 @@
-Instructions
+##Motivational quote set to super sick synths by Kalax.
+
+**“You can do all things if you believe."
+“When you feel like stopping think of why you started."
+“You are your only limit."**
+
+##Instructions
 
 Please send a zip archive containing your code and any relevant materials into coding@shipt.com. Include a readme file explaining your assumptions, providing any necessary assumptions, and stating what you would accomplish with more time.
 
