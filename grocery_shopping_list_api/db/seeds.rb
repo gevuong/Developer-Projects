@@ -73,7 +73,7 @@ op21 = OrderedProduct.create(order_id: o12.id, product_id: p6.id, number_purchas
 
 c1 = Category.create(name: "poultry")
 c2 = Category.create(name: "vegetables")
-c3 = Category.create(name: "frozen_foods")
+c3 = Category.create(name: "frozen")
 
 pc1 = ProductCategory.create(category_id: c1.id, product_id: p1.id)
 pc2 = ProductCategory.create(category_id: c1.id, product_id: p2.id)

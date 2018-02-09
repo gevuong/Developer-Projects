@@ -9,11 +9,12 @@
 #
 
 class Category < ApplicationRecord
-  validates :name, presence: true
+  validates :name, presence: true, uniqueness: true
 
-  has_many :product_category
+  has_many :product_categories,
+  dependent: :destroy
 
   has_many :products,
-  through: :product_category,
-  source: :product  
+  through: :product_categories,
+  source: :product
 end

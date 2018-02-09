@@ -23,7 +23,8 @@ class Product < ApplicationRecord
   through: :ordered_products,
   source: :order
 
-  has_many :product_categories
+  has_many :product_categories,
+  dependent: :destroy 
 
   has_many :categories,
   through: :product_categories,
