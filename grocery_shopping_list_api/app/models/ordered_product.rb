@@ -39,19 +39,12 @@ class OrderedProduct < ApplicationRecord
   end
 
 
-  def day_week_month?(type)
-    type
-  end
-
 # An API endpoint that accepts a date range and a day, week, or month and returns a breakdown of products sold by quantity per day/week/month.
   def self.fetch_ordered_products(start_date, end_date, type)
-    if type == "day"
-      # Step 1: parse date
-      date_start = Date.parse(start_date)
-      date_end = Date.parse(end_date)
+    date_start = Date.parse(start_date)
+    date_end = Date.parse(end_date)
 
-      # Step 2: retrieve ordered_products within parsed date_range
-      # remaining_ordered_products =  OrderedProduct.where('ordered_products.created_at BETWEEN ? AND ?', date_start, date_end)
+    if type == "day"
       date_range = (date_start..date_end).to_a
 
      # NB try making one query to grab all ordered_products within date range, then iterate through date range and see if it equals then store ordered_product within date.
@@ -64,9 +57,6 @@ class OrderedProduct < ApplicationRecord
       dates
 
     elsif type == "week"
-      date_start = Date.parse(start_date)
-      date_end = Date.parse(end_date)
-
       # date_trunc truncates date down to a certain precision
       # OrderedProduct.group("date_trunc('week', created_at)").count
       OrderedProduct.includes(:product)
@@ -89,9 +79,7 @@ class OrderedProduct < ApplicationRecord
 
 
       # try this: How to deal with different years with same month
-      # OrderedProduct.group("year(created_at)").group("month(created_at)")
-      # OrderedProduct.where(:created_at => (date_start..date_end)).group("date(created_at)")
-      # OrderedProduct.pluck("date(created_at)").group("date(created_at)")
+      #  OrderedProduct.pluck("date(created_at)").group("date(created_at)")
       #
       # example_range = (Time.zone.today..2.months.from_now)
       # example_range.group_by { |date| date.month.to_s + "-" + date.year.to_s }

@@ -34,7 +34,6 @@ class Api::OrderedProductsController < ApplicationController
       render json: ordered_products
 
     end
-
   end
 
   private
