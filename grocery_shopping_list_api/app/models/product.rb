@@ -4,7 +4,7 @@
 #
 #  id         :integer          not null, primary key
 #  name       :string           not null
-#  price      :decimal(, )      not null
+#  price      :decimal(5, 2)    not null
 #  quantity   :integer          not null
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
@@ -22,5 +22,11 @@ class Product < ApplicationRecord
   has_many :orders,
   through: :ordered_products,
   source: :order
+
+  has_many :product_categories
+
+  has_many :categories,
+  through: :product_categories,
+  source: :category
 
 end

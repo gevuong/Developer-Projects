@@ -58,11 +58,11 @@ class OrderedProduct < ApplicationRecord
 
     elsif type == "week"
       # date_trunc truncates date down to a certain precision
-      # OrderedProduct.group("date_trunc('week', created_at)").count
-      OrderedProduct.includes(:product)
-        .where(:created_at => (date_start..date_end))
-        .order(:created_at)
-        .group_by { |date| date.created_at.to_date.cweek.to_s + "-" + date.created_at.year.to_s }
+      OrderedProduct.group("date_trunc('week', created_at), ordered_products.id")
+      # OrderedProduct.includes(:product)
+      #   .where(:created_at => (date_start..date_end))
+      #   .order(:created_at)
+      #   .group_by { |date| date.created_at.to_date.cweek.to_s + "-" + date.created_at.year.to_s }
 
     elsif type == "month" # need to keep track of year as well.
       date_start = Date.parse(start_date).beginning_of_month

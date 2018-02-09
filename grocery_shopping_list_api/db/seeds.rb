@@ -10,6 +10,8 @@ User.destroy_all
 Order.destroy_all
 Product.destroy_all
 OrderedProduct.destroy_all
+Category.destroy_all
+ProductCategory.destroy_all
 
 u1 = User.create(name: "George")
 u2 = User.create(name: "Virginia")
@@ -68,3 +70,21 @@ op18 = OrderedProduct.create(order_id: o9.id, product_id: p9.id, number_purchase
 op19 = OrderedProduct.create(order_id: o10.id, product_id: p4.id, number_purchased: 19)
 op20 = OrderedProduct.create(order_id: o11.id, product_id: p5.id, number_purchased: 20)
 op21 = OrderedProduct.create(order_id: o12.id, product_id: p6.id, number_purchased: 21)
+
+c1 = Category.create(name: "poultry")
+c2 = Category.create(name: "vegetables")
+c3 = Category.create(name: "frozen_foods")
+
+pc1 = ProductCategory.create(category_id: c1.id, product_id: p1.id)
+pc2 = ProductCategory.create(category_id: c1.id, product_id: p2.id)
+pc3 = ProductCategory.create(category_id: c1.id, product_id: p3.id)
+
+pc4 = ProductCategory.create(category_id: c2.id, product_id: p4.id)
+pc5 = ProductCategory.create(category_id: c2.id, product_id: p5.id)
+pc6 = ProductCategory.create(category_id: c2.id, product_id: p6.id)
+
+pc7 = ProductCategory.create(category_id: c3.id, product_id: p1.id)
+pc8 = ProductCategory.create(category_id: c3.id, product_id: p6.id)
+pc8 = ProductCategory.create(category_id: c3.id, product_id: p7.id)
+pc9 = ProductCategory.create(category_id: c3.id, product_id: p8.id)
+pc9 = ProductCategory.create(category_id: c3.id, product_id: p9.id)

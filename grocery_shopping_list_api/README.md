@@ -33,3 +33,5 @@ When facing high traffic and limited supply of a particular item, I would consid
 2. When the item is added to the cart or ordered, the number_available of that item is decreased by the quantity added to cart. For example, if there was only one 1gal milk available, and a customer adds the item to their cart, then the item would no longer be available even though the customer technically did not purchase the product yet. This prevents any issues with multiple customers added the same product to their cart when there is only one item left.
 
 3. Implement a timer for how long the item can be in a customer's cart for. For example, when purchasing tickets on Ticketmaster or StubHub, there is a 6-10min countdown from when the customer added the ticket(s) to his/her cart. When countdown reaches zero, the n the tickets are added in the pool of available tickets.
+
+## What I learned along the way
