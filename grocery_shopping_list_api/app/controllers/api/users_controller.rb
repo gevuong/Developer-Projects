@@ -28,7 +28,7 @@ class Api::UsersController < ApplicationController
 
   # use strong params by writing helper method that whitelists User attributes. All user_params are nested under the key :user in params hash.
   def user_params
-    params.require(:user).permit(:name)
+    params.require(:user).permit(:first_name)
   end
 end
 

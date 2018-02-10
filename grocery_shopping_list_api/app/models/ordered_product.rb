@@ -44,6 +44,7 @@ class OrderedProduct < ApplicationRecord
     date_start = Date.parse(start_date)
     date_end = Date.parse(end_date)
 
+    # look into :find_each or :find_in_batches
     if type == "day"
       date_range = (date_start..date_end).to_a
 
@@ -90,6 +91,7 @@ end
 
 
 =begin
+
 # Useful Resources:
 1. Grouping ActiveRecord objects by day or week using date_trunc  https://alexpeattie.com/blog/grouping-activerecord-by-day-or-week-with-datetrunc
 
@@ -97,4 +99,7 @@ end
 
 3. Grouping by week/month/etc & ActiveRecord
 https://stackoverflow.com/questions/902974/grouping-by-week-month-etc-activerecord
+
+4. Retrieving Multiple Objects in Batches http://guides.rubyonrails.org/active_record_querying.html#retrieving-multiple-objects-in-batches
+
 =end

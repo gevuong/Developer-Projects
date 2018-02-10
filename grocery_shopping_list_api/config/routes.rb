@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   namespace :api, defaults: { format: :json } do
     resources :users, only: [:create, :index, :destroy] do
       resources :orders, only: %i(index) # %i or %I creates an array of symbols
+      resources :category, only: [:show]
     end
 
     resources :orders, only: [:create, :index]
