@@ -20,8 +20,7 @@ Start/End times: 07:20­-07:45
 Items: 1 apple, 2 brownies, 4 diamonds
 
 
-When we call ItemCounter#print_items_per_interval(), something like the following
-should be printed:
+When we call ItemCounter#print_items_per_interval(), something like the following should be printed:
 07:00­-07:10 -­> 2 apples, 1 brownie
 07:10-­07:20 ­-> 3 apples, 1 brownie, 3 carrots
 07:20-­07:30 ­-> 4 apples, 3 brownies, 3 carrots, 4 diamonds

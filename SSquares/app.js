@@ -2,51 +2,56 @@
 document.addEventListener("DOMContentLoaded", () => {
   const squares = document.getElementsByClassName("square"); // returns HTMLCollection, not NodeList or Array
   let stack = [];
+  let squares_arr = Array.from(squares);   // Convert HTMLCollection to Array to iterate through each square
+  let revertColor;
 
-  // Convert HTMLCollection to Array to iterate through each square
-  Array.from(squares).forEach(square => {
-
+  squares_arr.forEach(square => {
     // initialize backgroundColor to white for each square
     square.style.backgroundColor = "white";
-    square.addEventListener("click", event => {
-      const clickedSquare = event.currentTarget;
-      console.log("clickedSquare: ", clickedSquare);
-      if (clickedSquare.style.backgroundColor === "white") {
-        clickedSquare.style.backgroundColor = "#33C6E4";
-
-        // To prevent same square from adding onto stack
-        if (!stack.includes(clickedSquare)) {
-          stack.push(clickedSquare);
-        }
-        console.log("stack: ", stack);
-        // setInterval(changeBackgroundColor(stack), 3000);
-
-      } else {
-        clickedSquare.style.backgroundColor = "white";
-      };
-
-      if (stack.length === 9) {
-        console.log("enter stack length");
-        // while (stack.length > 0) {
-          setInterval(changeBackgroundColor(stack), 3000);
-        // }
-      }
-
-    });
+    square.addEventListener("click", handleClick);
   })
 
-  function changeBackgroundColor(stack) {
-    let poppedSquare = stack.pop();
-    console.log(`changeBackgroundColor of ${stack.length}`);
-    poppedSquare.style.backgroundColor = "white";
+  function handleClick(event) {
+    let clickedSquare = event.currentTarget;
+    // console.log("clickedSquare");
+    if (clickedSquare.style.backgroundColor === "white") {
+      console.log("change blue");
+      clickedSquare.style.backgroundColor = "#33C6E4";
+        // To prevent same square from adding onto stack
+      if (!stack.includes(clickedSquare)) {
+        stack.push(clickedSquare);
+        console.log("push to stack: ", stack);
+      }
+
+      if (stack.length === 9) {
+        console.log("setInterval");
+        revertColor = setInterval(makeBackgroundWhite, 300);
+      }
+
+    } else {
+      console.log("change white");
+      clickedSquare.style.backgroundColor = "white";
+    }
   }
 
+  // let changeColor = setInterval(makeBackgroundWhite, 300);
+
+  function makeBackgroundWhite() {
+    console.log("enter makeBackgroundWhite");
+    let poppedSquare = stack.pop();
+    poppedSquare.style.backgroundColor = "white";
+    console.log("stack length: ", stack.length);
+    if (stack.length === 0) {
+      console.log("clearInterval");
+      clearInterval(revertColor);
+      removeListener();
+      revertColor = 0;
+    }
+  }
 
   function removeListener() {
-    Array.from(squares).forEach(square => {
-      square.removeEventListener("click", function() {
-        return;
-      })
+    squares_arr.forEach(square => {
+      square.removeEventListener("click", handleClick)
     })
   }
-});
+})
