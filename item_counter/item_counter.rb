@@ -1,60 +1,74 @@
+require 'active_support/inflector'
+
 class ItemCounter
-  attr_accessor :item_count
+  attr_reader :item_counts, :rides
 
   def initialize
-    @item_count = Hash.new { |hash, key| hash[key] = Hash.new(0) }
+    @item_counts = Hash.new { |hash, key| hash[key] = Hash.new(0) }
+    @rides = []
   end
 
-  # Processes a Ride object that contains metadata about the ride, including: start time, end time, and bike basket items.
   def process_ride(ride)
-    # initialize first ride
-    if @item_count.empty?
-      @item_count[ride.start_time] = ride.bike_basket_items
-      @item_count[ride.end_time] = {}
-      return @item_count
+    # Step 0: process a single ride object by first pushing ride object into ivar. Doing so enables each ride object to be considered every time a new ride object is processed
+    @rides.push(ride)
+    @item_counts = Hash.new { |hash, key| hash[key] = Hash.new(0) }
+
+    # Step 1: store start_time and end_time of all processed rides as keys in empty item_counts hash
+    @rides.flatten.each do |ride_obj|
+      @item_counts[ride_obj.start_time]
+      @item_counts[ride_obj.end_time]
     end
 
-    current_times = @item_count.keys
-    indices = (0...current_times.length).select { |idx| idx % 2 == 0 } # times array will always be of even length due to start and end times.
+    times = @item_counts.keys
 
-    # iterate through each pair of time ranges
-    indices.each do |idx|
-      start_time = current_times[idx]
-      end_time = current_times[idx + 1]
+    # Step 2: iterate ivar @rides, extract metadata of each processed ride. Iterate times array, and if a time is within start_time and end_time of said ride_object, store said bike_basket_items as values of said time
+    @rides.each do |ride_obj|
+      start_time = ride_obj.start_time
+      end_time = ride_obj.end_time
+      basket_items = ride_obj.bike_basket_items
 
-      if ride.start_time.between?(start_time, end_time - 60) # subtract a minute because #between? is inclusive
-        new_basket_items = ride.bike_basket_items # returns a hash of bike_basket_items and quantity
-        current_basket_items = @item_count[current_times[idx]]
-
-        new_basket_items.each do |new_item, quantity|
-          if current_basket_items[new_item].nil?
-            current_basket_items[new_item] = quantity
-          else
-            current_basket_items[new_item] += quantity
+      times.each do |time|
+        if time.between?(start_time, end_time - 60) #between? is inclusive
+          basket_items.each do |item, quantity|
+            @item_counts[time][item] += quantity
           end
         end
-
-        @item_count[ride.start_time] = current_basket_items
-        @item_count[ride.end_time] = {}
       end
-    end
-
-    # if start_time is not between any current time ranges in @item_count, then create new key-value pair
-    if @item_count[ride.start_time].nil?
-      p "enter last condition"
-      @item_count[ride.start_time] = ride.bike_basket_items
-      @item_count[ride.end_time] = {}
     end
   end
 
-  @item_count
+  def print_items_per_interval
+    @times = []
+    @items = []
+    parse_times_and_items
+
+    # print items per interval. Excludes time intervals during which no items were in transit. Note that the printed time intervals are sorted and continuous.
+    (0...@times.length - 1).each do |idx|
+      puts "#{@times[idx]}-#{@times[idx + 1]} -> #{@items[idx]}" unless @items[idx].empty?
+    end
+  end
+
+  private
+  # sort ivar based on time. Iterate ivar, converting and pushing new time format into times array, and constructing and pushing string of quantity and items into items_counts array
+  def parse_times_and_items
+    @item_counts.sort.each do |item_count|
+      items = item_count[1] # returns hash
+      time = item_count[0].strftime("%I:%M")
+      @times.push(time)
+
+      str = ""
+      items.sort.each do |sub_arr|
+        item = sub_arr[0]
+        quantity = sub_arr[1]
+        item = item.pluralize if quantity > 1
+        str.concat("#{quantity} #{item}, ")
+      end
+      @items.push(str.slice(0...-2))
+
+    end
+  end
+
 end
-
-# Prints a summary of the numbers of each type of item in transit during any given time interval. **Excludes time intervals during which no items were in transit.
-  # def print_items_per_interval
-  #
-  # end
-
 
 
 class Ride
@@ -64,50 +78,53 @@ class Ride
     @start_time = start_time
     @end_time = end_time
     @bike_basket_items = bike_basket_items
+
+    raise ArgumentError, "start_time and end_time must be Time objects" unless start_time.is_a?(Time) && end_time.is_a?(Time)
+
+    validate_bike_basket_items(bike_basket_items)
   end
 
+  def validate_bike_basket_items(bike_basket_items)
+    bike_basket_items.each do |item, quantity|
+
+      raise ArgumentError, "items must be a String" unless item.is_a?(String)
+
+      raise ArgumentError, "quantity must be an Integer greater than 0" unless quantity.is_a?(Integer) && quantity > 0
+
+    end
+  end
 end
 
-# to create Ride instance
-ride_1 = Ride.new(Time.new(2018, 2, 19, 7, 0, 0), Time.new(2018, 2, 19, 7, 30, 0), { "apples" => 2, "brownies" => 1 })
-ride_2 = Ride.new(Time.new(2018, 2, 19, 7, 10, 0), Time.new(2018, 2, 19, 8, 0, 0), { "apples" => 1, "carrots" => 3 })
-ride_3 = Ride.new(Time.new(2018, 2, 19, 7, 20, 0), Time.new(2018, 2, 19, 7, 45, 0), { "apples" => 1, "brownies" => 2, "diamonds" => 4 })
+
+# Test cases
+ride_1 = Ride.new(
+  Time.new(2018, 2, 19, 7, 0, 0),
+  Time.new(2018, 2, 19, 7, 30, 0),
+  { "apple" => 2, "brownie" => 1 }
+)
+ride_2 = Ride.new(
+  Time.new(2018, 2, 19, 7, 10, 0),
+  Time.new(2018, 2, 19, 8, 0, 0),
+  { "apple" => 1, "carrot" => 3 }
+)
+ride_3 = Ride.new(
+  Time.new(2018, 2, 19, 7, 20, 0),
+  Time.new(2018, 2, 19, 7, 45, 0),
+  { "apple" => 1, "brownie" => 2, "diamond" => 4 }
+)
+
+# test for no items in transit
+ride_4 = Ride.new(
+  Time.new(2018, 2, 19, 8, 31, 0),
+  Time.new(2018, 2, 19, 8, 35, 0),
+  {}
+)
 
 item_counter = ItemCounter.new
+
 item_counter.process_ride(ride_1)
-p item_counter.item_count
-
 item_counter.process_ride(ride_2)
-p item_counter.item_count
+item_counter.process_ride(ride_3)
+item_counter.process_ride(ride_4)
 
-# item_counter.process_ride(ride_3)
-# p item_counter.item_count
-
-# ride_1 = {
-#   start_time: DateTime.new(2018, 2, 19, 7, 0, 0),
-#   end_time: DateTime.new(2018, 2, 19, 7, 30, 0),
-#   bike_basket_items: {
-#     "apples" => 2,
-#     "brownie" => 1
-#   }
-# }
-#
-# ride_2 = {
-#   start_time: DateTime.new(2018, 2, 19, 7, 10, 0),
-#   end_time: DateTime.new(2018, 2, 19, 8, 0, 0),
-#   bike_basket_items: {
-#     "apple" => 1,
-#     "carrots" => 3
-#   }
-# }
-#
-# ride_3 = {
-#   start_time: DateTime.new(2018, 2, 19, 7, 20, 0),
-#   end_time: DateTime.new(2018, 2, 19, 7, 45, 0),
-#   bike_basket_items: {
-#     "apples" => 2,
-#     "brownie" => 1,
-#     "diamonds" => 4
-#   }
-# }
-# Time.new(2018, 2, 15, 7, 0, 0), Time.new(2018, 2, 15, 7, 30, 0)
+item_counter.print_items_per_interval
