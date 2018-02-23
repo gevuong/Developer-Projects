@@ -48,7 +48,8 @@ class ItemCounter
     end
   end
 
-  private
+  private # internal helper methods
+
   # sort ivar based on time. Iterate ivar, converting and pushing new time format into times array, and constructing and pushing string of quantity and items into items_counts array
   def parse_times_and_items
     @item_counts.sort.each do |item_count|
@@ -86,11 +87,9 @@ class Ride
 
   def validate_bike_basket_items(bike_basket_items)
     bike_basket_items.each do |item, quantity|
-
       raise ArgumentError, "items must be a String" unless item.is_a?(String)
-
+      
       raise ArgumentError, "quantity must be an Integer greater than 0" unless quantity.is_a?(Integer) && quantity > 0
-
     end
   end
 end
