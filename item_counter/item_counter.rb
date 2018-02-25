@@ -14,7 +14,7 @@ class ItemCounter
     @item_counts = Hash.new { |hash, key| hash[key] = Hash.new(0) }
 
     # Step 1: store start_time and end_time of all processed rides as keys in empty item_counts hash
-    @rides.flatten.each do |ride_obj|
+    @rides.each do |ride_obj|
       @item_counts[ride_obj.start_time]
       @item_counts[ride_obj.end_time]
     end
@@ -88,7 +88,7 @@ class Ride
   def validate_bike_basket_items(bike_basket_items)
     bike_basket_items.each do |item, quantity|
       raise ArgumentError, "items must be a String" unless item.is_a?(String)
-      
+
       raise ArgumentError, "quantity must be an Integer greater than 0" unless quantity.is_a?(Integer) && quantity > 0
     end
   end
