@@ -1,0 +1,26 @@
+-----------------------
+HTML Email Production
+-----------------------
+
+Please convert the attached .psd file ("MWD-Developer-Test-PSD.psd") to an HTML email that will render well across all major email clients and web browsers. 
+
+Try to minimize the number of image slices used, while converting as much of the email content to text/code as possible.
+
+There is a "comp" contained in the testing kit for a quick preview of the design file.
+
+The client logo should be hyperlinked, directing to: http://www.seti.org/ , and the 'donate now' buttons and blue text should direct to: https://seti.org/donate
+
+All other links, including social media icons, should use a placeholder link of your choosing. 
+
+The HTML email should be responsive (or fluid) to the best of your abilities.
+
+Send the email back to us when you're done.
+
+Feel free to ask any questions while you work on this.
+
+This should be completed within (about) 1 week.
+
+Good resources:
+https://www.emailonacid.com/
+https://litmus.com/
+https://www.campaignmonitor.com/
