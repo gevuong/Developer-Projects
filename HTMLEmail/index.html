@@ -3,23 +3,26 @@
   <head>
     <meta charset="utf-8">
     <title>HTML Email</title>
-    <link rel="stylesheet" href="style.css">
+    <link href="style.css" rel="stylesheet" type="text/css" >
   </head>
   <body>
+    <div>
     <header>
-      <img src="images/seti-logo.png" alt="SETI logo" />
+      <a id="header-logo" href="http://www.seti.org/">
+        <img src="images/seti-logo.png" alt="SETI logo" />
+      </a>
     </header>
     <h1>Support the Search for Evidence of Life on Mars</h1>
 
-      <figure>
-        <img src="images/img-space.jpg" alt="image space" />
-      </figure>
+      <!-- <figure> -->
+        <img class="img-space" src="images/img-space.jpg" alt="image space" />
+      <!-- </figure> -->
 
-      <a class="button" href="https://seti.org/donate">DONATE NOW</a>
+      <a class="donate-button" href="https://seti.org/donate">DONATE NOW</a>
 
     <main>
       <p>
-        Dear Firstname,
+        Dear &lt;Firstname&gt;,
       </p>
       <p>
        I have recently returned from a field expedition to one of the most remote and extreme environments on Earth – the high Andes region of Chile, at altitudes of 9,000 to 20,000 feet.   
@@ -38,8 +41,8 @@
     </main>
 
     <div class="middle-container">
-      <h1 class="middle-paragraph">FUND GROUNDBREAKING RESEARCH AND SUPPORT THE SEARCH FOR LIFE ON MARS.</h1>
-      <a class="button" href="https://seti.org/donate">DONATE NOW</a>
+      <h2>FUND GROUNDBREAKING RESEARCH AND SUPPORT THE SEARCH FOR LIFE ON MARS.</h2>
+      <a class="donate-button" href="https://seti.org/donate">DONATE NOW</a>
     </div>
 
     <p>
@@ -47,49 +50,56 @@
     </p>
 
     <p>
-             How do we define habitability and habitats? What will happen when samples are brought back to the lab? What will we see in the lab that we can’t see in the field?
-            <p class="blue-font">
-            With your help, these are some of the questions we will answer this year.
-          </p>
+       How do we define habitability and habitats? What will happen when samples are brought back to the lab? What will we see in the lab that we can’t see in the field?
+      <span class="blue-font">
+        With your help, these are some of the questions we will answer this year.
+      </span>
     </p>
     <p>
-          Funds raised this Spring will allow our scientists to commit to another field expedition this year.  
+      Funds raised this Spring will allow our scientists to commit to another field expedition this year.  
     </p>
     <p class="blue-font">
-              If you share our excitement about the importance of this work, please make a gift of $50, $100, $250 or more to help fund this Mars astrobiology project. We can’t do this without you.  
+      If you share our excitement about the importance of this work, please make a gift of $50, $100, $250 or more to help fund this Mars astrobiology project. We can’t do this without you.  
     </p>
     <p>
-               Finding evidence of life on Mars would mean that life has existed on two of the eight planets in our solar system alone.  The implications for our wider searches will be remarkable.
+      Finding evidence of life on Mars would mean that life has existed on two of the eight planets in our solar system alone.  The implications for our wider searches will be remarkable.
     </p>
-<p>
-              I hope you will join us to support the search for life in our solar system!
-
-</p>
-
-<img src="images/nathalie-img.jpg" alt="image" />
-<p>
-          Sincerely,
-          <img src="images/nathalie-signature.png" alt="signature" />
-          Nathalie Cabrol Senior Research Scientist Director of the Carl Sagan Center SETI Institute
-    </p>
-    <a class="button" href="https://seti.org/donate">DONATE NOW</a>
-
-    <p>
-      STAY CONNECTED: <img src="images/icons.png" alt="social media icons" />
+    <p>I hope you will join us to support the search for life in our solar system!
     </p>
 
+    <div class="bottom-container">
+      <div>
+        <img src="images/nathalie-img.jpg" alt="image" />
+      </div>
+      <div>
+        <p>Sincerely,</p>
+        <img src="images/nathalie-signature.png" alt="signature" />
+          <p>Nathalie Cabrol</p>
+          <p>Senior Research Scientist</p>
+          <p>Director of the Carl Sagan Center</p>
+          <p>SETI Institute</p>
+        </p>
+      </div>
+
+    </div>
+
+    <a class="donate-button" href="https://seti.org/donate">DONATE NOW</a>
+
+      <span id="icons">STAY CONNECTED:
+      <img src="images/icons.png" alt="social media icons" />
+</span>
     <footer>
-     <p>
-       SETI Institute is a 501(c)(3) charitable organization. Our Federal Tax ID is 94-2951356.
-     </p>
-     <p>All donations are tax deductible.</p>
-     <p>189 Bernardo Ave, Suite 200, Mountain View, CA 94043</p>
-     <p>Phone: 650-961-6633</p>
-     <p>
-       <u>Unsubscribe</u>
-       <u>Privacy Policy</u>
-     </p>
+      <p>
+        SETI Institute is a 501(c)(3) charitable organization. Our Federal Tax ID is 94-2951356.
+      </p>
+      <p>All donations are tax deductible.</p>
+      <p>189 Bernardo Ave, Suite 200, Mountain View, CA 94043</p>
+      <p id="phone-number">Phone: 650-961-6633</p>
+      <p>
+        <a href="">Unsubscribe</a>
+        <a href="">Privacy Policy</a>
+      </p>
     </footer>
-
+    </div>
   </body>
 </html>

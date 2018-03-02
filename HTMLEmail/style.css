@@ -3,18 +3,32 @@
    License: none (public domain)
 */
 
+/* =================================
+  Element Styles
+==================================== */
+
 body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  font-family: sans-serif;
+  font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;
+  margin-left: 250px;
+  margin-right: 250px;
 }
 
 .donate-button {
   background: blue;
 }
 
-a {
+
+h1 {
+  text-align: center;
+  letter-spacing: 1px;
+  margin-bottom: 0;
+  font-size: 40px;
+}
+
+.donate-button {
   background: #00adef;
   color: white;
   text-decoration: none;
@@ -24,18 +38,22 @@ a {
   font-size: 23px;
   padding: 11px;
   letter-spacing: 0.5px;
-
 }
 
-figure {
+p {
+  line-height: 1.5;
+  font-size: 15px;
+  letter-spacing: 0.5px;
+}
+
+.img-space {
   box-shadow: 0 16px 15px 6px rgba(1,6,2,0.25);
-  opacity: 1;
 }
 
 .middle-container {
-  text-align: center;
   background: #E5EEF1;
   padding-bottom: 30px;
+  text-align: center;
 }
 
 .blue-font {
@@ -43,10 +61,42 @@ figure {
   font-weight: 600;
 }
 
+.bottom-container {
+  display: flex;
+
+}
+
+.bottom-container img {
+  object-fit: none;
+}
+
+#icons {
+  background: #DEDBDA;
+  text-align: center;
+}
+
 footer {
   background: black;
   color: white;
   text-align: center;
-  font-size: 12px;
   font-family: sans-serif;
 }
+
+footer p #phone-number {
+  text-decoration: none;
+  color: white;
+}
+
+footer p {
+  font-size: 11px;
+  margin-bottom: 2px;
+  margin-top: 2px;
+}
+
+footer a {
+  color: white;
+}
+
+/* =================================
+  Media Queries
+==================================== */
