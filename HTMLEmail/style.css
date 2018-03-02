@@ -3,53 +3,50 @@
    License: none (public domain)
 */
 
-html, body, div, span, applet, object, iframe,
-h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-a, abbr, acronym, address, big, cite, code,
-del, dfn, em, img, ins, kbd, q, s, samp,
-small, strike, strong, sub, sup, tt, var,
-b, u, i, center,
-dl, dt, dd, ol, ul, li,
-fieldset, form, label, legend,
-table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, embed,
-figure, figcaption, footer, header, hgroup,
-menu, nav, output, ruby, section, summary,
-time, mark, audio, video {
-	margin: 0;
-	padding: 0;
-	border: 0;
-	font-size: 100%;
-	font: inherit;
-	vertical-align: baseline;
-}
-/* HTML5 display-role reset for older browsers */
-article, aside, details, figcaption, figure,
-footer, header, hgroup, menu, nav, section {
-	display: block;
-}
-body {
-	line-height: 1;
-}
-ol, ul {
-	list-style: none;
-}
-blockquote, q {
-	quotes: none;
-}
-blockquote:before, blockquote:after,
-q:before, q:after {
-	content: '';
-	content: none;
-}
-table {
-	border-collapse: collapse;
-	border-spacing: 0;
-}
-
-
 body {
   display: flex;
   flex-direction: column;
   align-items: center;
+  font-family: sans-serif;
+}
+
+.donate-button {
+  background: blue;
+}
+
+a {
+  background: #00adef;
+  color: white;
+  text-decoration: none;
+  text-align: center;
+  width: 200px;
+  font-weight: 300;
+  font-size: 23px;
+  padding: 11px;
+  letter-spacing: 0.5px;
+
+}
+
+figure {
+  box-shadow: 0 16px 15px 6px rgba(1,6,2,0.25);
+  opacity: 1;
+}
+
+.middle-container {
+  text-align: center;
+  background: #E5EEF1;
+  padding-bottom: 30px;
+}
+
+.blue-font {
+  color: #00adef;
+  font-weight: 600;
+}
+
+footer {
+  background: black;
+  color: white;
+  text-align: center;
+  font-size: 12px;
+  font-family: sans-serif;
 }
