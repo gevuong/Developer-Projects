@@ -62,19 +62,13 @@ body {
   max-width: 510px;
   min-width: 509px;
 }
-
 header {
   text-align: center;
 }
-
-#header-logo {
-  width: 100%;
+img.logo {
+  /* width: 100%; */
+  margin-top: 33px;
 }
-
-img {
-  /* max-width: 100%; */
-}
-
 h1 {
   letter-spacing: 0.03em;
   font-size: 2.5em;
@@ -82,20 +76,16 @@ h1 {
   font-weight: 600;
   padding: 27px 0 18px 0;
 }
-
 #banner-container {
   margin-bottom: 55px;
 }
-
 #banner-img {
   box-shadow: 0 16px 15px 6px rgba(1,6,2,0.25);
 }
-
 .donate-container {
   text-align: center;
-  margin-bottom: 50px;
+  margin: 50px 0;
 }
-
 .donate-button {
   background: #00adef;
   color: white;
@@ -105,25 +95,20 @@ h1 {
   padding: 11px 25px;
   letter-spacing: 1.5px;
 }
-
 p {
   line-height: 1.5;
   font-size: 15px;
   letter-spacing: 0.4px;
   margin-bottom: 25px;
 }
-
 .blue-font {
   color: #00adef;
-  /* font-weight: 600; */
 }
-
 .middle-container {
   background: #E5EEF1;
   padding-bottom: 38px;
   text-align: center;
 }
-
 h2 {
   font-weight: 600;
   font-size: 1.6em;
@@ -131,32 +116,57 @@ h2 {
   letter-spacing: 1px;
   line-height: 1.3em;
 }
-
-#img-signature-wrapper {
+#nathalie-img {
+  padding: 10px 0;
   width: 100%;
   margin: 0 auto;
 }
-
+img.signature {
+  margin-top: 10px;
+}
 .box {
   float: left;
   margin: 0 auto;
-
 }
 p.author-info {
  margin: 0;
 }
-
+.right-box {
+  padding-left: 30px;
+}
+.icons {
+  background: #DEDBDA;
+  text-align: center;
+}
+span {
+  text-align: center;
+  font-size: 1.2em;
+  letter-spacing: 1.5px;
+}
+footer {
+  background: black;
+  color: white;
+  text-align: center;
+  font-family: sans-serif;
+  padding: 10px 0;
+}
+footer p {
+  font-size: 10px;
+  margin-bottom: 2px;
+  margin-top: 2px;
+}
+footer p #phone-number {
+  text-decoration: none;
+  color: white;
+}
+footer a {
+  color: white;
+}
+.donate-cont {
+  margin: 50px 0;
+}
 
 /*
-
-
-
-
-
-
-
-
-
 .bottom-container {
   display: flex;
 
@@ -166,32 +176,7 @@ p.author-info {
   object-fit: none;
 }
 
-#icons {
-  background: #DEDBDA;
-  text-align: center;
-}
 
-footer {
-  background: black;
-  color: white;
-  text-align: center;
-  font-family: sans-serif;
-}
-
-footer p #phone-number {
-  text-decoration: none;
-  color: white;
-}
-
-footer p {
-  font-size: 11px;
-  margin-bottom: 2px;
-  margin-top: 2px;
-}
-
-footer a {
-  color: white;
-} */
 
 /* =================================
   Media Queries
