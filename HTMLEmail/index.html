@@ -5,80 +5,95 @@
     <title>HTML Email</title>
     <link href="style.css" rel="stylesheet" type="text/css" >
   </head>
+
   <body>
-    <div>
-    <header>
-      <a id="header-logo" href="http://www.seti.org/">
-        <img src="images/seti-logo.png" alt="SETI logo" />
-      </a>
-    </header>
-    <h1>Support the Search for Evidence of Life on Mars</h1>
+    <div id="wrapper">
+      <header>
+        <a id="header-logo" href="http://www.seti.org/">
+          <img src="images/seti-logo.png" alt="SETI" />
+        </a>
+        <h1>Support the Search for Evidence of Life on Mars</h1>
+      </header>
 
-      <!-- <figure> -->
-        <img class="img-space" src="images/img-space.jpg" alt="image space" />
-      <!-- </figure> -->
+      <figure id="banner-container">
+        <img id="banner-img" src="images/banner.jpg" alt="banner" />
+      </figure>
 
-      <a class="donate-button" href="https://seti.org/donate">DONATE NOW</a>
+      <!-- Note: <div> is a generic container used only for styling purposes -->
+      <div class="donate-container">
+        <a class="donate-button" href="https://seti.org/donate">DONATE NOW</a>
+      </div>
 
-    <main>
-      <p>
-        Dear &lt;Firstname&gt;,
-      </p>
-      <p>
-       I have recently returned from a field expedition to one of the most remote and extreme environments on Earth – the high Andes region of Chile, at altitudes of 9,000 to 20,000 feet.   
-      </p>
 
-      <p>
-        This region in Chile is the closest imitation of Mars’ landscape that we have here on Earth. We embarked on this expedition as part of a NASA project, to develop and test tools and instruments that will be able to withstand the harsh environmental conditions that exist on Mars today.  
-      </p>
+      <section>
+        <p>Dear &lt;Firstname&gt;,</p>
+        <p>
+         I have recently returned from a field expedition to one of the most remote and extreme environments on Earth – the high Andes region of Chile, at altitudes of 9,000 to 20,000 feet.   
+        </p>
+        <p>
+          This region in Chile is the closest imitation of Mars’ landscape that we have here on Earth. We embarked on this expedition as part of a NASA project, to develop and test tools and instruments that will be able to withstand the harsh environmental conditions that exist on Mars today.
+        </p>
+        <p>
+          In just a few years, the Mars 2020 mission will look for signs of life on Mars.  The goal of our work at the SETI Institute is to prepare for this mission with the very best research. We ask questions such as: How will we know what kind of life to look for on Mars and where to find it? How will we recognize what we’re looking for? And how will we understand it if we do find something?
+        </p>
 
-      <p>
-         In just a few years, the Mars 2020 mission will look for signs of life on Mars.  The goal of our work at the SETI Institute is to prepare for this mission with the very best research. We ask questions such as: How will we know what kind of life to look for on Mars and where to find it? How will we recognize what we’re looking for? And how will we understand it if we do find something?
-      </p>
-      <p class="blue-font">
-         To answer these questions, the SETI Institute needs your help to raise $80,000 this Spring to fund the Mars astrobiology project.  Mars is our next big frontier in the search for extraterrestrial life – and your financial support can play a pivotal role in that success.   
-      </p>
+        <p class="blue-font">
+           To answer these questions, the SETI Institute needs your help to raise $80,000 this Spring to fund the Mars astrobiology project.  Mars is our next big frontier in the search for extraterrestrial life – and your financial support can play a pivotal role in that success.   
+        </p>
+      </section>
+
+      <div class="middle-container">
+        <h2>FUND GROUNDBREAKING RESEARCH AND SUPPORT THE SEARCH FOR LIFE ON MARS.</h2>
+        <a class="donate-button" href="https://seti.org/donate">DONATE NOW</a>
+      </div>
+
+      <section>
+        <p>
+           In addition to research and field expeditions in some of Earth’s most extreme environments, the SETI Institute is a leading force in the development of new search methodologies. Our scientists are uniquely qualified. They analyze data and geological samples to understand the environment on Mars and identify signs of life.
+        </p>
+        <p>
+           How do we define habitability and habitats? What will happen when samples are brought back to the lab? What will we see in the lab that we can’t see in the field?
+          <span class="blue-font">
+            With your help, these are some of the questions we will answer this year.
+          </span>
+        </p>
+        <p>
+          Funds raised this Spring will allow our scientists to commit to another field expedition this year.  
+        </p>
+        <p class="blue-font">
+          If you share our excitement about the importance of this work, please make a gift of $50, $100, $250 or more to help fund this Mars astrobiology project. We can’t do this without you.  
+        </p>
+        <p>
+          Finding evidence of life on Mars would mean that life has existed on two of the eight planets in our solar system alone.  The implications for our wider searches will be remarkable.
+        </p>
+        <p>I hope you will join us to support the search for life in our solar system!
+        </p>
+      </section>
+
+      <!-- <div id="img-signature-wrapper"> -->
+        <div class="box">
+          <img src="images/nathalie-img.jpg" alt="image" />
+        </div>
+        <div class="box">
+          <p class="author-info">Sincerely,</p>
+          <img src="images/nathalie-signature.png" alt="signature" />
+          <p class="author-info">Nathalie Cabrol</p>
+          <p class="author-info">Senior Research Scientist</p>
+          <p class="author-info">Director of the Carl Sagan Center</p>
+          <p class="author-info">SETI Institute</p>
+        </div>
+      <!-- </div> -->
+      <!--
+
+
     </main>
-
-    <div class="middle-container">
-      <h2>FUND GROUNDBREAKING RESEARCH AND SUPPORT THE SEARCH FOR LIFE ON MARS.</h2>
-      <a class="donate-button" href="https://seti.org/donate">DONATE NOW</a>
-    </div>
-
-    <p>
-       In addition to research and field expeditions in some of Earth’s most extreme environments, the SETI Institute is a leading force in the development of new search methodologies. Our scientists are uniquely qualified. They analyze data and geological samples to understand the environment on Mars and identify signs of life.
-    </p>
-
-    <p>
-       How do we define habitability and habitats? What will happen when samples are brought back to the lab? What will we see in the lab that we can’t see in the field?
-      <span class="blue-font">
-        With your help, these are some of the questions we will answer this year.
-      </span>
-    </p>
-    <p>
-      Funds raised this Spring will allow our scientists to commit to another field expedition this year.  
-    </p>
-    <p class="blue-font">
-      If you share our excitement about the importance of this work, please make a gift of $50, $100, $250 or more to help fund this Mars astrobiology project. We can’t do this without you.  
-    </p>
-    <p>
-      Finding evidence of life on Mars would mean that life has existed on two of the eight planets in our solar system alone.  The implications for our wider searches will be remarkable.
-    </p>
-    <p>I hope you will join us to support the search for life in our solar system!
-    </p>
 
     <div class="bottom-container">
       <div>
-        <img src="images/nathalie-img.jpg" alt="image" />
+
       </div>
       <div>
-        <p>Sincerely,</p>
-        <img src="images/nathalie-signature.png" alt="signature" />
-          <p>Nathalie Cabrol</p>
-          <p>Senior Research Scientist</p>
-          <p>Director of the Carl Sagan Center</p>
-          <p>SETI Institute</p>
-        </p>
+
       </div>
 
     </div>
@@ -99,7 +114,7 @@
         <a href="">Unsubscribe</a>
         <a href="">Privacy Policy</a>
       </p>
-    </footer>
+    </footer> -->
     </div>
   </body>
 </html>

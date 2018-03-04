@@ -8,5 +8,8 @@ Try to use "em" rather than "px" if you can. However, margin and padding are typ
 
 https://kyleschaeffer.com/development/css-font-size-em-vs-px-vs-pt-vs/
 
+Reset CSS
+https://meyerweb.com/eric/tools/css/reset/
+
 HTML Special Entities
 http://htmlhelp.com/reference/html40/entities/special.html
