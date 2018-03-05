@@ -80,7 +80,9 @@ h1 {
   margin-bottom: 55px;
 }
 #banner-img {
-  box-shadow: 0 16px 15px 6px rgba(1,6,2,0.25);
+  -webkit-box-shadow: 0px 10px 35px 0px rgba(71,71,71,1);
+  -moz-box-shadow: 0px 10px 35px 0px rgba(71,71,71,1);
+  box-shadow: 0px 10px 35px 0px rgba(71,71,71,1);
 }
 .donate-container {
   text-align: center;
@@ -116,6 +118,9 @@ h2 {
   letter-spacing: 1px;
   line-height: 1.3em;
 }
+.section-two {
+  margin-top: 25px;
+}
 #nathalie-img {
   padding: 10px 0;
   width: 100%;
@@ -140,9 +145,10 @@ p.author-info {
 }
 span {
   text-align: center;
-  font-size: 1.2em;
-  letter-spacing: 1.5px;
+  font-size: 15px;
+  letter-spacing: 0.4px;
 }
+
 footer {
   background: black;
   color: white;
@@ -169,14 +175,10 @@ footer a {
 /*
 .bottom-container {
   display: flex;
-
 }
-
 .bottom-container img {
   object-fit: none;
 }
-
-
 
 /* =================================
   Media Queries
