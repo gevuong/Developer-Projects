@@ -20,7 +20,11 @@ Try to use "em" rather than "px" if you can. However, margin and padding are typ
 
 **Generally, 1em = 12pt = 16px = 100%**
 
+
 ## Helpful Resources
+Universally Supported CSS and HTML for Email Designs
+http://www.pinpointe.com/blog/email-campaign-html-and-css-support
+
 
 https://kyleschaeffer.com/development/css-font-size-em-vs-px-vs-pt-vs/
 
