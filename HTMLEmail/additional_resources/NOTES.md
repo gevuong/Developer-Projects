@@ -12,7 +12,7 @@
 
 6. Images have to be hosted remotely.
 
-7. Try to use "em" rather than "px" if you can. However, margin and padding are typically "px"
+7. Try to use "em" rather than "px" if you can. However, margin and padding are typically "px". Edit: "em" does not really apply with older email clients...stick with "px" atm.
 
 - Ems are becoming increasingly popular in web documents due to scalability and their mobile-device-friendly nature. **However, I learned that some desktop emailers cannot recognize em format, like AOL Chrome on iOS.**
 
