@@ -148,7 +148,9 @@ span {
   font-size: 15px;
   letter-spacing: 0.4px;
 }
-
+.author-container {
+  padding-left: 10px;
+}
 footer {
   background: black;
   color: white;

@@ -3,14 +3,200 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title></title>
+    <title>Responsive HTML Email</title>
+
+    <style type="text/css">
+      body {
+        margin: 0 auto;
+      }
+      .wrapper {
+        width: 100%;
+        /* table-layout: fixed; */
+        background: black;
+      }
+      .wrapper-inner {
+        width: 100%;
+        margin: 0 auto;
+        max-width: 680px;
+        background: #fff;
+      }
+      table {
+        font-family: sans-serif;
+      }
+      td {
+        padding: 0;
+      }
+
+      .header-table {
+        width: 100%;
+        max-width: 508px;
+        margin: 0 auto;
+        padding-top: 32px;
+        text-align: center;
+      }
+      .h1 {
+        margin: 0;
+        font-weight: 600;
+        font-size: 2.5em;
+        letter-spacing: 1.3px;
+        padding: 26px 0px 15px;
+        line-height: 1.2em;
+      }
+      .banner-table {
+        text-align: center;
+      }
+      img.banner {
+        width: 100%;
+        /* -webkit-box-shadow: 0px 10px 35px 0px rgba(71,71,71,1);
+        -moz-box-shadow: 0px 10px 35px 0px rgba(71,71,71,1); */
+        box-shadow: 0px 10px 35px 0px rgba(71,71,71,1);
+        max-width: 508px;
+      }
+
+      .main-table-one {
+        width: 100%;
+        margin: 0 auto;
+        margin-top: 52px;
+        max-width: 508px;
+      }
+      .button-holder-center {
+        text-align: center;
+        /* margin-bottom: 30px; */
+      }
+      .btn {
+        background: #00adef;
+        color: white;
+        text-decoration: none;
+        font-weight: 300;
+        font-size: 1.5em;
+        padding: 11px 25px;
+        letter-spacing: 1.5px;
+      }
+      p {
+        margin: 0;
+        padding: 0;
+        line-height: 1.4em;
+        font-size: 15px;
+        letter-spacing: 0.3px;
+        margin-bottom: 25px;
+        font-weight: 300;
+      }
+      p.end-text {
+        margin: 20px auto;
+      }
+      .blue-font {
+        color: #00adef;
+        font-weight: 400;
+      }
+
+      .main-table-two {
+        background: #E5EEF1;
+        text-align: center;
+        width: 100%;
+        max-width: 508px;
+        margin: 0 auto;
+        margin-bottom: 20px;
+        padding-bottom: 10px;
+      }
+      .h2 {
+        margin: 0;
+        font-weight: 600;
+        font-size: 1.6em;
+        padding: 24px;
+        line-height: 1.3em;
+        letter-spacing: 0.03em;
+      }
+
+      .main-table-three {
+        width: 100%;
+        max-width: 508px;
+        margin: 0 auto;
+      }
+
+      .main-table-four {
+        width: 100%;
+        max-width: 508px;
+        margin: 0 auto;
+        padding: 0;
+      }
+      .box {
+        display: inline-block;
+        vertical-align: bottom;
+        margin: 0 auto;
+        max-width: 508px;
+      }
+      .section-two {
+        padding-left: 28px;
+      }
+      /* .inner-td {
+        padding-right: 10px;
+      } */
+      /* .two-column .content {
+        text-align: justify;
+      } */
+      img.nathalie {
+        width: 100%;
+        max-width: 130px;
+        height: auto;
+        vertical-align: bottom;
+      }
+      img.signature {
+        width: 100%;
+        max-width: 202px;
+        padding-top: 10px;
+      }
+      .author-info {
+        margin: 0;
+        text-align: left;
+      }
+
+      .social-table {
+        width: 100%;
+        margin: 0;
+        padding: 0;
+        background: #DEDBDA;
+      }
+      .social-cell {
+        text-align: center;
+      }
+      .social-text {
+        margin: 0;
+        font-weight: 400;
+        font-size: 1.3em;
+        padding: 13px 25px;
+        letter-spacing: 1.5px;
+      }
+
+      .footer-table {
+        width: 100%;
+        background: #010511;
+        color: white;
+      }
+      .footer {
+        text-align: center;
+        font-size: 0.68em;
+        padding: 10px 0 13px;
+      }
+      .footer p {
+        margin: 0;
+        padding-bottom: 5px;
+        font-weight: 300;
+        font-size: 0.9em;
+      }
+      .footer p a {
+        color: white;
+        padding: 0 7px;
+      }
+    </style>
+
   </head>
+
   <body>
     <div class="wrapper">
       <div class="wrapper-inner">
 
         <!-- Begin Header Table -->
-        <table width="100%" class="header-table">
+        <table class="header-table">
           <tr>
             <td class="header">
               <a href="http://www.seti.org/">
@@ -27,7 +213,7 @@
         <table width="100%" class="banner-table">
           <tr>
             <td class="image">
-              <img src="images/banner.jpg" alt="banner" />
+              <img class="banner" src="images/banner.jpg" alt="banner" />
             </td>
           </tr>
         </table>
@@ -35,21 +221,22 @@
 
         <table width="100%" class="main-table-one">
           <tr>
-            <td class="inner-td">
+            <td class="one-column">
               <p class="button-holder-center">
                 <a class="btn" href="#">DONATE NOW</a>
               </p>
-              <p class="text">Dear &lt;Firstname&gt;,</p>
-              <p class="text">
+              <br />
+              <p>Dear &lt;Firstname&gt;,</p>
+              <p>
                 I have recently returned from a field expedition to one of the most remote and extreme environments on Earth – the high Andes region of Chile, at altitudes of 9,000 to 20,000 feet.   
               </p>
-              <p class="text">
+              <p>
                 This region in Chile is the closest imitation of Mars’ landscape that we have here on Earth. We embarked on this expedition as part of a NASA project, to develop and test tools and instruments that will be able to withstand the harsh environmental conditions that exist on Mars today.
               </p>
-              <p class="text">
+              <p>
                 In just a few years, the Mars 2020 mission will look for signs of life on Mars.  The goal of our work at the SETI Institute is to prepare for this mission with the very best research. We ask questions such as: How will we know what kind of life to look for on Mars and where to find it? How will we recognize what we’re looking for? And how will we understand it if we do find something?
               </p>
-              <p class="text blue">
+              <p class="end-text blue-font">
                 To answer these questions, the SETI Institute needs your help to raise $80,000 this Spring to fund the Mars astrobiology project.  Mars is our next big frontier in the search for extraterrestrial life – and your financial support can play a pivotal role in that success.
               </p>
             </td>
@@ -57,9 +244,9 @@
         </table>
         <!-- End Main Table One -->
 
-        <table class="main-table-two">
+        <table width="100%" class="main-table-two">
           <tr>
-            <td class="inner-td">
+            <td class="one-column">
               <p class="h2">
                 FUND GROUNDBREAKING RESEARCH AND SUPPORT THE SEARCH FOR LIFE ON MARS.
               </p>
@@ -73,20 +260,20 @@
 
         <table class="main-table-three">
           <tr>
-            <td class="inner-td">
+            <td class="one-column">
               <p class="text">
                 In addition to research and field expeditions in some of Earth’s most extreme environments, the SETI Institute is a leading force in the development of new search methodologies. Our scientists are uniquely qualified. They analyze data and geological samples to understand the environment on Mars and identify signs of life.
               </p>
               <p>
                 How do we define habitability and habitats? What will happen when samples are brought back to the lab? What will we see in the lab that we can’t see in the field?
-                <span class="blue">
+                <span class="blue-font">
                   With your help, these are some of the questions we will answer this year.
                 </span>
               </p>
               <p>
                 Funds raised this Spring will allow our scientists to commit to another field expedition this year.  
               </p>
-              <p class="blue">
+              <p class="blue-font">
                 If you share our excitement about the importance of this work, please make a gift of $50, $100, $250 or more to help fund this Mars astrobiology project. We can’t do this without you.  
               </p>
               <p>
@@ -99,42 +286,45 @@
           </tr>
         </table>
         <!-- End Main Table Three -->
-        <!-- Begin Two Column -->
+
         <table class="main-table-four">
           <tr>
-            <td class="two-column">
-
-              <div class="section">
-                <table width="100%">
-                  <tr>
-                    <td align="left" class="inner-td">
-                      <img src="images/nathalie.jpg" alt="nathalie" />
-                    </td>
-                  </tr>
-                </table>
-              </div> <!-- End First of Two Columns -->
-
-              <div class="section">
-                <table width="100%">
-                  <tr>
-                    <td class="inner-td">
-                      <p class="author-info">Sincerely,</p>
-                      <img class="signature" src="images/nathalie-signature.png" alt="signature" />
-                      <p class="author-info">Nathalie Cabrol</p>
-                      <p class="author-info">Senior Research Scientist</p>
-                      <p class="author-info">Director of the Carl Sagan Center</p>
-                      <p class="author-info">SETI Institute</p>
-                    </td>
-                  </tr>
-                </table>
-              </div> <!-- End Second of Two Columns -->
-
+            <td>
+              <div class="box section-one">
+                <img class="nathalie" src="images/nathalie.jpg" alt="nathalie" />
+              </div>
+              <div class="box section-two">
+                <p class="author-info">Sincerely,</p>
+                <img class="signature" src="images/nathalie-signature.png" alt="signature" />
+                <p class="author-info">Nathalie Cabrol</p>
+                <p class="author-info">Senior Research Scientist</p>
+                <p class="author-info">Director of the Carl Sagan Center</p>
+                <p class="author-info">SETI Institute</p>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <br />
+              <br />
+              <br />
+              <p class="button-holder-center">
+                <a class="btn" href="#">DONATE NOW</a>
+              </p>
+              <br />
+              <br />
             </td>
           </tr>
         </table>
 
-        <!-- Two Columns-->
-        <table class="main-table-five">
+        <table class="social-table">
+          <tr>
+            <td class="social-cell">
+              <p class="social-text">STAY CONNECTED: </p>
+            </td>
+          </tr>
+        </table>
+        <!-- <table class="main-table-five">
           <tr>
             <td class="two-column">
 
@@ -178,26 +368,20 @@
 
             </td>
           </tr>
-        </table>
+        </table>  -->
         <!-- End Main Table Five -->
-        <table class="outer-table-two">
+        <table class="footer-table">
           <tr>
-            <td class="one-column">
-              <table width="100%">
-                <tr>
-                  <td class="footer">
-                    <p>
-                      SETI Institute is a 501(c)(3) charitable organization. Our Federal Tax ID is 94-2951356.<br />All donations are tax deductible.
-                    </p>
-                    <p>189 Bernardo Ave, Suite 200, Mountain View, CA 94043</p>
-                    <p id="phone-number">Phone: 650-961-6633</p>
-                    <p>
-                      <a href="">Unsubscribe</a>
-                      <a href="">Privacy Policy</a>
-                    </p>
-                  </td>
-                </tr>
-              </table>
+            <td class="footer">
+              <p>
+                SETI Institute is a 501(c)(3) charitable organization. Our Federal Tax ID is 94-2951356.<br />All donations are tax deductible.
+              </p>
+              <p>189 Bernardo Ave, Suite 200, Mountain View, CA 94043</p>
+              <p id="phone-number">Phone: 650-961-6633</p>
+              <p>
+                <a href="">Unsubscribe</a>
+                <a href="">Privacy Policy</a>
+              </p>
             </td>
           </tr>
         </table>
