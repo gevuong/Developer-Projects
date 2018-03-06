@@ -2,6 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Responsive HTML Email</title>
 
@@ -11,31 +12,39 @@
       }
       .wrapper {
         width: 100%;
-        /* table-layout: fixed; */
+        table-layout: fixed;
         background: black;
       }
       .wrapper-inner {
         width: 100%;
         margin: 0 auto;
-        max-width: 680px;
+        max-width: 680px !important;
         background: #fff;
       }
       table {
         font-family: sans-serif;
+        width: 100%;
       }
       td {
         padding: 0;
       }
-
+      img {
+        width: 100%;
+        height: auto;
+        border-style: none;
+      }
       .header-table {
         width: 100%;
         max-width: 508px;
         margin: 0 auto;
         padding-top: 32px;
-        text-align: center;
+        text-align: center !important;
+      }
+      img.logo {
+        max-width: 112px !important;
       }
       .h1 {
-        margin: 0;
+        margin: 0 auto !important;
         font-weight: 600;
         font-size: 2.5em;
         letter-spacing: 1.3px;
@@ -46,22 +55,20 @@
         text-align: center;
       }
       img.banner {
-        width: 100%;
-        /* -webkit-box-shadow: 0px 10px 35px 0px rgba(71,71,71,1);
-        -moz-box-shadow: 0px 10px 35px 0px rgba(71,71,71,1); */
+        max-width: 508px !important;
+        -webkit-box-shadow: 0px 10px 35px 0px rgba(71,71,71,1);
+        -moz-box-shadow: 0px 10px 35px 0px rgba(71,71,71,1);
         box-shadow: 0px 10px 35px 0px rgba(71,71,71,1);
-        max-width: 508px;
       }
 
       .main-table-one {
         width: 100%;
+        max-width: 508px !important;
         margin: 0 auto;
         margin-top: 52px;
-        max-width: 508px;
       }
       .button-holder-center {
         text-align: center;
-        /* margin-bottom: 30px; */
       }
       .btn {
         background: #00adef;
@@ -69,8 +76,11 @@
         text-decoration: none;
         font-weight: 300;
         font-size: 1.5em;
-        padding: 11px 25px;
+        padding: 13px 25px 11px !important;
         letter-spacing: 1.5px;
+      }
+      .top-btn {
+        padding-bottom: 5px;
       }
       p {
         margin: 0;
@@ -86,25 +96,26 @@
       }
       .blue-font {
         color: #00adef;
-        font-weight: 400;
+        font-weight: 400 !important;
       }
 
       .main-table-two {
-        background: #E5EEF1;
-        text-align: center;
         width: 100%;
-        max-width: 508px;
+        max-width: 508px !important;
+        background: #E5EEF1;
         margin: 0 auto;
         margin-bottom: 20px;
         padding-bottom: 10px;
+
       }
       .h2 {
-        margin: 0;
+        margin: 0 auto !important;
         font-weight: 600;
         font-size: 1.6em;
         padding: 24px;
         line-height: 1.3em;
         letter-spacing: 0.03em;
+        text-align: center;
       }
 
       .main-table-three {
@@ -119,37 +130,30 @@
         margin: 0 auto;
         padding: 0;
       }
-      .box {
+      div.box {
         display: inline-block;
         vertical-align: bottom;
         margin: 0 auto;
         max-width: 508px;
       }
-      .section-two {
+      div.box.section-two {
         padding-left: 28px;
       }
-      /* .inner-td {
-        padding-right: 10px;
-      } */
-      /* .two-column .content {
-        text-align: justify;
-      } */
       img.nathalie {
-        width: 100%;
-        max-width: 130px;
-        height: auto;
+        max-width: 130px !important;
         vertical-align: bottom;
       }
       img.signature {
-        width: 100%;
-        max-width: 202px;
+        max-width: 202px !important;
         padding-top: 10px;
       }
-      .author-info {
-        margin: 0;
+      p.author-info {
+        margin: 0 !important;
         text-align: left;
       }
-
+      .bottom-btn {
+        padding-top: 15px;
+      }
       .social-table {
         width: 100%;
         margin: 0;
@@ -160,13 +164,29 @@
         text-align: center;
       }
       .social-text {
-        margin: 0;
+        margin: 0 !important;
+        padding: 13px 0;
         font-weight: 400;
         font-size: 1.3em;
-        padding: 13px 25px;
-        letter-spacing: 1.5px;
+        letter-spacing: 1.2px;
+        color: #3a3a3a;
       }
-
+      ul {
+        margin: 0;
+        padding: 0;
+        list-style-type: none;
+      }
+      li {
+        list-style-type: none;
+        float: left;
+        padding: 0 0 8px 18px;
+      }
+      a > img {
+        max-width: 32px !important;
+      }
+      li.first-social-icon {
+        padding-left: 10px;
+      }
       .footer-table {
         width: 100%;
         background: #010511;
@@ -174,19 +194,44 @@
       }
       .footer {
         text-align: center;
-        font-size: 0.68em;
-        padding: 10px 0 13px;
+        font-size: 0.65em;
+        padding: 8px 0 12px !important;
       }
       .footer p {
-        margin: 0;
+        margin: 0 !important;
         padding-bottom: 5px;
         font-weight: 300;
         font-size: 0.9em;
+        color: white !important;
+        text-decoration: none !important;
       }
       .footer p a {
         color: white;
         padding: 0 7px;
+        text-decoration: underline;
       }
+
+      @media screen and (max-width: 414px) {
+        body {
+          padding: 0 30px !important;
+        }
+        .main-table-four {
+          text-align: center !important;
+        }
+        li.first-social-icon {
+          padding-left: 0 !important;
+        }
+        div.box.section-two {
+          padding-top: 20px !important;
+        }
+        .footer p, p.author-info, .h1, .h2, .social-text {
+          margin: 0 !important;
+        }
+        .footer p {
+          color: white !important;
+        }
+      }
+
     </style>
 
   </head>
@@ -200,7 +245,7 @@
           <tr>
             <td class="header">
               <a href="http://www.seti.org/">
-                <img class="logo" src="images/seti-logo.png" alt="SETI Institute" />
+                <img class="logo" src="https://res.cloudinary.com/dtluc0y85/image/upload/v1520318927/seti-logo_pijnea.png" alt="SETI Institute" />
               </a>
               <p class="h1">
                 Support the Search for Evidence of Life on Mars
@@ -210,20 +255,20 @@
         </table>
         <!-- End Header Table -->
 
-        <table width="100%" class="banner-table">
+        <table class="banner-table">
           <tr>
             <td class="image">
-              <img class="banner" src="images/banner.jpg" alt="banner" />
+              <img class="banner" src="https://res.cloudinary.com/dtluc0y85/image/upload/v1520318917/banner_gubsry.jpg" alt="banner" />
             </td>
           </tr>
         </table>
         <!-- End Banner Table -->
 
-        <table width="100%" class="main-table-one">
+        <table class="main-table-one">
           <tr>
             <td class="one-column">
-              <p class="button-holder-center">
-                <a class="btn" href="#">DONATE NOW</a>
+              <p class="button-holder-center top-btn">
+                <a class="btn" href="https://seti.org/donate">DONATE NOW</a>
               </p>
               <br />
               <p>Dear &lt;Firstname&gt;,</p>
@@ -244,14 +289,14 @@
         </table>
         <!-- End Main Table One -->
 
-        <table width="100%" class="main-table-two">
+        <table class="main-table-two">
           <tr>
             <td class="one-column">
               <p class="h2">
                 FUND GROUNDBREAKING RESEARCH AND SUPPORT THE SEARCH FOR LIFE ON MARS.
               </p>
               <p class="button-holder-center">
-                <a class="btn" href="#">DONATE NOW</a>
+                <a class="btn" href="https://seti.org/donate">DONATE NOW</a>
               </p>
             </td>
           </tr>
@@ -291,11 +336,11 @@
           <tr>
             <td>
               <div class="box section-one">
-                <img class="nathalie" src="images/nathalie.jpg" alt="nathalie" />
+                <img class="nathalie" src="https://res.cloudinary.com/dtluc0y85/image/upload/v1520318932/nathalie_d7mwuv.jpg" alt="nathalie" />
               </div>
               <div class="box section-two">
                 <p class="author-info">Sincerely,</p>
-                <img class="signature" src="images/nathalie-signature.png" alt="signature" />
+                <img class="signature" src="https://res.cloudinary.com/dtluc0y85/image/upload/v1520318936/nathalie-signature_liixrh.png" alt="signature" />
                 <p class="author-info">Nathalie Cabrol</p>
                 <p class="author-info">Senior Research Scientist</p>
                 <p class="author-info">Director of the Carl Sagan Center</p>
@@ -307,9 +352,8 @@
             <td>
               <br />
               <br />
-              <br />
-              <p class="button-holder-center">
-                <a class="btn" href="#">DONATE NOW</a>
+              <p class="button-holder-center bottom-btn">
+                <a class="btn" href="https://seti.org/donate">DONATE NOW</a>
               </p>
               <br />
               <br />
@@ -320,73 +364,51 @@
         <table class="social-table">
           <tr>
             <td class="social-cell">
-              <p class="social-text">STAY CONNECTED: </p>
+              <div class="box">
+                <p class="social-text">STAY CONNECTED:</p>
+              </div>
+              <div class="box">
+                <ul class="social-list">
+                  <li class="first-social-icon">
+                    <a href="https://plus.google.com"><img src="https://res.cloudinary.com/dtluc0y85/image/upload/v1520346154/google-plus_n3ewne.png" alt="google plus" /></a>
+                  </li>
+                  <li>
+                    <a href="https://www.facebook.com"><img src="https://res.cloudinary.com/dtluc0y85/image/upload/v1520346071/facebook_oimdam.png" alt="facebook" /></a>
+                  </li>
+                  <li>
+                    <a href="https://www.twitter.com"><img src="http://res.cloudinary.com/dtluc0y85/image/upload/v1520346063/twitter_jwkjxq.png" alt="twitter" /></a>
+                  </li>
+                  <li>
+                    <a href="https://www.youtube.com"><img src="https://res.cloudinary.com/dtluc0y85/image/upload/v1520346061/youtube_k9mfoe.png" alt="youtube" /></a>
+                  </li>
+                  <li>
+                    <a href="https://www.linkedin.com"><img src="https://res.cloudinary.com/dtluc0y85/image/upload/v1520346053/linkedin_t9ycuc.png" alt="linkedin" /></a>
+                  </li>
+                </ul>
+              </div>
             </td>
           </tr>
         </table>
-        <!-- <table class="main-table-five">
-          <tr>
-            <td class="two-column">
 
-              <div class="section">
-                <table width="100%">
-                  <tr>
-                    <td>
-                      STAY CONNECTED:
-                    </td>
-                  </tr>
-                </table>
-              </div>
-
-              <div class="section">
-                <table width="100%">
-                  <tr>
-                    <td>
-                      <div>
-                        <ul class="social-list">
-                          <li>
-                            <a href="#"><img src=""/></a>Google Plus
-                          </li>
-                          <li>
-                            <a href="#"><img /></a>Facebook
-                          </li>
-                          <li>
-                            <a href="#"><img /></a>Twitter
-                          </li>
-                          <li>
-                            <a href="#"><img /></a>YouTube
-                          </li>
-                          <li>
-                            <a href="#"><img /></a>LinkedIn
-                          </li>
-                        </ul>
-                      </div>
-                    </td>
-                  </tr>
-                </table>
-              </div>
-
-            </td>
-          </tr>
-        </table>  -->
         <!-- End Main Table Five -->
         <table class="footer-table">
           <tr>
             <td class="footer">
               <p>
-                SETI Institute is a 501(c)(3) charitable organization. Our Federal Tax ID is 94-2951356.<br />All donations are tax deductible.
+                SETI Institute is a 501(c)(3) charitable organization. Our Federal Tax ID is 94-2951356.
+                <br />
+                All donations are tax deductible.
               </p>
               <p>189 Bernardo Ave, Suite 200, Mountain View, CA 94043</p>
-              <p id="phone-number">Phone: 650-961-6633</p>
+              <p>Phone: 650-961-6633</p>
               <p>
-                <a href="">Unsubscribe</a>
-                <a href="">Privacy Policy</a>
+                <a href="#">Unsubscribe</a>
+                <a href="#">Privacy Policy</a>
               </p>
             </td>
           </tr>
         </table>
-        <!-- End Outer Table Two -->
-
+        <!-- End Footer Table -->
       </div> <!-- End Wrapper Inner -->
     </div> <!-- End Wrapper -->
   </body>
