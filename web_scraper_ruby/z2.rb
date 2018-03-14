@@ -7,7 +7,7 @@ require 'json'
 agent = Mechanize.new 
 z2_page = agent.get("https://z2trackdays.com/events/")
 ptt_page = []
-keigwins_page = [] 
+keigwins_page = agent.get("http://www.keigwins.com/events_schedule.php") 
 lets_ride_page = []
 
 event_links = z2_page.links_with(href: /(\/events\/.+)[0-9\-]{7}\/$/) # returns an array of Mechanize::Page::Link
