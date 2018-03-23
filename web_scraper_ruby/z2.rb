@@ -12,8 +12,16 @@ lets_ride_page = []
 
 event_links = z2_page.links_with(href: /(\/events\/.+)[0-9\-]{7}\/$/) # returns an array of Mechanize::Page::Link
 
+keigwins_page.search("div.schedule ul").each_with_index do |ul, idx|
+    date, title = ul.children[1].text.strip.split("-\n")
+    keigwins_hash[idx + 1]["date"] = date.strip
+    keigwins_hash[idx + 1]["title"] = title.strip 
+end 
+
+
 # initialize
-hash = Hash.new { |hash, key| hash[key] = {} }
+z2_hash = Hash.new { |hash, key| hash[key] = {} }
+keigwins_hash = Hash.new { |hash, key| hash[key] = {} }
 key = 1
 
 # parse data using Mechanize's #search 
@@ -22,16 +30,16 @@ z2_page.search('table.events-table tr td').each_with_index do |table_data, idx|
     if idx % 2 == 0 # parse and store date in hash
         date = table_data.text.strip # remove whitespace
         next unless date.include?("2018")
-        hash[key]["organizer"] = "z2"
-        hash[key]["date"] = Date.strptime(date, "%m/%d/%Y")
+        z2_hash[key]["organizer"] = "z2"
+        z2_hash[key]["date"] = Date.strptime(date, "%m/%d/%Y")
         next
     elsif idx % 2 != 0
         title, location = table_data.text.strip.split("\r\n")
         url = table_data.css("a")[0]["href"]
         next unless location || url.include?("2018")
-        hash[key]["title"] = title.strip 
-        hash[key]["location"] = location.strip
-        hash[key]["register_url"] = url
+        z2_hash[key]["title"] = title.strip 
+        z2_hash[key]["location"] = location.strip
+        z2_hash[key]["register_url"] = url
         key += 1
     end 
 
@@ -50,7 +58,7 @@ event_links.each_with_index do |link, idx|
             break
         end 
     end 
-    hash[idx + 1]["novice_price"] = table_data_price
+    z2_hash[idx + 1]["novice_price"] = table_data_price
 
 end 
 
