@@ -3,8 +3,10 @@
 This README would normally document whatever steps are necessary to get the
 application up and running.
 
-Things you may want to cover:
+Steps To Build Application:
 rails g project_name --database=postgresql
+rails db:create 
+rails g model User
 
 
 * Ruby version
