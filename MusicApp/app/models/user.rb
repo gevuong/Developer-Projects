@@ -17,7 +17,7 @@ class User < ApplicationRecord
     # we want :password validation to pass even if @password = nil. The only time @password is not nil is when password has changed using #password setter method. If not, then @password = nil because attribute only lives in ivar, and not persisted to DB. 
     validates :password, length: { minimum: 6 }, allow_nil: true 
 
-    # only generate session token for User only if one hasn't been set
+    # callback is called whenever ActiveRecord object is instantiated directly using #new (i.e. User.new) or loads a record from DB (i.e. User.first). Callback generates session token only if one hasn't been set.
     after_initialize :ensure_session_token
 
     attr_reader :password

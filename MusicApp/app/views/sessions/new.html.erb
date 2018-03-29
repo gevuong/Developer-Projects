@@ -6,7 +6,8 @@
 <!-- when form submits, all info inputted in form gets packaged and makes a POST request to /session which is session#create. -->
 <!-- action attribute specifies which url to send data to -->
 <!-- method attribute specifies which http method to use -->
-<form action="/session" method="POST">
+
+<form action="/users" method="POST">
     <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
 
     <label for="user_email">Email</label>
@@ -15,9 +16,9 @@
     <br />
     
     <label for="user_password">Password</label>
-    <input id="user_password" type="text" name="user[password]">
+    <input id="user_password" type="password" name="user[password]">
     <br />
     <br />
-    
+
     <input type="submit" value="Log In!">
 </form>

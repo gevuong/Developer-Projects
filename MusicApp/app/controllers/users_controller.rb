@@ -2,9 +2,11 @@ class UsersController < ApplicationController
     def create
         @user = User.new(user_params)
         if @user.save 
-            render json: user
+            # render json: user
+            login(@user)
+            redirect_to user_url(@user) # user show page passing in @user.id wildcard
         else 
-            render json: @user.errors.full_messages, status: :unprocessable_entity
+            render json: @user.errors.full_messages
         end 
     end
 
@@ -12,9 +14,10 @@ class UsersController < ApplicationController
         render :new
     end 
 
-    # def show 
-    #     render :show
-    # end 
+    def show 
+        @user = User.find_by_id(:id)
+        render :show
+    end 
 
     private 
 
