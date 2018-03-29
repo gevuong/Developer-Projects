@@ -1,0 +1,23 @@
+<h1>Log In!</h1>
+
+<!-- render partial called "form", don't use "_form". Only use local variable in partial instead of ivar. So pass ivar as local variable in partial form. This prevents coupling between partial and controller that renders it. This implementation keeps code DRY and prevents bugs -->
+<!-- <%#= render "form", user: @user, action: :new %> -->
+
+<!-- when form submits, all info inputted in form gets packaged and makes a POST request to /session which is session#create. -->
+<!-- action attribute specifies which url to send data to -->
+<!-- method attribute specifies which http method to use -->
+<form action="/session" method="POST">
+    <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+
+    <label for="user_email">Email</label>
+    <input id="user_email" type="text" name="user[email]">
+    <br />
+    <br />
+    
+    <label for="user_password">Password</label>
+    <input id="user_password" type="text" name="user[password]">
+    <br />
+    <br />
+    
+    <input type="submit" value="Log In!">
+</form>

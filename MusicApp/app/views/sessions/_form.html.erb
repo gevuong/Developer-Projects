@@ -1,0 +1,24 @@
+
+
+<% action = (user.persisted? ? user_url(user) : users_url) %>
+<% method = (user.persisted? ? "patch" : "post") %>
+<% message = (user.persisted? ? "Update user" : "Create user") %>
+
+<form action="<%= action %>" method="post">
+
+<!-- for historical reasons <form> won't let you specify a PATCH, only GET or POST requests. The Rails solution is to upload a special parameter named "_method" with the value set to the HTTP method you want in <input /> tag using a hidden field. form_authenticity_token looks at user session -->
+    <input name="_method" type="hidden" value="<%= method %>">
+
+<!-- On each request, Rails sets an authenticity token in session. To prevent CSRF (cross-site request forgery) On each non-GET request, Rails sets an authenticity token in your session -->
+    <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+
+    <label for="user_email">Email</label>
+    <input id="user_email" name="user[email]" type="text">
+    <br>
+
+    <label for="user_password">Password</label>
+    <input id="user_password" name="user[password]" type="text">
+    <br>
+
+    <input type="submit" value="<%= message %>">
+</form>
