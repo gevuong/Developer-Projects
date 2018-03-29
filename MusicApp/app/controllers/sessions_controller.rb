@@ -1,6 +1,6 @@
 class SessionsController < ApplicationController
 
-    # verify user credentials to login user
+    # verify user credentials to login
     def create 
         user = User.find_by_credentials(
                 params[:user][:email],
@@ -8,9 +8,11 @@ class SessionsController < ApplicationController
             )
         if user
             login(user) 
-            redirect_to user_url(user) # user show page passing in user.id wildcard
-        else 
-            render json: "User credentials don't exist"
+            redirect_to user_url(user) # redirect to show page
+        else
+            # cannot render user.errors.full_messages because user = nil
+            flash.now[:errors] = ["Incorrect username and/or password"] 
+            render :new 
         end 
     end 
 

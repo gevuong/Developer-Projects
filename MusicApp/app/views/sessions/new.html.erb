@@ -7,7 +7,7 @@
 <!-- action attribute specifies which url to send data to -->
 <!-- method attribute specifies which http method to use -->
 
-<form action="/users" method="POST">
+<form action="/session" method="POST">
     <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
 
     <label for="user_email">Email</label>
@@ -22,3 +22,8 @@
 
     <input type="submit" value="Log In!">
 </form>
+
+<p>
+    New to MusicApp?
+    <a class="button" href="<%= new_user_url %>"> Sign Up!</a>
+</p>

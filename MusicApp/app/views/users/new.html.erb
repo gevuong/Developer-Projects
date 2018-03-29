@@ -1,0 +1,22 @@
+<h1>New User Sign Up!</h1>
+
+<form action="/users" method="POST">
+    <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+
+    <label for="user_email">Email</label>
+    <input id="user_email" type="text" name="user[email]">
+    <br />
+    <br />
+    
+    <label for="user_password">Password</label>
+    <input id="user_password" type="password" name="user[password]">
+    <br />
+    <br />
+
+    <input type="submit" value="Sign Up!">
+</form>
+
+<p>
+    Already have an account?
+    <a class="button" href="<%= new_session_url %>"> Log In!</a>
+</p>
