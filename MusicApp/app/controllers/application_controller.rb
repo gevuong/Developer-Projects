@@ -7,14 +7,14 @@ class ApplicationController < ActionController::Base
 
 	# look up user with current session token
 	def current_user 
-		User.find_by_session_token(session[:session_token])
+		@current_user ||= User.find_by_session_token(session[:session_token])
 	end 
 
 	# upon login, reset user's session and assign to session cookie
 	def login(user)
-		
+		@current_user = user
 		session[:session_token] = user.reset_session_token
-	end
+	end 
 
 	# return boolean indicating whether someone is logged in
 	def logged_in?
@@ -24,6 +24,7 @@ class ApplicationController < ActionController::Base
 	def logout
 		current_user.reset_session_token
 		session[:session_token] = nil
+		@current_user = nil
 	end 
 
 	def require_login
@@ -31,6 +32,6 @@ class ApplicationController < ActionController::Base
 	end 
 
 	def require_logout
-		redirect_to user_url(current_user.id) if current_user
+		redirect_to user_url(@current_user.id) if current_user
 	end 
 end
