@@ -17,7 +17,7 @@ class User < ApplicationRecord
     # we want :password validation to pass even if @password = nil. The only time @password is not nil is when password has changed using #password setter method. If not, then @password = nil because attribute only lives in ivar, and not persisted to DB. 
     validates :password, length: { minimum: 6 }, allow_nil: true 
 
-    # callback is called whenever ActiveRecord object is instantiated directly using #new (i.e. User.new) or loads a record from DB (i.e. User.first). Callback generates session token only if one hasn't been set.
+    # callback is called when AR object is instantiated using #new (i.e. User.new) or loads a record from DB (i.e. User.first). Callback generates session token only if one hasn't been set.
     after_initialize :ensure_session_token
 
     attr_reader :password
@@ -39,19 +39,24 @@ class User < ApplicationRecord
         BCrypt::Password.new(self.password_digest).is_password?(password)
     end 
 
-    def self.generate_session_token
-        SecureRandom.urlsafe_base64(16) # generates a random urlsafe base64 string
-    end 
-
-    def reset_session_token!
-        self.session_token = User.generate_session_token
+    def reset_session_token
+        self.session_token = User.generate_unique_session_token
         self.save!
         self.session_token
     end 
 
     private 
     
+    def self.generate_unique_session_token
+        # returns a 16 digit pseudorandom string
+        new_session_token = SecureRandom.urlsafe_base64(16) 
+        while User.find_by_session_token(new_session_token)
+            new_session_token = SecureRandom.urlsafe_base64(16)
+        end 
+        new_session_token
+    end 
+
     def ensure_session_token 
-        self.session_token ||= User.generate_session_token
+        self.session_token ||= User.generate_unique_session_token
     end 
 end

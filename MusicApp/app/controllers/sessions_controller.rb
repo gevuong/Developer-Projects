@@ -1,4 +1,6 @@
 class SessionsController < ApplicationController
+    # user requires logout before having access to #new and #create controller actions
+    before_action :require_logout, only: [:new, :create]
 
     # verify user credentials to login
     def create 
@@ -8,6 +10,8 @@ class SessionsController < ApplicationController
             )
         if user
             login(user) 
+            # data stored in flash is available in next controller action and can be used when redirecting. ":notice" is arbitrary, but semantically meaningful
+            flash[:notice] = "Successfully logged in"
             redirect_to user_url(user) # redirect to show page
         else
             # cannot render user.errors.full_messages because user = nil
