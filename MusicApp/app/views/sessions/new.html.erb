@@ -2,6 +2,7 @@
 
 <%= render "layouts/errors" %>
 <!-- render partial called "form", don't use "_form". Only use local variable in partial instead of ivar. So pass ivar as local variable in partial form. This prevents coupling between partial and controller that renders it. This implementation keeps code DRY and prevents bugs -->
+
 <!-- <%#= render "form", user: @user, action: :new %> -->
 
 <!-- when form submits, all info inputted in form gets packaged and makes a POST request to /session which is session#create. -->
@@ -15,7 +16,7 @@
     <input id="user_email" type="text" name="user[email]">
     <br />
     <br />
-    
+
     <label for="user_password">Password</label>
     <input id="user_password" type="password" name="user[password]">
     <br />

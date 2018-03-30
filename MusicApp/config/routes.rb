@@ -5,5 +5,5 @@ Rails.application.routes.draw do
 
   # session resource is singular, user will only use at most one session, their own.
   resource :session, only: [:new, :create, :destroy]
-  resources :artists, only: [:new, :show, :index]
+  resources :artists
 end

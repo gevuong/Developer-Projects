@@ -1,12 +1,13 @@
-<h1>New Artist</h1>
+<h1>Update <%= @artist.name %> Details</h1>
 
 <%= render "layouts/errors" %>
 
-<form action="/artists" method="POST">
+<form action="<%= artist_url(@artist.id) %>" method="POST">
+    <input name="_method" type="hidden" value="PATCH" />
     <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>" />
 
     <label for="artist_name">Name</label>
-    <input id="artist_name" type="type" name="artist[name]" />
+    <input id="artist_name" type="text" name="artist[name]" />
     <br />
     <br />
 
