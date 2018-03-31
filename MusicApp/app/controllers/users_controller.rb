@@ -17,13 +17,9 @@ class UsersController < ApplicationController
         end
     end
 
-    # def new
-    # end
-
-    def show
-        render :show
+    def new
     end
-
+    
     private
 
     # helper method encapsulates (or whitelists) permissible, strong parameters (from query string or request body) to protect user attributes from end-user assignment, like adding malicioius fields that are not in form, such as { user: { admin: true } }.

@@ -1,15 +1,18 @@
 class ArtistsController < ApplicationController
+    before_action :require_login
+
     def create
-        artist = Artist.new(artist_params)
-        if artist.save
-            redirect_to artist_url(artist) # artist show page
+        @artist = Artist.new(artist_params)
+        if @artist.save
+            redirect_to artist_url(@artist) # artist show page
         else
-            flash.now[:errors] = artist.errors.full_messages
+            flash.now[:errors] = @artist.errors.full_messages
             render :new
         end
     end
 
     def new
+        @artist = Artist.new
     end
 
     def index
@@ -18,6 +21,9 @@ class ArtistsController < ApplicationController
 
     def show
         @artist = Artist.find_by_id(params[:id])
+        if @artist.nil?
+            redirect_to artists_url
+        end
     end
 
     def edit
@@ -25,12 +31,12 @@ class ArtistsController < ApplicationController
     end
 
     def update
-        artist = Artist.find_by_id(params[:id])
-        
-        if artist.update_attributes(artist_params)
-            redirect_to artist_url(artist)
+        @artist = Artist.find_by_id(params[:id])
+
+        if @artist.update(artist_params)
+            redirect_to artist_url(@artist)
         else
-            flash.now[:errors] = artist.errors.full_messages
+            flash.now[:errors] = @artist.errors.full_messages
             render :edit
         end
     end
@@ -38,7 +44,7 @@ class ArtistsController < ApplicationController
     def destroy
         artist = Artist.find_by_id(params[:id])
         if artist
-            artist.destroy_all
+            artist.destroy
             redirect_to artists_url
         else
             flash.now[:errors] = ["Artist does not exist"]

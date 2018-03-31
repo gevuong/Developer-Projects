@@ -1,17 +1,24 @@
 <h1><%= @artist.name %>'s Show Page</h1>
 
-<p>List of Albums</p>
+<h3>Albums List</h3>
 
 <!-- be able to edit and destroy band, and add album -->
 
+<a type="button" href="">New Album</a>
+<br />
+<br />
+
 <a type="button" href="<%= edit_artist_url(@artist) %>">Edit Artist</a>
-<a type="button" href="">Add Album</a>
-<!-- <a type="button" href="">Delete Artist</a> -->
+<br />
+<br />
+
 <form action="<%= artist_url(@artist) %>" method="POST" >
-    <label for="delete_artist">Delete Artist</label>
     <input name="_method" type="hidden" value="DELETE" />
     <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>" />
 
     <input type="submit" value="Delete Artist" />
 </form>
+<br />
+<br />
+
 <a type="button" href="<%= artists_url %>">All Artists</a>

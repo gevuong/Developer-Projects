@@ -14,11 +14,11 @@
 
 			<% if logged_in? %>
 				<h1>Logged in as: <%= current_user.email %></h1>
-					
+				<a class="button" href="<%= artists_url %>">Home</a>
 				<div>
 					<form action="/session" method="POST">
 						<input type="hidden" name="_method" value="DELETE">
-						<input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>"> 
+						<input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
 						<input type="submit" value="Log Out">
 					</form>
 				</div>
