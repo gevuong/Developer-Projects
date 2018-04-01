@@ -50,7 +50,6 @@ class ArtistsController < ApplicationController
             flash.now[:errors] = ["Artist does not exist"]
             render :index
         end
-
     end
 
     private

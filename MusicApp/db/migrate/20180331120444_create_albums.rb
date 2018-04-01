@@ -8,8 +8,8 @@ class CreateAlbums < ActiveRecord::Migration[5.1]
             t.timestamps
         end
 
-        # can index multiple columns following index to query :band_id or :band_id AND :name (order matters!)
-        # https://stackoverflow.com/questions/6169996/index-on-multiple-columns-in-ror#6170023
+        # this uniqueness DB constraint is equivalent to model-level uniqueness validation using :scope option. Index multiple columns to query :band_id or :band_id AND :name (order matters!) https://stackoverflow.com/questions/6169996/index-on-multiple-columns-in-ror#6170023
         add_index :albums, [:band_id, :title], unique: true
+
     end
 end
