@@ -13,10 +13,7 @@
 
 class Album < ApplicationRecord
     validates :live, inclusion: { in: %w(true false) }
-    validates :title,
-        presence: true,
-        uniqueness: { scope: :band_id, message: "band must have unique album title" },
-        format: { with: /[a-zA-Z0-9]/, message: "can only be letters and numbers" }
+    validates :title, presence: true, uniqueness: { scope: :band_id, message: "band must have unique album title" }
     validates :year,
         presence: true,
         length: { is: 4 },

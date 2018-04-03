@@ -1,9 +1,33 @@
-#README
+# README
+
+### Rails routes
+Testcase: https://art-sharing-api.herokuapp.com/users
+
+```
+Prefix Verb   URI Pattern                        Controller#Action
+ user_artworks GET    /users/:user_id/artworks(.:format) artworks#index
+         users GET    /users(.:format)                   users#index
+               POST   /users(.:format)                   users#create
+          user GET    /users/:id(.:format)               users#show
+               PATCH  /users/:id(.:format)               users#update
+               PUT    /users/:id(.:format)               users#update
+               DELETE /users/:id(.:format)               users#destroy
+      artworks POST   /artworks(.:format)                artworks#create
+       artwork GET    /artworks/:id(.:format)            artworks#show
+               PATCH  /artworks/:id(.:format)            artworks#update
+               PUT    /artworks/:id(.:format)            artworks#update
+               DELETE /artworks/:id(.:format)            artworks#destroy
+artwork_shares GET    /artwork_shares(.:format)          artwork_shares#index
+               POST   /artwork_shares(.:format)          artwork_shares#create
+ artwork_share DELETE /artwork_shares/:id(.:format)      artwork_shares#destroy
+      comments GET    /comments(.:format)                comments#index
+               POST   /comments(.:format)                comments#create
+       comment DELETE /comments/:id(.:format)            comments#destroy
+```
 
 ## Art Share API
 
-Our goal is to build an application to store, share, and
-comment on artwork, as well as search for users.
+Goal is to build an application to store, share, and comment on artwork, as well as search for users.
 
 Each user has a set of artworks that they own/control. These artworks can also be shared with other users. An artwork that has been shared with one or more other users will be visible to those users, but the artwork still 'belongs to' the original user.
 
