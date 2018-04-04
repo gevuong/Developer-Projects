@@ -35,7 +35,12 @@ export default class AddPlayerForm extends Component {
     return (
       <div className="add-player-form">
         <form onSubmit={ this.addPlayer } >
-          <input type="text" placeholder="input name" value={ this.state.name } onChange={ this.onNameChange }></input>
+          <input 
+            type="text" 
+            placeholder="input name" 
+            value={ this.state.name } 
+            onChange={ this.onNameChange }>
+          </input>
           <input type="submit" value="Add Player" ></input>
         </form>
       </div>
