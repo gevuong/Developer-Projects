@@ -111,36 +111,70 @@ var AutoComplete = function (_Component) {
 
         var _this = _possibleConstructorReturn(this, (AutoComplete.__proto__ || Object.getPrototypeOf(AutoComplete)).call(this, props));
 
+        _this.state = { name: "" };
+
         AutoComplete.propTypes = {
             names: _propTypes2.default.array.isRequired
         };
+
+        _this.handleChange = _this.handleChange.bind(_this);
+        _this.updateNamesList = _this.updateNamesList.bind(_this);
         return _this;
     }
 
     _createClass(AutoComplete, [{
         key: 'handleChange',
-        value: function handleChange() {}
+        value: function handleChange(event) {
+            this.updateNamesList();
+
+            this.setState({
+                name: event.target.value
+            });
+
+            console.log(this.state);
+        }
+    }, {
+        key: 'updateNamesList',
+        value: function updateNamesList() {
+            var namesList = this.props.names;
+            for (var i = 0; i < this.props.names.length; i++) {
+                if (this.props.names[i].includes(this.state.name)) {
+                    continue;
+                } else {
+                    namesList.splice(1, i); // remove 1 element from index i
+                }
+            }
+        }
     }, {
         key: 'render',
         value: function render() {
+            var names = this.props.names;
+
+            console.log(names);
+            names.sort();
             return _react2.default.createElement(
                 'div',
-                null,
+                { className: 'main-content' },
                 _react2.default.createElement('input', {
                     type: 'text',
-                    placeholder: 'Input Name'
+                    placeholder: 'Search...',
+                    onChange: this.handleChange,
+                    value: this.state.name
                 }),
-                'Render Autocomplete Component!',
                 _react2.default.createElement(
-                    'ul',
+                    'div',
                     null,
-                    this.props.map(function (name, idx) {
-                        _react2.default.createElement(
-                            'li',
-                            { key: idx },
-                            name
-                        );
-                    })
+                    _react2.default.createElement(
+                        'ul',
+                        null,
+                        names.map(function (name, idx) {
+                            return _react2.default.createElement(
+                                'li',
+                                { key: idx },
+                                name
+                            );
+                        })
+                    )
                 )
             );
         }
@@ -19751,7 +19785,7 @@ var _autocomplete2 = _interopRequireDefault(_autocomplete);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var NAMES = ["Steve", "Jasmine", "Dick", "Vineyard", "Woodbridge", "Coffee", "Content"];
+var NAMES = ["Steve", "ridge", "Wood", "Vineyard", "Woodbridge", "Coffee", "Content", "bridge"];
 
 var Root = function Root() {
     return _react2.default.createElement(

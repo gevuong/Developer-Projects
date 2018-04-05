@@ -4,27 +4,62 @@ import PropTypes from 'prop-types';
 class AutoComplete extends Component {
     constructor(props) {
         super(props);
-        this.state = { name: "" }
+        this.state = {
+            name: "",
+        };
 
         AutoComplete.propTypes = {
             names: PropTypes.array.isRequired,
         }
 
         this.handleChange = this.handleChange.bind(this);
+        this.selectName = this.selectName.bind(this);
+        this.findMatches = this.findMatches.bind(this);
     }
 
     handleChange(event) {
         this.setState({
             name: event.target.value,
         })
+
         console.log(this.state);
+    }
+
+    findMatches(names) {
+        let matches = [];
+        if (this.state.name.length === 0) {
+            return names;
+        }
+
+        names.forEach(name => {
+            if (name.includes(this.state.name)) {
+                matches.push(name);
+            }
+        })
+
+        if (matches.length === 0) {
+            return ["There are no matches"];
+        }
+
+        return matches
+    }
+
+    selectName(event) {
+        // currentTarget refers to element to which event handler is attached to. target returns element on which event occurred.
+        this.setState({
+            name: event.target.textContent,
+        });
+        console.log("selectName state: ", this.state);
     }
 
     render() {
         const { names } = this.props;
-        console.log(names);
+        names.sort();
+
+        let matchedResults = this.findMatches(names);
+        console.log("matchedResults: ", matchedResults);
         return (
-            <div>
+            <div className="main-content">
                 <input
                     type="text"
                     placeholder="Search..."
@@ -34,8 +69,13 @@ class AutoComplete extends Component {
                 </input>
                 <div>
                     <ul>
-                        { names.map((name, idx) => (
-                            <li key={idx}>{ name }</li>
+                        { matchedResults.map((name, idx) => (
+                            <li
+                                key={idx}
+                                onClick={ this.selectName }
+                            >
+                            { name }
+                            </li>
                         ))
                         }
                     </ul>
