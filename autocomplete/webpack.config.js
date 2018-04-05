@@ -3,9 +3,9 @@ var path = require('path');
 module.exports = {
   mode: "development",
   context: __dirname,
-  entry: "./root.jsx",
+  entry: "./frontend/search.jsx",
   output: {
-    path: path.resolve(__dirname),
+    path: path.resolve(__dirname, 'app', 'assets', 'javascripts'),
     filename: "bundle.js"
   },
   module: {
