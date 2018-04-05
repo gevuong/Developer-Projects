@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 class AutoComplete extends Component {
     constructor(props) {
@@ -27,12 +28,18 @@ class AutoComplete extends Component {
 
     findMatches(names) {
         let matches = [];
-        if (this.state.name.length === 0) {
+        let inputName = this.state.name;
+
+        if (inputName.length === 0) {
             return names;
         }
 
         names.forEach(name => {
-            if (name.includes(this.state.name)) {
+            // Uncomment below if dictionary-type search is desired
+            // let subName = name.slice(0, inputName.length);
+            // if (subName.toLowerCase() === inputName.toLowerCase()) {
+
+            if (name.includes(inputName)) {
                 matches.push(name);
             }
         })
@@ -41,15 +48,14 @@ class AutoComplete extends Component {
             return ["There are no matches"];
         }
 
-        return matches
+        return matches;
     }
 
     selectName(event) {
-        // currentTarget refers to element to which event handler is attached to. target returns element on which event occurred.
+        // e.currentTarget refers to element to which event handler is attached to. e.target returns element on which event occurred.
         this.setState({
             name: event.target.textContent,
         });
-        console.log("selectName state: ", this.state);
     }
 
     render() {
@@ -60,13 +66,13 @@ class AutoComplete extends Component {
         console.log("matchedResults: ", matchedResults);
         return (
             <div className="main-content">
+                <h1>Autocomplete</h1>
                 <input
                     type="text"
                     placeholder="Search..."
                     onChange={ this.handleChange }
                     value= { this.state.name }
-                >
-                </input>
+                />
                 <div>
                     <ul>
                         { matchedResults.map((name, idx) => (
@@ -80,6 +86,7 @@ class AutoComplete extends Component {
                         }
                     </ul>
                 </div>
+
             </div>
         )
     }
