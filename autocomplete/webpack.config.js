@@ -3,7 +3,7 @@ var path = require('path');
 module.exports = {
   mode: "development",
   context: __dirname,
-  entry: "./frontend/search.jsx",
+  entry: "./frontend/search.js",
   output: {
     path: path.resolve(__dirname, 'app', 'assets', 'javascripts'),
     filename: "bundle.js"
