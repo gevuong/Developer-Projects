@@ -2,6 +2,6 @@
 export const fetchAllThings = () => (
     $.ajax({
         method: 'GET',
-        url: 'api/things'
+        url: 'api/things',
     })
 );

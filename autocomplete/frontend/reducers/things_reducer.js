@@ -1,6 +1,6 @@
 import { RECEIVE_ALL_THINGS } from '../actions/thing_actions';
 
-// temporary to test
+// temporary for testing Redux cycle
 const NAMES = [
     "steve",
     "ridge",
