@@ -61,12 +61,11 @@ class AutoComplete extends Component {
     render() {
         const { names } = this.props;
         names.sort();
-
         let matchedResults = this.findMatches(names);
-        console.log("matchedResults: ", matchedResults);
+
         return (
             <div className="main-content">
-                <h1>Autocomplete</h1>
+                <h3>Autocomplete</h3>
                 <input
                     type="text"
                     placeholder="Search..."
@@ -75,15 +74,21 @@ class AutoComplete extends Component {
                 />
                 <div>
                     <ul>
-                        { matchedResults.map((name, idx) => (
-                            <li
-                                key={idx}
-                                onClick={ this.selectName }
-                            >
-                            { name }
-                            </li>
-                        ))
-                        }
+                        <ReactCSSTransitionGroup
+                            transitionName="auto"
+                            transitionEnterTimeout={500}
+                            transitionLeaveTimeout={500}
+                        >
+                            { matchedResults.map((name, idx) => (
+                                <li
+                                    key={idx}
+                                    onClick={ this.selectName }
+                                >
+                                { name }
+                                </li>
+                            ))
+                            }
+                        </ReactCSSTransitionGroup>
                     </ul>
                 </div>
 
