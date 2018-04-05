@@ -60,7 +60,16 @@ class AutoComplete extends Component {
 
     render() {
         const { names } = this.props;
-        names.sort();
+
+        // pass sort a compareFunction to handle lowercased and uppercased characters in string
+        names.sort((a, b) => {
+            a = a.toLowerCase();
+            b = b.toLowerCase();
+            if (a === b) return 0;
+            if (a > b) return 1; // meaning, b comes before a. convert character to ASCII and then makes comparison. So if ("z" > "d"), which is true, return 1, meaning "a" comes before "z".
+            return -1; // meaning a comes before b.
+        });
+
         let matchedResults = this.findMatches(names);
 
         return (
