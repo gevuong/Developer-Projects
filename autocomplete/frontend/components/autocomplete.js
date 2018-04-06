@@ -61,7 +61,7 @@ class AutoComplete extends Component {
     render() {
         const { names } = this.props;
 
-        // pass sort a compareFunction to handle lowercased and uppercased characters in string
+        // pass sort a compareFunction to sort lowercased and uppercased characters in string
         names.sort((a, b) => {
             a = a.toLowerCase();
             b = b.toLowerCase();
