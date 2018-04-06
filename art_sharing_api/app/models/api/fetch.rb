@@ -1,10 +1,4 @@
-# response = HTTParty.get('https://api.foursquare.com/v2/users/self?oauth_token=IAG5XHTG5FVPJBSTGVXOZMBLKCGTHJCMJMSINCLEMLIIFMAH&v=20180403')
-
 # demo from HTTP docs
-response = HTTParty.get('http://api.stackexchange.com/2.2/questions?site=stackoverflow')
-
-# puts response.body
-# , response.code, response.message, response.headers.inspect
 
 class Api::Fetch < ApplicationRecord
     include HTTParty

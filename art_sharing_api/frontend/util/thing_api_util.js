@@ -4,7 +4,10 @@ export const fetchAllThings = () => (
         method: 'GET',
         url: 'api/fetches',
     }).then(
-        data => console.log(data);
+        data => console.log(data),
         error => console.log(error)
     )
 );
+
+
+window.fetchAllThings = fetchAllThings;
