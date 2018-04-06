@@ -23,3 +23,10 @@ Steps to Improve User Experience
 # Add independent Search or Magnifying Glass button to right of Search Bar.
 # Don't return "no results", but alternatives or explanation
 # Provide filter and sort options
+
+
+Bugs encountered
+0. Ran into error where it said uninitialized constant HTTParty, or it did not recognize HTTParty. Turns out I had to restart server to get it to work. Looked up error, stackoverflow said you have to restart server, and it'll work. I don't know why, I could've looked further into it, but moved on from there. 
+1. undefined method base_uri, had to include HTTParty and pass argument to base_uri explicitly. Found out base_uri is a HTTParty class method. Looked at #base_uri docs and found an example of how to use base_uri. Used it and it worked.  
+https://stackoverflow.com/questions/38274458/undefined-method-base-uri-on-httparty
+http://www.rubydoc.info/github/jnunemaker/httparty/HTTParty%2FClassMethods%3Abase_uri
