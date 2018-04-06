@@ -10,7 +10,7 @@ class Api::FetchesController < ApplicationController
       # puts stack_exchange.user
         if stack_exchange
             # render json: fetched_page
-            render json: stack_exchange
+            render json: stack_exchange.users
         else
             render json: fetched_page.errors.full_messages, status: 422
         end

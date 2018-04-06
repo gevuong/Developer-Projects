@@ -7,8 +7,9 @@ response = HTTParty.get('http://api.stackexchange.com/2.2/questions?site=stackov
 # , response.code, response.message, response.headers.inspect
 
 class Api::Fetch < ApplicationRecord
-    # #base_uri is a HTTParty's class method
-    base_uri 'api.stackexchange.com'
+    include HTTParty
+    #base_uri is a HTTParty's class method
+    base_uri('api.stackexchange.com')
 
     def initialize(service, page)
       @options = { query: { site: service, page: page } }
@@ -22,29 +23,3 @@ class Api::Fetch < ApplicationRecord
       self.class.get("/2.2/users", @options)
     end
 end
-
-#   stack_exchange = StackExchange.new("stackoverflow", 1)
-#   puts stack_exchange.questions
-#   puts stack_exchange.users
-#
-#
-# class StackExchange
-#   include HTTParty
-#   base_uri 'api.stackexchange.com'
-#
-#   def initialize(service, page)
-#     @options = { query: { site: service, page: page } }
-#   end
-#
-#   def questions
-#     self.class.get("/2.2/questions", @options)
-#   end
-#
-#   def users
-#     self.class.get("/2.2/users", @options)
-#   end
-# end
-#
-# stack_exchange = StackExchange.new("stackoverflow", 1)
-# puts stack_exchange.questions
-# puts stack_exchange.users
