@@ -548,6 +548,7 @@ var fetchAllThings = exports.fetchAllThings = function fetchAllThings() {
     });
 };
 
+// uncomment for testing on console
 window.fetchAllThings = fetchAllThings;
 
 /***/ }),
