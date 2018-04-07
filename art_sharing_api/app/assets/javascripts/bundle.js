@@ -540,7 +540,7 @@ Object.defineProperty(exports, "__esModule", {
 var fetchAllThings = exports.fetchAllThings = function fetchAllThings() {
     return $.ajax({
         method: 'GET',
-        url: 'api/fetches'
+        url: '/api/fetches'
     }).then(function (data) {
         return console.log(data);
     }, function (error) {

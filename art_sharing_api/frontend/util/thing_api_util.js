@@ -2,7 +2,7 @@
 export const fetchAllThings = () => (
     $.ajax({
         method: 'GET',
-        url: 'api/fetches',
+        url: '/api/fetches',
     }).then(
         data => console.log(data),
         error => console.log(error)
