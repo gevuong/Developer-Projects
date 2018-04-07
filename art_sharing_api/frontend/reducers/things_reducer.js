@@ -20,7 +20,7 @@ import { RECEIVE_FETCHED_THINGS, RECEIVE_SEARCHED_THINGS } from '../actions/thin
 
 const defaultState = Object.freeze({
     things: [],
-}
+});
 // reducer must never mutate previus state. Instead, return a new array or object with the necessary changes.
 
 const thingsReducer = (state = defaultState, action) => {
