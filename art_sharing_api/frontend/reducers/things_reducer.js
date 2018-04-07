@@ -1,3 +1,5 @@
+import merge from 'lodash/merge';
+
 import { RECEIVE_FETCHED_THINGS, RECEIVE_SEARCHED_THINGS } from '../actions/thing_actions';
 
 // temporary for testing Redux cycle
@@ -18,21 +20,24 @@ import { RECEIVE_FETCHED_THINGS, RECEIVE_SEARCHED_THINGS } from '../actions/thin
 //     "services",
 // ]
 
-const defaultState = Object.freeze({
-    things: [],
-});
+// const defaultState = Object.freeze({
+//     things: [],
+// });
 // reducer must never mutate previus state. Instead, return a new array or object with the necessary changes.
 
-const thingsReducer = (state = defaultState, action) => {
+const thingsReducer = (state = {}, action) => {
+    Object.freeze(state);
+    console.log("action: ", action);
     switch(action.type) {
         case RECEIVE_FETCHED_THINGS:
-            console.log("state: ", state);
-            console.log("action.things: ", action.things);
-
-            return state.concat([action.things]);
-        case RECEIVE_SEARCHED_THINGS:
-            return state.concat([action.things]);
+            const things = action.things;
+            // console.log("state: ", state);
+            // console.log("action.things: ", action.things);
+            return merge({}, state, things);
+        // case RECEIVE_SEARCHED_THINGS:
+        //     return state.concat([action.things]);
         default:
+            console.log("return default state");
             return state;
     }
 }

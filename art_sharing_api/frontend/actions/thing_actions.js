@@ -2,7 +2,7 @@ import { fetchAllThings, searchAllThings } from '../util/thing_api_util';
 
 // export action type
 export const RECEIVE_FETCHED_THINGS = 'RECEIVE_FETCHED_THINGS';
-export const RECEIVE_SEARCHED_THINGS = 'RECEIVE_SEARCHED_THINGS'
+export const RECEIVE_SEARCHED_THINGS = 'RECEIVE_SEARCHED_THINGS';
 
 // sync action creator
 export const receiveFetchedThings = things => (

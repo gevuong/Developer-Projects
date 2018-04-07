@@ -8,7 +8,8 @@ const Root = ({ store }) => {
     return (
         <Provider store={ store }>
             <div>
-                <AutoCompleteContainer />
+                <h1>Render Root Component</h1>
+                {/*<AutoCompleteContainer />*/}
             </div>
         </Provider>
     )
