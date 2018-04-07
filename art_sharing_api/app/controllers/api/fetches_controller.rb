@@ -4,10 +4,10 @@ class Api::FetchesController < ApplicationController
 
         @stack_exchange = Fetch.new("stackoverflow", 1)
 
-        if @fetched_data
-            # render json: fetched_data
-            render json: @stack_exchange.users
-            # render :index
+        if @fetched_data || @stack_exchange.users
+            # render json: @fetched_data
+            # render json: @stack_exchange.users
+            render :index
         else
             render json: @fetched_data.errors.full_messages, status: 422
         end

@@ -14,7 +14,7 @@ Rails.application.routes.draw do
   resources :artwork_shares, only: [:index, :create, :destroy]
   resources :comments, only: [:index, :create, :destroy]
 
-  namespace :api, defaults: { format: :json } do
+  namespace :api do
       resources :fetches, only: [:index]
   end
 
