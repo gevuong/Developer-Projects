@@ -1,4 +1,4 @@
-import { RECEIVE_ALL_THINGS } from '../actions/thing_actions';
+import { RECEIVE_FETCHED_THINGS, RECEIVE_SEARCHED_THINGS } from '../actions/thing_actions';
 
 // temporary for testing Redux cycle
 // const NAMES = [
@@ -18,11 +18,19 @@ import { RECEIVE_ALL_THINGS } from '../actions/thing_actions';
 //     "services",
 // ]
 
+const defaultState = Object.freeze({
+    things: [],
+}
 // reducer must never mutate previus state. Instead, return a new array or object with the necessary changes.
 
-const thingsReducer = (state = {}, action) => {
+const thingsReducer = (state = defaultState, action) => {
     switch(action.type) {
-        case RECEIVE_ALL_THINGS:
+        case RECEIVE_FETCHED_THINGS:
+            console.log("state: ", state);
+            console.log("action.things: ", action.things);
+
+            return state.concat([action.things]);
+        case RECEIVE_SEARCHED_THINGS:
             return state.concat([action.things]);
         default:
             return state;

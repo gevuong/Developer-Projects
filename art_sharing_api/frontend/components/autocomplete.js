@@ -7,6 +7,7 @@ class AutoComplete extends Component {
         super(props);
         this.state = {
             name: "",
+            searchQuery: "",
         };
 
         AutoComplete.propTypes = {
@@ -19,6 +20,9 @@ class AutoComplete extends Component {
     }
 
     handleChange(event) {
+        let searchQuery = event.target.value
+        this.props.requestSearchThings(searchQuery)
+
         this.setState({
             name: event.target.value,
         })

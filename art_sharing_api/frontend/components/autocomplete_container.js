@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 
-import { requestAllEvents } from '../actions/thing_actions';
+import { requestFetchThings, requestSearchThings } from '../actions/thing_actions';
 import AutoComplete from './autocomplete';
 
 const mapStateToProps = ({ things }) => ({
@@ -9,7 +9,8 @@ const mapStateToProps = ({ things }) => ({
 
 // function that returns an object containing functions that can be called to dispatch acttions to the store.
 const mapDispatchToProps = dispatch => ({
-    requestAllEvents: () => dispatch(requestAllEvents()),
+    requestFetchThings: () => dispatch(requestFetchThings()),
+    requestSearchThings: query => dispatch(requestSearchThings(query)),
 });
 
 export default connect(

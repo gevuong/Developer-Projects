@@ -84,30 +84,44 @@
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-exports.requestAllThings = exports.receiveAllThings = exports.RECEIVE_ALL_THINGS = undefined;
+exports.requestSearchThings = exports.requestFetchThings = exports.receiveSearchedThings = exports.receiveFetchedThings = exports.RECEIVE_SEARCHED_THINGS = exports.RECEIVE_FETCHED_THINGS = undefined;
 
 var _thing_api_util = __webpack_require__(/*! ../util/thing_api_util */ "./frontend/util/thing_api_util.js");
 
-var _thing_api_util2 = _interopRequireDefault(_thing_api_util);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
 // export action type
-var RECEIVE_ALL_THINGS = exports.RECEIVE_ALL_THINGS = 'RECEIVE_ALL_THINGS';
+var RECEIVE_FETCHED_THINGS = exports.RECEIVE_FETCHED_THINGS = 'RECEIVE_FETCHED_THINGS';
+var RECEIVE_SEARCHED_THINGS = exports.RECEIVE_SEARCHED_THINGS = 'RECEIVE_SEARCHED_THINGS';
 
 // sync action creator
-var receiveAllThings = exports.receiveAllThings = function receiveAllThings(things) {
+var receiveFetchedThings = exports.receiveFetchedThings = function receiveFetchedThings(things) {
     return {
-        type: RECEIVE_ALL_THINGS,
+        type: RECEIVE_FETCHED_THINGS,
+        things: things
+    };
+};
+
+var receiveSearchedThings = exports.receiveSearchedThings = function receiveSearchedThings(things) {
+    return {
+        type: RECEIVE_SEARCHED_THINGS,
         things: things
     };
 };
 
 // async thunk action creator
-var requestAllThings = exports.requestAllThings = function requestAllThings() {
-    return (0, _thing_api_util2.default)().then(function (things) {
-        return dispatch(receiveAllThings(things));
-    });
+var requestFetchThings = exports.requestFetchThings = function requestFetchThings() {
+    return function (dispatch) {
+        return (0, _thing_api_util.fetchAllThings)().then(function (things) {
+            return dispatch(receiveFetchedThings(things));
+        });
+    };
+};
+
+var requestSearchThings = exports.requestSearchThings = function requestSearchThings(query) {
+    return function (dispatch) {
+        return (0, _thing_api_util.searchAllThings)(query).then(function (things) {
+            return dispatch(receiveSearchedThings(things));
+        });
+    };
 };
 
 /***/ }),
@@ -157,7 +171,8 @@ var AutoComplete = function (_Component) {
         var _this = _possibleConstructorReturn(this, (AutoComplete.__proto__ || Object.getPrototypeOf(AutoComplete)).call(this, props));
 
         _this.state = {
-            name: ""
+            name: "",
+            searchQuery: ""
         };
 
         AutoComplete.propTypes = {
@@ -173,6 +188,9 @@ var AutoComplete = function (_Component) {
     _createClass(AutoComplete, [{
         key: 'handleChange',
         value: function handleChange(event) {
+            var searchQuery = event.target.value;
+            this.props.requestSearchThings(searchQuery);
+
             this.setState({
                 name: event.target.value
             });
@@ -317,8 +335,11 @@ var mapStateToProps = function mapStateToProps(_ref) {
 // function that returns an object containing functions that can be called to dispatch acttions to the store.
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
     return {
-        requestAllEvents: function requestAllEvents() {
-            return dispatch((0, _thing_actions.requestAllEvents)());
+        requestFetchThings: function requestFetchThings() {
+            return dispatch((0, _thing_actions.requestFetchThings)());
+        },
+        requestSearchThings: function requestSearchThings(query) {
+            return dispatch((0, _thing_actions.requestSearchThings)(query));
         }
     };
 };
@@ -408,50 +429,9 @@ exports.default = rootReducer;
   !*** ./frontend/reducers/things_reducer.js ***!
   \*********************************************/
 /*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, exports) {
 
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-var _thing_actions = __webpack_require__(/*! ../actions/thing_actions */ "./frontend/actions/thing_actions.js");
-
-// temporary for testing Redux cycle
-// const NAMES = [
-//     "Steve",
-//     "ridge",
-//     "wood",
-//     "vineyard",
-//     "woodbridge",
-//     "coffee",
-//     "content",
-//     "bridge",
-//     "capital",
-//     "socks",
-//     "stable",
-//     "corn",
-//     "David",
-//     "services",
-// ]
-
-// reducer must never mutate previus state. Instead, return a new array or object with the necessary changes.
-
-var thingsReducer = function thingsReducer() {
-    var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-    var action = arguments[1];
-
-    switch (action.type) {
-        case _thing_actions.RECEIVE_ALL_THINGS:
-            return state.concat([action.things]);
-        default:
-            return state;
-    }
-};
-
-exports.default = thingsReducer;
+throw new Error("Module build failed: SyntaxError: Unexpected token, expected , (26:0)\n\n\u001b[0m \u001b[90m 24 | \u001b[39m\u001b[90m// reducer must never mutate previus state. Instead, return a new array or object with the necessary changes.\u001b[39m\n \u001b[90m 25 | \u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 26 | \u001b[39m\u001b[36mconst\u001b[39m thingsReducer \u001b[33m=\u001b[39m (state \u001b[33m=\u001b[39m defaultState\u001b[33m,\u001b[39m action) \u001b[33m=>\u001b[39m {\n \u001b[90m    | \u001b[39m\u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 27 | \u001b[39m    \u001b[36mswitch\u001b[39m(action\u001b[33m.\u001b[39mtype) {\n \u001b[90m 28 | \u001b[39m        \u001b[36mcase\u001b[39m \u001b[33mRECEIVE_FETCHED_THINGS\u001b[39m\u001b[33m:\u001b[39m\n \u001b[90m 29 | \u001b[39m            console\u001b[33m.\u001b[39mlog(\u001b[32m\"state: \"\u001b[39m\u001b[33m,\u001b[39m state)\u001b[33m;\u001b[39m\u001b[0m\n");
 
 /***/ }),
 
@@ -512,6 +492,10 @@ var _root_reducer = __webpack_require__(/*! ../reducers/root_reducer */ "./front
 
 var _root_reducer2 = _interopRequireDefault(_root_reducer);
 
+var _reduxLogger = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"redux-logger\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
+
+var _reduxLogger2 = _interopRequireDefault(_reduxLogger);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 // configureStore is used to apply preloadedState and middleware
@@ -548,8 +532,17 @@ var fetchAllThings = exports.fetchAllThings = function fetchAllThings() {
     });
 };
 
+// hit #index
+var searchAllThings = exports.searchAllThings = function searchAllThings(query) {
+    return $.ajax({
+        method: 'GET',
+        url: '/api/searches',
+        data: query
+    });
+};
 // uncomment for testing on console
 window.fetchAllThings = fetchAllThings;
+window.searchAllThings = searchAllThings;
 
 /***/ }),
 

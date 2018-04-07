@@ -9,5 +9,14 @@ export const fetchAllThings = () => (
     )
 );
 
+// hit #index
+export const searchAllThings = query => (
+    $.ajax({
+        method: 'GET',
+        url: '/api/searches',
+        data: query,
+    })
+);
 // uncomment for testing on console
 window.fetchAllThings = fetchAllThings;
+window.searchAllThings = searchAllThings;
