@@ -1,5 +1,4 @@
 # demo from HTTP docs
-
 class Api::Fetch < ApplicationRecord
     include HTTParty
     #base_uri is a HTTParty's class method
@@ -15,5 +14,10 @@ class Api::Fetch < ApplicationRecord
 
     def users
       self.class.get("/2.2/users", @options)
+    end
+
+    # filters based on search query params, then sorts remaining data
+    def search(params[:query])
+
     end
 end

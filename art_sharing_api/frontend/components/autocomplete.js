@@ -8,7 +8,7 @@ class AutoComplete extends Component {
         this.state = {
             name: "",
             searchQuery: "",
-            queryPending: "",
+            queryPending: true,
         };
 
         AutoComplete.propTypes = {
@@ -25,12 +25,17 @@ class AutoComplete extends Component {
     }
 
     handleChange(event) {
-        let searchQuery = event.target.value
-        this.props.requestSearchThings(searchQuery)
+        let searchQuery = event.target.value;
+        
+        this.props.requestSearchThings(searchQuery).then(() => (
+            this.setState({
+                queryPending: false,
+            })
+        ));
 
         this.setState({
             name: event.target.value,
-        })
+        });
 
         console.log(this.state);
     }
@@ -79,39 +84,49 @@ class AutoComplete extends Component {
             return -1; // meaning a comes before b.
         });
 
+        // findMatches between list of names and this.state.name before rendering names
         let matchedResults = this.findMatches(names);
 
-        return (
-            <div className="main-content">
-                <h3>Autocomplete</h3>
-                <input
+        if (this.state.queryPending) {
+            // render <CSS Spinner, ie. pokemon />
+            return (
+                <h1>Loading...</h1>
+            )
+        } else {
+            return (
+                <div className="main-content">
+                    <h3>Autocomplete</h3>
+                    <input
                     type="text"
                     placeholder="Search..."
                     onChange={ this.handleChange }
                     value= { this.state.name }
-                />
-                <div>
-                    <ul>
+                    />
+                    <div>
+                        <ul>
                         <ReactCSSTransitionGroup
-                            transitionName="auto"
-                            transitionEnterTimeout={500}
-                            transitionLeaveTimeout={500}
+                        transitionName="auto"
+                        transitionEnterTimeout={500}
+                        transitionLeaveTimeout={500}
                         >
-                            { matchedResults.map((name, idx) => (
-                                <li
-                                    key={idx}
-                                    onClick={ this.selectName }
-                                >
-                                { name }
-                                </li>
-                            ))
-                            }
-                        </ReactCSSTransitionGroup>
+                        { matchedResults.map((name, idx) => (
+                            <li
+                            key={idx}
+                            onClick={ this.selectName }
+                            >
+                            { name }
+                            </li>
+                        ))
+                    }
+                    </ReactCSSTransitionGroup>
                     </ul>
                 </div>
 
             </div>
-        )
+            )
+
+        }
+
     }
 }
 
