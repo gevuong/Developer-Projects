@@ -8,6 +8,7 @@ class AutoComplete extends Component {
         this.state = {
             name: "",
             searchQuery: "",
+            queryPending: "",
         };
 
         AutoComplete.propTypes = {
@@ -17,6 +18,10 @@ class AutoComplete extends Component {
         this.handleChange = this.handleChange.bind(this);
         this.selectName = this.selectName.bind(this);
         this.findMatches = this.findMatches.bind(this);
+    }
+
+    componentDidMount() {
+        this.props.requestFetchThings();
     }
 
     handleChange(event) {

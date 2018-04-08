@@ -7,7 +7,7 @@ import thunk from 'redux-thunk';
 
 // configureStore is used to apply preloadedState and middleware
 const configureStore = () => (
-    createStore(rootReducer)
+    createStore(rootReducer, applyMiddleware(thunk, logger))
 );
 
 export default configureStore;

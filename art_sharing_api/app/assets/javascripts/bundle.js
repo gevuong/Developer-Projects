@@ -126,10 +126,60 @@ var requestSearchThings = exports.requestSearchThings = function requestSearchTh
 
 /***/ }),
 
-/***/ "./frontend/components/autocomplete.js":
-/*!*********************************************!*\
-  !*** ./frontend/components/autocomplete.js ***!
-  \*********************************************/
+/***/ "./frontend/components/root.js":
+/*!*************************************!*\
+  !*** ./frontend/components/root.js ***!
+  \*************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _react = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactRedux = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+
+var _things_index_container = __webpack_require__(/*! ./things_index_container */ "./frontend/components/things_index_container.js");
+
+var _things_index_container2 = _interopRequireDefault(_things_index_container);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+// All container components need access to Redux store.
+var Root = function Root(_ref) {
+    var store = _ref.store;
+
+    return _react2.default.createElement(
+        _reactRedux.Provider,
+        { store: store },
+        _react2.default.createElement(
+            'div',
+            null,
+            _react2.default.createElement(
+                'h1',
+                null,
+                'Render Root Component'
+            ),
+            _react2.default.createElement(_things_index_container2.default, null)
+        )
+    );
+}; // A React component that magically makes store available to all containers in app without passing it explicitly.
+
+exports.default = Root;
+
+/***/ }),
+
+/***/ "./frontend/components/things_index.jsx":
+/*!**********************************************!*\
+  !*** ./frontend/components/things_index.jsx ***!
+  \**********************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -162,93 +212,48 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var AutoComplete = function (_Component) {
-    _inherits(AutoComplete, _Component);
+var ThingsIndex = function (_Component) {
+    _inherits(ThingsIndex, _Component);
 
-    function AutoComplete(props) {
-        _classCallCheck(this, AutoComplete);
+    function ThingsIndex(props) {
+        _classCallCheck(this, ThingsIndex);
 
-        var _this = _possibleConstructorReturn(this, (AutoComplete.__proto__ || Object.getPrototypeOf(AutoComplete)).call(this, props));
+        var _this = _possibleConstructorReturn(this, (ThingsIndex.__proto__ || Object.getPrototypeOf(ThingsIndex)).call(this, props));
 
         _this.state = {
             name: "",
-            searchQuery: ""
+            searchQuery: "",
+            queryPending: ""
         };
 
-        AutoComplete.propTypes = {
-            names: _propTypes2.default.array.isRequired
-        };
-
-        _this.handleChange = _this.handleChange.bind(_this);
-        _this.selectName = _this.selectName.bind(_this);
-        _this.findMatches = _this.findMatches.bind(_this);
+        // ThingsIndex.propTypes = {
+        //     things: PropTypes.array.isRequired,
+        // }
         return _this;
     }
 
-    _createClass(AutoComplete, [{
-        key: 'handleChange',
-        value: function handleChange(event) {
-            var searchQuery = event.target.value;
-            this.props.requestSearchThings(searchQuery);
-
-            this.setState({
-                name: event.target.value
-            });
-
-            console.log(this.state);
-        }
-    }, {
-        key: 'findMatches',
-        value: function findMatches(names) {
-            var matches = [];
-            var inputName = this.state.name;
-
-            if (inputName.length === 0) {
-                return names;
-            }
-
-            names.forEach(function (name) {
-                // Uncomment below if dictionary-type search is desired
-                // let subName = name.slice(0, inputName.length);
-                // if (subName.toLowerCase() === inputName.toLowerCase()) {
-
-                if (name.includes(inputName)) {
-                    matches.push(name);
-                }
-            });
-
-            if (matches.length === 0) {
-                return ["There are no matches"];
-            }
-
-            return matches;
-        }
-    }, {
-        key: 'selectName',
-        value: function selectName(event) {
-            // e.currentTarget refers to element to which event handler is attached to. e.target returns element on which event occurred.
-            this.setState({
-                name: event.target.textContent
-            });
+    _createClass(ThingsIndex, [{
+        key: 'componentDidMount',
+        value: function componentDidMount() {
+            this.props.requestFetchThings();
         }
     }, {
         key: 'render',
         value: function render() {
-            var _this2 = this;
+            var things = this.props.things;
 
-            var names = this.props.names;
-
+            console.log("things: ", things);
+            console.log("props: ", this.props);
+            var allIDs = Object.keys(things);
+            console.log("allIDs: ", allIDs);
             // pass sort a compareFunction to sort lowercased and uppercased characters in string
-
-            names.sort(function (a, b) {
-                a = a.toLowerCase();
-                b = b.toLowerCase();
-                if (a === b) return 0;
-                if (a > b) return 1; // meaning, b comes before a. convert character to ASCII and then makes comparison. So if ("z" > "d"), which is true, return 1, meaning "a" comes before "z".
-                return -1; // meaning a comes before b.
-            });
-
-            var matchedResults = this.findMatches(names);
+            // things.sort((a, b) => {
+            //     a = a.toLowerCase();
+            //     b = b.toLowerCase();
+            //     if (a === b) return 0;
+            //     if (a > b) return 1; // meaning, b comes before a. convert character to ASCII and then makes comparison. So if ("z" > "d"), which is true, return 1, meaning "a" comes before "z".
+            //     return -1; // meaning a comes before b.
+            // });
 
             return _react2.default.createElement(
                 'div',
@@ -256,13 +261,11 @@ var AutoComplete = function (_Component) {
                 _react2.default.createElement(
                     'h3',
                     null,
-                    'Autocomplete'
+                    'ThingsIndexComponent'
                 ),
                 _react2.default.createElement('input', {
                     type: 'text',
-                    placeholder: 'Search...',
-                    onChange: this.handleChange,
-                    value: this.state.name
+                    placeholder: 'Search...'
                 }),
                 _react2.default.createElement(
                     'div',
@@ -277,14 +280,16 @@ var AutoComplete = function (_Component) {
                                 transitionEnterTimeout: 500,
                                 transitionLeaveTimeout: 500
                             },
-                            matchedResults.map(function (name, idx) {
+                            _react2.default.createElement(
+                                'li',
+                                null,
+                                'Render list of things here'
+                            ),
+                            allIDs.map(function (id) {
                                 return _react2.default.createElement(
                                     'li',
-                                    {
-                                        key: idx,
-                                        onClick: _this2.selectName
-                                    },
-                                    name
+                                    null,
+                                    things[id].firstName
                                 );
                             })
                         )
@@ -294,16 +299,16 @@ var AutoComplete = function (_Component) {
         }
     }]);
 
-    return AutoComplete;
+    return ThingsIndex;
 }(_react.Component);
 
-exports.default = AutoComplete;
+exports.default = ThingsIndex;
 
 /***/ }),
 
-/***/ "./frontend/components/autocomplete_container.js":
+/***/ "./frontend/components/things_index_container.js":
 /*!*******************************************************!*\
-  !*** ./frontend/components/autocomplete_container.js ***!
+  !*** ./frontend/components/things_index_container.js ***!
   \*******************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -319,16 +324,16 @@ var _reactRedux = __webpack_require__(/*! react-redux */ "./node_modules/react-r
 
 var _thing_actions = __webpack_require__(/*! ../actions/thing_actions */ "./frontend/actions/thing_actions.js");
 
-var _autocomplete = __webpack_require__(/*! ./autocomplete */ "./frontend/components/autocomplete.js");
+var _things_index = __webpack_require__(/*! ./things_index.jsx */ "./frontend/components/things_index.jsx");
 
-var _autocomplete2 = _interopRequireDefault(_autocomplete);
+var _things_index2 = _interopRequireDefault(_things_index);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var mapStateToProps = function mapStateToProps(_ref) {
     var things = _ref.things;
     return {
-        names: things
+        things: things
     };
 };
 
@@ -344,57 +349,8 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
     };
 };
 
-exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_autocomplete2.default);
+exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_things_index2.default);
 // A container component is just a React component that uses store.subscribe() to read part of the state tree and supply props for presentational components to render. connect() basically connects a React component to slices of the state in the Redux store, and action dispatches to view components.
-
-/***/ }),
-
-/***/ "./frontend/components/root.js":
-/*!*************************************!*\
-  !*** ./frontend/components/root.js ***!
-  \*************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-var _react = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-
-var _react2 = _interopRequireDefault(_react);
-
-var _reactRedux = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-
-var _autocomplete_container = __webpack_require__(/*! ./autocomplete_container */ "./frontend/components/autocomplete_container.js");
-
-var _autocomplete_container2 = _interopRequireDefault(_autocomplete_container);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-// All container components need access to Redux store.
-var Root = function Root(_ref) {
-    var store = _ref.store;
-
-    return _react2.default.createElement(
-        _reactRedux.Provider,
-        { store: store },
-        _react2.default.createElement(
-            'div',
-            null,
-            _react2.default.createElement(
-                'h1',
-                null,
-                'Render Root Component'
-            )
-        )
-    );
-}; // A React component that magically makes store available to all containers in app without passing it explicitly.
-
-exports.default = Root;
 
 /***/ }),
 
@@ -590,7 +546,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 // configureStore is used to apply preloadedState and middleware
 var configureStore = function configureStore() {
-    return (0, _redux.createStore)(_root_reducer2.default);
+    return (0, _redux.createStore)(_root_reducer2.default, (0, _redux.applyMiddleware)(_reduxThunk2.default, _reduxLogger2.default));
 };
 
 exports.default = configureStore;
