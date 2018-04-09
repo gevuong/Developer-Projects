@@ -28,40 +28,64 @@ class ThingsIndex extends Component {
     }
 
     handleChange(event) {
-        const searchQuery = event.target.value;
         this.setState({
-            searchQuery: searchQuery,
+            searchQuery: event.target.value,
         });
         console.log(this.state);
     }
 
     selectThing(event) {
         this.setState({
-            searchQuery: event.target.value,
+            searchQuery: event.target.textContent,
         });
     }
 
     findMatches() {
+        const thingsArr = [];
+        const { things } = this.props;
+        const allIDs = Object.keys(things);
 
+        // return array of things
+        allIDs.forEach(id => (
+            thingsArr.push(things[id].firstName)
+        ))
+
+        if (this.state.searchQuery.length === 0) {
+            return thingsArr;
+        } else {
+            const matches = thingsArr.filter(
+                thing => thing.toLowerCase().includes(this.state.searchQuery.toLowerCase())
+            )
+
+            // pass sort a compareFunction to sort lowercased and uppercased characters in string
+            matches.sort((a, b) => {
+                a = a.toLowerCase();
+                b = b.toLowerCase();
+                if (a === b) return 0;
+                if (a > b) return 1; // meaning, b comes before a. convert character to ASCII and then makes comparison. So if ("z" > "d"), which is true, return 1, meaning "a" comes before "z".
+                return -1; // meaning a comes before b.
+            });
+
+            return matches
+        }
+
+        if (matches.length === 0) {
+            return ["There are no matches"];
+        }
     }
 
     render() {
         const { things } = this.props;
-        console.log("things: ", things);
+        // console.log("things: ", things);
         console.log("props: ", this.props);
-        const allIDs = Object.keys(things);
-        console.log("allIDs: ", allIDs);
-        // pass sort a compareFunction to sort lowercased and uppercased characters in string
-        // things.sort((a, b) => {
-        //     a = a.toLowerCase();
-        //     b = b.toLowerCase();
-        //     if (a === b) return 0;
-        //     if (a > b) return 1; // meaning, b comes before a. convert character to ASCII and then makes comparison. So if ("z" > "d"), which is true, return 1, meaning "a" comes before "z".
-        //     return -1; // meaning a comes before b.
-        // });
+        console.log("state: ", this.state);
+
+        const searchResults = this.findMatches() || this.state.searchQuery;
+        console.log("searchResults: ", searchResults);
         if (this.state.loading) {
+            console.log("enter loading");
             return (
-                <h3>Loading...</h3>
+                <h1>Loading...</h1>
             )
         } else {
             return (
@@ -81,12 +105,12 @@ class ThingsIndex extends Component {
                                 transitionLeaveTimeout={500}
                                 >
                                 <li>Render list of things here</li>
-                                { allIDs.map((id, idx) => (
+                                { searchResults.map((thing, idx) => (
                                     <li
                                         key={idx}
                                         onClick={ this.selectThing }
                                     >
-                                        { things[id].firstName }
+                                        { thing }
                                     </li>
                                 ))
                                 }

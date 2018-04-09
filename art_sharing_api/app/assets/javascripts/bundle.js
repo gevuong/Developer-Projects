@@ -245,9 +245,8 @@ var ThingsIndex = function (_Component) {
     }, {
         key: 'handleChange',
         value: function handleChange(event) {
-            var searchQuery = event.target.value;
             this.setState({
-                searchQuery: searchQuery
+                searchQuery: event.target.value
             });
             console.log(this.state);
         }
@@ -255,34 +254,64 @@ var ThingsIndex = function (_Component) {
         key: 'selectThing',
         value: function selectThing(event) {
             this.setState({
-                searchQuery: event.target.value
+                searchQuery: event.target.textContent
             });
         }
     }, {
         key: 'findMatches',
-        value: function findMatches() {}
+        value: function findMatches() {
+            var _this2 = this;
+
+            var thingsArr = [];
+            var things = this.props.things;
+
+            var allIDs = Object.keys(things);
+
+            // return array of things
+            allIDs.forEach(function (id) {
+                return thingsArr.push(things[id].firstName);
+            });
+
+            if (this.state.searchQuery.length === 0) {
+                return thingsArr;
+            } else {
+                var _matches = thingsArr.filter(function (thing) {
+                    return thing.toLowerCase().includes(_this2.state.searchQuery.toLowerCase());
+                });
+
+                // pass sort a compareFunction to sort lowercased and uppercased characters in string
+                _matches.sort(function (a, b) {
+                    a = a.toLowerCase();
+                    b = b.toLowerCase();
+                    if (a === b) return 0;
+                    if (a > b) return 1; // meaning, b comes before a. convert character to ASCII and then makes comparison. So if ("z" > "d"), which is true, return 1, meaning "a" comes before "z".
+                    return -1; // meaning a comes before b.
+                });
+
+                return _matches;
+            }
+
+            if (matches.length === 0) {
+                return ["There are no matches"];
+            }
+        }
     }, {
         key: 'render',
         value: function render() {
-            var _this2 = this;
+            var _this3 = this;
 
             var things = this.props.things;
+            // console.log("things: ", things);
 
-            console.log("things: ", things);
             console.log("props: ", this.props);
-            var allIDs = Object.keys(things);
-            console.log("allIDs: ", allIDs);
-            // pass sort a compareFunction to sort lowercased and uppercased characters in string
-            // things.sort((a, b) => {
-            //     a = a.toLowerCase();
-            //     b = b.toLowerCase();
-            //     if (a === b) return 0;
-            //     if (a > b) return 1; // meaning, b comes before a. convert character to ASCII and then makes comparison. So if ("z" > "d"), which is true, return 1, meaning "a" comes before "z".
-            //     return -1; // meaning a comes before b.
-            // });
+            console.log("state: ", this.state);
+
+            var searchResults = this.findMatches() || this.state.searchQuery;
+            console.log("searchResults: ", searchResults);
             if (this.state.loading) {
+                console.log("enter loading");
                 return _react2.default.createElement(
-                    'h3',
+                    'h1',
                     null,
                     'Loading...'
                 );
@@ -319,14 +348,14 @@ var ThingsIndex = function (_Component) {
                                     null,
                                     'Render list of things here'
                                 ),
-                                allIDs.map(function (id, idx) {
+                                searchResults.map(function (thing, idx) {
                                     return _react2.default.createElement(
                                         'li',
                                         {
                                             key: idx,
-                                            onClick: _this2.selectThing
+                                            onClick: _this3.selectThing
                                         },
-                                        things[id].firstName
+                                        thing
                                     );
                                 })
                             )
