@@ -161,12 +161,7 @@ var Root = function Root(_ref) {
         { store: store },
         _react2.default.createElement(
             'div',
-            null,
-            _react2.default.createElement(
-                'h3',
-                null,
-                'Render Root Component'
-            ),
+            { className: 'wrapper' },
             _react2.default.createElement(_things_index_container2.default, null)
         )
     );
@@ -311,28 +306,41 @@ var ThingsIndex = function (_Component) {
             if (this.state.loading) {
                 console.log("enter loading");
                 return _react2.default.createElement(
-                    'h1',
+                    'div',
                     null,
-                    'Loading...'
+                    _react2.default.createElement(
+                        'h1',
+                        null,
+                        'Loading...'
+                    )
                 );
             } else {
                 return _react2.default.createElement(
                     'div',
-                    { className: 'main-content' },
+                    null,
                     _react2.default.createElement(
-                        'h3',
+                        'header',
                         null,
-                        'ThingsIndexComponent'
+                        _react2.default.createElement(
+                            'h1',
+                            null,
+                            'Stack Overflow'
+                        ),
+                        _react2.default.createElement(
+                            'p',
+                            null,
+                            'Find the answer to your questions. Begin search here.'
+                        ),
+                        _react2.default.createElement('input', {
+                            type: 'text',
+                            placeholder: 'Search...',
+                            onChange: this.handleChange,
+                            value: this.state.searchQuery
+                        })
                     ),
-                    _react2.default.createElement('input', {
-                        type: 'text',
-                        placeholder: 'Search...',
-                        onChange: this.handleChange,
-                        value: this.state.searchQuery
-                    }),
                     _react2.default.createElement(
                         'div',
-                        null,
+                        { className: 'main' },
                         _react2.default.createElement(
                             'ul',
                             null,
@@ -343,11 +351,6 @@ var ThingsIndex = function (_Component) {
                                     transitionEnterTimeout: 500,
                                     transitionLeaveTimeout: 500
                                 },
-                                _react2.default.createElement(
-                                    'li',
-                                    null,
-                                    'Render list of things here'
-                                ),
                                 searchResults.map(function (thing, idx) {
                                     return _react2.default.createElement(
                                         'li',

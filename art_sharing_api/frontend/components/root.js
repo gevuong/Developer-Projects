@@ -7,8 +7,7 @@ import ThingsIndexContainer from './things_index_container';
 const Root = ({ store }) => {
     return (
         <Provider store={ store }>
-            <div>
-                <h3>Render Root Component</h3>
+            <div className="wrapper">
                 <ThingsIndexContainer />
             </div>
         </Provider>

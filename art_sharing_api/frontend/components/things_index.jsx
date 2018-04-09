@@ -86,26 +86,31 @@ class ThingsIndex extends Component {
         if (this.state.loading) {
             console.log("enter loading");
             return (
-                <h1>Loading...</h1>
+                <div>
+                    <h1>Loading...</h1>
+                </div>
             )
         } else {
             return (
-                <div className="main-content">
-                    <h3>ThingsIndexComponent</h3>
-                    <input
-                        type="text"
-                        placeholder="Search..."
-                        onChange={ this.handleChange }
-                        value={ this.state.searchQuery }
-                    />
-                    <div>
+                <div>
+                    <header>
+                        <h1>Stack Overflow</h1>
+                        <p>Find the answer to your questions. Begin search here.</p>
+                        <input
+                            type="text"
+                            placeholder="Search..."
+                            onChange={ this.handleChange }
+                            value={ this.state.searchQuery }
+                        />
+                    </header>
+
+                    <div className="main">
                         <ul>
                             <ReactCSSTransitionGroup
                                 transitionName="auto"
                                 transitionEnterTimeout={500}
                                 transitionLeaveTimeout={500}
                                 >
-                                <li>Render list of things here</li>
                                 { searchResults.map((thing, idx) => (
                                     <li
                                         key={idx}

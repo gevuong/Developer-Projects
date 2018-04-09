@@ -1,5 +1,3 @@
-# demo from HTTP docs
-
 class Api::Fetch < ApplicationRecord
     include HTTParty
     #base_uri is a HTTParty class method

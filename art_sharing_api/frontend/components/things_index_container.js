@@ -13,8 +13,5 @@ const mapDispatchToProps = dispatch => ({
     requestSearchThings: query => dispatch(requestSearchThings(query)),
 });
 
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(ThingsIndex);
+export default connect(mapStateToProps, mapDispatchToProps)(ThingsIndex);
 // A container component is just a React component that uses store.subscribe() to read part of the state tree and supply props for presentational components to render. connect() basically connects a React component to slices of the state in the Redux store, and action dispatches to view components.
