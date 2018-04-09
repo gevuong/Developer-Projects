@@ -233,9 +233,11 @@ var ThingsIndex = function (_Component) {
     _createClass(ThingsIndex, [{
         key: 'componentDidMount',
         value: function componentDidMount() {
-            this.props.requestFetchThings().then(this.setState({
-                loading: false
-            }));
+            // this.props.requestFetchThings().then(
+            //     this.setState({
+            //         loading: false,
+            //     })
+            // );
         }
     }, {
         key: 'handleChange',
@@ -303,69 +305,64 @@ var ThingsIndex = function (_Component) {
 
             var searchResults = this.findMatches();
             console.log("searchResults: ", searchResults);
-            if (this.state.loading) {
-                console.log("enter loading");
-                return _react2.default.createElement(
-                    'div',
+            // if (this.state.loading) {
+            //     console.log("enter loading");
+            //     return (
+            //         <div>
+            //             <h1>Loading...</h1>
+            //         </div>
+            //     )
+            // } else {
+            return _react2.default.createElement(
+                'div',
+                null,
+                _react2.default.createElement(
+                    'header',
                     null,
                     _react2.default.createElement(
                         'h1',
                         null,
-                        'Loading...'
-                    )
-                );
-            } else {
-                return _react2.default.createElement(
-                    'div',
-                    null,
-                    _react2.default.createElement(
-                        'header',
-                        null,
-                        _react2.default.createElement(
-                            'h1',
-                            null,
-                            'Stack Overflow'
-                        ),
-                        _react2.default.createElement(
-                            'p',
-                            null,
-                            'Find the answer to your questions. Begin search here.'
-                        ),
-                        _react2.default.createElement('input', {
-                            type: 'text',
-                            placeholder: 'Search...',
-                            onChange: this.handleChange,
-                            value: this.state.searchQuery
-                        })
+                        'Stack Overflow'
                     ),
                     _react2.default.createElement(
-                        'div',
-                        { className: 'main' },
+                        'p',
+                        null,
+                        'Find the answer to your questions. Begin search here.'
+                    ),
+                    _react2.default.createElement('input', {
+                        type: 'text',
+                        placeholder: 'Search...',
+                        onChange: this.handleChange,
+                        value: this.state.searchQuery
+                    })
+                ),
+                _react2.default.createElement(
+                    'div',
+                    { className: 'main' },
+                    _react2.default.createElement(
+                        'ul',
+                        null,
                         _react2.default.createElement(
-                            'ul',
-                            null,
-                            _react2.default.createElement(
-                                _reactAddonsCssTransitionGroup2.default,
-                                {
-                                    transitionName: 'auto',
-                                    transitionEnterTimeout: 500,
-                                    transitionLeaveTimeout: 500
-                                },
-                                searchResults.map(function (thing, idx) {
-                                    return _react2.default.createElement(
-                                        'li',
-                                        {
-                                            key: idx,
-                                            onClick: _this3.selectThing
-                                        },
-                                        thing
-                                    );
-                                })
-                            )
+                            _reactAddonsCssTransitionGroup2.default,
+                            {
+                                transitionName: 'auto',
+                                transitionEnterTimeout: 500,
+                                transitionLeaveTimeout: 500
+                            },
+                            searchResults.map(function (thing, idx) {
+                                return _react2.default.createElement(
+                                    'li',
+                                    {
+                                        key: idx,
+                                        onClick: _this3.selectThing
+                                    },
+                                    thing
+                                );
+                            })
                         )
                     )
-                );
-            }
+                )
+            );
         }
     }]);
 

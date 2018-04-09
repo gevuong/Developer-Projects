@@ -14,16 +14,3 @@
  *= require_self
  *= require main
  */
-
- header {
-   text-align: center;
-   // background-image: url("../images/header.jpg");
-   background: linear-gradient(90deg, #d4eece, #d4eece, #d4eece),
-               url('header.jpg') no-repeat;
-               background-blend-mode: multiply;
-               background-size: cover;
-   /*background: linear-gradient(90deg, #d4eece, #55b3d0, #1e7eb7),
-               url('../images/header.jpg') no-repeat;
-               background-blend-mode: multiply;
-               background-size: cover;*/
- }

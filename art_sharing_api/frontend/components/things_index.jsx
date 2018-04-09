@@ -20,11 +20,11 @@ class ThingsIndex extends Component {
     }
 
     componentDidMount() {
-        this.props.requestFetchThings().then(
-            this.setState({
-                loading: false,
-            })
-        );
+        // this.props.requestFetchThings().then(
+        //     this.setState({
+        //         loading: false,
+        //     })
+        // );
     }
 
     handleChange(event) {
@@ -83,14 +83,14 @@ class ThingsIndex extends Component {
 
         const searchResults = this.findMatches();
         console.log("searchResults: ", searchResults);
-        if (this.state.loading) {
-            console.log("enter loading");
-            return (
-                <div>
-                    <h1>Loading...</h1>
-                </div>
-            )
-        } else {
+        // if (this.state.loading) {
+        //     console.log("enter loading");
+        //     return (
+        //         <div>
+        //             <h1>Loading...</h1>
+        //         </div>
+        //     )
+        // } else {
             return (
                 <div>
                     <header>
@@ -125,7 +125,7 @@ class ThingsIndex extends Component {
                     </div>
                 </div>
             )
-        }
+        
     }
 }
 
