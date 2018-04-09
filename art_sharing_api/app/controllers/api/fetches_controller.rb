@@ -1,6 +1,5 @@
 class Api::FetchesController < ApplicationController
 
-
     def index
         # in index, run fetch() defined in model. This will return a response with all data. THEN, upon returning results, you can extrapolate response data based on client-side search query.
 
@@ -11,9 +10,7 @@ class Api::FetchesController < ApplicationController
         # 4. Then assign remaining names to ivar, which gets passed to jbuilder. The data is then passed to receiveSearchedThings(data), and data becomes a value key value attribute.
         # 5. receiveSearchedThings(data) gets dispatched to reducer, and the state gets updated with new data.
 
-        # @filtered_results = Api::Fetch.search(params[:query])
-        @fetched_data = HTTParty.get('https://api.foursquare.com/v2/users/self?oauth_token=IAG5XHTG5FVPJBSTGVXOZMBLKCGTHJCMJMSINCLEMLIIFMAH&v=20180403')
-
+        @fetched_data = Api::Fetch.fetch
         @stack_exchange = Api::Fetch.new("stackoverflow", 1)
 
         if @fetched_data || @stack_exchange.users

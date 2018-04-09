@@ -25,14 +25,6 @@ class AutoComplete extends Component {
     }
 
     handleChange(event) {
-        let searchQuery = event.target.value;
-        
-        this.props.requestSearchThings(searchQuery).then(() => (
-            this.setState({
-                queryPending: false,
-            })
-        ));
-
         this.setState({
             name: event.target.value,
         });

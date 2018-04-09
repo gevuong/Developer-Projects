@@ -8,7 +8,7 @@ const Root = ({ store }) => {
     return (
         <Provider store={ store }>
             <div>
-                <h1>Render Root Component</h1>
+                <h3>Render Root Component</h3>
                 <ThingsIndexContainer />
             </div>
         </Provider>

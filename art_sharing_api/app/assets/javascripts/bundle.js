@@ -163,7 +163,7 @@ var Root = function Root(_ref) {
             'div',
             null,
             _react2.default.createElement(
-                'h1',
+                'h3',
                 null,
                 'Render Root Component'
             ),
@@ -221,25 +221,51 @@ var ThingsIndex = function (_Component) {
         var _this = _possibleConstructorReturn(this, (ThingsIndex.__proto__ || Object.getPrototypeOf(ThingsIndex)).call(this, props));
 
         _this.state = {
-            name: "",
             searchQuery: "",
-            queryPending: ""
+            loading: true
         };
 
-        // ThingsIndex.propTypes = {
-        //     things: PropTypes.array.isRequired,
-        // }
+        ThingsIndex.propTypes = {
+            requestFetchThings: _propTypes2.default.func.isRequired
+            // things: PropTypes.object.isRequired,
+        };
+
+        _this.handleChange = _this.handleChange.bind(_this);
+        _this.selectThing = _this.selectThing.bind(_this);
         return _this;
     }
 
     _createClass(ThingsIndex, [{
         key: 'componentDidMount',
         value: function componentDidMount() {
-            this.props.requestFetchThings();
+            this.props.requestFetchThings().then(this.setState({
+                loading: false
+            }));
         }
+    }, {
+        key: 'handleChange',
+        value: function handleChange(event) {
+            var searchQuery = event.target.value;
+            this.setState({
+                searchQuery: searchQuery
+            });
+            console.log(this.state);
+        }
+    }, {
+        key: 'selectThing',
+        value: function selectThing(event) {
+            this.setState({
+                searchQuery: event.target.value
+            });
+        }
+    }, {
+        key: 'findMatches',
+        value: function findMatches() {}
     }, {
         key: 'render',
         value: function render() {
+            var _this2 = this;
+
             var things = this.props.things;
 
             console.log("things: ", things);
@@ -254,48 +280,60 @@ var ThingsIndex = function (_Component) {
             //     if (a > b) return 1; // meaning, b comes before a. convert character to ASCII and then makes comparison. So if ("z" > "d"), which is true, return 1, meaning "a" comes before "z".
             //     return -1; // meaning a comes before b.
             // });
-
-            return _react2.default.createElement(
-                'div',
-                { className: 'main-content' },
-                _react2.default.createElement(
+            if (this.state.loading) {
+                return _react2.default.createElement(
                     'h3',
                     null,
-                    'ThingsIndexComponent'
-                ),
-                _react2.default.createElement('input', {
-                    type: 'text',
-                    placeholder: 'Search...'
-                }),
-                _react2.default.createElement(
+                    'Loading...'
+                );
+            } else {
+                return _react2.default.createElement(
                     'div',
-                    null,
+                    { className: 'main-content' },
                     _react2.default.createElement(
-                        'ul',
+                        'h3',
+                        null,
+                        'ThingsIndexComponent'
+                    ),
+                    _react2.default.createElement('input', {
+                        type: 'text',
+                        placeholder: 'Search...',
+                        onChange: this.handleChange,
+                        value: this.state.searchQuery
+                    }),
+                    _react2.default.createElement(
+                        'div',
                         null,
                         _react2.default.createElement(
-                            _reactAddonsCssTransitionGroup2.default,
-                            {
-                                transitionName: 'auto',
-                                transitionEnterTimeout: 500,
-                                transitionLeaveTimeout: 500
-                            },
+                            'ul',
+                            null,
                             _react2.default.createElement(
-                                'li',
-                                null,
-                                'Render list of things here'
-                            ),
-                            allIDs.map(function (id) {
-                                return _react2.default.createElement(
+                                _reactAddonsCssTransitionGroup2.default,
+                                {
+                                    transitionName: 'auto',
+                                    transitionEnterTimeout: 500,
+                                    transitionLeaveTimeout: 500
+                                },
+                                _react2.default.createElement(
                                     'li',
                                     null,
-                                    things[id].firstName
-                                );
-                            })
+                                    'Render list of things here'
+                                ),
+                                allIDs.map(function (id, idx) {
+                                    return _react2.default.createElement(
+                                        'li',
+                                        {
+                                            key: idx,
+                                            onClick: _this2.selectThing
+                                        },
+                                        things[id].firstName
+                                    );
+                                })
+                            )
                         )
                     )
-                )
-            );
+                );
+            }
         }
     }]);
 
