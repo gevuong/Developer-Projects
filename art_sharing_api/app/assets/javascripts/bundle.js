@@ -274,26 +274,26 @@ var ThingsIndex = function (_Component) {
 
             if (this.state.searchQuery.length === 0) {
                 return thingsArr;
-            } else {
-                var _matches = thingsArr.filter(function (thing) {
-                    return thing.toLowerCase().includes(_this2.state.searchQuery.toLowerCase());
-                });
-
-                // pass sort a compareFunction to sort lowercased and uppercased characters in string
-                _matches.sort(function (a, b) {
-                    a = a.toLowerCase();
-                    b = b.toLowerCase();
-                    if (a === b) return 0;
-                    if (a > b) return 1; // meaning, b comes before a. convert character to ASCII and then makes comparison. So if ("z" > "d"), which is true, return 1, meaning "a" comes before "z".
-                    return -1; // meaning a comes before b.
-                });
-
-                return _matches;
             }
+
+            var matches = thingsArr.filter(function (thing) {
+                return thing.toLowerCase().includes(_this2.state.searchQuery.toLowerCase());
+            });
+
+            // pass sort a compareFunction to sort lowercased and uppercased characters in string
+            matches.sort(function (a, b) {
+                a = a.toLowerCase();
+                b = b.toLowerCase();
+                if (a === b) return 0;
+                if (a > b) return 1; // meaning, b comes before a. convert character to ASCII and then makes comparison. So if ("z" > "d"), which is true, return 1, meaning "a" comes before "z".
+                return -1; // meaning a comes before b.
+            });
 
             if (matches.length === 0) {
                 return ["There are no matches"];
             }
+
+            return matches;
         }
     }, {
         key: 'render',
@@ -306,7 +306,7 @@ var ThingsIndex = function (_Component) {
             console.log("props: ", this.props);
             console.log("state: ", this.state);
 
-            var searchResults = this.findMatches() || this.state.searchQuery;
+            var searchResults = this.findMatches();
             console.log("searchResults: ", searchResults);
             if (this.state.loading) {
                 console.log("enter loading");

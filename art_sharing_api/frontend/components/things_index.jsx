@@ -52,26 +52,27 @@ class ThingsIndex extends Component {
 
         if (this.state.searchQuery.length === 0) {
             return thingsArr;
-        } else {
-            const matches = thingsArr.filter(
-                thing => thing.toLowerCase().includes(this.state.searchQuery.toLowerCase())
-            )
-
-            // pass sort a compareFunction to sort lowercased and uppercased characters in string
-            matches.sort((a, b) => {
-                a = a.toLowerCase();
-                b = b.toLowerCase();
-                if (a === b) return 0;
-                if (a > b) return 1; // meaning, b comes before a. convert character to ASCII and then makes comparison. So if ("z" > "d"), which is true, return 1, meaning "a" comes before "z".
-                return -1; // meaning a comes before b.
-            });
-
-            return matches
         }
+
+        const matches = thingsArr.filter(
+            thing => thing.toLowerCase().includes(this.state.searchQuery.toLowerCase())
+        )
+
+        // pass sort a compareFunction to sort lowercased and uppercased characters in string
+        matches.sort((a, b) => {
+            a = a.toLowerCase();
+            b = b.toLowerCase();
+            if (a === b) return 0;
+            if (a > b) return 1; // meaning, b comes before a. convert character to ASCII and then makes comparison. So if ("z" > "d"), which is true, return 1, meaning "a" comes before "z".
+            return -1; // meaning a comes before b.
+        });
+
 
         if (matches.length === 0) {
             return ["There are no matches"];
         }
+
+        return matches;
     }
 
     render() {
@@ -80,7 +81,7 @@ class ThingsIndex extends Component {
         console.log("props: ", this.props);
         console.log("state: ", this.state);
 
-        const searchResults = this.findMatches() || this.state.searchQuery;
+        const searchResults = this.findMatches();
         console.log("searchResults: ", searchResults);
         if (this.state.loading) {
             console.log("enter loading");
