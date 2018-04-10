@@ -13,6 +13,7 @@ class Api::Fetch < ApplicationRecord
     end
 
     def generate_random_api_key
+        # Hourly limit: 1,000 requests. For more info: https://www.nps.gov/subjects/developer/guides.htm
         api_key = [
             "DgxI2OorIMB526wU4s8a380kHTqaokfjGMNISAzT"
         ]
@@ -22,15 +23,5 @@ class Api::Fetch < ApplicationRecord
 
     def campgrounds
         self.class.get("/campgrounds", @options)
-    end
-
-    # eventually, assign an external API to pass based on client-side filtering option (i.e. stack overflow, foursqure)
-    def self.fetch
-        response = HTTParty.get(
-            'https://developer.nps.gov/api/v1/campgrounds?limit=50&api_key=DgxI2OorIMB526wU4s8a380kHTqaokfjGMNISAzT'
-        )
-        # response = HTTParty.get(
-        #     'https://api.foursquare.com/v2/users/self?oauth_token=IAG5XHTG5FVPJBSTGVXOZMBLKCGTHJCMJMSINCLEMLIIFMAH&v=20180403'
-        # )
     end
 end
