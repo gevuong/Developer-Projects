@@ -94,29 +94,45 @@ class ThingsIndex extends Component {
             <div>
                 <header>
                     <h2>National Park Services</h2>
-                    <p>Explore. Find your campground. Begin your search today.</p>
-                    <form>
-                        <input
-                            type="text"
-                            name="search-query"
-                            placeholder="Discover your next campground..."
-                            onChange={ this.handleChange }
-                            value={ this.state.searchQuery }
-                        />
-                        <button
-                            type="submit"
-                            name="search"
-                            value="submit"
-                        >Search
-                        </button>
-                    </form>
+                     <div className="text-and-form">
+                         <p>Explore. Find your campground. Begin your search today.</p>
+                         <form>
+                             <input
+                                 type="text"
+                                 name="search-query"
+                                 placeholder="Discover your next campground..."
+                                 onChange={ this.handleChange }
+                                 value={ this.state.searchQuery }
+                                 />
+                             <button
+                                 type="submit"
+                                 name="search"
+                                 value="submit"
+                                 >
+                                 <div>
+                                     <span><i className="fas fa-search"></i></span>
+                                     <span>Search</span>
+                                 </div>
+                             </button>
+                         </form>
+                     </div>
                 </header>
-                <RingLoader
-                    className="sweet-loading"
-                    color={'#000'}
-                    loading={this.state.loading}
-                />
-            <h1>fetching data...</h1>
+                if (this.state.loading)
+                    return {
+                        <div>
+                        <RingLoader
+                            className="sweet-loading"
+                            color={'#000'}
+                            loading={this.state.loading}
+                            value="getting coffee, one sec..."
+                            name="getting coffee, one sec..."
+                            placeholder="getting coffee, one sec..."
+                        >getting coffee, one sec...
+                        </RingLoader>
+
+                        </div>
+                    }
+
                 <ul>
                     <ReactCSSTransitionGroup
                         transitionName="auto"

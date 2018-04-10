@@ -311,40 +311,64 @@ var ThingsIndex = function (_Component) {
                         'National Park Services'
                     ),
                     _react2.default.createElement(
-                        'p',
-                        null,
-                        'Explore. Find your campground. Begin your search today.'
-                    ),
-                    _react2.default.createElement(
-                        'form',
-                        null,
-                        _react2.default.createElement('input', {
-                            type: 'text',
-                            name: 'search-query',
-                            placeholder: 'Discover your next campground...',
-                            onChange: this.handleChange,
-                            value: this.state.searchQuery
-                        }),
+                        'div',
+                        { className: 'text-and-form' },
                         _react2.default.createElement(
-                            'button',
-                            {
-                                type: 'submit',
-                                name: 'search',
-                                value: 'submit'
-                            },
-                            'Search'
+                            'p',
+                            null,
+                            'Explore. Find your campground. Begin your search today.'
+                        ),
+                        _react2.default.createElement(
+                            'form',
+                            null,
+                            _react2.default.createElement('input', {
+                                type: 'text',
+                                name: 'search-query',
+                                placeholder: 'Discover your next campground...',
+                                onChange: this.handleChange,
+                                value: this.state.searchQuery
+                            }),
+                            _react2.default.createElement(
+                                'button',
+                                {
+                                    type: 'submit',
+                                    name: 'search',
+                                    value: 'submit'
+                                },
+                                _react2.default.createElement(
+                                    'div',
+                                    null,
+                                    _react2.default.createElement(
+                                        'span',
+                                        null,
+                                        _react2.default.createElement('i', { className: 'fas fa-search' })
+                                    ),
+                                    _react2.default.createElement(
+                                        'span',
+                                        null,
+                                        'Search'
+                                    )
+                                )
+                            )
                         )
                     )
                 ),
-                _react2.default.createElement(_reactSpinners.RingLoader, {
-                    className: 'sweet-loading',
-                    color: '#000',
-                    loading: this.state.loading
-                }),
+                'if (this.state.loading) return ',
                 _react2.default.createElement(
-                    'h1',
+                    'div',
                     null,
-                    'fetching data...'
+                    _react2.default.createElement(
+                        _reactSpinners.RingLoader,
+                        {
+                            className: 'sweet-loading',
+                            color: '#000',
+                            loading: this.state.loading,
+                            value: 'getting coffee, one sec...',
+                            name: 'getting coffee, one sec...',
+                            placeholder: 'getting coffee, one sec...'
+                        },
+                        'getting coffee, one sec...'
+                    )
                 ),
                 _react2.default.createElement(
                     'ul',
