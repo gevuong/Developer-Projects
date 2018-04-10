@@ -3,12 +3,16 @@ import PropTypes from 'prop-types';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import { RingLoader } from 'react-spinners';
 
+import PaginationBar from './pagination_bar';
+
 class ThingsIndex extends Component {
     constructor(props) {
         super(props);
         this.state = {
             searchQuery: "",
             loading: true,
+            rowsPerPage: 6,
+            currentPage: 1,
         };
 
         ThingsIndex.propTypes = {
@@ -82,6 +86,8 @@ class ThingsIndex extends Component {
 
     render() {
         const { campgrounds } = this.props;
+        const { rowsPerPage, currentPage } = this.state;
+
         // console.log("campgrounds: ", campgrounds);
         console.log("props: ", this.props);
         console.log("state: ", this.state);
@@ -89,7 +95,38 @@ class ThingsIndex extends Component {
         const searchResults = this.findMatches();
         console.log("searchResults: ", searchResults);
 
-        // totalPages = searchResults / 5
+
+        const prevPage = currentPage - 1;
+        const firstIndex = prevPage * rowsPerPage
+        // when setState executes, render is invoked with updated currentPage value. round up due to zero index to calculate totalPages.
+        const lastIndex = currentPage * rowsPerPage;
+        const totalPages = Math.ceil(searchResults.length / rowsPerPage);
+
+        let startPage, endPage;
+
+        // following code modifies number of pages to render when traversing PaginationBar.
+        if (totalPages <= 3) {
+            startPage = 1;
+            endPage = totalPages;
+        } else { //
+            if (currentPage <= 2) {
+                startPage = 1;
+                endPage = currentPage + 1;
+            }
+            else if (currentPage + 1 >= totalPages) {
+            // consider currentPage is close to exceeding totalPages
+            startPage = totalPages - 1;
+            endPage = totalPages;
+            }
+            else {
+            // otherwise, currentPage will always be between startPage and endPage
+            startPage = currentPage - 1;
+            endPage = currentPage + 1;
+            }
+        }
+
+        const slicedData = searchResults.slice(startPage, endPage);
+
         return (
             <div>
                 <header>
@@ -158,6 +195,13 @@ class ThingsIndex extends Component {
                         }
                     </ReactCSSTransitionGroup>
                 </ul>
+                <PaginationBar
+                    data={ searchResults }
+                    currentPage={ currenPage }
+                    totalPages={ totalPages }
+                    startPage={ startPage }
+                    endPage={ endPage }
+                />
             </div>
             )
     }
