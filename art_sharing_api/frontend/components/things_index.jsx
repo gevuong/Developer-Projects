@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
+import { RingLoader } from 'react-spinners';
 
 class ThingsIndex extends Component {
     constructor(props) {
@@ -87,14 +88,12 @@ class ThingsIndex extends Component {
 
         const searchResults = this.findMatches();
         console.log("searchResults: ", searchResults);
-        // if (this.state.loading) {
-        //     console.log("enter loading");
-        //     return (
-        //         <div>
-        //             <h1>Loading...</h1>
-        //         </div>
-        //     )
-        // } else {
+
+        // totalPages = searchResults / 5
+
+
+        if (this.state.loading) {
+            console.log("enter loading");
             return (
                 <div>
                     <header>
@@ -107,37 +106,46 @@ class ThingsIndex extends Component {
                             value={ this.state.searchQuery }
                         />
                     </header>
-
-                    <div className="main">
-                        <ul>
-                            <ReactCSSTransitionGroup
-                                transitionName="auto"
-                                transitionEnterTimeout={500}
-                                transitionLeaveTimeout={500}
-                                >
-                                { searchResults.map((campground, idx) => (
-                                    <li
-                                        key={idx}
-                                        onClick={ this.selectCampground }
-                                    >
-                                        <div className="campground-container">
-                                            <div>
-                                                <img className="campground-img" src="http://res.cloudinary.com/dtluc0y85/image/upload/v1523306878/header_humzpt.jpg" />
-                                            </div>
-                                            <div className="campground-info">
-                                                <p>{ campground }</p>
-                                            </div>
-
-                                        </div>
-                                    </li>
-                                ))
-                                }
-                            </ReactCSSTransitionGroup>
-                        </ul>
-                    </div>
+                    <RingLoader
+                        className="loading-icon"
+                        color={ '#000'}
+                        loading={this.state.loading}
+                    />
+                    <h1>Loading...</h1>
                 </div>
             )
+        } else {
+            console.log("enter else statement");
+            return (
+                <div className="main">
+                    <ul>
+                        <ReactCSSTransitionGroup
+                            transitionName="auto"
+                            transitionEnterTimeout={500}
+                            transitionLeaveTimeout={500}
+                            >
+                            { searchResults.map((campground, idx) => (
+                                <li
+                                    key={idx}
+                                    onClick={ this.selectCampground }
+                                    >
+                                    <div className="campground-container">
+                                        <div>
+                                            <img className="campground-img" src="http://res.cloudinary.com/dtluc0y85/image/upload/v1523306878/header_humzpt.jpg" />
+                                        </div>
+                                        <div className="campground-info">
+                                            <p>{ campground }</p>
+                                        </div>
 
+                                    </div>
+                                </li>
+                            ))
+                        }
+                    </ReactCSSTransitionGroup>
+                </ul>
+            </div>
+            )
+        }
     }
 }
 
