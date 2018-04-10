@@ -11,8 +11,12 @@ class ThingsIndex extends Component {
         };
 
         ThingsIndex.propTypes = {
+            campgrounds: PropTypes.shape({
+                name: PropTypes.string,
+                description: PropTypes.string,
+                image_url: PropTypes.string,
+            }),
             requestAllCampgrounds: PropTypes.func.isRequired,
-            // campgrounds: PropTypes.object.isRequired,
         }
 
         this.handleChange = this.handleChange.bind(this);
@@ -111,12 +115,20 @@ class ThingsIndex extends Component {
                                 transitionEnterTimeout={500}
                                 transitionLeaveTimeout={500}
                                 >
-                                { searchResults.map((thing, idx) => (
+                                { searchResults.map((campground, idx) => (
                                     <li
                                         key={idx}
                                         onClick={ this.selectCampground }
                                     >
-                                        { thing }
+                                        <div className="campground-container">
+                                            <div>
+                                                <img className="campground-img" src="http://res.cloudinary.com/dtluc0y85/image/upload/v1523306878/header_humzpt.jpg" />
+                                            </div>
+                                            <div className="campground-info">
+                                                <p>{ campground }</p>
+                                            </div>
+
+                                        </div>
                                     </li>
                                 ))
                                 }

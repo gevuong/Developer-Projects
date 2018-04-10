@@ -205,8 +205,12 @@ var ThingsIndex = function (_Component) {
         };
 
         ThingsIndex.propTypes = {
+            campgrounds: _propTypes2.default.shape({
+                name: _propTypes2.default.string,
+                description: _propTypes2.default.string,
+                image_url: _propTypes2.default.string
+            }),
             requestAllCampgrounds: _propTypes2.default.func.isRequired
-            // campgrounds: PropTypes.object.isRequired,
         };
 
         _this.handleChange = _this.handleChange.bind(_this);
@@ -333,14 +337,31 @@ var ThingsIndex = function (_Component) {
                                 transitionEnterTimeout: 500,
                                 transitionLeaveTimeout: 500
                             },
-                            searchResults.map(function (thing, idx) {
+                            searchResults.map(function (campground, idx) {
                                 return _react2.default.createElement(
                                     'li',
                                     {
                                         key: idx,
                                         onClick: _this3.selectCampground
                                     },
-                                    thing
+                                    _react2.default.createElement(
+                                        'div',
+                                        { className: 'campground-container' },
+                                        _react2.default.createElement(
+                                            'div',
+                                            null,
+                                            _react2.default.createElement('img', { className: 'campground-img', src: 'http://res.cloudinary.com/dtluc0y85/image/upload/v1523306878/header_humzpt.jpg' })
+                                        ),
+                                        _react2.default.createElement(
+                                            'div',
+                                            { className: 'campground-info' },
+                                            _react2.default.createElement(
+                                                'p',
+                                                null,
+                                                campground
+                                            )
+                                        )
+                                    )
                                 );
                             })
                         )
