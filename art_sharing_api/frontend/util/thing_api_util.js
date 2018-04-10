@@ -5,11 +5,3 @@ export const fetchAllThings = () => (
         url: '/api/fetches',
     })
 );
-
-export const searchAllThings = query => (
-    $.ajax({
-        method: 'GET',
-        url: '/api/searches',
-        data: query,
-    })
-);

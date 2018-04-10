@@ -84,13 +84,12 @@
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-exports.requestSearchThings = exports.requestFetchThings = exports.receiveSearchedThings = exports.receiveFetchedThings = exports.RECEIVE_SEARCHED_THINGS = exports.RECEIVE_FETCHED_THINGS = undefined;
+exports.requestFetchThings = exports.receiveFetchedThings = exports.RECEIVE_FETCHED_THINGS = undefined;
 
 var _thing_api_util = __webpack_require__(/*! ../util/thing_api_util */ "./frontend/util/thing_api_util.js");
 
 // export action type
 var RECEIVE_FETCHED_THINGS = exports.RECEIVE_FETCHED_THINGS = 'RECEIVE_FETCHED_THINGS';
-var RECEIVE_SEARCHED_THINGS = exports.RECEIVE_SEARCHED_THINGS = 'RECEIVE_SEARCHED_THINGS';
 
 // sync action creator
 var receiveFetchedThings = exports.receiveFetchedThings = function receiveFetchedThings(things) {
@@ -100,26 +99,11 @@ var receiveFetchedThings = exports.receiveFetchedThings = function receiveFetche
     };
 };
 
-var receiveSearchedThings = exports.receiveSearchedThings = function receiveSearchedThings(things) {
-    return {
-        type: RECEIVE_SEARCHED_THINGS,
-        things: things
-    };
-};
-
 // async thunk action creator
 var requestFetchThings = exports.requestFetchThings = function requestFetchThings() {
     return function (dispatch) {
         return (0, _thing_api_util.fetchAllThings)().then(function (things) {
             return dispatch(receiveFetchedThings(things));
-        });
-    };
-};
-
-var requestSearchThings = exports.requestSearchThings = function requestSearchThings(query) {
-    return function (dispatch) {
-        return (0, _thing_api_util.searchAllThings)(query).then(function (things) {
-            return dispatch(receiveSearchedThings(things));
         });
     };
 };
@@ -638,14 +622,6 @@ var fetchAllThings = exports.fetchAllThings = function fetchAllThings() {
     return $.ajax({
         method: 'GET',
         url: '/api/fetches'
-    });
-};
-
-var searchAllThings = exports.searchAllThings = function searchAllThings(query) {
-    return $.ajax({
-        method: 'GET',
-        url: '/api/searches',
-        data: query
     });
 };
 

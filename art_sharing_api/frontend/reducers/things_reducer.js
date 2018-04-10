@@ -1,6 +1,5 @@
 import merge from 'lodash/merge';
-
-import { RECEIVE_FETCHED_THINGS, RECEIVE_SEARCHED_THINGS } from '../actions/thing_actions';
+import { RECEIVE_FETCHED_THINGS } from '../actions/thing_actions';
 
 // temporary for testing Redux cycle
 // const NAMES = [

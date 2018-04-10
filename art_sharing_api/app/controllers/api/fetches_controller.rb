@@ -12,12 +12,12 @@ class Api::FetchesController < ApplicationController
 
 
 
-        @fetched_data = Api::Fetch.fetch
-        @nps = Api::Fetch.new("58")
-
-        if @nps.campgrounds
+        # @fetched_data = Api::Fetch.fetch
+        nps = Api::Fetch.new("5")
+        if nps
+            @nps_campgrounds = nps.campgrounds
             # render json: @fetched_data
-            render json: @nps.campgrounds
+            render json: @nps_campgrounds
             # render :index
         else
             render json: @fetched_data.errors.full_messages, status: 422
