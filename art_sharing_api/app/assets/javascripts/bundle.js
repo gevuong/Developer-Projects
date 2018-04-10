@@ -315,7 +315,7 @@ var ThingsIndex = function (_Component) {
                     ),
                     _react2.default.createElement('input', {
                         type: 'text',
-                        placeholder: 'Discover your next favorite campground...',
+                        placeholder: 'Discover your next campground...',
                         onChange: this.handleChange,
                         value: this.state.searchQuery
                     })

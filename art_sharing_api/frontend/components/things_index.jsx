@@ -98,7 +98,7 @@ class ThingsIndex extends Component {
                         <p>Explore. Find your campground. Begin your search today.</p>
                         <input
                             type="text"
-                            placeholder="Discover your next favorite campground..."
+                            placeholder="Discover your next campground..."
                             onChange={ this.handleChange }
                             value={ this.state.searchQuery }
                         />
