@@ -10,13 +10,15 @@ class Api::FetchesController < ApplicationController
         # 4. Then assign remaining names to ivar, which gets passed to jbuilder. The data is then passed to receiveSearchedThings(data), and data becomes a value key value attribute.
         # 5. receiveSearchedThings(data) gets dispatched to reducer, and the state gets updated with new data.
 
-        @fetched_data = Api::Fetch.fetch
-        @stack_exchange = Api::Fetch.new("stackoverflow", 1)
 
-        if @fetched_data || @stack_exchange.users
+
+        @fetched_data = Api::Fetch.fetch
+        @nps = Api::Fetch.new("58")
+
+        if @nps.campgrounds
             # render json: @fetched_data
-            # render json: @stack_exchange.users
-            render :index
+            render json: @nps.campgrounds
+            # render :index
         else
             render json: @fetched_data.errors.full_messages, status: 422
         end

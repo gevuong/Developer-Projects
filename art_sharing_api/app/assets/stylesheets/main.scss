@@ -25,8 +25,12 @@ header {
     text-align: center;
     height: 390px;
     padding: 2.5em 1em 1em;
-    background: linear-gradient(90deg, #d4eece, #d4eece, #d4eece),
-              url('images/header.jpg') no-repeat;
+
+    // background: linear-gradient(90deg, #d4eece, #d4eece, #d4eece),
+    //           url('images/header.jpg') no-repeat;
+    //           background-blend-mode: multiply;
+    //           background-size: cover;
+    background: url('images/nature.jpg') no-repeat;
               background-blend-mode: multiply;
               background-size: cover;
     background-position: 0 -95px;
