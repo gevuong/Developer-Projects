@@ -24,6 +24,7 @@ class ThingsIndex extends Component {
             requestAllCampgrounds: PropTypes.func.isRequired,
         }
 
+        this.onChangePage = this.onChangePage.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.selectCampground = this.selectCampground.bind(this);
     }
@@ -34,6 +35,15 @@ class ThingsIndex extends Component {
                 loading: false,
             })
         );
+    }
+
+    // onChangePage needs to retrieve currentPage from PaginationBar Component
+    onChangePage(currentPage) {
+      this.setState((prevState) => { // setState() can run asynchronously and has access to prevState
+        return {
+          currentPage: currentPage,
+        }
+      })
     }
 
     handleChange(event) {
@@ -88,23 +98,23 @@ class ThingsIndex extends Component {
         const { campgrounds } = this.props;
         const { rowsPerPage, currentPage } = this.state;
 
-        // console.log("campgrounds: ", campgrounds);
         console.log("props: ", this.props);
         console.log("state: ", this.state);
 
         const searchResults = this.findMatches();
         console.log("searchResults: ", searchResults);
 
-
+        // need prevPage in order to determine initial index of slice(). if currentPage is 1 (default), then prevPage is 0, which equates to an idx of 0
         const prevPage = currentPage - 1;
         const firstIndex = prevPage * rowsPerPage
+
         // when setState executes, render is invoked with updated currentPage value. round up due to zero index to calculate totalPages.
         const lastIndex = currentPage * rowsPerPage;
         const totalPages = Math.ceil(searchResults.length / rowsPerPage);
 
         let startPage, endPage;
 
-        // following code modifies number of pages to render when traversing PaginationBar.
+        // calculate startPage and endPage based on totalPages. The following code modifies number of pages to render when traversing PaginationBar.
         if (totalPages <= 3) {
             startPage = 1;
             endPage = totalPages;
@@ -176,7 +186,7 @@ class ThingsIndex extends Component {
                         transitionEnterTimeout={500}
                         transitionLeaveTimeout={500}
                         >
-                        { searchResults.map((campground, idx) => (
+                        { slicedData.map((campground, idx) => (
                             <li
                                 key={idx}
                                 onClick={ this.selectCampground }
@@ -185,25 +195,35 @@ class ThingsIndex extends Component {
                                     <div>
                                         <img className="campground-img" src="http://res.cloudinary.com/dtluc0y85/image/upload/v1523306878/header_humzpt.jpg" />
                                     </div>
+
                                     <div className="campground-info">
                                         <p>{ campground }</p>
                                     </div>
-
                                 </div>
                             </li>
                         ))
                         }
                     </ReactCSSTransitionGroup>
                 </ul>
-                <PaginationBar
-                    data={ searchResults }
-                    currentPage={ currenPage }
-                    totalPages={ totalPages }
-                    startPage={ startPage }
-                    endPage={ endPage }
-                />
+
+                {/* Don't render PaginationBar if Data <= rowsPerPage */}
+                <div className="pagination-container">
+                    { searchResults.length > rowsPerPage ?
+                        <PaginationBar
+                            data={ searchResults }
+                            currentPage={ currentPage }
+                            rowsPerPage={ rowsPerPage }
+                            totalPages={ totalPages }
+                            startPage={ startPage }
+                            endPage={ endPage }
+                            onChangePage={ this.onChangePage }
+                        />
+                        :
+                        " "
+                    }
+                </div>
             </div>
-            )
+        )
     }
 }
 

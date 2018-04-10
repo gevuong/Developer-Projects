@@ -120,6 +120,10 @@ var requestAllCampgrounds = exports.requestAllCampgrounds = function requestAllC
 "use strict";
 
 
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _react = __webpack_require__(/*! react */ "./node_modules/react/index.js");
@@ -144,16 +148,133 @@ var PaginationBar = function (_Component) {
     function PaginationBar(props) {
         _classCallCheck(this, PaginationBar);
 
-        return _possibleConstructorReturn(this, (PaginationBar.__proto__ || Object.getPrototypeOf(PaginationBar)).call(this, props));
+        var _this = _possibleConstructorReturn(this, (PaginationBar.__proto__ || Object.getPrototypeOf(PaginationBar)).call(this, props));
+
+        PaginationBar.propTypes = {
+            data: _propTypes2.default.array.isRequired,
+            currentPage: _propTypes2.default.number.isRequired,
+            rowsPerPage: _propTypes2.default.number.isRequired,
+            onChangePage: _propTypes2.default.func.isRequired,
+            totalPages: _propTypes2.default.number.isRequired
+        };
+
+        PaginationBar.defaultProps = {
+            initialPage: 1
+        };
+        return _this;
     }
 
+    // reset page if data array has changed
+    // componentDidUpdate(prevProps, prevState) {
+    //     if (this.props.data !== prevProps.data) {
+    //         this.setPage(this.props.initialPage);
+    //     }
+    // }
+
     _createClass(PaginationBar, [{
+        key: 'setPage',
+        value: function setPage(currentPage) {
+            var totalPages = this.props.totalPages;
+            if (currentPage < 1 || currentPage > totalPages) {
+                return;
+            }
+
+            this.props.onChangePage(currentPage);
+        }
+    }, {
         key: 'render',
-        value: function render() {}
+        value: function render() {
+            var _this2 = this;
+
+            var _props = this.props,
+                currentPage = _props.currentPage,
+                totalPages = _props.totalPages,
+                startPage = _props.startPage,
+                endPage = _props.endPage;
+
+            // render() will reset pageNumbers to an empty array
+
+            var pageNumbers = [];
+            for (var page = startPage; page <= endPage; page++) {
+                pageNumbers.push(page); // array of page numbers
+            }
+
+            var renderPageNumbers = pageNumbers.map(function (page) {
+                return _react2.default.createElement(
+                    'li',
+                    { key: page,
+                        onClick: function onClick() {
+                            return _this2.setPage(page);
+                        },
+                        className: currentPage === page ? "active" : "" },
+                    _react2.default.createElement(
+                        'a',
+                        { className: 'page-number' },
+                        page
+                    )
+                );
+            });
+
+            return _react2.default.createElement(
+                'ul',
+                { className: 'pagination-bar' },
+                _react2.default.createElement(
+                    'li',
+                    { onClick: function onClick() {
+                            return _this2.setPage(1);
+                        },
+                        className: currentPage === 1 ? "disabled" : "" },
+                    _react2.default.createElement(
+                        'a',
+                        null,
+                        _react2.default.createElement('i', { className: 'fa fa-angle-double-left', 'aria-hidden': 'true' })
+                    )
+                ),
+                _react2.default.createElement(
+                    'li',
+                    { className: currentPage === 1 ? "disabled" : "",
+                        onClick: function onClick() {
+                            return _this2.setPage(currentPage - 1);
+                        } },
+                    _react2.default.createElement(
+                        'a',
+                        null,
+                        _react2.default.createElement('i', { className: 'fa fa-angle-left', 'aria-hidden': 'true' })
+                    )
+                ),
+                renderPageNumbers,
+                _react2.default.createElement(
+                    'li',
+                    { className: currentPage === totalPages ? "disabled" : "",
+                        onClick: function onClick() {
+                            return _this2.setPage(currentPage + 1);
+                        } },
+                    _react2.default.createElement(
+                        'a',
+                        null,
+                        _react2.default.createElement('i', { className: 'fa fa-angle-right', 'aria-hidden': 'true' })
+                    )
+                ),
+                _react2.default.createElement(
+                    'li',
+                    { className: currentPage === totalPages ? "disabled" : "",
+                        onClick: function onClick() {
+                            return _this2.setPage(totalPages);
+                        } },
+                    _react2.default.createElement(
+                        'a',
+                        null,
+                        _react2.default.createElement('i', { className: 'fa fa-angle-double-right', 'aria-hidden': 'true' })
+                    )
+                )
+            );
+        }
     }]);
 
     return PaginationBar;
 }(_react.Component);
+
+exports.default = PaginationBar;
 
 /***/ }),
 
@@ -268,6 +389,7 @@ var ThingsIndex = function (_Component) {
             requestAllCampgrounds: _propTypes2.default.func.isRequired
         };
 
+        _this.onChangePage = _this.onChangePage.bind(_this);
         _this.handleChange = _this.handleChange.bind(_this);
         _this.selectCampground = _this.selectCampground.bind(_this);
         return _this;
@@ -282,6 +404,19 @@ var ThingsIndex = function (_Component) {
                 return _this2.setState({
                     loading: false
                 });
+            });
+        }
+
+        // onChangePage needs to retrieve currentPage from PaginationBar Component
+
+    }, {
+        key: 'onChangePage',
+        value: function onChangePage(currentPage) {
+            this.setState(function (prevState) {
+                // setState() can run asynchronously and has access to prevState
+                return {
+                    currentPage: currentPage
+                };
             });
         }
     }, {
@@ -347,7 +482,6 @@ var ThingsIndex = function (_Component) {
                 rowsPerPage = _state.rowsPerPage,
                 currentPage = _state.currentPage;
 
-            // console.log("campgrounds: ", campgrounds);
 
             console.log("props: ", this.props);
             console.log("state: ", this.state);
@@ -355,8 +489,10 @@ var ThingsIndex = function (_Component) {
             var searchResults = this.findMatches();
             console.log("searchResults: ", searchResults);
 
+            // need prevPage in order to determine initial index of slice(). if currentPage is 1 (default), then prevPage is 0, which equates to an idx of 0
             var prevPage = currentPage - 1;
             var firstIndex = prevPage * rowsPerPage;
+
             // when setState executes, render is invoked with updated currentPage value. round up due to zero index to calculate totalPages.
             var lastIndex = currentPage * rowsPerPage;
             var totalPages = Math.ceil(searchResults.length / rowsPerPage);
@@ -364,7 +500,7 @@ var ThingsIndex = function (_Component) {
             var startPage = void 0,
                 endPage = void 0;
 
-            // following code modifies number of pages to render when traversing PaginationBar.
+            // calculate startPage and endPage based on totalPages. The following code modifies number of pages to render when traversing PaginationBar.
             if (totalPages <= 3) {
                 startPage = 1;
                 endPage = totalPages;
@@ -467,7 +603,7 @@ var ThingsIndex = function (_Component) {
                             transitionEnterTimeout: 500,
                             transitionLeaveTimeout: 500
                         },
-                        searchResults.map(function (campground, idx) {
+                        slicedData.map(function (campground, idx) {
                             return _react2.default.createElement(
                                 'li',
                                 {
@@ -496,13 +632,19 @@ var ThingsIndex = function (_Component) {
                         })
                     )
                 ),
-                _react2.default.createElement(_pagination_bar2.default, {
-                    data: searchResults,
-                    currentPage: currenPage,
-                    totalPages: totalPages,
-                    startPage: startPage,
-                    endPage: endPage
-                })
+                _react2.default.createElement(
+                    'div',
+                    { className: 'pagination-container' },
+                    searchResults.length > rowsPerPage ? _react2.default.createElement(_pagination_bar2.default, {
+                        data: searchResults,
+                        currentPage: currentPage,
+                        rowsPerPage: rowsPerPage,
+                        totalPages: totalPages,
+                        startPage: startPage,
+                        endPage: endPage,
+                        onChangePage: this.onChangePage
+                    }) : " "
+                )
             );
         }
     }]);
