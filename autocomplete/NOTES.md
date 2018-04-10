@@ -33,4 +33,4 @@ http://www.rubydoc.info/github/jnunemaker/httparty/HTTParty%2FClassMethods%3Abas
 
 Future Improvements or Implementations
 1. Include a dropdown to select which API you'd like to fetch data from.
-2.
+2. Utilize fetchAPI or Axios to make single AJAX call.
