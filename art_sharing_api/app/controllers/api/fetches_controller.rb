@@ -2,7 +2,7 @@ class Api::FetchesController < ApplicationController
 
     def index
         # @fetched_data = Api::Fetch.fetch
-        nps = Api::Fetch.new("15")
+        nps = Api::Fetch.new("50")
         if nps
             @nps_campgrounds = nps.campgrounds
             # render json: @nps_campgrounds

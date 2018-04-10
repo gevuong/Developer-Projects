@@ -10,6 +10,10 @@ Tips: use this test to show off your skill set and what you can bring to the tea
 
 Choose **modern** technologies that exercise the breadth of approach and ones that you’re comfortable developing with.
 
+MVPs
+1. Add loading spinner
+2. pagination
+3. responsive
 
 # Consider adding a cache layer (Memcached or Redis) to prevent having to query DB every time.
 # Import fetch from 'cross-fetch'. You don't need a large library like jQuery if all you're going to do is make an AJAX.

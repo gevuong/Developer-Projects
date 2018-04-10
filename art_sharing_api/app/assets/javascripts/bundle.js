@@ -223,11 +223,13 @@ var ThingsIndex = function (_Component) {
     _createClass(ThingsIndex, [{
         key: 'componentDidMount',
         value: function componentDidMount() {
-            // this.props.requestAllCampgrounds().then(
-            //     this.setState({
-            //         loading: false,
-            //     })
-            // );
+            var _this2 = this;
+
+            this.props.requestAllCampgrounds().then(function () {
+                return _this2.setState({
+                    loading: false
+                });
+            });
         }
     }, {
         key: 'handleChange',
@@ -247,7 +249,7 @@ var ThingsIndex = function (_Component) {
     }, {
         key: 'findMatches',
         value: function findMatches() {
-            var _this2 = this;
+            var _this3 = this;
 
             var campgroundsArr = [];
             var campgrounds = this.props.campgrounds;
@@ -264,7 +266,7 @@ var ThingsIndex = function (_Component) {
             }
 
             var matches = campgroundsArr.filter(function (campground) {
-                return campground.toLowerCase().includes(_this2.state.searchQuery.toLowerCase());
+                return campground.toLowerCase().includes(_this3.state.searchQuery.toLowerCase());
             });
 
             // pass sort a compareFunction to sort lowercased and uppercased characters in string
@@ -285,7 +287,7 @@ var ThingsIndex = function (_Component) {
     }, {
         key: 'render',
         value: function render() {
-            var _this3 = this;
+            var _this4 = this;
 
             var campgrounds = this.props.campgrounds;
             // console.log("campgrounds: ", campgrounds);
@@ -297,90 +299,83 @@ var ThingsIndex = function (_Component) {
             console.log("searchResults: ", searchResults);
 
             // totalPages = searchResults / 5
-
-
-            if (this.state.loading) {
-                console.log("enter loading");
-                return _react2.default.createElement(
-                    'div',
+            return _react2.default.createElement(
+                'div',
+                null,
+                _react2.default.createElement(
+                    'header',
                     null,
                     _react2.default.createElement(
-                        'header',
+                        'h2',
                         null,
-                        _react2.default.createElement(
-                            'h2',
-                            null,
-                            'National Park Services'
-                        ),
-                        _react2.default.createElement(
-                            'p',
-                            null,
-                            'Explore. Find your campground. Begin your search today.'
-                        ),
+                        'National Park Services'
+                    ),
+                    _react2.default.createElement(
+                        'p',
+                        null,
+                        'Explore. Find your campground. Begin your search today.'
+                    ),
+                    _react2.default.createElement(
+                        'form',
+                        null,
                         _react2.default.createElement('input', {
                             type: 'text',
                             placeholder: 'Discover your next campground...',
                             onChange: this.handleChange,
                             value: this.state.searchQuery
                         })
-                    ),
-                    _react2.default.createElement(_reactSpinners.RingLoader, {
-                        className: 'loading-icon',
-                        color: '#000',
-                        loading: this.state.loading
-                    }),
-                    _react2.default.createElement(
-                        'h1',
-                        null,
-                        'Loading...'
                     )
-                );
-            } else {
-                console.log("enter else statement");
-                return _react2.default.createElement(
-                    'div',
-                    { className: 'main' },
+                ),
+                _react2.default.createElement(_reactSpinners.RingLoader, {
+                    className: 'sweet-loading',
+                    color: '#000',
+                    loading: this.state.loading
+                }),
+                _react2.default.createElement(
+                    'h1',
+                    null,
+                    'Loading...'
+                ),
+                _react2.default.createElement(
+                    'ul',
+                    null,
                     _react2.default.createElement(
-                        'ul',
-                        null,
-                        _react2.default.createElement(
-                            _reactAddonsCssTransitionGroup2.default,
-                            {
-                                transitionName: 'auto',
-                                transitionEnterTimeout: 500,
-                                transitionLeaveTimeout: 500
-                            },
-                            searchResults.map(function (campground, idx) {
-                                return _react2.default.createElement(
-                                    'li',
-                                    {
-                                        key: idx,
-                                        onClick: _this3.selectCampground
-                                    },
+                        _reactAddonsCssTransitionGroup2.default,
+                        {
+                            transitionName: 'auto',
+                            transitionEnterTimeout: 500,
+                            transitionLeaveTimeout: 500
+                        },
+                        searchResults.map(function (campground, idx) {
+                            return _react2.default.createElement(
+                                'li',
+                                {
+                                    key: idx,
+                                    onClick: _this4.selectCampground
+                                },
+                                _react2.default.createElement(
+                                    'div',
+                                    { className: 'campground-container' },
                                     _react2.default.createElement(
                                         'div',
-                                        { className: 'campground-container' },
+                                        null,
+                                        _react2.default.createElement('img', { className: 'campground-img', src: 'http://res.cloudinary.com/dtluc0y85/image/upload/v1523306878/header_humzpt.jpg' })
+                                    ),
+                                    _react2.default.createElement(
+                                        'div',
+                                        { className: 'campground-info' },
                                         _react2.default.createElement(
-                                            'div',
+                                            'p',
                                             null,
-                                            _react2.default.createElement('img', { className: 'campground-img', src: 'http://res.cloudinary.com/dtluc0y85/image/upload/v1523306878/header_humzpt.jpg' })
-                                        ),
-                                        _react2.default.createElement(
-                                            'div',
-                                            { className: 'campground-info' },
-                                            _react2.default.createElement(
-                                                'p',
-                                                null,
-                                                campground
-                                            )
+                                            campground
                                         )
                                     )
-                                );
-                            })
-                        )
+                                )
+                            );
+                        })
                     )
-                );
-            }
+                )
+            );
         }
     }]);
 
