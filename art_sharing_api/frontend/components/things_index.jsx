@@ -106,7 +106,7 @@ class ThingsIndex extends Component {
 
         // need prevPage in order to determine initial index of slice(). if currentPage is 1 (default), then prevPage is 0, which equates to an idx of 0
         const prevPage = currentPage - 1;
-        const firstIndex = prevPage * rowsPerPage
+        const firstIndex = prevPage * rowsPerPage;
 
         // when setState executes, render is invoked with updated currentPage value. round up due to zero index to calculate totalPages.
         const lastIndex = currentPage * rowsPerPage;
@@ -135,7 +135,8 @@ class ThingsIndex extends Component {
             }
         }
 
-        const slicedData = searchResults.slice(startPage, endPage);
+        const slicedData = searchResults.slice(firstIndex, lastIndex);
+        console.log("slicedData: ", slicedData);
 
         return (
             <div>

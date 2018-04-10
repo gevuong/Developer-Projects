@@ -520,7 +520,8 @@ var ThingsIndex = function (_Component) {
                 }
             }
 
-            var slicedData = searchResults.slice(startPage, endPage);
+            var slicedData = searchResults.slice(firstIndex, lastIndex);
+            console.log("slicedData: ", slicedData);
 
             return _react2.default.createElement(
                 'div',
