@@ -94,8 +94,8 @@ class ThingsIndex extends Component {
             return (
                 <div>
                     <header>
-                        <h1>Stack Overflow</h1>
-                        <p>Find the answer to your questions. Begin search here.</p>
+                        <h2>Stack Overflow</h2>
+                        <p>Find the answer to your questions. Begin your search here today.</p>
                         <input
                             type="text"
                             placeholder="Search..."
@@ -125,7 +125,7 @@ class ThingsIndex extends Component {
                     </div>
                 </div>
             )
-        
+
     }
 }
 

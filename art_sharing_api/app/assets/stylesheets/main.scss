@@ -25,36 +25,34 @@ header {
     text-align: center;
     height: 390px;
     padding: 2.5em 1em 1em;
-    background-position: 0 -95px;
     background: linear-gradient(90deg, #d4eece, #d4eece, #d4eece),
               url('images/header.jpg') no-repeat;
               background-blend-mode: multiply;
               background-size: cover;
-  // background: linear-gradient(90deg, #d4eece, #55b3d0, #1e7eb7),
-  //             url('../images/header.jpg') no-repeat;
-  //             background-blend-mode: multiply;
-  //             background-size: cover;
+    background-position: 0 -95px;
 }
 
 header input {
     padding: 12px;
     font-size: 1.15em;
     width: 60%;
-    margin: 12.7em auto 0;
+    margin: 9em auto 0;
 }
 
-h1 {
+h2 {
     font-family: 'Courgette';
     font-size: 5.8em;
     text-shadow: 0 1px 0 rgba(0,0,0, .4);
     line-height: .65;
     margin-top: 0.4em;
     margin-bottom: 0;
+    color: white;
 }
 
 p {
     font-size: 1.1em;
     text-shadow: 0 1px 0 rgba(0,0,0, .25);
+    color: white;
 }
 
 // ul {
@@ -71,8 +69,6 @@ p {
 //   border-bottom: solid 2px rgba(88, 183, 205, .2);
 //   position: relative;
 // }
-
-
 
 div > p {
   color: #767676;
@@ -97,23 +93,23 @@ li {
   CSS Transition
 ==================================== */
 .auto-enter {
-  opacity: 0.01;
-  transform: translateY(500%);
+    opacity: 0.01;
+    transform: translateY(500%);
 }
 
 .auto-enter.auto-enter-active {
-  opacity: 1;
-  transform: translateY(0);
-  transition: opacity 500ms, transform 500ms;
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 500ms, transform 500ms;
 }
 
 .auto-leave {
-  opacity: 1;
-  transform: translateY(0);
+    opacity: 1;
+    transform: translateY(0);
 }
 
 .auto-leave.auto-leave-active {
-  opacity: 0.01;
-  transform: translateY(500%);
-  transition: opacity 500ms, transform 500ms;
+    opacity: 0.01;
+    transform: translateY(500%);
+    transition: opacity 500ms, transform 500ms;
 }

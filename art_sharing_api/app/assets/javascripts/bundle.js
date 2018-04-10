@@ -320,14 +320,14 @@ var ThingsIndex = function (_Component) {
                     'header',
                     null,
                     _react2.default.createElement(
-                        'h1',
+                        'h2',
                         null,
                         'Stack Overflow'
                     ),
                     _react2.default.createElement(
                         'p',
                         null,
-                        'Find the answer to your questions. Begin search here.'
+                        'Find the answer to your questions. Begin your search here today.'
                     ),
                     _react2.default.createElement('input', {
                         type: 'text',
