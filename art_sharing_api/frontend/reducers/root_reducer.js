@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux';
-import things from './things_reducer';
+import campgrounds from './things_reducer';
 
 const rootReducer = combineReducers({
-    things,
+    campgrounds, // syntactic sugar for campgrounds: campgroundsReducer
 });
 
 export default rootReducer;

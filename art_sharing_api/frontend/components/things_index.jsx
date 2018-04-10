@@ -11,16 +11,16 @@ class ThingsIndex extends Component {
         };
 
         ThingsIndex.propTypes = {
-            requestFetchThings: PropTypes.func.isRequired,
-            // things: PropTypes.object.isRequired,
+            requestAllCampgrounds: PropTypes.func.isRequired,
+            // campgrounds: PropTypes.object.isRequired,
         }
 
         this.handleChange = this.handleChange.bind(this);
-        this.selectThing = this.selectThing.bind(this);
+        this.selectCampground = this.selectCampground.bind(this);
     }
 
     componentDidMount() {
-        // this.props.requestFetchThings().then(
+        // this.props.requestAllCampgrounds().then(
         //     this.setState({
         //         loading: false,
         //     })
@@ -34,28 +34,28 @@ class ThingsIndex extends Component {
         console.log(this.state);
     }
 
-    selectThing(event) {
+    selectCampground(event) {
         this.setState({
             searchQuery: event.target.textContent,
         });
     }
 
     findMatches() {
-        const thingsArr = [];
-        const { things } = this.props;
-        const allIDs = Object.keys(things);
+        const campgroundsArr = [];
+        const { campgrounds } = this.props;
+        const allIDs = Object.keys(campgrounds);
 
-        // return array of things
+        // return array of campgrounds
         allIDs.forEach(id => (
-            thingsArr.push(things[id].firstName)
+            campgroundsArr.push(campgrounds[id].name)
         ))
 
         if (this.state.searchQuery.length === 0) {
-            return thingsArr;
+            return campgroundsArr;
         }
 
-        const matches = thingsArr.filter(
-            thing => thing.toLowerCase().includes(this.state.searchQuery.toLowerCase())
+        const matches = campgroundsArr.filter(
+            campground => campground.toLowerCase().includes(this.state.searchQuery.toLowerCase())
         )
 
         // pass sort a compareFunction to sort lowercased and uppercased characters in string
@@ -76,8 +76,8 @@ class ThingsIndex extends Component {
     }
 
     render() {
-        const { things } = this.props;
-        // console.log("things: ", things);
+        const { campgrounds } = this.props;
+        // console.log("campgrounds: ", campgrounds);
         console.log("props: ", this.props);
         console.log("state: ", this.state);
 
@@ -94,11 +94,11 @@ class ThingsIndex extends Component {
             return (
                 <div>
                     <header>
-                        <h2>Stack Overflow</h2>
-                        <p>Find the answer to your questions. Begin your search here today.</p>
+                        <h2>National Park Services</h2>
+                        <p>Explore. Find your campground. Begin your search today.</p>
                         <input
                             type="text"
-                            placeholder="Search..."
+                            placeholder="Discover your next favorite campground..."
                             onChange={ this.handleChange }
                             value={ this.state.searchQuery }
                         />
@@ -114,7 +114,7 @@ class ThingsIndex extends Component {
                                 { searchResults.map((thing, idx) => (
                                     <li
                                         key={idx}
-                                        onClick={ this.selectThing }
+                                        onClick={ this.selectCampground }
                                     >
                                         { thing }
                                     </li>

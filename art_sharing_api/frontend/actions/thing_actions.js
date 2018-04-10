@@ -1,19 +1,19 @@
-import { fetchAllThings, searchAllThings } from '../util/thing_api_util';
+import { fetchAllCampgrounds } from '../util/thing_api_util';
 
 // export action type
-export const RECEIVE_FETCHED_THINGS = 'RECEIVE_FETCHED_THINGS';
+export const RECEIVE_ALL_CAMPGROUNDS = 'RECEIVE_ALL_CAMPGROUNDS';
 
 // sync action creator
-export const receiveFetchedThings = things => (
+export const receiveAllCampgrounds = campgrounds => (
     {
-        type: RECEIVE_FETCHED_THINGS,
-        things,
+        type: RECEIVE_ALL_CAMPGROUNDS,
+        campgrounds,
     }
 );
 
 // async thunk action creator
-export const requestFetchThings = () => dispatch => {
-    return fetchAllThings().then(
-        things => dispatch(receiveFetchedThings(things))
+export const requestAllCampgrounds = () => dispatch => {
+    return fetchAllCampgrounds().then(
+        things => dispatch(receiveAllCampgrounds(things))
     );
 };

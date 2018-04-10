@@ -1,16 +1,15 @@
 import { connect } from 'react-redux';
 
-import { requestFetchThings, requestSearchThings } from '../actions/thing_actions';
+import { requestAllCampgrounds } from '../actions/thing_actions';
 import ThingsIndex from './things_index.jsx';
 
-const mapStateToProps = ({ things }) => ({
-    things,
+const mapStateToProps = ({ campgrounds }) => ({
+    campgrounds,
 });
 
 // function that returns an object containing functions that can be called to dispatch acttions to the store.
 const mapDispatchToProps = dispatch => ({
-    requestFetchThings: () => dispatch(requestFetchThings()),
-    requestSearchThings: query => dispatch(requestSearchThings(query)),
+    requestAllCampgrounds: () => dispatch(requestAllCampgrounds()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ThingsIndex);

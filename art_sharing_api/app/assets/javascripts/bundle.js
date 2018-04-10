@@ -84,26 +84,26 @@
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-exports.requestFetchThings = exports.receiveFetchedThings = exports.RECEIVE_FETCHED_THINGS = undefined;
+exports.requestAllCampgrounds = exports.receiveAllCampgrounds = exports.RECEIVE_ALL_CAMPGROUNDS = undefined;
 
 var _thing_api_util = __webpack_require__(/*! ../util/thing_api_util */ "./frontend/util/thing_api_util.js");
 
 // export action type
-var RECEIVE_FETCHED_THINGS = exports.RECEIVE_FETCHED_THINGS = 'RECEIVE_FETCHED_THINGS';
+var RECEIVE_ALL_CAMPGROUNDS = exports.RECEIVE_ALL_CAMPGROUNDS = 'RECEIVE_ALL_CAMPGROUNDS';
 
 // sync action creator
-var receiveFetchedThings = exports.receiveFetchedThings = function receiveFetchedThings(things) {
+var receiveAllCampgrounds = exports.receiveAllCampgrounds = function receiveAllCampgrounds(campgrounds) {
     return {
-        type: RECEIVE_FETCHED_THINGS,
-        things: things
+        type: RECEIVE_ALL_CAMPGROUNDS,
+        campgrounds: campgrounds
     };
 };
 
 // async thunk action creator
-var requestFetchThings = exports.requestFetchThings = function requestFetchThings() {
+var requestAllCampgrounds = exports.requestAllCampgrounds = function requestAllCampgrounds() {
     return function (dispatch) {
-        return (0, _thing_api_util.fetchAllThings)().then(function (things) {
-            return dispatch(receiveFetchedThings(things));
+        return (0, _thing_api_util.fetchAllCampgrounds)().then(function (things) {
+            return dispatch(receiveAllCampgrounds(things));
         });
     };
 };
@@ -205,19 +205,19 @@ var ThingsIndex = function (_Component) {
         };
 
         ThingsIndex.propTypes = {
-            requestFetchThings: _propTypes2.default.func.isRequired
-            // things: PropTypes.object.isRequired,
+            requestAllCampgrounds: _propTypes2.default.func.isRequired
+            // campgrounds: PropTypes.object.isRequired,
         };
 
         _this.handleChange = _this.handleChange.bind(_this);
-        _this.selectThing = _this.selectThing.bind(_this);
+        _this.selectCampground = _this.selectCampground.bind(_this);
         return _this;
     }
 
     _createClass(ThingsIndex, [{
         key: 'componentDidMount',
         value: function componentDidMount() {
-            // this.props.requestFetchThings().then(
+            // this.props.requestAllCampgrounds().then(
             //     this.setState({
             //         loading: false,
             //     })
@@ -232,8 +232,8 @@ var ThingsIndex = function (_Component) {
             console.log(this.state);
         }
     }, {
-        key: 'selectThing',
-        value: function selectThing(event) {
+        key: 'selectCampground',
+        value: function selectCampground(event) {
             this.setState({
                 searchQuery: event.target.textContent
             });
@@ -243,22 +243,22 @@ var ThingsIndex = function (_Component) {
         value: function findMatches() {
             var _this2 = this;
 
-            var thingsArr = [];
-            var things = this.props.things;
+            var campgroundsArr = [];
+            var campgrounds = this.props.campgrounds;
 
-            var allIDs = Object.keys(things);
+            var allIDs = Object.keys(campgrounds);
 
-            // return array of things
+            // return array of campgrounds
             allIDs.forEach(function (id) {
-                return thingsArr.push(things[id].firstName);
+                return campgroundsArr.push(campgrounds[id].name);
             });
 
             if (this.state.searchQuery.length === 0) {
-                return thingsArr;
+                return campgroundsArr;
             }
 
-            var matches = thingsArr.filter(function (thing) {
-                return thing.toLowerCase().includes(_this2.state.searchQuery.toLowerCase());
+            var matches = campgroundsArr.filter(function (campground) {
+                return campground.toLowerCase().includes(_this2.state.searchQuery.toLowerCase());
             });
 
             // pass sort a compareFunction to sort lowercased and uppercased characters in string
@@ -281,8 +281,8 @@ var ThingsIndex = function (_Component) {
         value: function render() {
             var _this3 = this;
 
-            var things = this.props.things;
-            // console.log("things: ", things);
+            var campgrounds = this.props.campgrounds;
+            // console.log("campgrounds: ", campgrounds);
 
             console.log("props: ", this.props);
             console.log("state: ", this.state);
@@ -306,16 +306,16 @@ var ThingsIndex = function (_Component) {
                     _react2.default.createElement(
                         'h2',
                         null,
-                        'Stack Overflow'
+                        'National Park Services'
                     ),
                     _react2.default.createElement(
                         'p',
                         null,
-                        'Find the answer to your questions. Begin your search here today.'
+                        'Explore. Find your campground. Begin your search today.'
                     ),
                     _react2.default.createElement('input', {
                         type: 'text',
-                        placeholder: 'Search...',
+                        placeholder: 'Discover your next favorite campground...',
                         onChange: this.handleChange,
                         value: this.state.searchQuery
                     })
@@ -338,7 +338,7 @@ var ThingsIndex = function (_Component) {
                                     'li',
                                     {
                                         key: idx,
-                                        onClick: _this3.selectThing
+                                        onClick: _this3.selectCampground
                                     },
                                     thing
                                 );
@@ -382,20 +382,17 @@ var _things_index2 = _interopRequireDefault(_things_index);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var mapStateToProps = function mapStateToProps(_ref) {
-    var things = _ref.things;
+    var campgrounds = _ref.campgrounds;
     return {
-        things: things
+        campgrounds: campgrounds
     };
 };
 
 // function that returns an object containing functions that can be called to dispatch acttions to the store.
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
     return {
-        requestFetchThings: function requestFetchThings() {
-            return dispatch((0, _thing_actions.requestFetchThings)());
-        },
-        requestSearchThings: function requestSearchThings(query) {
-            return dispatch((0, _thing_actions.requestSearchThings)(query));
+        requestAllCampgrounds: function requestAllCampgrounds() {
+            return dispatch((0, _thing_actions.requestAllCampgrounds)());
         }
     };
 };
@@ -428,7 +425,7 @@ var _things_reducer2 = _interopRequireDefault(_things_reducer);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var rootReducer = (0, _redux.combineReducers)({
-    things: _things_reducer2.default
+    campgrounds: _things_reducer2.default // syntactic sugar for campgrounds: campgroundsReducer
 });
 
 exports.default = rootReducer;
@@ -457,50 +454,27 @@ var _thing_actions = __webpack_require__(/*! ../actions/thing_actions */ "./fron
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-// temporary for testing Redux cycle
-// const NAMES = [
-//     "Steve",
-//     "ridge",
-//     "wood",
-//     "vineyard",
-//     "woodbridge",
-//     "coffee",
-//     "content",
-//     "bridge",
-//     "capital",
-//     "socks",
-//     "stable",
-//     "corn",
-//     "David",
-//     "services",
-// ]
-
 // const defaultState = Object.freeze({
-//     things: [],
+//     campgrounds: [],
 // });
 // reducer must never mutate previus state. Instead, return a new array or object with the necessary changes.
-
-var thingsReducer = function thingsReducer() {
+var campgroundsReducer = function campgroundsReducer() {
     var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
     var action = arguments[1];
 
     Object.freeze(state);
     console.log("action: ", action);
     switch (action.type) {
-        case _thing_actions.RECEIVE_FETCHED_THINGS:
-            var things = action.things;
-            // console.log("state: ", state);
-            // console.log("action.things: ", action.things);
-            return (0, _merge2.default)({}, state, things);
-        // case RECEIVE_SEARCHED_THINGS:
-        //     return state.concat([action.things]);
+        case _thing_actions.RECEIVE_ALL_CAMPGROUNDS:
+            var campgrounds = action.campgrounds;
+            return (0, _merge2.default)({}, state, campgrounds);
         default:
             console.log("return default state");
             return state;
     }
 };
 
-exports.default = thingsReducer;
+exports.default = campgroundsReducer;
 
 /***/ }),
 
@@ -536,7 +510,7 @@ var _thing_api_util = __webpack_require__(/*! ./util/thing_api_util */ "./fronte
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-// defensive programming technique: use DOMContentLoaded event to allow bundle.js script tag to be placed elsewhere in index.html. Browser loads JS code, but waits until DOM Content is parsed and loaded before running JS code against it.
+// defensive programming technique: DOMContentLoaded event allows bundle.js script tag to be placed elsewhere in index.html. Browser loads JS code, but waits until DOM Content is parsed and loaded before running JS code against it.
 
 
 // Uncomment the following for testing purposes only:
@@ -546,15 +520,11 @@ document.addEventListener("DOMContentLoaded", function () {
     _reactDom2.default.render(_react2.default.createElement(_root2.default, { store: store }), rootEl);
 
     // Uncomment the following for testing purposes only:
-    // window.configureStore = configureStore;
     window.getState = store.getState;
     window.dispatch = store.dispatch;
-    window.requestFetchThings = _thing_actions.requestFetchThings;
-    window.requestSearchThings = _thing_actions.requestSearchThings;
-    window.receiveFetchedThings = _thing_actions.receiveFetchedThings;
-    window.receiveSearchedThings = _thing_actions.receiveSearchedThings;
-    window.fetchAllThings = _thing_api_util.fetchAllThings;
-    window.searchAllThings = _thing_api_util.searchAllThings;
+    window.requestAllCampgrounds = _thing_actions.requestAllCampgrounds;
+    window.receiveAllCampgrounds = _thing_actions.receiveAllCampgrounds;
+    window.fetchAllCampgrounds = _thing_api_util.fetchAllCampgrounds;
 
     // fetchAllThings().then(
     //     things => dispatch(receiveFetchedThings(things))
@@ -618,7 +588,7 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 // alternatives for future optimization: fetch API from 'cross-fetch' or Axios. However, fetchAPI is not compatible with all browsers. Don't need large library like jquery to implemenet one ajax function.
-var fetchAllThings = exports.fetchAllThings = function fetchAllThings() {
+var fetchAllCampgrounds = exports.fetchAllCampgrounds = function fetchAllCampgrounds() {
     return $.ajax({
         method: 'GET',
         url: '/api/fetches'
