@@ -98,10 +98,17 @@ class ThingsIndex extends Component {
                     <form>
                         <input
                             type="text"
+                            name="search-query"
                             placeholder="Discover your next campground..."
                             onChange={ this.handleChange }
                             value={ this.state.searchQuery }
                         />
+                        <button
+                            type="submit"
+                            name="search"
+                            value="submit"
+                        >Search
+                        </button>
                     </form>
                 </header>
                 <RingLoader
@@ -109,7 +116,7 @@ class ThingsIndex extends Component {
                     color={'#000'}
                     loading={this.state.loading}
                 />
-                <h1>Loading...</h1>
+            <h1>fetching data...</h1>
                 <ul>
                     <ReactCSSTransitionGroup
                         transitionName="auto"

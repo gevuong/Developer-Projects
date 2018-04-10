@@ -320,10 +320,20 @@ var ThingsIndex = function (_Component) {
                         null,
                         _react2.default.createElement('input', {
                             type: 'text',
+                            name: 'search-query',
                             placeholder: 'Discover your next campground...',
                             onChange: this.handleChange,
                             value: this.state.searchQuery
-                        })
+                        }),
+                        _react2.default.createElement(
+                            'button',
+                            {
+                                type: 'submit',
+                                name: 'search',
+                                value: 'submit'
+                            },
+                            'Search'
+                        )
                     )
                 ),
                 _react2.default.createElement(_reactSpinners.RingLoader, {
@@ -334,7 +344,7 @@ var ThingsIndex = function (_Component) {
                 _react2.default.createElement(
                     'h1',
                     null,
-                    'Loading...'
+                    'fetching data...'
                 ),
                 _react2.default.createElement(
                     'ul',

@@ -11,6 +11,35 @@ body {
     background: #f8fdf3;
 }
 
+form {
+  width: 60%;
+  background: white;
+  display: inline-block;
+  overflow: hidden;
+  display: -webkit-flex;
+  display: flex;
+  border-radius: .2em;
+  border: solid 4px white;
+  box-shadow: 0 1px 14px rgba(0,0,0, .12);
+}
+
+form button {
+  padding: 0 1em;
+  font-size: 1em;
+  background: #7bcbc4;
+  border-radius: .2em;
+  color: white;
+}
+
+button {
+  cursor: pointer;
+}
+input,
+button {
+  border: none;
+  outline: none;
+}
+
 .sweet-loading {
     font-size: 10em;
     display: flex;
@@ -43,10 +72,9 @@ header {
 }
 
 header input {
-    padding: 12px;
-    font-size: 1.15em;
-    width: 60%;
-    margin: 3em auto 0;
+  padding: 12px;
+  font-size: 1.15em;
+  width: 100%;
 }
 
 h2 {
@@ -93,6 +121,7 @@ ul li:hover {
     transform: scale(1.03);
     box-shadow: 0 1px 5px 1px rgba(0,0,0,0.15);
 }
+
 
 div > p {
   color: #767676;
