@@ -376,7 +376,7 @@ var ThingsIndex = function (_Component) {
         _this.state = {
             searchQuery: "",
             loading: true,
-            rowsPerPage: 6,
+            rowsPerPage: 10,
             currentPage: 1
         };
 
@@ -408,13 +408,13 @@ var ThingsIndex = function (_Component) {
             });
         }
 
-        // onChangePage needs to retrieve currentPage from PaginationBar Component
+        // onChangePage needs to retrieve currentPage from Pagination Component
 
     }, {
         key: 'onChangePage',
         value: function onChangePage(currentPage) {
+            // fyi, setState() can run asynchronously and has access to prevState
             this.setState(function (prevState) {
-                // setState() can run asynchronously and has access to prevState
                 return {
                     currentPage: currentPage
                 };
@@ -427,7 +427,6 @@ var ThingsIndex = function (_Component) {
                 searchQuery: event.target.value,
                 currentPage: 1
             });
-            console.log(this.state);
         }
     }, {
         key: 'onSubmit',
@@ -460,7 +459,7 @@ var ThingsIndex = function (_Component) {
 
             var allIDs = Object.keys(campgrounds);
 
-            // return array of campgrounds
+            // return array of campground names
             allIDs.forEach(function (id) {
                 return campgroundsArr.push(campgrounds[id].name);
             });
@@ -471,15 +470,6 @@ var ThingsIndex = function (_Component) {
 
             var matches = campgroundsArr.filter(function (campground) {
                 return campground.toLowerCase().includes(_this3.state.searchQuery.toLowerCase());
-            });
-
-            // pass sort a compareFunction to sort lowercased and uppercased characters in string
-            matches.sort(function (a, b) {
-                a = a.toLowerCase();
-                b = b.toLowerCase();
-                if (a === b) return 0;
-                if (a > b) return 1; // meaning, b comes before a. convert character to ASCII and then makes comparison. So if ("z" > "d"), which is true, return 1, meaning "a" comes before "z".
-                return -1; // meaning a comes before b.
             });
 
             if (matches.length === 0) {
@@ -502,7 +492,14 @@ var ThingsIndex = function (_Component) {
             console.log("props: ", this.props);
             console.log("state: ", this.state);
 
-            var searchResults = this.findMatches();
+            var searchResults = this.findMatches().sort(function (a, b) {
+                a = a.toLowerCase();
+                b = b.toLowerCase();
+                if (a === b) return 0;
+                if (a > b) return 1; // meaning, b comes before a. convert character to ASCII and then makes comparison. So if ("z" > "d"), which is true, return 1, meaning "a" comes before "z".
+                return -1; // meaning a comes before b.
+            });
+
             console.log("searchResults: ", searchResults);
 
             // need prevPage in order to determine initial index of slice(). if currentPage is 1 (default), then prevPage is 0, which equates to an idx of 0
@@ -536,9 +533,7 @@ var ThingsIndex = function (_Component) {
                 }
             }
 
-            console.log("firstIndex, lastIndex: ", firstIndex, lastIndex);
             var slicedData = searchResults.slice(firstIndex, lastIndex);
-            console.log("slicedData: ", slicedData);
 
             return _react2.default.createElement(
                 'div',
@@ -595,7 +590,7 @@ var ThingsIndex = function (_Component) {
                         'getting coffee, one sec...'
                     ) : _react2.default.createElement(
                         'h1',
-                        { id: 'search-results-text' },
+                        { className: 'search-results' },
                         'Search Results'
                     )
                 ),

@@ -11,7 +11,7 @@ class ThingsIndex extends Component {
         this.state = {
             searchQuery: "",
             loading: true,
-            rowsPerPage: 6,
+            rowsPerPage: 10,
             currentPage: 1,
         };
 
@@ -38,13 +38,14 @@ class ThingsIndex extends Component {
         );
     }
 
-    // onChangePage needs to retrieve currentPage from PaginationBar Component
+    // onChangePage needs to retrieve currentPage from Pagination Component
     onChangePage(currentPage) {
-      this.setState((prevState) => { // setState() can run asynchronously and has access to prevState
-        return {
-          currentPage: currentPage,
-        }
-      })
+        // fyi, setState() can run asynchronously and has access to prevState
+        this.setState((prevState) => {
+            return {
+              currentPage: currentPage,
+            }
+        });
     }
 
     onChange(event) {
@@ -52,7 +53,6 @@ class ThingsIndex extends Component {
             searchQuery: event.target.value,
             currentPage: 1,
         });
-        console.log(this.state);
     }
 
     onSubmit(event) {
@@ -79,7 +79,7 @@ class ThingsIndex extends Component {
         const { campgrounds } = this.props;
         const allIDs = Object.keys(campgrounds);
 
-        // return array of campgrounds
+        // return array of campground names
         allIDs.forEach(id => (
             campgroundsArr.push(campgrounds[id].name)
         ))
@@ -89,18 +89,9 @@ class ThingsIndex extends Component {
         }
 
         const matches = campgroundsArr.filter(
-            campground => campground.toLowerCase().includes(this.state.searchQuery.toLowerCase())
+            campground => campground.toLowerCase()
+                .includes(this.state.searchQuery.toLowerCase())
         )
-
-        // pass sort a compareFunction to sort lowercased and uppercased characters in string
-        matches.sort((a, b) => {
-            a = a.toLowerCase();
-            b = b.toLowerCase();
-            if (a === b) return 0;
-            if (a > b) return 1; // meaning, b comes before a. convert character to ASCII and then makes comparison. So if ("z" > "d"), which is true, return 1, meaning "a" comes before "z".
-            return -1; // meaning a comes before b.
-        });
-
 
         if (matches.length === 0) {
             return ["There are no matches"];
@@ -109,6 +100,7 @@ class ThingsIndex extends Component {
         return matches;
     }
 
+
     render() {
         const { campgrounds } = this.props;
         const { rowsPerPage, currentPage } = this.state;
@@ -116,7 +108,14 @@ class ThingsIndex extends Component {
         console.log("props: ", this.props);
         console.log("state: ", this.state);
 
-        const searchResults = this.findMatches();
+        const searchResults = this.findMatches().sort((a, b) => {
+            a = a.toLowerCase();
+            b = b.toLowerCase();
+            if (a === b) return 0;
+            if (a > b) return 1; // meaning, b comes before a. convert character to ASCII and then makes comparison. So if ("z" > "d"), which is true, return 1, meaning "a" comes before "z".
+            return -1; // meaning a comes before b.
+        });
+
         console.log("searchResults: ", searchResults);
 
         // need prevPage in order to determine initial index of slice(). if currentPage is 1 (default), then prevPage is 0, which equates to an idx of 0
@@ -150,9 +149,7 @@ class ThingsIndex extends Component {
             }
         }
 
-        console.log("firstIndex, lastIndex: ", firstIndex, lastIndex);
         const slicedData = searchResults.slice(firstIndex, lastIndex);
-        console.log("slicedData: ", slicedData);
 
         return (
             <div>
@@ -186,7 +183,7 @@ class ThingsIndex extends Component {
                         loading={ this.state.loading }
                     >
                     </RingLoader>
-                { this.state.loading ? <p>getting coffee, one sec...</p> : <h1 id="search-results-text">Search Results</h1> }
+                { this.state.loading ? <p>getting coffee, one sec...</p> : <h1 className="search-results">Search Results</h1> }
                 </div>
 
                 <div className="main">
@@ -201,17 +198,14 @@ class ThingsIndex extends Component {
                                     key={idx}
                                     onClick={ this.selectCampground }
                                     >
-
-
                                             <p>{ campground }</p>
-
-
                                 </li>
                             ))
                             }
                         </ReactCSSTransitionGroup>
                     </ul>
                 </div>
+
                 {/* Don't render PaginationBar if Data <= rowsPerPage */}
                 <div className="pagination-container">
                     { searchResults.length > rowsPerPage ?
@@ -228,6 +222,7 @@ class ThingsIndex extends Component {
                         " "
                     }
                 </div>
+
             </div>
         )
     }
