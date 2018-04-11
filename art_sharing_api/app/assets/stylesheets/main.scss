@@ -58,11 +58,11 @@ button {
   border: none;
   outline: none;
 }
-// button:active {
+
+// button.active {
 //     background: blue;
 // }
 //
-
 .loading-div {
     display: flex;
     flex-direction: column;
@@ -71,9 +71,9 @@ button {
     margin-top: 4em;
 }
 
-// .sweet-loading {
-// }
-
+#search-results-text {
+    margin-top: -1em;
+}
 //
 // h2 {
 //     font-family: 'Courgette';
@@ -91,12 +91,12 @@ button {
 //     color: white;
 // }
 //
-// .load-error {
-//     text-align: center;
-//     padding: 1em 2em;
-//     font-family: "Montserrat", "Open Sans", "Helvetica Neue";
-//     font-size: 18px;
-// }
+.load-error {
+    text-align: center;
+    padding: 1em 2em;
+    font-family: "Montserrat", "Open Sans", "Helvetica Neue";
+    font-size: 18px;
+}
 //
 // ul {
 //   list-style: none;
@@ -155,24 +155,20 @@ button {
     opacity: 0.01;
     transform: translateY(500%);
 }
-
 .auto-enter.auto-enter-active {
     opacity: 1;
     transform: translateY(0);
     transition: opacity 500ms, transform 500ms;
 }
-
 .auto-leave {
     opacity: 1;
     transform: translateY(0);
 }
-
 .auto-leave.auto-leave-active {
     opacity: 0.01;
     transform: translateY(500%);
     transition: opacity 500ms, transform 500ms;
 }
-
 
 /* =================================
   Media Queries
@@ -219,7 +215,7 @@ button {
         position: relative;
     }
     .main {
-        padding: 3.8em 1.5em .75em;
+        padding: 1.8em 1.5em .75em;
         position: relative;
         z-index: 10;
     }

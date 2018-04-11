@@ -31,11 +31,11 @@ class ThingsIndex extends Component {
     }
 
     componentDidMount() {
-        // this.props.requestAllCampgrounds().then(() =>
-        //     this.setState({
-        //         loading: false,
-        //     })
-        // );
+        this.props.requestAllCampgrounds().then(() =>
+            this.setState({
+                loading: false,
+            })
+        );
     }
 
     // onChangePage needs to retrieve currentPage from PaginationBar Component
@@ -186,7 +186,7 @@ class ThingsIndex extends Component {
                         loading={ this.state.loading }
                     >
                     </RingLoader>
-                { this.state.loading ? <p>getting coffee, one sec...</p> : "" }
+                { this.state.loading ? <p>getting coffee, one sec...</p> : <h1 id="search-results-text">Search Results</h1> }
                 </div>
 
                 <div className="main">
@@ -201,15 +201,11 @@ class ThingsIndex extends Component {
                                     key={idx}
                                     onClick={ this.selectCampground }
                                     >
-                                    <div className="campground-container">
-                                        <div>
-                                            <img className="campground-img" src="http://res.cloudinary.com/dtluc0y85/image/upload/v1523306878/header_humzpt.jpg" />
-                                        </div>
 
-                                        <div className="campground-info">
+
                                             <p>{ campground }</p>
-                                        </div>
-                                    </div>
+
+
                                 </li>
                             ))
                             }
@@ -238,3 +234,15 @@ class ThingsIndex extends Component {
 }
 
 export default ThingsIndex;
+
+//
+// <div className="campground-container">
+//     <div>
+//         <img className="campground-img" src="http://res.cloudinary.com/dtluc0y85/image/upload/v1523306878/header_humzpt.jpg" />
+//     </div>
+//
+//     <div className="campground-info">
+//         <p>{ campground }</p>
+//     </div>
+// </div>
+//

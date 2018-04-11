@@ -323,10 +323,10 @@ exports.default = Root;
 
 /***/ }),
 
-/***/ "./frontend/components/things_index.jsx":
-/*!**********************************************!*\
-  !*** ./frontend/components/things_index.jsx ***!
-  \**********************************************/
+/***/ "./frontend/components/things_index.js":
+/*!*********************************************!*\
+  !*** ./frontend/components/things_index.js ***!
+  \*********************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -398,13 +398,15 @@ var ThingsIndex = function (_Component) {
 
     _createClass(ThingsIndex, [{
         key: 'componentDidMount',
-        value: function componentDidMount() {}
-        // this.props.requestAllCampgrounds().then(() =>
-        //     this.setState({
-        //         loading: false,
-        //     })
-        // );
+        value: function componentDidMount() {
+            var _this2 = this;
 
+            this.props.requestAllCampgrounds().then(function () {
+                return _this2.setState({
+                    loading: false
+                });
+            });
+        }
 
         // onChangePage needs to retrieve currentPage from PaginationBar Component
 
@@ -451,7 +453,7 @@ var ThingsIndex = function (_Component) {
     }, {
         key: 'findMatches',
         value: function findMatches() {
-            var _this2 = this;
+            var _this3 = this;
 
             var campgroundsArr = [];
             var campgrounds = this.props.campgrounds;
@@ -468,7 +470,7 @@ var ThingsIndex = function (_Component) {
             }
 
             var matches = campgroundsArr.filter(function (campground) {
-                return campground.toLowerCase().includes(_this2.state.searchQuery.toLowerCase());
+                return campground.toLowerCase().includes(_this3.state.searchQuery.toLowerCase());
             });
 
             // pass sort a compareFunction to sort lowercased and uppercased characters in string
@@ -489,7 +491,7 @@ var ThingsIndex = function (_Component) {
     }, {
         key: 'render',
         value: function render() {
-            var _this3 = this;
+            var _this4 = this;
 
             var campgrounds = this.props.campgrounds;
             var _state = this.state,
@@ -591,7 +593,11 @@ var ThingsIndex = function (_Component) {
                         'p',
                         null,
                         'getting coffee, one sec...'
-                    ) : ""
+                    ) : _react2.default.createElement(
+                        'h1',
+                        { id: 'search-results-text' },
+                        'Search Results'
+                    )
                 ),
                 _react2.default.createElement(
                     'div',
@@ -611,25 +617,12 @@ var ThingsIndex = function (_Component) {
                                     'li',
                                     {
                                         key: idx,
-                                        onClick: _this3.selectCampground
+                                        onClick: _this4.selectCampground
                                     },
                                     _react2.default.createElement(
-                                        'div',
-                                        { className: 'campground-container' },
-                                        _react2.default.createElement(
-                                            'div',
-                                            null,
-                                            _react2.default.createElement('img', { className: 'campground-img', src: 'http://res.cloudinary.com/dtluc0y85/image/upload/v1523306878/header_humzpt.jpg' })
-                                        ),
-                                        _react2.default.createElement(
-                                            'div',
-                                            { className: 'campground-info' },
-                                            _react2.default.createElement(
-                                                'p',
-                                                null,
-                                                campground
-                                            )
-                                        )
+                                        'p',
+                                        null,
+                                        campground
                                     )
                                 );
                             })
@@ -658,6 +651,18 @@ var ThingsIndex = function (_Component) {
 
 exports.default = ThingsIndex;
 
+//
+// <div className="campground-container">
+//     <div>
+//         <img className="campground-img" src="http://res.cloudinary.com/dtluc0y85/image/upload/v1523306878/header_humzpt.jpg" />
+//     </div>
+//
+//     <div className="campground-info">
+//         <p>{ campground }</p>
+//     </div>
+// </div>
+//
+
 /***/ }),
 
 /***/ "./frontend/components/things_index_container.js":
@@ -678,7 +683,7 @@ var _reactRedux = __webpack_require__(/*! react-redux */ "./node_modules/react-r
 
 var _thing_actions = __webpack_require__(/*! ../actions/thing_actions */ "./frontend/actions/thing_actions.js");
 
-var _things_index = __webpack_require__(/*! ./things_index.jsx */ "./frontend/components/things_index.jsx");
+var _things_index = __webpack_require__(/*! ./things_index */ "./frontend/components/things_index.js");
 
 var _things_index2 = _interopRequireDefault(_things_index);
 

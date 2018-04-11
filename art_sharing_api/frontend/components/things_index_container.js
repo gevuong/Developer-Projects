@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 
 import { requestAllCampgrounds } from '../actions/thing_actions';
-import ThingsIndex from './things_index.jsx';
+import ThingsIndex from './things_index';
 
 const mapStateToProps = ({ campgrounds }) => ({
     campgrounds,
