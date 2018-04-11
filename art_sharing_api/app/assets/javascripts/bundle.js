@@ -392,6 +392,7 @@ var ThingsIndex = function (_Component) {
         _this.onChangePage = _this.onChangePage.bind(_this);
         _this.handleChange = _this.handleChange.bind(_this);
         _this.selectCampground = _this.selectCampground.bind(_this);
+        _this.handleSubmit = _this.handleSubmit.bind(_this);
         return _this;
     }
 
@@ -427,6 +428,20 @@ var ThingsIndex = function (_Component) {
                 currentPage: 1
             });
             console.log(this.state);
+        }
+    }, {
+        key: 'handleSubmit',
+        value: function handleSubmit(event) {
+            event.preventDefault();
+            console.log("in handleSubmit");
+            if (event.target.textContent.length === 0) {
+                console.log("handleSubmit do nothing");
+                return;
+            }
+            this.setState({
+                searchQuery: event.target.textContent,
+                currentPage: 1
+            });
         }
     }, {
         key: 'selectCampground',
@@ -546,7 +561,7 @@ var ThingsIndex = function (_Component) {
                         ),
                         _react2.default.createElement(
                             'form',
-                            null,
+                            { onSubmit: this.handleSubmit },
                             _react2.default.createElement('input', {
                                 type: 'text',
                                 name: 'search-query',
@@ -561,40 +576,27 @@ var ThingsIndex = function (_Component) {
                                     name: 'search',
                                     value: 'submit'
                                 },
-                                _react2.default.createElement(
-                                    'div',
-                                    null,
-                                    _react2.default.createElement(
-                                        'span',
-                                        null,
-                                        _react2.default.createElement('i', { className: 'fas fa-search' })
-                                    ),
-                                    _react2.default.createElement(
-                                        'span',
-                                        null,
-                                        'Search'
-                                    )
-                                )
+                                _react2.default.createElement('i', { className: 'fas fa-search' })
                             )
                         )
                     )
                 ),
-                'if (this.state.loading) return ',
                 _react2.default.createElement(
                     'div',
                     null,
-                    _react2.default.createElement(
-                        _reactSpinners.RingLoader,
-                        {
-                            className: 'sweet-loading',
-                            color: '#000',
-                            loading: this.state.loading,
-                            value: 'getting coffee, one sec...',
-                            name: 'getting coffee, one sec...',
-                            placeholder: 'getting coffee, one sec...'
-                        },
+                    _react2.default.createElement(_reactSpinners.RingLoader, {
+                        className: 'sweet-loading',
+                        color: '#000',
+                        loading: this.state.loading,
+                        value: 'getting coffee, one sec...',
+                        name: 'getting coffee, one sec...',
+                        placeholder: 'getting coffee, one sec...'
+                    }),
+                    this.state.loading ? _react2.default.createElement(
+                        'p',
+                        null,
                         'getting coffee, one sec...'
-                    )
+                    ) : ""
                 ),
                 _react2.default.createElement(
                     'ul',

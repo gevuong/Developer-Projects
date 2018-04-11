@@ -27,6 +27,7 @@ class ThingsIndex extends Component {
         this.onChangePage = this.onChangePage.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.selectCampground = this.selectCampground.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     componentDidMount() {
@@ -52,6 +53,19 @@ class ThingsIndex extends Component {
             currentPage: 1,
         });
         console.log(this.state);
+    }
+
+    handleSubmit(event) {
+        event.preventDefault();
+        console.log("in handleSubmit");
+        if (event.target.textContent.length === 0) {
+            console.log("handleSubmit do nothing");
+            return;
+        }
+        this.setState({
+            searchQuery: event.target.textContent,
+            currentPage: 1,
+        });
     }
 
     selectCampground(event) {
@@ -146,7 +160,7 @@ class ThingsIndex extends Component {
                     <h2>National Park Services</h2>
                      <div className="text-and-form">
                          <p>Explore. Find your campground. Begin your search today.</p>
-                         <form>
+                         <form onSubmit={ this.handleSubmit }>
                              <input
                                  type="text"
                                  name="search-query"
@@ -159,29 +173,26 @@ class ThingsIndex extends Component {
                                  name="search"
                                  value="submit"
                                  >
-                                 <div>
-                                     <span><i className="fas fa-search"></i></span>
-                                     <span>Search</span>
-                                 </div>
+
+                                    <i className="fas fa-search"></i>
+
                              </button>
                          </form>
                      </div>
                 </header>
-                if (this.state.loading)
-                    return {
-                        <div>
-                        <RingLoader
-                            className="sweet-loading"
-                            color={'#000'}
-                            loading={this.state.loading}
-                            value="getting coffee, one sec..."
-                            name="getting coffee, one sec..."
-                            placeholder="getting coffee, one sec..."
-                        >getting coffee, one sec...
-                        </RingLoader>
 
-                        </div>
-                    }
+                <div>
+                    <RingLoader
+                        className="sweet-loading"
+                        color={'#000'}
+                        loading={this.state.loading}
+                        value="getting coffee, one sec..."
+                        name="getting coffee, one sec..."
+                        placeholder="getting coffee, one sec..."
+                    >
+                    </RingLoader>
+                { this.state.loading ? <p>getting coffee, one sec...</p> : "" }
+                </div>
 
                 <ul>
                     <ReactCSSTransitionGroup
