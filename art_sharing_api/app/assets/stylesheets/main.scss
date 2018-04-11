@@ -58,22 +58,20 @@ button {
   border: none;
   outline: none;
 }
-//
-// button {
-//
-// }
-//
 // button:active {
 //     background: blue;
 // }
 //
 
-//
+.loading-div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 4em;
+}
+
 // .sweet-loading {
-//     font-size: 10em;
-//     display: flex;
-//     justify-content: center;
-//
 // }
 
 //
@@ -201,6 +199,9 @@ button {
         font-size: 1em;
         text-align: center;
     }
+    .main {
+        padding: 2em 1em .75em;
+    }
 }
 
 @media (min-width: 769px) {
@@ -216,5 +217,16 @@ button {
         margin: 11.55em auto 0;
         z-index: 3000;
         position: relative;
+    }
+    .main {
+        padding: 3.8em 1.5em .75em;
+        position: relative;
+        z-index: 10;
+    }
+    .main > div {
+        float: right;
+        display: inline-block;
+        margin-top: 12px;
+        margin-right: 1.25%;
     }
 }

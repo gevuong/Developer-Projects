@@ -31,11 +31,11 @@ class ThingsIndex extends Component {
     }
 
     componentDidMount() {
-        this.props.requestAllCampgrounds().then(() =>
-            this.setState({
-                loading: false,
-            })
-        );
+        // this.props.requestAllCampgrounds().then(() =>
+        //     this.setState({
+        //         loading: false,
+        //     })
+        // );
     }
 
     // onChangePage needs to retrieve currentPage from PaginationBar Component
@@ -66,13 +66,13 @@ class ThingsIndex extends Component {
             searchQuery: event.target.textContent,
             currentPage: 1,
         });
-    }
+    };
 
     selectCampground(event) {
         this.setState({
             searchQuery: event.target.textContent,
         });
-    }
+    };
 
     findMatches() {
         const campgroundsArr = [];
@@ -178,45 +178,44 @@ class ThingsIndex extends Component {
                          </form>
                      </div>
                 </header>
-                <div>
+
+                <div className="loading-div">
                     <RingLoader
                         className="sweet-loading"
                         color={'#000'}
-                        loading={this.state.loading}
-                        value="getting coffee, one sec..."
-                        name="getting coffee, one sec..."
-                        placeholder="getting coffee, one sec..."
+                        loading={ this.state.loading }
                     >
                     </RingLoader>
                 { this.state.loading ? <p>getting coffee, one sec...</p> : "" }
                 </div>
 
-                <ul>
-                    <ReactCSSTransitionGroup
-                        transitionName="auto"
-                        transitionEnterTimeout={500}
-                        transitionLeaveTimeout={500}
-                        >
-                        { slicedData.map((campground, idx) => (
-                            <li
-                                key={idx}
-                                onClick={ this.selectCampground }
-                                >
-                                <div className="campground-container">
-                                    <div>
-                                        <img className="campground-img" src="http://res.cloudinary.com/dtluc0y85/image/upload/v1523306878/header_humzpt.jpg" />
-                                    </div>
+                <div className="main">
+                    <ul>
+                        <ReactCSSTransitionGroup
+                            transitionName="auto"
+                            transitionEnterTimeout={500}
+                            transitionLeaveTimeout={500}
+                            >
+                            { slicedData.map((campground, idx) => (
+                                <li
+                                    key={idx}
+                                    onClick={ this.selectCampground }
+                                    >
+                                    <div className="campground-container">
+                                        <div>
+                                            <img className="campground-img" src="http://res.cloudinary.com/dtluc0y85/image/upload/v1523306878/header_humzpt.jpg" />
+                                        </div>
 
-                                    <div className="campground-info">
-                                        <p>{ campground }</p>
+                                        <div className="campground-info">
+                                            <p>{ campground }</p>
+                                        </div>
                                     </div>
-                                </div>
-                            </li>
-                        ))
-                        }
-                    </ReactCSSTransitionGroup>
-                </ul>
-
+                                </li>
+                            ))
+                            }
+                        </ReactCSSTransitionGroup>
+                    </ul>
+                </div>
                 {/* Don't render PaginationBar if Data <= rowsPerPage */}
                 <div className="pagination-container">
                     { searchResults.length > rowsPerPage ?

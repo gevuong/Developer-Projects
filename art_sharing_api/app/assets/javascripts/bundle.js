@@ -398,15 +398,13 @@ var ThingsIndex = function (_Component) {
 
     _createClass(ThingsIndex, [{
         key: 'componentDidMount',
-        value: function componentDidMount() {
-            var _this2 = this;
+        value: function componentDidMount() {}
+        // this.props.requestAllCampgrounds().then(() =>
+        //     this.setState({
+        //         loading: false,
+        //     })
+        // );
 
-            this.props.requestAllCampgrounds().then(function () {
-                return _this2.setState({
-                    loading: false
-                });
-            });
-        }
 
         // onChangePage needs to retrieve currentPage from PaginationBar Component
 
@@ -453,7 +451,7 @@ var ThingsIndex = function (_Component) {
     }, {
         key: 'findMatches',
         value: function findMatches() {
-            var _this3 = this;
+            var _this2 = this;
 
             var campgroundsArr = [];
             var campgrounds = this.props.campgrounds;
@@ -470,7 +468,7 @@ var ThingsIndex = function (_Component) {
             }
 
             var matches = campgroundsArr.filter(function (campground) {
-                return campground.toLowerCase().includes(_this3.state.searchQuery.toLowerCase());
+                return campground.toLowerCase().includes(_this2.state.searchQuery.toLowerCase());
             });
 
             // pass sort a compareFunction to sort lowercased and uppercased characters in string
@@ -491,7 +489,7 @@ var ThingsIndex = function (_Component) {
     }, {
         key: 'render',
         value: function render() {
-            var _this4 = this;
+            var _this3 = this;
 
             var campgrounds = this.props.campgrounds;
             var _state = this.state,
@@ -583,14 +581,11 @@ var ThingsIndex = function (_Component) {
                 ),
                 _react2.default.createElement(
                     'div',
-                    null,
+                    { className: 'loading-div' },
                     _react2.default.createElement(_reactSpinners.RingLoader, {
                         className: 'sweet-loading',
                         color: '#000',
-                        loading: this.state.loading,
-                        value: 'getting coffee, one sec...',
-                        name: 'getting coffee, one sec...',
-                        placeholder: 'getting coffee, one sec...'
+                        loading: this.state.loading
                     }),
                     this.state.loading ? _react2.default.createElement(
                         'p',
@@ -599,42 +594,46 @@ var ThingsIndex = function (_Component) {
                     ) : ""
                 ),
                 _react2.default.createElement(
-                    'ul',
-                    null,
+                    'div',
+                    { className: 'main' },
                     _react2.default.createElement(
-                        _reactAddonsCssTransitionGroup2.default,
-                        {
-                            transitionName: 'auto',
-                            transitionEnterTimeout: 500,
-                            transitionLeaveTimeout: 500
-                        },
-                        slicedData.map(function (campground, idx) {
-                            return _react2.default.createElement(
-                                'li',
-                                {
-                                    key: idx,
-                                    onClick: _this4.selectCampground
-                                },
-                                _react2.default.createElement(
-                                    'div',
-                                    { className: 'campground-container' },
+                        'ul',
+                        null,
+                        _react2.default.createElement(
+                            _reactAddonsCssTransitionGroup2.default,
+                            {
+                                transitionName: 'auto',
+                                transitionEnterTimeout: 500,
+                                transitionLeaveTimeout: 500
+                            },
+                            slicedData.map(function (campground, idx) {
+                                return _react2.default.createElement(
+                                    'li',
+                                    {
+                                        key: idx,
+                                        onClick: _this3.selectCampground
+                                    },
                                     _react2.default.createElement(
                                         'div',
-                                        null,
-                                        _react2.default.createElement('img', { className: 'campground-img', src: 'http://res.cloudinary.com/dtluc0y85/image/upload/v1523306878/header_humzpt.jpg' })
-                                    ),
-                                    _react2.default.createElement(
-                                        'div',
-                                        { className: 'campground-info' },
+                                        { className: 'campground-container' },
                                         _react2.default.createElement(
-                                            'p',
+                                            'div',
                                             null,
-                                            campground
+                                            _react2.default.createElement('img', { className: 'campground-img', src: 'http://res.cloudinary.com/dtluc0y85/image/upload/v1523306878/header_humzpt.jpg' })
+                                        ),
+                                        _react2.default.createElement(
+                                            'div',
+                                            { className: 'campground-info' },
+                                            _react2.default.createElement(
+                                                'p',
+                                                null,
+                                                campground
+                                            )
                                         )
                                     )
-                                )
-                            );
-                        })
+                                );
+                            })
+                        )
                     )
                 ),
                 _react2.default.createElement(
