@@ -390,9 +390,9 @@ var ThingsIndex = function (_Component) {
         };
 
         _this.onChangePage = _this.onChangePage.bind(_this);
-        _this.handleChange = _this.handleChange.bind(_this);
+        _this.onChange = _this.onChange.bind(_this);
         _this.selectCampground = _this.selectCampground.bind(_this);
-        _this.handleSubmit = _this.handleSubmit.bind(_this);
+        _this.onSubmit = _this.onSubmit.bind(_this);
         return _this;
     }
 
@@ -421,8 +421,8 @@ var ThingsIndex = function (_Component) {
             });
         }
     }, {
-        key: 'handleChange',
-        value: function handleChange(event) {
+        key: 'onChange',
+        value: function onChange(event) {
             this.setState({
                 searchQuery: event.target.value,
                 currentPage: 1
@@ -430,12 +430,12 @@ var ThingsIndex = function (_Component) {
             console.log(this.state);
         }
     }, {
-        key: 'handleSubmit',
-        value: function handleSubmit(event) {
+        key: 'onSubmit',
+        value: function onSubmit(event) {
             event.preventDefault();
-            console.log("in handleSubmit");
+            console.log("in onSubmit");
             if (event.target.textContent.length === 0) {
-                console.log("handleSubmit do nothing");
+                console.log("onSubmit do nothing");
                 return;
             }
             this.setState({
@@ -557,16 +557,16 @@ var ThingsIndex = function (_Component) {
                         _react2.default.createElement(
                             'p',
                             null,
-                            'Explore. Find your campground. Begin your search today.'
+                            'Explore. Find your next campground. Begin your search today.'
                         ),
                         _react2.default.createElement(
                             'form',
-                            { onSubmit: this.handleSubmit },
+                            { onSubmit: this.onSubmit },
                             _react2.default.createElement('input', {
                                 type: 'text',
                                 name: 'search-query',
                                 placeholder: 'Discover your next campground...',
-                                onChange: this.handleChange,
+                                onChange: this.onChange,
                                 value: this.state.searchQuery
                             }),
                             _react2.default.createElement(

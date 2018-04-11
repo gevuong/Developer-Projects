@@ -25,9 +25,9 @@ class ThingsIndex extends Component {
         }
 
         this.onChangePage = this.onChangePage.bind(this);
-        this.handleChange = this.handleChange.bind(this);
+        this.onChange = this.onChange.bind(this);
         this.selectCampground = this.selectCampground.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
+        this.onSubmit = this.onSubmit.bind(this);
     }
 
     componentDidMount() {
@@ -47,7 +47,7 @@ class ThingsIndex extends Component {
       })
     }
 
-    handleChange(event) {
+    onChange(event) {
         this.setState({
             searchQuery: event.target.value,
             currentPage: 1,
@@ -55,11 +55,11 @@ class ThingsIndex extends Component {
         console.log(this.state);
     }
 
-    handleSubmit(event) {
+    onSubmit(event) {
         event.preventDefault();
-        console.log("in handleSubmit");
+        console.log("in onSubmit");
         if (event.target.textContent.length === 0) {
-            console.log("handleSubmit do nothing");
+            console.log("onSubmit do nothing");
             return;
         }
         this.setState({
@@ -159,13 +159,13 @@ class ThingsIndex extends Component {
                 <header>
                     <h2>National Park Services</h2>
                      <div className="text-and-form">
-                         <p>Explore. Find your campground. Begin your search today.</p>
-                         <form onSubmit={ this.handleSubmit }>
+                         <p>Explore. Find your next campground. Begin your search today.</p>
+                         <form onSubmit={ this.onSubmit }>
                              <input
                                  type="text"
                                  name="search-query"
                                  placeholder="Discover your next campground..."
-                                 onChange={ this.handleChange }
+                                 onChange={ this.onChange }
                                  value={ this.state.searchQuery }
                                  />
                              <button
@@ -173,14 +173,11 @@ class ThingsIndex extends Component {
                                  name="search"
                                  value="submit"
                                  >
-
                                     <i className="fas fa-search"></i>
-
                              </button>
                          </form>
                      </div>
                 </header>
-
                 <div>
                     <RingLoader
                         className="sweet-loading"
