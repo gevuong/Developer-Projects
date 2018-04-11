@@ -518,7 +518,9 @@ var ThingsIndex = function (_Component) {
                 return -1; // meaning a comes before b.
             });
 
-            console.log("searchResults: ", searchResults);
+            var uniqSearchResults = Array.from(new Set(searchResults));
+
+            console.log("uniqSearchResults: ", uniqSearchResults);
 
             // need prevPage in order to determine initial index of slice(). if currentPage is 1 (default), then prevPage is 0, which equates to an idx of 0
             var prevPage = currentPage - 1;
@@ -526,12 +528,12 @@ var ThingsIndex = function (_Component) {
 
             // when setState executes, render is invoked with updated currentPage value. round up due to zero index to calculate totalPages.
             var lastIndex = currentPage * rowsPerPage;
-            var totalPages = Math.ceil(searchResults.length / rowsPerPage);
+            var totalPages = Math.ceil(uniqSearchResults.length / rowsPerPage);
 
             var startPage = this.findStartAndEndPage(totalPages)[0];
             var endPage = this.findStartAndEndPage(totalPages)[1];
 
-            var slicedData = searchResults.slice(firstIndex, lastIndex);
+            var slicedData = uniqSearchResults.slice(firstIndex, lastIndex);
 
             return _react2.default.createElement(
                 'div',
@@ -584,7 +586,7 @@ var ThingsIndex = function (_Component) {
                     ) : _react2.default.createElement(
                         'h1',
                         { className: 'search-results' },
-                        searchResults.length === 1 && searchResults[0] !== "none" ? searchResults.length + ' Search Result' : searchResults[0] === "none" ? "0 Search Results" : searchResults.length + ' Search Results'
+                        uniqSearchResults.length === 1 && uniqSearchResults[0] !== "none" ? uniqSearchResults.length + ' Search Result' : uniqSearchResults[0] === "none" ? "0 Search Results" : uniqSearchResults.length + ' Search Results'
                     )
                 ),
                 _react2.default.createElement(
@@ -600,7 +602,7 @@ var ThingsIndex = function (_Component) {
                                 transitionEnterTimeout: 500,
                                 transitionLeaveTimeout: 500
                             },
-                            searchResults[0] === "none" ? _react2.default.createElement(
+                            uniqSearchResults[0] === "none" ? _react2.default.createElement(
                                 'div',
                                 { className: 'no-matches-div' },
                                 _react2.default.createElement(
@@ -639,8 +641,8 @@ var ThingsIndex = function (_Component) {
                 _react2.default.createElement(
                     'div',
                     { className: 'pagination-container' },
-                    searchResults.length > rowsPerPage ? _react2.default.createElement(_pagination_bar2.default, {
-                        data: searchResults,
+                    uniqSearchResults.length > rowsPerPage ? _react2.default.createElement(_pagination_bar2.default, {
+                        data: uniqSearchResults,
                         currentPage: currentPage,
                         rowsPerPage: rowsPerPage,
                         totalPages: totalPages,
@@ -658,7 +660,6 @@ var ThingsIndex = function (_Component) {
 
 exports.default = ThingsIndex;
 
-//
 // <div className="campground-container">
 //     <div>
 //         <img className="campground-img" src="http://res.cloudinary.com/dtluc0y85/image/upload/v1523306878/header_humzpt.jpg" />
@@ -668,7 +669,6 @@ exports.default = ThingsIndex;
 //         <p>{ campground }</p>
 //     </div>
 // </div>
-//
 
 /***/ }),
 

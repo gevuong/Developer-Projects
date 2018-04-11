@@ -123,24 +123,22 @@ button {
 //     font-family: sans-serif;
 //     margin: auto;
 //     width: 90%;
-//     border: 1px solid black;
 //     padding: 10px;
 //     background: lightblue;
 //     color: gray;
 // }
 //
-// .campground-container {
-//     display: flex;
-//     min-width: 400px;
-// }
-//
-// .campground-img {
-//     display: block;
-//     object-fit: cover;
-//     height: 130px;
-//     width: 190px;
-//     padding: 1em;
-// }
+.campground-container {
+    display: flex;
+    min-width: 400px;
+}
+
+.campground-img {
+    display: block;
+    object-fit: cover;
+    height: 130px;
+    padding: 1em;
+}
 
 /* =================================
   CSS Transition
@@ -178,11 +176,10 @@ button {
         margin-top: 9em;
     }
     form {
-        width: 95%;
+        width: 93%;
         -webkit-flex-direction: column;
         flex-direction: column;
         margin: auto;
-        // margin-top: 2.5em;
     }
     form button {
         padding: 12px 0;
@@ -198,6 +195,7 @@ button {
     .main {
         padding: 0em 1em .75em;
     }
+
 }
 
 @media (min-width: 769px) {

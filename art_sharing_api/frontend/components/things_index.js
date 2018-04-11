@@ -138,7 +138,9 @@ class ThingsIndex extends Component {
             return -1; // meaning a comes before b.
         });
 
-        console.log("searchResults: ", searchResults);
+        const uniqSearchResults = Array.from(new Set(searchResults));
+
+        console.log("uniqSearchResults: ", uniqSearchResults);
 
         // need prevPage in order to determine initial index of slice(). if currentPage is 1 (default), then prevPage is 0, which equates to an idx of 0
         const prevPage = currentPage - 1;
@@ -146,12 +148,12 @@ class ThingsIndex extends Component {
 
         // when setState executes, render is invoked with updated currentPage value. round up due to zero index to calculate totalPages.
         const lastIndex = currentPage * rowsPerPage;
-        const totalPages = Math.ceil(searchResults.length / rowsPerPage);
+        const totalPages = Math.ceil(uniqSearchResults.length / rowsPerPage);
 
         let startPage = this.findStartAndEndPage(totalPages)[0];
         let endPage = this.findStartAndEndPage(totalPages)[1];
 
-        const slicedData = searchResults.slice(firstIndex, lastIndex);
+        const slicedData = uniqSearchResults.slice(firstIndex, lastIndex);
 
         return (
             <div>
@@ -191,13 +193,13 @@ class ThingsIndex extends Component {
                         <p>getting coffee, one sec...</p>
                         :
                         <h1 className="search-results">
-                            { searchResults.length === 1 && searchResults[0] !== "none" ?
-                                `${searchResults.length} Search Result`
+                            { uniqSearchResults.length === 1 && uniqSearchResults[0] !== "none" ?
+                                `${uniqSearchResults.length} Search Result`
                                 :
-                                searchResults[0] === "none" ?
+                                uniqSearchResults[0] === "none" ?
                                     "0 Search Results"
                                     :
-                                    `${searchResults.length} Search Results`
+                                    `${uniqSearchResults.length} Search Results`
                             }
                         </h1>
                     }
@@ -211,7 +213,7 @@ class ThingsIndex extends Component {
                             transitionEnterTimeout={500}
                             transitionLeaveTimeout={500}
                             >
-                            { searchResults[0] === "none" ?
+                            { uniqSearchResults[0] === "none" ?
                                 <div className="no-matches-div">
                                     <p>Sorry there were no matches...</p>
                                     <p>Try another search, or head over to <a href="https://www.nps.gov/subjects/camping/campground.htm#3/42.55/-107.75">NPS</a> for more info.
@@ -223,7 +225,10 @@ class ThingsIndex extends Component {
                                         key={idx}
                                         onClick={ this.selectCampground }
                                     >
+
                                         <p>{ campground }</p>
+
+
                                     </li>
                                 ))
                             }
@@ -231,11 +236,11 @@ class ThingsIndex extends Component {
                     </ul>
                 </div>
 
-                {/* Don't render PaginationBar if searchResults length <= rowsPerPage */}
+                {/* Don't render PaginationBar if uniqSearchResults length <= rowsPerPage */}
                 <div className="pagination-container">
-                    { searchResults.length > rowsPerPage ?
+                    { uniqSearchResults.length > rowsPerPage ?
                         <PaginationBar
-                            data={ searchResults }
+                            data={ uniqSearchResults }
                             currentPage={ currentPage }
                             rowsPerPage={ rowsPerPage }
                             totalPages={ totalPages }
@@ -255,7 +260,6 @@ class ThingsIndex extends Component {
 
 export default ThingsIndex;
 
-//
 // <div className="campground-container">
 //     <div>
 //         <img className="campground-img" src="http://res.cloudinary.com/dtluc0y85/image/upload/v1523306878/header_humzpt.jpg" />
@@ -265,4 +269,3 @@ export default ThingsIndex;
 //         <p>{ campground }</p>
 //     </div>
 // </div>
-//
