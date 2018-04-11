@@ -89,7 +89,7 @@ class ThingsIndex extends Component {
         )
 
         if (matches.length === 0) {
-            return [];
+            return ["none"];
         }
 
         return matches;
@@ -185,10 +185,13 @@ class ThingsIndex extends Component {
                         <p>getting coffee, one sec...</p>
                         :
                         <h1 className="search-results">
-                            { searchResults.length === 1 ?
+                            { searchResults.length === 1 && searchResults[0] !== "none" ?
                                 `${searchResults.length} Search Result`
                                 :
-                                `${searchResults.length} Search Results`
+                                searchResults[0] === "none" ?
+                                    "0 Search Results"
+                                    :
+                                    `${searchResults.length} Search Results`
                             }
                         </h1>
                     }
@@ -202,7 +205,7 @@ class ThingsIndex extends Component {
                             transitionEnterTimeout={500}
                             transitionLeaveTimeout={500}
                             >
-                            { searchResults.length === 0 ?
+                            { searchResults[0] === "none" ?
                                 <div className="no-matches-div">
                                     <p>Sorry there were no matches...</p>
                                     <p>Try another search, or head over to <a href="https://www.nps.gov/subjects/camping/campground.htm#3/42.55/-107.75">NPS</a> for more info.

@@ -462,7 +462,7 @@ var ThingsIndex = function (_Component) {
             });
 
             if (matches.length === 0) {
-                return [];
+                return ["none"];
             }
 
             return matches;
@@ -580,7 +580,7 @@ var ThingsIndex = function (_Component) {
                     ) : _react2.default.createElement(
                         'h1',
                         { className: 'search-results' },
-                        searchResults.length === 1 ? searchResults.length + ' Search Result' : searchResults.length + ' Search Results'
+                        searchResults.length === 1 && searchResults[0] !== "none" ? searchResults.length + ' Search Result' : searchResults[0] === "none" ? "0 Search Results" : searchResults.length + ' Search Results'
                     )
                 ),
                 _react2.default.createElement(
@@ -596,7 +596,7 @@ var ThingsIndex = function (_Component) {
                                 transitionEnterTimeout: 500,
                                 transitionLeaveTimeout: 500
                             },
-                            searchResults.length === 0 ? _react2.default.createElement(
+                            searchResults[0] === "none" ? _react2.default.createElement(
                                 'div',
                                 { className: 'no-matches-div' },
                                 _react2.default.createElement(
