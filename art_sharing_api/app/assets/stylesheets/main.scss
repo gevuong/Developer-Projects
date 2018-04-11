@@ -49,7 +49,7 @@ form {
 form button {
   padding: 0 1em;
   font-size: 1em;
-  background: #7bcbc4;
+  background: #46ba82;
   border-radius: .2em;
   color: white;
 }
@@ -58,9 +58,6 @@ button {
   border: none;
   outline: none;
 }
-// button.active {
-//     background: blue;
-// }
 .loading-div {
     display: flex;
     flex-direction: column;
@@ -114,6 +111,9 @@ button {
 .main ul li:hover {
     transform: scale(1.03);
     box-shadow: 0 1px 5px 1px rgba(0,0,0,0.15);
+}
+.no-matches-div {
+    text-align: center;
 }
 //
 //

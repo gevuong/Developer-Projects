@@ -164,13 +164,6 @@ var PaginationBar = function (_Component) {
         return _this;
     }
 
-    // reset page if data array has changed
-    // componentDidUpdate(prevProps, prevState) {
-    //     if (this.props.data !== prevProps.data) {
-    //         this.setPage(this.props.initialPage);
-    //     }
-    // }
-
     _createClass(PaginationBar, [{
         key: 'setPage',
         value: function setPage(currentPage) {
@@ -215,6 +208,7 @@ var PaginationBar = function (_Component) {
                 );
             });
 
+            // render left and right arrows, prevPage, currentPage, nextPage in pagination bar
             return _react2.default.createElement(
                 'ul',
                 { className: 'pagination-bar' },
@@ -422,31 +416,26 @@ var ThingsIndex = function (_Component) {
         }
     }, {
         key: 'onChange',
-        value: function onChange(event) {
+        value: function onChange(e) {
             this.setState({
-                searchQuery: event.target.value,
+                searchQuery: e.target.value,
                 currentPage: 1
             });
         }
     }, {
         key: 'onSubmit',
-        value: function onSubmit(event) {
-            event.preventDefault();
-            console.log("in onSubmit");
-            if (event.target.textContent.length === 0) {
+        value: function onSubmit(e) {
+            e.preventDefault();
+            if (e.target.textContent.length === 0) {
                 console.log("onSubmit do nothing");
                 return;
             }
-            this.setState({
-                searchQuery: event.target.textContent,
-                currentPage: 1
-            });
         }
     }, {
         key: 'selectCampground',
-        value: function selectCampground(event) {
+        value: function selectCampground(e) {
             this.setState({
-                searchQuery: event.target.textContent
+                searchQuery: e.target.textContent
             });
         }
     }, {
@@ -473,7 +462,7 @@ var ThingsIndex = function (_Component) {
             });
 
             if (matches.length === 0) {
-                return ["There are no matches"];
+                return [];
             }
 
             return matches;
@@ -591,7 +580,7 @@ var ThingsIndex = function (_Component) {
                     ) : _react2.default.createElement(
                         'h1',
                         { className: 'search-results' },
-                        'Search Results'
+                        searchResults.length === 1 ? searchResults.length + ' Search Result' : searchResults.length + ' Search Results'
                     )
                 ),
                 _react2.default.createElement(
@@ -607,7 +596,26 @@ var ThingsIndex = function (_Component) {
                                 transitionEnterTimeout: 500,
                                 transitionLeaveTimeout: 500
                             },
-                            slicedData.map(function (campground, idx) {
+                            searchResults.length === 0 ? _react2.default.createElement(
+                                'div',
+                                { className: 'no-matches-div' },
+                                _react2.default.createElement(
+                                    'p',
+                                    null,
+                                    'Sorry there were no matches...'
+                                ),
+                                _react2.default.createElement(
+                                    'p',
+                                    null,
+                                    'Try another search, or head over to ',
+                                    _react2.default.createElement(
+                                        'a',
+                                        { href: 'https://www.nps.gov/subjects/camping/campground.htm#3/42.55/-107.75' },
+                                        'NPS'
+                                    ),
+                                    ' for more info.'
+                                )
+                            ) : slicedData.map(function (campground, idx) {
                                 return _react2.default.createElement(
                                     'li',
                                     {
@@ -757,22 +765,17 @@ var _thing_actions = __webpack_require__(/*! ../actions/thing_actions */ "./fron
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-// const defaultState = Object.freeze({
-//     campgrounds: [],
-// });
 // reducer must never mutate previus state. Instead, return a new array or object with the necessary changes.
 var campgroundsReducer = function campgroundsReducer() {
     var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
     var action = arguments[1];
 
     Object.freeze(state);
-    console.log("action: ", action);
     switch (action.type) {
         case _thing_actions.RECEIVE_ALL_CAMPGROUNDS:
             var campgrounds = action.campgrounds;
             return (0, _merge2.default)({}, state, campgrounds);
         default:
-            console.log("return default state");
             return state;
     }
 };

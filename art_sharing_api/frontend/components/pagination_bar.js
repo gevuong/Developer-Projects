@@ -18,13 +18,6 @@ class PaginationBar extends Component {
         }
     }
 
-    // reset page if data array has changed
-    // componentDidUpdate(prevProps, prevState) {
-    //     if (this.props.data !== prevProps.data) {
-    //         this.setPage(this.props.initialPage);
-    //     }
-    // }
-
     setPage(currentPage) {
         const totalPages = this.props.totalPages;
         if (currentPage < 1 || currentPage > totalPages) {
@@ -55,6 +48,7 @@ class PaginationBar extends Component {
             )
         });
 
+        // render left and right arrows, prevPage, currentPage, nextPage in pagination bar
         return (
             <ul className="pagination-bar">
                 <li onClick={ () => this.setPage(1) }

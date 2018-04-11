@@ -48,29 +48,24 @@ class ThingsIndex extends Component {
         });
     }
 
-    onChange(event) {
+    onChange(e) {
         this.setState({
-            searchQuery: event.target.value,
+            searchQuery: e.target.value,
             currentPage: 1,
         });
     }
 
-    onSubmit(event) {
-        event.preventDefault();
-        console.log("in onSubmit");
-        if (event.target.textContent.length === 0) {
+    onSubmit(e) {
+        e.preventDefault();
+        if (e.target.textContent.length === 0) {
             console.log("onSubmit do nothing");
             return;
         }
-        this.setState({
-            searchQuery: event.target.textContent,
-            currentPage: 1,
-        });
     };
 
-    selectCampground(event) {
+    selectCampground(e) {
         this.setState({
-            searchQuery: event.target.textContent,
+            searchQuery: e.target.textContent,
         });
     };
 
@@ -94,7 +89,7 @@ class ThingsIndex extends Component {
         )
 
         if (matches.length === 0) {
-            return ["There are no matches"];
+            return [];
         }
 
         return matches;
@@ -153,6 +148,8 @@ class ThingsIndex extends Component {
 
         return (
             <div>
+
+                {/* Render header and search form */}
                 <header>
                     <h2>National Park Services</h2>
                      <div className="text-and-form">
@@ -176,6 +173,7 @@ class ThingsIndex extends Component {
                      </div>
                 </header>
 
+                {/* Render loading spinner */}
                 <div className="loading-div">
                     <RingLoader
                         className="sweet-loading"
@@ -183,9 +181,20 @@ class ThingsIndex extends Component {
                         loading={ this.state.loading }
                     >
                     </RingLoader>
-                { this.state.loading ? <p>getting coffee, one sec...</p> : <h1 className="search-results">Search Results</h1> }
+                    { this.state.loading ?
+                        <p>getting coffee, one sec...</p>
+                        :
+                        <h1 className="search-results">
+                            { searchResults.length === 1 ?
+                                `${searchResults.length} Search Result`
+                                :
+                                `${searchResults.length} Search Results`
+                            }
+                        </h1>
+                    }
                 </div>
 
+                {/* Render list of campgrounds */}
                 <div className="main">
                     <ul>
                         <ReactCSSTransitionGroup
@@ -193,20 +202,27 @@ class ThingsIndex extends Component {
                             transitionEnterTimeout={500}
                             transitionLeaveTimeout={500}
                             >
-                            { slicedData.map((campground, idx) => (
-                                <li
-                                    key={idx}
-                                    onClick={ this.selectCampground }
+                            { searchResults.length === 0 ?
+                                <div className="no-matches-div">
+                                    <p>Sorry there were no matches...</p>
+                                    <p>Try another search, or head over to <a href="https://www.nps.gov/subjects/camping/campground.htm#3/42.55/-107.75">NPS</a> for more info.
+                                    </p>
+                                </div>
+                                :
+                                 slicedData.map((campground, idx) => (
+                                    <li
+                                        key={idx}
+                                        onClick={ this.selectCampground }
                                     >
-                                            <p>{ campground }</p>
-                                </li>
-                            ))
+                                        <p>{ campground }</p>
+                                    </li>
+                                ))
                             }
                         </ReactCSSTransitionGroup>
                     </ul>
                 </div>
 
-                {/* Don't render PaginationBar if Data <= rowsPerPage */}
+                {/* Don't render PaginationBar if searchResults length <= rowsPerPage */}
                 <div className="pagination-container">
                     { searchResults.length > rowsPerPage ?
                         <PaginationBar
