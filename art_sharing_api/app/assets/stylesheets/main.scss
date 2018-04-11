@@ -35,6 +35,11 @@ header input {
   font-size: 1.15em;
   width: 100%;
 }
+header p {
+    font-size: 1.1em;
+    color: white;
+    text-shadow: 0 1px 0 rgba(0,0,0, .25);
+}
 form {
   width: 60%;
   background: white;
@@ -79,12 +84,6 @@ button {
 //     color: white;
 // }
 //
-// p {
-//     font-size: 1.1em;
-//     text-shadow: 0 1px 0 rgba(0,0,0, .25);
-//     color: white;
-// }
-//
 .load-error {
     text-align: center;
     padding: 1em 2em;
@@ -107,7 +106,6 @@ button {
   transition: 0.2s;
   cursor: pointer;
 }
-
 .main ul li:hover {
     transform: scale(1.03);
     box-shadow: 0 1px 5px 1px rgba(0,0,0,0.15);
@@ -176,12 +174,15 @@ button {
     header {
         padding: 1.25em;
     }
+    .text-and-form {
+        margin-top: 9em;
+    }
     form {
         width: 95%;
         -webkit-flex-direction: column;
         flex-direction: column;
         margin: auto;
-        margin-top: 2.5em;
+        // margin-top: 2.5em;
     }
     form button {
         padding: 12px 0;
@@ -209,9 +210,12 @@ button {
         background-position: 0 -95px;
     }
     form {
-        margin: 11.55em auto 0;
+        margin: 0 auto 0;
         z-index: 3000;
         position: relative;
+    }
+    .text-and-form {
+        margin-top: 8em;
     }
     .main {
         padding: 0em 1.5em .75em;

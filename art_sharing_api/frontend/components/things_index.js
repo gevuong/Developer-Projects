@@ -150,8 +150,6 @@ class ThingsIndex extends Component {
 
         let startPage = this.findStartAndEndPage(totalPages)[0];
         let endPage = this.findStartAndEndPage(totalPages)[1];
-        
-        console.log("startPage, endPage: ", startPage, endPage);
 
         const slicedData = searchResults.slice(firstIndex, lastIndex);
 
@@ -160,7 +158,6 @@ class ThingsIndex extends Component {
 
                 {/* Render header and search form */}
                 <header>
-                    <h2>National Park Services</h2>
                      <div className="text-and-form">
                          <p>Explore. Find your next campground. Begin your search today.</p>
                          <form onSubmit={ this.onSubmit }>

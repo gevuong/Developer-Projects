@@ -531,8 +531,6 @@ var ThingsIndex = function (_Component) {
             var startPage = this.findStartAndEndPage(totalPages)[0];
             var endPage = this.findStartAndEndPage(totalPages)[1];
 
-            console.log("startPage, endPage: ", startPage, endPage);
-
             var slicedData = searchResults.slice(firstIndex, lastIndex);
 
             return _react2.default.createElement(
@@ -541,11 +539,6 @@ var ThingsIndex = function (_Component) {
                 _react2.default.createElement(
                     'header',
                     null,
-                    _react2.default.createElement(
-                        'h2',
-                        null,
-                        'National Park Services'
-                    ),
                     _react2.default.createElement(
                         'div',
                         { className: 'text-and-form' },
