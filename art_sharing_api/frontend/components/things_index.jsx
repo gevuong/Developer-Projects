@@ -49,6 +49,7 @@ class ThingsIndex extends Component {
     handleChange(event) {
         this.setState({
             searchQuery: event.target.value,
+            currentPage: 1,
         });
         console.log(this.state);
     }
@@ -135,6 +136,7 @@ class ThingsIndex extends Component {
             }
         }
 
+        console.log("firstIndex, lastIndex: ", firstIndex, lastIndex);
         const slicedData = searchResults.slice(firstIndex, lastIndex);
         console.log("slicedData: ", slicedData);
 

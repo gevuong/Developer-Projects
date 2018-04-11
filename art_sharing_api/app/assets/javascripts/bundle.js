@@ -423,7 +423,8 @@ var ThingsIndex = function (_Component) {
         key: 'handleChange',
         value: function handleChange(event) {
             this.setState({
-                searchQuery: event.target.value
+                searchQuery: event.target.value,
+                currentPage: 1
             });
             console.log(this.state);
         }
@@ -520,6 +521,7 @@ var ThingsIndex = function (_Component) {
                 }
             }
 
+            console.log("firstIndex, lastIndex: ", firstIndex, lastIndex);
             var slicedData = searchResults.slice(firstIndex, lastIndex);
             console.log("slicedData: ", slicedData);
 
