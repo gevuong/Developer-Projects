@@ -1,4 +1,51 @@
+## DNS & SSL
 
+- Domain Name Service
+- Responsible for mapping a string url to an IP address.
+- You're buying a right of entry in to the 13 root servers. You have access to name entry portion of the root server.
+- First hit root nameserver, then org. namerserver, then wikipedia.org nameserver.
+
+- A maps a name to an IP address
+- A "C" maps a name to another name
+- Those are the most common types, type A and C.
+- Hierarchy nature of DNS. As devops, you'll have to manage domains, text records. So you'll need to edit those DNS records.
+- NSA, C, A, and text are the four hierarchical types you need to be concerned about.
+- Some domains require that you authenticate your domain to prove that it's your own. They will give a unique string as a text record
+
+- Record Types
+    - MX is only for receiving emails.
+
+
+### Cryptography
+- Symmetric vs asymmetric
+    - a hash function doesn't have a cryptographic key to go back to the original plain text message as what was passed into the hash.
+    - If there was a crypted key, you are able to go back to plain text. But with hashing, there is no crypted key.
+
+    - With cryptographic fcns, you can run a decrypt function to decrypt a crypted text, and encrypt fcn to encrypt plain text.
+    - If fcn is symmetric, key_1 == key_2. Symmetric key cryptography is preferred, meaning two people have same keys to read message being sent from one person to another. With public and private keys, symmetric keys mean both person has both public and private keys to read message.
+    - fcn is asym if key_1 != key_2. public and private keys means its asymmetric.
+
+- Using XOR uses substitution cyphers. I think writing a hashing fcn uses XOR.
+- There are two substitution and two transposition cyphers. The binary string goes through all four cyphers and the process is repeated hundreds of times to produce a key.
+
+- Asymmetric cryptography
+    - both parties have a secured shared key, in which both partners can communicate using symmetric fcn.
+    - used to get to a shared key. One for encrypting another for decrypting.
+    -
+
+
+## SSL - Key Exchange
+- TLS/SSL defines multiple encryption algorithms for creating a shared symmetric key securely. Also known as a SSL handshake.
+
+- SSL in action
+    - Give both public and private key to amazon. ELB can take a certificate as a param. So ELB is responsible for all the handshake. Anything forwarded to us will be unencrypted
+- We'll generate a RSA key and make a certificate from that RSA key, then give it to amazon, and it will be managed using certificate manager.
+- Every SSL certificate also has a public and private key, and a hash or signature and put it in the certificate. All SSL is a web of trust model, in order to trust it, it needs to be signed by another entity that you trust. Browser manufacturers are the ones who provide a trusted SSL signature, so they have special access to Google Chrome's course code. So now the public can trust your certificate, so they ask you to provide money for that type of service.
+
+- Let's Encrypt is trying to do provide all the signatures for free. So Let's Encrypt.org spoke with Chrome developer to ask if letsencrypt.org can be a trusted source for signatures.
+
+
+# Friday's lecture
 Issues and Concerns
 - Downtime is always a concern, so speed is desired.
 
@@ -101,4 +148,4 @@ Other Concerns
 
 ## Custom JSON
 - When you deploy app, you can add a little extra JSON which will then be passed to Chef script.
-- 
+-
