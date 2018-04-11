@@ -95,6 +95,33 @@ class ThingsIndex extends Component {
         return matches;
     }
 
+    findStartAndEndPage(totalPages) {
+        let startPage, endPage;
+        const { currentPage } = this.state;
+
+        // calculate startPage and endPage based on totalPages. The following code modifies number of pages to render when traversing PaginationBar.
+        if (totalPages <= 3) {
+            startPage = 1;
+            endPage = totalPages;
+        } else {
+            if (currentPage <= 2) {
+                startPage = 1;
+                endPage = currentPage + 1;
+            }
+            else if (currentPage + 1 >= totalPages) {
+            // consider currentPage is close to exceeding totalPages
+            startPage = totalPages - 1;
+            endPage = totalPages;
+            }
+            else {
+            // otherwise, currentPage will always be between startPage and endPage
+            startPage = currentPage - 1;
+            endPage = currentPage + 1;
+            }
+        }
+
+        return [startPage, endPage];
+    }
 
     render() {
         const { campgrounds } = this.props;
@@ -121,28 +148,10 @@ class ThingsIndex extends Component {
         const lastIndex = currentPage * rowsPerPage;
         const totalPages = Math.ceil(searchResults.length / rowsPerPage);
 
-        let startPage, endPage;
-
-        // calculate startPage and endPage based on totalPages. The following code modifies number of pages to render when traversing PaginationBar.
-        if (totalPages <= 3) {
-            startPage = 1;
-            endPage = totalPages;
-        } else { //
-            if (currentPage <= 2) {
-                startPage = 1;
-                endPage = currentPage + 1;
-            }
-            else if (currentPage + 1 >= totalPages) {
-            // consider currentPage is close to exceeding totalPages
-            startPage = totalPages - 1;
-            endPage = totalPages;
-            }
-            else {
-            // otherwise, currentPage will always be between startPage and endPage
-            startPage = currentPage - 1;
-            endPage = currentPage + 1;
-            }
-        }
+        let startPage = this.findStartAndEndPage(totalPages)[0];
+        let endPage = this.findStartAndEndPage(totalPages)[1];
+        
+        console.log("startPage, endPage: ", startPage, endPage);
 
         const slicedData = searchResults.slice(firstIndex, lastIndex);
 

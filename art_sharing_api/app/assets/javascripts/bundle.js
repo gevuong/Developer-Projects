@@ -468,6 +468,35 @@ var ThingsIndex = function (_Component) {
             return matches;
         }
     }, {
+        key: 'findStartAndEndPage',
+        value: function findStartAndEndPage(totalPages) {
+            var startPage = void 0,
+                endPage = void 0;
+            var currentPage = this.state.currentPage;
+
+            // calculate startPage and endPage based on totalPages. The following code modifies number of pages to render when traversing PaginationBar.
+
+            if (totalPages <= 3) {
+                startPage = 1;
+                endPage = totalPages;
+            } else {
+                if (currentPage <= 2) {
+                    startPage = 1;
+                    endPage = currentPage + 1;
+                } else if (currentPage + 1 >= totalPages) {
+                    // consider currentPage is close to exceeding totalPages
+                    startPage = totalPages - 1;
+                    endPage = totalPages;
+                } else {
+                    // otherwise, currentPage will always be between startPage and endPage
+                    startPage = currentPage - 1;
+                    endPage = currentPage + 1;
+                }
+            }
+
+            return [startPage, endPage];
+        }
+    }, {
         key: 'render',
         value: function render() {
             var _this4 = this;
@@ -499,28 +528,10 @@ var ThingsIndex = function (_Component) {
             var lastIndex = currentPage * rowsPerPage;
             var totalPages = Math.ceil(searchResults.length / rowsPerPage);
 
-            var startPage = void 0,
-                endPage = void 0;
+            var startPage = this.findStartAndEndPage(totalPages)[0];
+            var endPage = this.findStartAndEndPage(totalPages)[1];
 
-            // calculate startPage and endPage based on totalPages. The following code modifies number of pages to render when traversing PaginationBar.
-            if (totalPages <= 3) {
-                startPage = 1;
-                endPage = totalPages;
-            } else {
-                //
-                if (currentPage <= 2) {
-                    startPage = 1;
-                    endPage = currentPage + 1;
-                } else if (currentPage + 1 >= totalPages) {
-                    // consider currentPage is close to exceeding totalPages
-                    startPage = totalPages - 1;
-                    endPage = totalPages;
-                } else {
-                    // otherwise, currentPage will always be between startPage and endPage
-                    startPage = currentPage - 1;
-                    endPage = currentPage + 1;
-                }
-            }
+            console.log("startPage, endPage: ", startPage, endPage);
 
             var slicedData = searchResults.slice(firstIndex, lastIndex);
 
