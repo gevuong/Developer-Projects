@@ -427,7 +427,7 @@ var ThingsIndex = function (_Component) {
         value: function onSubmit(e) {
             e.preventDefault();
             if (e.target.textContent.length === 0) {
-                console.log("onSubmit do nothing");
+                // console.log("onSubmit do nothing");
                 return;
             }
         }
@@ -506,9 +506,8 @@ var ThingsIndex = function (_Component) {
                 rowsPerPage = _state.rowsPerPage,
                 currentPage = _state.currentPage;
 
-
-            console.log("props: ", this.props);
-            console.log("state: ", this.state);
+            // console.log("props: ", this.props);
+            // console.log("state: ", this.state);
 
             var searchResults = this.findMatches().sort(function (a, b) {
                 a = a.toLowerCase();
@@ -520,7 +519,7 @@ var ThingsIndex = function (_Component) {
 
             var uniqSearchResults = Array.from(new Set(searchResults));
 
-            console.log("uniqSearchResults: ", uniqSearchResults);
+            // console.log("uniqSearchResults: ", uniqSearchResults);
 
             // need prevPage in order to determine initial index of slice(). if currentPage is 1 (default), then prevPage is 0, which equates to an idx of 0
             var prevPage = currentPage - 1;
@@ -662,7 +661,7 @@ exports.default = ThingsIndex;
 
 // <div className="campground-container">
 //     <div>
-//         <img className="campground-img" src="http://res.cloudinary.com/dtluc0y85/image/upload/v1523306878/header_humzpt.jpg" />
+//         <img className="campground-img" src="https://res.cloudinary.com/dtluc0y85/image/upload/v1523306878/header_humzpt.jpg" />
 //     </div>
 //
 //     <div className="campground-info">
@@ -814,27 +813,24 @@ var _store = __webpack_require__(/*! ./store/store */ "./frontend/store/store.js
 
 var _store2 = _interopRequireDefault(_store);
 
-var _thing_actions = __webpack_require__(/*! ./actions/thing_actions */ "./frontend/actions/thing_actions.js");
-
-var _thing_api_util = __webpack_require__(/*! ./util/thing_api_util */ "./frontend/util/thing_api_util.js");
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-// defensive programming technique: DOMContentLoaded event allows bundle.js script tag to be placed elsewhere in index.html. Browser loads JS code, but waits until DOM Content is parsed and loaded before running JS code against it.
-
-
 // Uncomment the following for testing purposes only:
+// import { receiveAllCampgrounds, requestAllCampgrounds } from './actions/thing_actions';
+// import { fetchAllCampgrounds } from './util/thing_api_util';
+
+// defensive programming technique: DOMContentLoaded event allows bundle.js script tag to be placed elsewhere in index.html. Browser loads JS code, but waits until DOM Content is parsed and loaded before running JS code against it.
 document.addEventListener("DOMContentLoaded", function () {
     var store = (0, _store2.default)();
     var rootEl = document.getElementById("root");
     _reactDom2.default.render(_react2.default.createElement(_root2.default, { store: store }), rootEl);
 
     // Uncomment the following for testing purposes only:
-    window.getState = store.getState;
-    window.dispatch = store.dispatch;
-    window.requestAllCampgrounds = _thing_actions.requestAllCampgrounds;
-    window.receiveAllCampgrounds = _thing_actions.receiveAllCampgrounds;
-    window.fetchAllCampgrounds = _thing_api_util.fetchAllCampgrounds;
+    // window.getState = store.getState;
+    // window.dispatch = store.dispatch;
+    // window.requestAllCampgrounds = requestAllCampgrounds;
+    // window.receiveAllCampgrounds = receiveAllCampgrounds;
+    // window.fetchAllCampgrounds = fetchAllCampgrounds;
 
     // fetchAllThings().then(
     //     things => dispatch(receiveFetchedThings(things))
@@ -877,7 +873,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 // configureStore is used to apply preloadedState and middleware
 var configureStore = function configureStore() {
-    return (0, _redux.createStore)(_root_reducer2.default, (0, _redux.applyMiddleware)(_reduxThunk2.default, _reduxLogger2.default));
+    return (0, _redux.createStore)(_root_reducer2.default, (0, _redux.applyMiddleware)(_reduxThunk2.default));
 };
 
 exports.default = configureStore;

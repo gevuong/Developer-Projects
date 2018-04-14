@@ -1,4 +1,6 @@
 var path = require('path');
+// var webpack = require('webpack');
+// var config = require('config');
 
 module.exports = {
   mode: "development",
@@ -15,7 +17,7 @@ module.exports = {
         exclude: /(node_modules)/,
         loader: 'babel-loader',
         query: {
-          presets: ['env', 'react']
+          presets: ['env', 'react', 'stage-0']
         }
       }
     ]

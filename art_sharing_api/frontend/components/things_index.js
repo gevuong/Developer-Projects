@@ -58,7 +58,7 @@ class ThingsIndex extends Component {
     onSubmit(e) {
         e.preventDefault();
         if (e.target.textContent.length === 0) {
-            console.log("onSubmit do nothing");
+            // console.log("onSubmit do nothing");
             return;
         }
     };
@@ -127,8 +127,8 @@ class ThingsIndex extends Component {
         const { campgrounds } = this.props;
         const { rowsPerPage, currentPage } = this.state;
 
-        console.log("props: ", this.props);
-        console.log("state: ", this.state);
+        // console.log("props: ", this.props);
+        // console.log("state: ", this.state);
 
         const searchResults = this.findMatches().sort((a, b) => {
             a = a.toLowerCase();
@@ -140,7 +140,7 @@ class ThingsIndex extends Component {
 
         const uniqSearchResults = Array.from(new Set(searchResults));
 
-        console.log("uniqSearchResults: ", uniqSearchResults);
+        // console.log("uniqSearchResults: ", uniqSearchResults);
 
         // need prevPage in order to determine initial index of slice(). if currentPage is 1 (default), then prevPage is 0, which equates to an idx of 0
         const prevPage = currentPage - 1;
@@ -262,7 +262,7 @@ export default ThingsIndex;
 
 // <div className="campground-container">
 //     <div>
-//         <img className="campground-img" src="http://res.cloudinary.com/dtluc0y85/image/upload/v1523306878/header_humzpt.jpg" />
+//         <img className="campground-img" src="https://res.cloudinary.com/dtluc0y85/image/upload/v1523306878/header_humzpt.jpg" />
 //     </div>
 //
 //     <div className="campground-info">

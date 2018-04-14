@@ -73,17 +73,7 @@ button {
 .search-results {
     margin: -1em 0 0;
 }
-//
-// h2 {
-//     font-family: 'Courgette';
-//     font-size: 1.8em;
-//     text-shadow: 0 1px 0 rgba(0,0,0, .4);
-//     line-height: .65;
-//     margin-top: 0.4em;
-//     margin-bottom: 0;
-//     color: white;
-// }
-//
+
 .load-error {
     text-align: center;
     padding: 1em 2em;
@@ -98,6 +88,7 @@ button {
 
 .main ul li {
   margin: 1em;
+  padding-left: 1em;
   background: #fff;
   border-radius: .2em;
   border: solid 1px rgba(88, 183, 205, .2);
@@ -113,21 +104,7 @@ button {
 .no-matches-div {
     text-align: center;
 }
-//
-//
-// div > p {
-//   color: #767676;
-// }
-//
-// .main {
-//     font-family: sans-serif;
-//     margin: auto;
-//     width: 90%;
-//     padding: 10px;
-//     background: lightblue;
-//     color: gray;
-// }
-//
+
 .campground-container {
     display: flex;
     min-width: 400px;
