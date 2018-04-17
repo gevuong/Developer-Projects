@@ -1,21 +1,13 @@
+## Backend
+* [x] [URL Shortener] (Ruby on Rails)
+  * [x] Create new user and shortened url in CLI using rails runner and Shebang
+  * [x] Launches shortened url via Launchy gem
+  * [x] Records number of url visits, unique visits, and unique visits within a recent time period
+
+![url shortener gif](images/url_shortener.gif)
+
+
 ## Frontend
-* [ ] [Super Mario Bros](https://goo.gl/BnoLin) (vanilla JS)
-  * [x] Create sprite of game screen (sky and ground tiles) background
-  * [ ] ...
-
-![Super Mario Bros](images/super_mario_bros.png)
-
-* [x] [Tetris, 2-player](https://goo.gl/voR27T) (vanilla JS)
-  * [x] LEFT PLAYER keys: ASDW, RIGHT PLAYER keys: Up, Down, Left, Right
-  * [x] Collision detection
-  * [x] Rotate Tetrominoes
-  * [x] Remove row when entire row is filled
-  * [x] Basic scoreboard
-  * [x] Implement two player capability
-  * [x] Implement multi-player capability using WebSocket (have not deployed, works locally)
-
-![Tetris Multiplayer](images/tetris.gif)
-
 * [x] [Scoreboard App](https://goo.gl/GjZeVb) (React.js with Redux)
   * [x] Increment/decrement score per player
   * [x] Add and remove player
@@ -47,11 +39,19 @@
 
 ![rsvp gif](images/rsvp.gif)
 
+* [ ] [Super Mario Bros](https://goo.gl/BnoLin) (vanilla JS)
+  * [x] Create sprite of game screen (sky and ground tiles) background
+  * [ ] ...
 
-## Backend
-* [x] [URL Shortener] (Ruby on Rails)
-  * [x] Create new user and shortened url in CLI using rails runner and Shebang
-  * [x] Launches shortened url via Launchy gem
-  * [x] Records number of url visits, unique visits, and unique visits within a recent time period
+![Super Mario Bros](images/super_mario_bros.png)
 
-![url shortener gif](images/url_shortener.gif)
+* [x] [Tetris, 2-player](https://goo.gl/voR27T) (vanilla JS)
+  * [x] LEFT PLAYER keys: ASDW, RIGHT PLAYER keys: Up, Down, Left, Right
+  * [x] Collision detection
+  * [x] Rotate Tetrominoes
+  * [x] Remove row when entire row is filled
+  * [x] Basic scoreboard
+  * [x] Implement two player capability
+  * [x] Implement multi-player capability using WebSocket (have not deployed, works locally)
+
+![Tetris Multiplayer](images/tetris.gif)
