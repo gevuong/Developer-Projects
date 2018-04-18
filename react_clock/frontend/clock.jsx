@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 
-class Root extends Component {
+class Clock extends Component {
     constructor() {
         super();
         this.state = {
@@ -12,7 +12,7 @@ class Root extends Component {
     }
 
     componentDidMount() {
-        this.interval = setInterval(this.onTick, 60)
+        this.interval = setInterval(this.onTick, 1000)
     }
 
     componentWillUnmount() {
@@ -49,5 +49,5 @@ class Root extends Component {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-  ReactDOM.render(<Root/>, document.getElementById('main'));
+  ReactDOM.render(<Clock/>, document.getElementById('main'));
 });
