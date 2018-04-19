@@ -6,11 +6,11 @@
 Using React, build a digital clock that displays the current (west coast) time (non-military).
 
 ### Clarifying points
-You can only get current time once.
-You must display hours, minutes, seconds, and AM/PM.
-Try not to use external resources, but if you must, you can only use MDN and React docs.
-Style it as best as you can within the allotted time.
-You have 60 minutes to complete this (please set a timer).
+- You can only get current time once.
+- You must display hours, minutes, seconds, and AM/PM.
+- Try not to use external resources, but if you must, you can only use MDN and React docs.
+- Style it as best as you can within the allotted time.
+- You have 60 minutes to complete this (please set a timer).
 Bonus: Add an alarm
 
 ### Hints

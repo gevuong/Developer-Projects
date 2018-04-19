@@ -12,7 +12,7 @@ class Clock extends Component {
     }
 
     componentDidMount() {
-        this.interval = setInterval(this.onTick, 1000)
+        this.interval = setInterval(this.onTick, 1000);
     }
 
     componentWillUnmount() {
@@ -25,7 +25,7 @@ class Clock extends Component {
         // let timeNow = Date.now();
         this.setState({
             date: timeNow,
-        })
+        });
     }
 
     render() {
