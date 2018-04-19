@@ -20,9 +20,7 @@ class Clock extends Component {
     }
 
     onTick() {
-        // console.log("onTick: ");
         let timeNow = new Date();
-        // let timeNow = Date.now();
         this.setState({
             date: timeNow,
         });

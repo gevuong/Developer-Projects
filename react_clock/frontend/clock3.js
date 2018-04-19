@@ -19,39 +19,69 @@ document.addEventListener('DOMContentLoaded', () => {
     var currentTime = new Date();
 
     function Clock() {
-        this.currentHour = currentTime.getHours();
-        this.currentMinutes = currentTime.getMinutes();
-        this.currentSeconds = currentTime.getSeconds();
-        let isAm = currentHour > 11 ? "PM" : "AM";
+        let currentHours = currentTime.getHours();
+        let currentMinutes = currentTime.getMinutes();
+        let currentSeconds = currentTime.getSeconds();
 
-        if (this.currentHour > 12) {
-            this.currentHour -= 12;
-        } else if (this.currentHour === 0) {
-            this.currentHour = 12;
+        let amPm = currentHours > 11 ? "PM" : "AM";
+
+        let hoursDisplay = document.querySelector(".hours");
+        let minutesDisplay = document.querySelector(".minutes");
+        let secondsDisplay = document.querySelector(".seconds");
+        let amPmDisplay = document.querySelector(".am-pm");
+
+        this.incrementTime = function() {
+            setInterval(incrementSeconds, 1000);
         }
 
-        if (this.currentMinutes > 59) {
-            this.currentMinutes = 0;
-            this.currentHour += 1;
-        } else {
-            this.currentMinutes += 1;
+        function incrementHours() {
+            if (currentHours > 12) {
+                currentHours -= 12;
+                amPm = 'PM';
+            } else if (currentHours === 0) {
+                currentHours = 12;
+            }
         }
 
-        if (this.currentSeconds > 59) {
-            this.currentSeconds = 0;
-            this.currentMinutes += 1;
-        } else {
-            this.currentSeconds += 1;
+        function incrementMinutes() {
+            if (currentMinutes > 59) {
+                currentMinutes = 0;
+                incrementHours();
+            } else {
+                currentMinutes += 1;
+            }
+        }
+
+        function incrementSeconds() {
+            if (currentSeconds > 59) {
+                currentSeconds = 0;
+                incrementMinutes();
+            } else {
+                currentSeconds += 1;
+            }
+
+            render();
+        }
+
+        function render() {
+            hoursDisplay.innerHTML = addPadding(currentHours);
+            minutesDisplay.innerHTML = addPadding(currentMinutes);
+            secondsDisplay.innerHTML = addPadding(currentSeconds);
+            amPmDisplay.innerHTML = amPm;
         }
 
     }
 
-    const mainDiv = document.getElementById("main");
-    const div = document.createElement("div");
-    mainDiv.appendChild(div);
+    // launch clock
+    var clock = new Clock();
+    clock.incrementTime();
 
+    // helper method to add "0" padding
+    function addPadding(num) {
+        if (num < 10) {
+            return `0${num}`
+        }
 
-    function render() {
-
+        return num;
     }
 })
