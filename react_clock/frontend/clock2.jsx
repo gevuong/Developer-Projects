@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 
+// build clock by calling new Date() only once
 class Clock2 extends Component {
     constructor() {
         super();
