@@ -7669,11 +7669,24 @@ var createTransitionManager = function createTransitionManager() {
 "use strict";
 
 
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.receiveSessionErrors = exports.receiveCurrentUser = undefined;
+
 var _session_api_util = __webpack_require__(276);
 
 var APIUtil = _interopRequireWildcard(_session_api_util);
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+var receiveCurrentUser = exports.receiveCurrentUser = function receiveCurrentUser(currentUser) {
+    type: RECEIVE_CURRENT_USER, currentUser;
+};
+
+var receiveSessionErrors = exports.receiveSessionErrors = function receiveSessionErrors(errors) {
+    type: RECEIVE_SESSION_ERRORS, errors;
+};
 
 /***/ }),
 /* 69 */
