@@ -119,8 +119,12 @@ def casablanca_cast
 			actors
 		JOIN castings
 		ON casablanca_id = castings.movie_id
+		WHERE 
+			movie.title = 'Casablanca'
 	SQL
 end
+
+p casablanca_cast 
 
 def alien_cast
 	# Obtain the cast list for the film 'Alien'
