@@ -78,7 +78,6 @@ def eighties_literature
 		WHERE 
 			yr BETWEEN 1980 AND 1989
 			AND subject = 'Literature'
-
 	SQL
 end
 
