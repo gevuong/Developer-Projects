@@ -35,5 +35,5 @@ When facing high traffic and limited supply of a particular item, I would consid
 3. Implement a timer for how long the item can be in a customer's cart for. For example, when purchasing tickets on Ticketmaster or StubHub, there is a 6-10min countdown from when the customer added the ticket(s) to his/her cart. When countdown reaches zero, the n the tickets are added in the pool of available tickets.
 
 ## How to test in Postman or localhost:3000
-You can change the type to day, week, or month
+You can change the type value in params to day, week, or month
 `localhost:3000/api/ordered_products?type=week&start_date=2018-01-25&end_date=2018-02-06`
