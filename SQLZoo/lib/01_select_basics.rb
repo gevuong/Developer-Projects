@@ -11,25 +11,25 @@
 require_relative './sqlzoo.rb'
 
 def example_select
-  execute(<<-SQL)
-    SELECT
-      population
-    FROM
-      countries
-    WHERE
-      name = 'France'
-  SQL
+	execute(<<-SQL)
+	SELECT
+		population
+	FROM
+		countries
+	WHERE
+		name = 'France'
+	SQL
 end
 
 def select_population_of_germany
-  execute(<<-SQL)
-    SELECT
-      population
-    FROM
-      countries
-    WHERE
-      name = 'Germany'
-  SQL
+	execute(<<-SQL)
+	SELECT
+		population
+	FROM
+		countries
+	WHERE
+		name = 'Germany'
+	SQL
 end
 
 def per_capita_gdp
