@@ -18,45 +18,43 @@ def highest_gdp
 	# name only. Some countries may have NULL gdp values)
 	execute(<<-SQL)
 		SELECT 
-			name
+			c1.name
 		FROM
-			countries 
-		GROUP BY
-			name
+			countries AS c1
+		WHERE
+			c1.gdp > (
+				SELECT
+					MAX(c2.gdp) /* find max GDP in Europe, and compare with every countries gdp */
+				FROM
+					countries AS c2
+				WHERE
+					c2.continent = 'Europe'
+			)
 
 	SQL
-
-
-	# hm, lets break this problem down. First obtain all countries in Europe 
-	execute(<<-SQL)
-		SELECT
-			name 
-		FROM
-			countries 
-		WHERE 
-			continent = 'Europe'
-	SQL
-
-	# ok, now how do we compare each country's gdp with every country's gdp in Europe?
 
 end
 
 p highest_gdp 
 
+# initially tried GROUP BY continent, then finding MAX(area)
 def largest_in_continent
 	# Find the largest country (by area) in each continent. Show the continent,
 	# name, and area.
 	execute(<<-SQL)
 		SELECT 
-			continent, name, area 
+			c1.continent, c1.name, c1.area
 		FROM
-			countries 
-		GROUP BY
-			continent 
-		ORDER BY 
-			area DESC
-		LIMIT
-			1
+			countries AS c1
+		WHERE
+			c1.area = (
+				SELECT
+					MAX(c2.area)
+				FROM
+					countries AS c2
+				WHERE 
+					c1.continent = c2.continent
+			)
 	SQL
 end
 
@@ -66,17 +64,20 @@ def large_neighbors
 	# Some countries have populations more than three times that of any of their
 	# neighbors (in the same continent). Give the countries and continents.
 	execute(<<-SQL)
-	/*	SELECT 
-			name, continent 
+		SELECT 
+			c1.name, c1.continent 
 		FROM
-			countries 
+			countries AS c1
 		WHERE 
-			population > 3 * (
+			c1.population > 3 * (
 				SELECT
-					population
+					MAX(c2.population)
 				FROM 
-					countries 
-				
-			)*/
+					countries AS c2
+				WHERE
+					/* don't compare same countries population, and want to compare countries population in same continent */
+					c1.continent = c2.continent AND
+					c1.name != c2.name 
+			)
 	SQL
 end

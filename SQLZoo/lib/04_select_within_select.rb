@@ -17,17 +17,17 @@ require_relative './sqlzoo.rb'
 def example_select_with_subquery
 	execute(<<-SQL)
 	SELECT
-		name
+		c1.name
 	FROM
-		countries
+		countries AS c1
 	WHERE
-		population > (
+		c1.population > (
 			SELECT
-				population
+				c2.population
 			FROM
-				countries
+				countries AS c2
 			WHERE
-				name='Romania'
+				c2.name='Romania'
 		)
 	SQL
 end
@@ -36,17 +36,17 @@ def larger_than_russia
 	# List each country name where the population is larger than 'Russia'.
 	execute(<<-SQL)
 		SELECT 
-			name 
+			c1.name 
 		FROM 
-			countries 
+			countries AS c1
 		WHERE
-			population > (
+			c1.population > (
 				SELECT 
-					population
+					c2.population
 				FROM
-					countries 
+					countries AS c2 
 				WHERE 
-					name = 'Russia'
+					c2.name = 'Russia'
 			)
 	SQL
 end
@@ -56,18 +56,18 @@ def richer_than_england
 	# 'United Kingdom'.
 	execute(<<-SQL)
 		SELECT 
-			name
+			c1.name
 		FROM
-			countries 
+			countries AS c1 
 		WHERE 
-			continent = 'Europe' AND 
-			(gdp / population) > (
+			c1.continent = 'Europe' AND 
+			(c1.gdp / c1.population) > (
 				SELECT 
-					gdp / population AS per_capita_GDP
+					c2.gdp / c2.population AS per_capita_GDP
 				FROM 
-					countries 
+					countries AS c2
 				WHERE
-					name = 'United Kingdom'
+					c2.name = 'United Kingdom'
 			)
 	SQL
 end
@@ -77,17 +77,17 @@ def neighbors_of_certain_b_countries
 	# 'Belize', 'Belgium'.
 	execute(<<-SQL)
 		SELECT 
-			name, continent
+			c1.name, c1.continent
 		FROM 
-			countries 
+			countries AS c1
 		WHERE 
-			continent IN (
+			c1.continent IN (
 				SELECT 
-					continent
+					c2.continent
 				FROM 
-					countries 
+					countries AS c2 
 				WHERE 
-					name IN ('Belize', 'Belgium')
+					c2.name IN ('Belize', 'Belgium')
 			)
 	SQL
 end
@@ -97,25 +97,25 @@ def population_constraint
 	# Poland? Show the name and the population.
 	execute(<<-SQL)
 		SELECT 
-			name, population 
+			c1.name, c1.population 
 		FROM 
-			countries 
+			countries AS c1
 		WHERE 
-			population > (
+			c1.population > (
 				SELECT 
-					population
+					c2.population
 				FROM
-					countries 
+					countries AS c2
 				WHERE 
-					name = 'Canada'
+					c2.name = 'Canada'
 			) AND 
-			population < (
+			c1.population < (
 				SELECT
-					population
+					c2.population
 				FROM
-					countries 
+					countries AS c2
 				WHERE 
-					name = 'Poland'
+					c2.name = 'Poland'
 			)
 	SQL
 end
@@ -128,22 +128,18 @@ def sparse_continents
 	# In other words, find the continents where all countries have a population <= 25000000. Then find the names of the countries associated with these continents. Show name, continent and population.
 	execute(<<-SQL)
 		SELECT 
-			name, continent, population
+			c1.name, c1.continent, c1.population
 		FROM 
-			countries 
+			countries AS c1
+		WHERE 
+			/* initially tried IN and c2.population <= 25000000, but didnt work...need to move on */
+			c1.continent NOT IN ( 
+				SELECT
+					c2.continent
+				FROM
+					countries AS c2
+				WHERE
+					c2.population > 25000000
+			)
 	SQL
 end
-
-# helper method
-def continents_with_small_population
-	execute(<<-SQL)
-		SELECT 
-			continent 
-		FROM 
-			countries 
-		WHERE 
-			population < 25000000
-	SQL
-end 
-
-p continents_with_small_population
