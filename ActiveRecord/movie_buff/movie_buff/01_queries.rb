@@ -27,8 +27,8 @@ def it_was_ok
 	# We can use ranges (a..b) inside a where method.
 	#
 	# Find the id, title, and score of all movies with scores between 2 and 3
-	Movie.select(:id, :title, :score)
-		 .where(score: 2..3)
+	Movie.select('movies.id, movies.title, movies.score') # same as .select(:id, :title, :score)
+		.where('score BETWEEN 2 AND 3') # same as .where(score: 2..3)
 end
 
 def harrison_ford
@@ -42,8 +42,8 @@ def harrison_ford
 	# Find the id and title of all movies in which Harrison Ford appeared but not as a lead actor
 	Movie.select(:id, :title)
 		.joins(:actors)
-		.where(actors: { name: 'Harrison Ford' })
-		.where.not(castings: { ord: 1 })
+		.where("actors.name = 'Harrison Ford'") # .where(actors: { name: 'Harrison Ford' })
+		.where('castings.ord != 1') # same as .where.not(castings: { ord: 1 })
 end
 
 # def harrison_ford_sql
@@ -77,8 +77,8 @@ def biggest_cast
 	# largest casts (i.e most actors)
 	Movie.select(:id, :title)
 		.joins(:actors)
-		.group('movies.id')
-		.order('COUNT(actors.id) DESC')
+		.group('movies.id') # GROUP clause should not have key-value pairs
+		.order('COUNT(actors.id) DESC') # ORDER clause should be in quotes and not have key-value pairs
 		.limit(3)
 end
 

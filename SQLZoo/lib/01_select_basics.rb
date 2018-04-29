@@ -58,6 +58,8 @@ def small_and_wealthy
 	SQL
 end
 
+p small_and_wealthy
+
 def scandinavia
 	# Show the name and the population for 'Denmark', 'Finland', 'Norway', and
 	# 'Sweden'
