@@ -38,7 +38,7 @@ def all_teachers_join
 		FROM
 			teachers
 			LEFT OUTER JOIN depts
-			ON teachers.dept_id = depts.id
+				ON teachers.dept_id = depts.id
 	SQL
 end
 
@@ -65,7 +65,7 @@ def all_depts_join
 		FROM
 			depts
 			LEFT OUTER JOIN teachers
-			ON teachers.dept_id = depts.id
+				ON teachers.dept_id = depts.id
 	SQL
 end
 
@@ -93,7 +93,7 @@ def teachers_and_depts
 		FROM
 			teachers 
 		LEFT OUTER JOIN depts 
-		ON teachers.dept_id = depts.id 
+			ON teachers.dept_id = depts.id 
 
 	SQL
 end
@@ -120,7 +120,7 @@ def dept_staff_counts
 		FROM
 			depts 
 			LEFT OUTER JOIN teachers 
-			ON depts.id = teachers.dept_id
+				ON depts.id = teachers.dept_id
 		GROUP BY
 			depts.id
 		

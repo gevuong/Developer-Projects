@@ -109,18 +109,24 @@ def casablanca_id
 	SQL
 end
 
+p casablanca_id[0][0]
+
 def casablanca_cast
 	# Obtain the cast list for 'Casablanca'. Use the id value that you obtained
 	# in the previous question directly in your query (for example, id = 1).
+	# I tried passing casablanca_id as a variable and using ? interpolation mark, but it didn't work... 
+	# Got ArgumentError: `execute': wrong number of arguments (given 2, expected 1) (ArgumentError)
 	execute(<<-SQL)
 		SELECT 
-			name
+			actors.name
 		FROM
 			actors
-		JOIN castings
-		ON casablanca_id = castings.movie_id
+			JOIN castings
+				ON actors.id = castings.actor_id
+			JOIN movies
+				ON castings.movie_id = movies.id
 		WHERE 
-			movie.title = 'Casablanca'
+			movies.id = 27
 	SQL
 end
 
@@ -130,8 +136,14 @@ def alien_cast
 	# Obtain the cast list for the film 'Alien'
 	execute(<<-SQL)
 		SELECT 
-			name
+			actors.name
 		FROM
-			actors 
+			actors
+			JOIN castings
+				ON actors.id = castings.actor_id
+			JOIN movies
+				ON castings.movie_id = movies.id
+		WHERE 
+			movies.title = 'Alien'
 	SQL
 end
