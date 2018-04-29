@@ -1,3 +1,26 @@
+# == Schema Information
+#
+# Table name: actors
+#
+#  id   :bigint(8)        not null, primary key
+#  name :string           not null
+#
+# Table name: castings
+#
+#  id       :bigint(8)        not null, primary key
+#  actor_id :integer          not null
+#  movie_id :integer          not null
+#  ord      :integer          not null
+#
+# Table name: movies
+#
+#  id          :bigint(8)        not null, primary key
+#  title       :string           not null
+#  yr          :integer          not null
+#  score       :float            not null
+#  votes       :integer          not null
+#  director_id :integer          not null
+
 def it_was_ok
 	# Consider the following:
 	# Movie.where(yr: 1970..1979)
@@ -19,29 +42,64 @@ def harrison_ford
 	# Find the id and title of all movies in which Harrison Ford appeared but not as a lead actor
 	Movie.select(:id, :title)
 		.joins(:actors)
-		.where(actors: { name: "Harrison Ford" })
+		.where(actors: { name: 'Harrison Ford' })
 		.where.not(castings: { ord: 1 })
 end
 
+# def harrison_ford_sql
+# 	execute(<<-SQL)
+# 		SELECT
+# 			movies.id, movies.title
+# 		FROM
+# 			movies
+# 			JOIN castings
+# 				ON castings.movie_id = movies.id
+# 			JOIN actors
+# 				ON actors.id = castings.actor_id 
+# 		WHERE
+# 			actors.name = 'Harrison Ford' AND
+# 			castings.ord != 1
+# 	SQL
+# end 
+
 def biggest_cast
-  # Consider the following:
-  # Actor
-  #   .joins(:movies)
-  #   .group('actors.id')
-  #   .order('COUNT(movies.id) DESC')
-  #   .limit(1)
-  #
-  # Sometimes we need to use aggregate SQL functions like COUNT, MAX, and AVG.
-  # Often these are combined with group.
-  #
-  # Find the id and title of the 3 movies with the
-  # largest casts (i.e most actors)
-  Movie.select(:id, :title)
-		  .joins(:actors)
-		  .group('movies.id')
-		  .order('COUNT(actors.id) DESC')
-		  .limit(3)
+	# Consider the following:
+	# Actor
+	#   .joins(:movies)
+	#   .group('actors.id')
+	#   .order('COUNT(movies.id) DESC')
+	#   .limit(1)
+	#
+	# Sometimes we need to use aggregate SQL functions like COUNT, MAX, and AVG.
+	# Often these are combined with group.
+	#
+	# Find the id and title of the 3 movies with the
+	# largest casts (i.e most actors)
+	Movie.select(:id, :title)
+		.joins(:actors)
+		.group('movies.id')
+		.order('COUNT(actors.id) DESC')
+		.limit(3)
 end
+
+# def biggest_cast_sql
+# 	execute(<<-SQL)
+# 		SELECT
+# 			id, title
+# 		FROM
+# 			movies
+# 			JOIN castings
+# 				ON castings.movie_id = movies.id 
+# 			JOIN actors 
+# 				ON actors.id = castings.actor_id 
+# 		GROUP BY
+# 			movies.id
+# 		ORDER BY 
+# 			COUNT(actors.id) DESC
+# 		LIMIT 
+# 			3
+# 	SQL
+# end 
 
 def directed_by_one_of(them)
 	# Consider the following:
@@ -57,6 +115,19 @@ def directed_by_one_of(them)
 		.where(actors: { name: them })
 end
 
+# def directed_by_one_of_sql(them)
+# 	execute(<<-SQL)
+# 		SELECT
+# 			id, title
+# 		FROM
+# 			movies
+# 			JOIN actors
+# 				ON actors.id = movies.director_id
+# 		WHERE
+# 			actors.name IN ('George Lucas', 'Steven Spielberg')
+# 	SQL
+# end 
+
 def movie_names_before_1940
 	# Consider the following:
 	#
@@ -67,6 +138,19 @@ def movie_names_before_1940
 	# directly into a Ruby Array instead of an ActiveRecord object. This can
 	# improve performace for larger queries.
 	#
-	# Use pluck to find the title of all movies made before 1940.
-	Movie.where('yr < 1940').pluck(:title)
+	# Find the title of all movies made before 1940 (Hint: use #pluck)
+	# (i.e. ["Wizard of Oz, The",
+	# 	   "Gone with the Wind"]
+	# )
+
+	Movie.where('yr < 1940')
+		.pluck(:title)
+
+	# the following returns an array of Movie instances with title: 
+	# (i.e. [#<Movie:0x007feee28d31e0 id: nil, title: "Wizard of Oz, The">,
+	# 		<Movie:0x007feee28d3078 id: nil, title: "Gone with the Wind">]
+	# )
+
+	# Movie.select(:title)
+	# 	.where('yr < 1940')
 end
