@@ -28,7 +28,7 @@ No coding necessary, explain the concept or sketch your thoughts.
 When facing high traffic and limited supply of a particular item, I would consider discussing the following concepts.
 
 1. Limit the number of the same product a customer can add/order to their cart. For example, Shipt knows there are only 15 one gallon Organic Valley whole milk left in stock. A customer is allowed to order only one of that item. When a customer has purchased the milk, their customer_id and/or shipping address will be logged. This prevents the same customer_id from purchasing the same item more than once and shipping the item to the same address. Because Shipt is membership-based, a customer will unlikely create a new Shipt account membership just to order that same item again.
-**Note:** This will not stop the customer from creating a new account, and order and shipping the same item to another address. However, I would think there are only so many addresses you can ship the item to.
+**Note:** This will not stop the customer from creating a new account, and ordering and shipping the same item to another address. However, I would think there are only so many addresses a user can ship the item to.
 
 2. When the item is added to the cart or ordered, the number_available of that item is decreased by the quantity added to cart. For example, if there was only one 1gal milk available, and a customer adds the item to their cart, then the item would no longer be available even though the customer technically did not purchase the product yet. This prevents any issues with multiple customers added the same product to their cart when there is only one item left.
 

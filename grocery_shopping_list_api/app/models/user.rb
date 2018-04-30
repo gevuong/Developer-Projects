@@ -19,21 +19,9 @@ class User < ApplicationRecord
   through: :orders,
   source: :ordered_products
 
+  # incomplete
   def query_user_and_category_and_number_purchased
     User.ordered_products.first.product.categories
 
-# SELECT users.id, users.first_name, categories.id AS category_id, categories.name AS category_name, ordered_products.number_purchased FROM users, categories, ordered_products;
-   #  id | first_name | category_id | category_name | number_purchased
-   # ----+------------+-------------+---------------+------------------
-   #  51 | George     |           8 | poultry       |                2
-   #  51 | George     |           8 | poultry       |                4
-   #  51 | George     |           8 | poultry       |                5
-   #  51 | George     |           8 | poultry       |                6
-   #  51 | George     |           8 | poultry       |                7
-   #  51 | George     |           8 | poultry       |                8
-   #  51 | George     |           8 | poultry       |                9
-   #  51 | George     |           8 | poultry       |               11
-   #  51 | George     |           8 | poultry       |               12
-   #  51 | George     |           8 | poultry       |               13
   end
 end

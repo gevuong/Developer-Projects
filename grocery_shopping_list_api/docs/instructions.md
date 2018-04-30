@@ -16,13 +16,13 @@ Finally, please note that even if you have questions about the test we will not 
 
 Thank you for taking the time to complete this assessment - we look forward to reviewing your solutions!
 
-Exercise background
+**Exercise background**
 
 Create a very basic API application, where a customer can have an order that is made up of products.
 
 Tasks
 
-Please implement the following stories.
+**Please implement the following stories.**
 
 A product belongs to many categories. A category has many products. A product can be sold in decimal amounts (such as weights).
 
