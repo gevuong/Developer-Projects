@@ -18,13 +18,31 @@ PARTS = {
 
 # White Oaks Collision Center in Campbell, CA: Repair Estimate 2
 PARTS_TWO = {
-    'front_bumper_cover' => '**QUALITY REPL PART', # $275 from estimate
-    'left_front_bumper_cover_support' => 51117058447,
-    'left_front_bumper_stiffener' => 51117134097,
-
-    'front_fender' => "**QUALITY REPL PART", # $185 from estimate
-
-    'left_front_combination_lamp_assembly' => 63117161669
+    'front_bumper_cover' => {
+        'part_number' => '**QUALITY REPL PART', 
+        'estimate_cost' => 275, 
+        'left_front_bumper_cover_support' => {
+            'part_number' => 51117058447,
+            'estimate_cost' => 7
+        },
+        'left_front_bumper_stiffener' => {
+            'part_number' => 51117134097,
+            'estimate_cost' => 8
+        }
+    },
+    'front_fender' => {
+        'part_number' => "**QUALITY REPL PART", 
+        'estimate_cost' => 185,
+        'left_fender_front_splash_shield' => 82
+    },
+    'left_front_combination_lamp_assembly' => {
+        'part_number' => 63117161669,
+        'estimate_cost' => 1343,
+        'left_headlamp_bracket' => {
+            'part_number' => 51647116707,
+            'estimate_cost' => 62
+        }
+    }
 }.freeze
 
 
