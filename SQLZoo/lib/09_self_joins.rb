@@ -81,7 +81,7 @@ def connecting_routes
 		GROUP BY 
 			company, num
 		HAVING 
-			stop_id = 149 OR stop_id = 53
+			COUNT(*) = 2 /* restricts output to two routes */
 	SQL
 end
 
@@ -106,8 +106,19 @@ def cl_to_lr
 	# Craiglockhart, without changing routes. Change the query so that it
 	# shows the services from Craiglockhart to London Road.
 	execute(<<-SQL)
+		SELECT
+			a.company, a.num, a.stop_id, b.stop_id
+		FROM
+			routes a
+			JOIN routes b 
+				ON (a.company = b.company AND a.num = b.num)
+		WHERE
+			a.stop_id = 53
+
 	SQL
 end
+
+p cl_to_lr
 
 def cl_to_lr_by_name
 	# Consider the query:
@@ -140,6 +151,14 @@ def haymarket_and_leith
 	# Give the company and num of the services that connect stops
 	# 115 and 137 ('Haymarket' and 'Leith')
 	execute(<<-SQL)
+		SELECT
+			company, name
+		FROM
+			routes
+			JOIN stops
+				ON stops.id = routes.stop_id
+		WHERE
+			stops.id = 115 OR stops.id = 137
 	SQL
 end
 
