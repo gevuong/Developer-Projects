@@ -2,17 +2,17 @@
 
 # Repair Estimate 1: Basic
 PARTS = {
-    'front_bumper_without_headlamp_washers' => {
+    'front_bumper_cover_without_headlamp_washers' => {
         'part_number' => 51117140859, 
         'estimate_cost' => 268
     },
     'front_fender' => {
         'part_number' => 41357135679, 
-        'estimate_cost' => 726.07
+        'estimate_cost' => 184
     },
     'left_headlamp_assembly_without_adaptive_headlamp' => {
         'part_number' => 63117161665,
-        "estimate_cost" => 184
+        "estimate_cost" => 727
     }
 }.freeze
 
@@ -24,7 +24,7 @@ PARTS_TWO = {
 
     'front_fender' => "**QUALITY REPL PART", # $185 from estimate
 
-    'right_front_combination_lamp_assembly' => 63117161670
+    'left_front_combination_lamp_assembly' => 63117161669
 }.freeze
 
 
@@ -49,31 +49,46 @@ CAR_MAKE_MODEL = {
 
 class FrontBumperCover 
     def initialize
-        @cost = 403.52
-        @link = 'http://www.realoem.com/bmw/enUS/showparts?id=VB13-USA-02_2004_E90_BMW_325i&diagId=51_5813#51117140859'
+        @oem_cost = 410
+        @oem_url = 'http://www.realoem.com/bmw/enUS/showparts?id=VB13-USA-02_2004_E90_BMW_325i&diagId=51_5813#51117140859'
+    
+        @ebay_cost = 100
+        @ebay_url = 'https://www.ebay.com/sch/i.html?_odkw=51117140859+2006+BMW+325i+Base+3.0L&_dmd=1&_osacat=0&_from=R40&_trksid=p2045573.m570.l1313.TR0.TRC0.H0.X51117140859+2006+BMW+325i+Base+3.0L+gray.TRS0&_nkw=51117140859+2006+BMW+325i+Base+3.0L+gray&_sacat=0'
     end 
 end 
 
 class HeadLight 
     def initialize(side = 'left')
         @side = side
-        @oem_cost = 938.57 # bi-xenon w/out adaptive headlamp
-        @oem_two_cost = 1096.95 # bi-xenon w/ adaptive headlamp
-        @ebay_cost = 592.95 # bi-xenon w/out adaptive headlamp
-        @oem_link = 'http://www.realoem.com/bmw/enUS/showparts?id=VB13-USA-02_2004_E90_BMW_325i&diagId=63_0907#63117161665'
-        @ebay_link = 'https://www.ebay.com/itm/For-BMW-325i-328i-330i-335i-xi-Bi-Xenon-Hella-Left-Side-Headlight-Assembly/323177359364?fits=Year%3A2006%7CMake%3ABMW%7CModel%3A325i%7CSubmodel%3ABase%7CEngine+-+Liter_Display%3A3.0L%7CTrim%3ABase+Sedan+4-Door%7CEngine%3A3.0L+2996CC+l6+GAS+DOHC+Naturally+Aspirated&epid=2235313231&hash=item4b3edf2804:g:gjsAAOSwUN9avOtt&vxp=mtr'
+        @oem_cost = 940 # bi-xenon w/out adaptive headlamp
+        @oem_adapt_cost = 1100 # bi-xenon w/ adaptive headlamp
+        @oem_url = 'http://www.realoem.com/bmw/enUS/showparts?id=VB13-USA-02_2004_E90_BMW_325i&diagId=63_0907#63117161665'
+
+        # bi-xenon w/out adaptive headlamp
+        @ebay_cost = 600 
+        @ebay_url = 'https://www.ebay.com/sch/Headlights-/33710/i.html?_from=R40&_dcat=33710&Bulb%2520Type=Xenon&mvsub=1&_mcatda=true&selcontext=productType%3ACAR_AND_TRUCK&selfil=1%2C2%2C3%2C4%2C5&selvel=2006~BMW~325i~Base%2520Sedan%25204-Door~3.0L%25202996CC%2520l6%2520GAS%2520DOHC%2520Naturally%2520Aspirated~Base~3.0L&_nkw=63117161665%202006%20BMW%20325i%20Base%203.0L'
+        
+        # bi-xenon w/ adaptive headlamp
+        @ebay_adapt_cost = 780
+        @ebay_adapt_url = 'https://www.ebay.com/sch/i.html?_odkw=63117161665+2006+BMW+325i+Base+3.0L&Bulb%2520Type=Xenon&_dcat=33710&_osacat=33710&_from=R40&_trksid=p2045573.m570.l1313.TR0.TRC0.H0.X63117161669+2006+BMW+325i+Base+3.0L.TRS0&_nkw=63117161669+2006+BMW+325i+Base+3.0L&_sacat=33710'
     end 
 end 
 
+
+
 class FrontSidePanel 
     def initialize(side = 'left')
+        @side = side
+
+        # additional parts needed to install
         @body_nut_count = 8
         @hexbolt_with_washer_count = 16
-        @oem_cost = 334.17 # USD from realoem
-        @oem_link = 'http://www.realoem.com/bmw/enUS/showparts?id=VB13-USA-02_2004_E90_BMW_325i&diagId=41_1596#41357135679'
-        @ebay_cost = 51
-        @ebay_link = ''
-        @side = 'left'
+        
+        @oem_cost = 340
+        @oem_url = 'http://www.realoem.com/bmw/enUS/showparts?id=VB13-USA-02_2004_E90_BMW_325i&diagId=41_1596#41357135679'
+        
+        @ebay_cost = 70
+        @ebay_url = 'https://www.ebay.com/sch/Fenders/33644/i.html?_from=R40&_nkw=41357135679+2006+BMW+325i+Base+3.0L&rt=nc&_dmd=2'
     end 
 end 
 
