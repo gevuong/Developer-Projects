@@ -100,7 +100,7 @@ class FrontSidePanel
 
         # additional parts needed to install
         @body_nut_count = 8
-        @hexbolt_with_washer_count = 16
+        @hexbolt_washer_count = 16
         
         @oem_cost = 340
         @oem_url = 'http://www.realoem.com/bmw/enUS/showparts?id=VB13-USA-02_2004_E90_BMW_325i&diagId=41_1596#41357135679'
@@ -110,18 +110,18 @@ class FrontSidePanel
     end 
 end 
 
-class BodyNut < FrontSidePanel
+class BodyNut
     def initialize
         @type = 'M6'
-        @part = '07147133884'
+        @part_number = '07147133884'
         @cost = 0.36
     end 
 end 
 
-class HexBoltWithWasher < FrontSidePanel
+class HexBoltWithWasher
     def initialize
         @type = 'M6X12'
-        @part = '07147147513'
+        @part_number = '07147147513'
         @cost = 0.38
     end 
 end 
