@@ -74,9 +74,9 @@ class FrontBumperCover
         @ebay_cost = 274 # part and paint
         @ebay_url = 'https://www.ebay.com/itm/NEW-Painted-to-Match-Front-Bumper-Cover-For-2006-2007-2008-BMW-3-Series/322253885207?hash=item4b07d40f17:g:SjsAAOSw1KxXMhIO&vxp=mtr'
     
-        @local_cost = 400 # part and paint
+        @local_cost = 400 # part and paint, comes with fog lights and is m3 design
         @local_link = 'https://sfbay.craigslist.org/eby/pts/d/e90-pre-lci-mtech-or-m3-front/6577227515.html'
-        @dublin_link = 'http://www.dublin-collision.com/products---bumpers.html'
+        @local_dublin_link = 'http://www.dublin-collision.com/products---bumpers.html'
     end 
 end 
 
@@ -87,9 +87,15 @@ class HeadLight
         @oem_adapt_cost = 1100 # xenon w/ adaptive headlamp
         @oem_url = 'http://www.realoem.com/bmw/enUS/showparts?id=VB13-USA-02_2004_E90_BMW_325i&diagId=63_0907#63117161665'
 
-        # left xenon w/ adaptive headlamp
-        @ebay_cost = 430 
-        @ebay_url = 'https://www.ebay.com/itm/06-08-BMW-E90-323i-325i-328i-330i-335i-M3-LEFT-XENON-HID-ADAPTIVE-HEADLIGHT/332540309140?fits=Year%3A2006%7CMake%3ABMW%7CModel%3A325i&hash=item4d6cf26e94:g:-DEAAOSwy~BaKJN9&vxp=mtr'
+        # left xenon w/ adaptive headlamp, pre-owned
+        @ebay_used_cost = 430 # free shipping
+        @ebay_used_url = 'https://www.ebay.com/itm/06-08-BMW-E90-323i-325i-328i-330i-335i-M3-LEFT-XENON-HID-ADAPTIVE-HEADLIGHT/332540309140?fits=Year%3A2006%7CMake%3ABMW%7CModel%3A325i&hash=item4d6cf26e94:g:-DEAAOSwy~BaKJN9&vxp=mtr'
+
+        # left xenon w/ adaptive headlamp, brand new
+        @ebay_new_cost = 600 
+        @ebay_new_url = 'https://www.ebay.com/itm/For-BMW-325i-328i-330i-335i-xi-Bi-Xenon-Hella-Left-Side-Headlight-Assembly/323177359364?fits=Year%3A2006%7CMake%3ABMW%7CModel%3A325i&epid=2235313231&hash=item4b3edf2804:g:gjsAAOSwUN9avOtt&vxp=mtr'
+
+
     end 
 end 
 
@@ -101,7 +107,7 @@ class FrontSidePanel
         @body_nut_count = 8
         @hexbolt_washer_count = 16
         
-        @oem_cost = 340
+        @oem_cost = 334
         @oem_url = 'http://www.realoem.com/bmw/enUS/showparts?id=VB13-USA-02_2004_E90_BMW_325i&diagId=41_1596#41357135679'
         
         @ebay_cost = 70
