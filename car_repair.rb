@@ -1,4 +1,4 @@
-# Car repair
+# car repair details
 
 # Repair Estimate 1: Kim's Auto Body
 PARTS = {
@@ -46,7 +46,7 @@ PARTS_TWO = {
 }.freeze
 
 
-CAR_MAKE_MODEL = {
+CAR_DETAILS = {
     'year' => 2006,
     'make' => 'bmw',
     'model' => '325i',
@@ -74,9 +74,10 @@ class FrontBumperCover
         @ebay_cost = 274 # part and paint
         @ebay_url = 'https://www.ebay.com/itm/NEW-Painted-to-Match-Front-Bumper-Cover-For-2006-2007-2008-BMW-3-Series/322253885207?hash=item4b07d40f17:g:SjsAAOSw1KxXMhIO&vxp=mtr'
     
-        @local_cost = 400 # part and paint, comes with fog lights and is m3 design
-        @local_link = 'https://sfbay.craigslist.org/eby/pts/d/e90-pre-lci-mtech-or-m3-front/6577227515.html'
-        @local_dublin_link = 'http://www.dublin-collision.com/products---bumpers.html'
+        # $400 for part w/ fog lamps and paint, $50 for installation
+        @dublin_collision_cost = 450 
+        @dublin_collision_craigslist_link = 'https://sfbay.craigslist.org/eby/pts/d/e90-pre-lci-mtech-or-m3-front/6577227515.html'
+        @dublin_collision_link = 'https://shop.dublin-collision.com/t/e90-parts-for-lci-and-pre-lci'
     end 
 end 
 
@@ -95,7 +96,13 @@ class HeadLight
         @ebay_new_cost = 600 
         @ebay_new_url = 'https://www.ebay.com/itm/For-BMW-325i-328i-330i-335i-xi-Bi-Xenon-Hella-Left-Side-Headlight-Assembly/323177359364?fits=Year%3A2006%7CMake%3ABMW%7CModel%3A325i&epid=2235313231&hash=item4b3edf2804:g:gjsAAOSwUN9avOtt&vxp=mtr'
 
-
+        # left xenon w/ adaptive headlamp, pre-owned
+        @craiglist_cost = 400
+        @craigslist_url = 'https://sacramento.craigslist.org/pts/d/bmw-328i-335i-e90-sedan-oem/6571819823.html'
+        
+        # left xenon w/ adaptive headlamp, pre-owned
+        @e90_forum_cost = 340 
+        @e90_forum_url = 'http://www.e90post.com/forums/showthread.php?t=1452005&highlight=e90+headlight'
     end 
 end 
 
@@ -110,8 +117,13 @@ class FrontSidePanel
         @oem_cost = 334
         @oem_url = 'http://www.realoem.com/bmw/enUS/showparts?id=VB13-USA-02_2004_E90_BMW_325i&diagId=41_1596#41357135679'
         
+        # does not have paint selection
         @ebay_cost = 70
         @ebay_url = 'https://www.ebay.com/sch/Fenders/33644/i.html?_from=R40&_nkw=41357135679+2006+BMW+325i+Base+3.0L&rt=nc&_dmd=2'
+        
+        # $400 for a set of new aftermarket fenders, w/ paint
+        @dublin_collision_cost = 400 
+        @dublin_collision_link = 'http://www.dublin-collision.com/products---bumpers.html'
     end 
 end 
 
