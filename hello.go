@@ -1,4 +1,3 @@
-
 // every go source code file is part of a package. In this case, declare it to be part of the main package because main packages are meant to be ran in the command line. You can define your own package.
 package main 
 
@@ -9,6 +8,7 @@ import "fmt"
 import {
 	"fmt"
 	"math" 
+	"github.com/golang/example/stringutil"
 }
 
 // constant variables or fcns named with a capital letter are exported from your package and are visible to other packages. If constant variable or fcn begins with a lower case, it'll be unexported, meaning you can't use it from other packages. If variable is not ready for public use, then name it with a lower case letter.
@@ -25,4 +25,5 @@ func main() {
 	fmt.Println(roundedUp, roundedDown)
 	fmt.Printf("Hello, World\n")
 
+	fmt.Println(stringutil.Reverse("hello"))
 }
