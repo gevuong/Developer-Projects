@@ -1,9 +1,9 @@
 package main
 
-// function is used to test state.go
-func main() {
-	printState()
-}
+// // function is used to test state.go
+// func main() {
+// 	printState()
+// }
 
 // this produces an error
 deckSize := 20
@@ -36,4 +36,4 @@ func main() {
 func main() {
 	deckSize = 52
 	fmt.Println(deckSize)
-  }
+}
