@@ -6,7 +6,6 @@ import "fmt"
 
 // how to import multiple packages or libraries. You will encounter a "Compile Error: imported and not used" if you don't end up using a package you imported. Unlike other languages, you can accumulate unused library imports, so Go doesn't allow that, to reduce compilation time.
 import {
-	"fmt"
 	"math" 
 	"github.com/golang/example/stringutil"
 }
