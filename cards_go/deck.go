@@ -31,3 +31,8 @@ func (d deck) print() {
 		fmt.Println(idx, card)
 	}
 }
+
+// two arguments "d deck" is the existing list of cards. Return two values from deal fcn of type deck (i.e. (deck, deck))
+func deal(d deck, handSize int) (deck, deck) {
+	return d[:handSize], d[handSize:] // return dealed cards, and remaining
+}
