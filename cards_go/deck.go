@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"io/ioutil"
+	"os"
 	"strings"
 )
 
@@ -52,4 +53,21 @@ func (d deck) toString() string {
 // For more info on ioutil.WriteFile, https://golang.org/pkg/io/ioutil/#WriteFile
 func (d deck) saveToFile(filename string) error {
 	return ioutil.WriteFile(filename, []byte(d.toString()), 0666)
+}
+
+// error is its own type if you're wondering. If nothing went wrong, error will have a value of 'nil', meaning no value. This function turns a []byte (byte slice) into a type deck
+func newDeckFromFile(filename string) deck {
+	byteSlice, err := ioutil.ReadFile(filename) // docs states ReadFile returns to values ([]byte, error)
+	if err != nil {
+		// Option 1: log error and return a call to newDeck()
+		// Option 2: log error and quit the program
+		fmt.Println("Error: ", err) // Go with Option 2
+		os.Exit(1)                  // non-zero indicates error: more info: https://golang.org/pkg/os/#Exit
+	}
+
+	// string(byteSlice) is how you convert []byte to string
+	sliceStrings := strings.Split(string(byteSlice), ",") // more info: https://golang.org/pkg/strings/#Split
+
+	// convert slice of string to deck type. Remember that we defined type 'deck' as a string slice.
+	return deck(sliceStrings)
 }
