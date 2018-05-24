@@ -3,8 +3,10 @@ package main
 import (
 	"fmt"
 	"io/ioutil"
+	"math/rand"
 	"os"
 	"strings"
+	"time"
 )
 
 // create a new type of 'deck', which is a slice of string, or string slice
@@ -70,4 +72,20 @@ func newDeckFromFile(filename string) deck {
 
 	// convert slice of string to deck type. Remember that we defined type 'deck' as a string slice.
 	return deck(sliceStrings)
+}
+
+// randomize order of cards, won't return anything
+func (d deck) shuffle() {
+	// type Rand is a source of random numbers. If we create a value of type Rand, we have the ability to specify the seed, or source of randomness for our number generator.
+	// To make a value of type Rand, and to make a source, we have to call newSource() and passing in a random int64 number, and pass source to our random number generator
+	// In summary: we're using current time in nanoseconds to generate a new int64 number every time we start the program. We use that as the "seed" to generate a new source object, and we use that source object as the basis for our new random number generator.
+	source := rand.NewSource(time.Now().UnixNano()) // https://golang.org/pkg/math/rand/#Source
+	r := rand.New(source)                           // r is random number generator of type Rand
+
+	for idx := range d {
+		newPosition := r.Intn(len(d) - 1) // if you have a value of type Rand, you can call Intn https://golang.org/pkg/math/rand/#Rand.Intn
+
+		d[idx], d[newPosition] = d[newPosition], d[idx] // swap elements at both idx and
+	}
+
 }

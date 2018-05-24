@@ -7,6 +7,9 @@ func main() {
 	// cards.saveToFile("my_cards")
 
 	cards := newDeckFromFile("my_cards")
+	// cards.print()
+
+	cards.shuffle()
 	cards.print()
 	// // multiple return values from one fcn: both values (or variables) being returned are of type deck
 	// hand, remainingCards := deal(cards, 5)
