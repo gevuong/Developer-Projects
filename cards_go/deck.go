@@ -19,7 +19,7 @@ func newDeck() deck {
 	cardSuits := []string{"Diamonds", "Clubs", "Hearts", "Spades"}
 	cardValues := []string{"Ace", "Two", "Three", "Four"}
 
-	// we input "_" to notify we're not using index in for loop
+	// we input "_" to notify that we're not using index in for loop
 	for _, suit := range cardSuits {
 		for _, value := range cardValues {
 
