@@ -24,10 +24,10 @@ func main() {
 		},
 	}
 
-	// Use "&" operator to turn &jim into a memory address, or pointer, and assign it to jimPointer. that variable, jim, is located, and store in jimPointer. As a result, jimPointer is pointing to the memory address that the jim struct is located, not the value, jim.
-	jimPointer := &jim
-	// fmt.Println(jimPointer)
-	jimPointer.updateName("jimmy")
+	// jimPointer := &jim
+	// fmt.Println(&jim)
+	// jim is of type person, while jimPointer or *person is a pointer, or memory address, to a person
+	jim.updateName("jimmy")
 	jim.print()
 }
 
