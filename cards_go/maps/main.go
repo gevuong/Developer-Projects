@@ -4,22 +4,19 @@ import "fmt"
 
 // create a map with keys and values as strings
 func main() {
-	// second method to create a map
-	// var colors map[string]string
-
-	// third method to create a map using make()
-	colors := make(map[int]string)
-
 	// first method to create a map
-	// colors := map[string]string{
-	// 	"red":   "#ff0000",
-	// 	"green": "00ff00",
-	// }
+	colors := map[string]string{
+		"red":   "#ff0000",
+		"green": "#00ff00",
+		"white": "#ffffff",
+	}
 
-	colors[10] = "#ffffff"
+	printMap(colors)
+}
 
-	// use delete() to remove keys and values off of existing map
-	delete(colors, 10)
-
-	fmt.Println(colors)
+// c is argument name, type is map
+func printMap(c map[string]string) {
+	for color, hex := range c { // color, hex are key, value for each step through loop
+		fmt.Println("hex code for", color, "is", hex)
+	}
 }
