@@ -7,16 +7,6 @@ type bot interface {
 	getGreeting() string
 }
 
-// interface syntax
-// type interfaceName interface {
-// 	getGreeting(input list of argument types) (input list of return types)
-// }
-
-// i.e.
-// type bot interface {
-// 	getGreeting(string, int) (string, error)
-// }
-
 type englishBot struct{}
 type spanishBot struct{}
 
